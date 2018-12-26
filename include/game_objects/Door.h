@@ -1,3 +1,4 @@
+//FIXME: block commenting
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 //	Name:			Tucker Dane Walker
@@ -23,7 +24,7 @@ public:
 	Door();									// default constructor for Door
 	Door(char s, int row, int col);			// constructor for Door initializing its symbol, rowPos, and colPos
 	~Door();								// deconstructor for Door
-
+	//FIXME: get and set order
 	void setSymbol(char s);					// a function which changes the door's symbol
 	void setOpen(bool o);					// a function which changes the Door's status
 	bool getOpen();							// returns true if the door is open

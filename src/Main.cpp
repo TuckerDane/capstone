@@ -1,4 +1,6 @@
-
+//TODO: add main comment block
+//FIXME: display output
+//FIXME: smooth game loop
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>

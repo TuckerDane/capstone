@@ -19,7 +19,7 @@ public:
 	Aarow();								// default constructor for Player
 	Aarow(int row, int col);				// constructor for Player initializing rowPos, colPos, and room
 	~Aarow();								// deconstructor for Player
-
+	//FIXME: get and set order
 	void setPosition(int row, int col);		// sets the aarow position
 	int getWeight();						// returns the weight of the object
 	string getName();						// returns the name of the Object

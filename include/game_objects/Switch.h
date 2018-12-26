@@ -1,3 +1,4 @@
+//FIXME: block commenting
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 //	Name:			Tucker Dane Walker
@@ -24,7 +25,7 @@ public:
 	Switch();												// default constructor for Switch
 	Switch(int row, int col, string c, char s);				// constructor for Switch initializing rowPos, colPos, and room
 	~Switch();												// deconstructor for Switch
-
+	//FIXME: get and set order
 	void setSwitch(int row, int col, string c, char s);		// sets up Switch
 	int getWeight();										// returns the weight of the object
 	string getName();										// returns the name of the Object

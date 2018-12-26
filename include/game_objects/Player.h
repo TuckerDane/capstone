@@ -1,3 +1,4 @@
+//FIXME: block commenting
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 //	Name:			Tucker Dane Walker
@@ -30,7 +31,8 @@ public:
 	Player();										// default constructor for Player
 	Player(int row, int col, string room, int r);	// constructor for Player initializing rowPos, colPos, and room
 	~Player();										// deconstructor for Player
-
+	//FIXME: get and set order
+	//FIXME: naming conventions
 	void setSymbol(char s);					// a function which changes the player's symbol
 	void setPlayerRoom(string room, int i);	// a function which changes the room the player is in
 
