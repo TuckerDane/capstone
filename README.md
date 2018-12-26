@@ -1,4 +1,4 @@
-# Adventure Game
+# Adventure
 
 ## Description
-This is an adventure game.
+This is an adventure.
