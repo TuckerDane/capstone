@@ -1,47 +1,56 @@
-####################
-### MACROS		 ###
-####################
+#
+# **************************************************************
+# *                Simple C++ Makefile Template                *
+# *                                                            *
+# * Author: Arash Partow (2003)                                *
+# * URL: http://www.partow.net/programming/makefile/index.html *
+# *                                                            *
+# * Copyright notice:                                          *
+# * Free use of this C++ Makefile template is permitted under  *
+# * the guidelines and in accordance with the the MIT License  *
+# * http://www.opensource.org/licenses/MIT                     *
+# *                                                            *
+# **************************************************************
+#
 
-CXX = g++
-CXXFLAGS = -std=c++0x
-CXXFLAGS += -Wall
-CXXFLAGS += -pedantic-errors
-CXXFLAGS += -g
-LDFLAGS_LINUX = -lncurses -ltinfo
-LDFLAGS= $(LDFLAGS_LINUX)
-INC= -I./include
+CXX      := g++
+CXXFLAGS := -pedantic-errors -Wall -std=c++0x -g
+LDFLAGS  := -lncurses -ltinfo
+BUILD    := ./build
+OBJ_DIR  := $(BUILD)/objects
+APP_DIR  := $(BUILD)/apps
+TARGET   := program
+INCLUDE  := -Iinclude/game_objects/
+INCLUDE	 += -Iinclude/space_objects/
+SRC      :=								\
+	$(wildcard src/game_objects/*.cpp)	\
+	$(wildcard src/space_objects/*.cpp)	\
+	$(wildcard src/*.cpp)				\
 
-####################
-### USER SECTION ###
-####################
- 
-SRCS = ./src/*.cpp 
-HEADERS = ./include/*.h
-OBJS = ./build/*.o
-PROG = adventureGame
+OBJECTS := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
-# This is the name of your compressed file. 
-# Edit name as needed. Keep the format.
-TAR = adventureGame.tar.bz2
+all: build $(APP_DIR)/$(TARGET)
 
-#####################
-### BUILD SECTION ###
-#####################
+$(OBJ_DIR)/%.o: %.cpp
+	@mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) $(INCLUDE) -o $@ -c $< $(LDFLAGS) 
 
-adventureGame: ${SRCS} ${HEADERS} 
-	${CXX} ${INC} ${CXXFLAGS} ${SRCS} -o ${PROG} ${LDFLAGS}
+$(APP_DIR)/$(TARGET): $(OBJECTS)
+	@mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) $(INCLUDE) -o $(APP_DIR)/$(TARGET) $(OBJECTS) $(LDFLAGS) 
 
-# Typing 'make all' in terminal calls this build.
-all:
-	${CXX} ${INC} ${CXXFLAGS} ${SRCS} ${HEADERS} -o ${PROG} ${LDFLAGS}
+.PHONY: all build clean debug release
 
-# Typing 'make tar' in terminal calls this build.
-# This creates a compressed file for submission.
-tar:
-	tar cvjf ${TAR} ${INC} ${SRCS} ${HEADERS} ${DOC} makefile
+build:
+	@mkdir -p $(APP_DIR)
+	@mkdir -p $(OBJ_DIR)
 
-# Typing 'make clean' calls this build.
-# It's designed to clean up the folder.
-# Be careful with this, edit as needed.
-clean: 
-	rm -f ${PROG} ${OBJS}
+debug: CXXFLAGS += -DDEBUG -g
+debug: all
+
+release: CXXFLAGS += -O2
+release: all
+
+clean:
+	-@rm -rvf $(OBJ_DIR)/*
+	-@rm -rvf $(APP_DIR)/*
