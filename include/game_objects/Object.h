@@ -1,13 +1,11 @@
-//FIXME: block commenting
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-//	Name:			Tucker Dane Walker
-//
-//	Date:			09 December 2016
-//
-//	Description:	The base class for various objects in the dungeon (including the player!)
-//
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/* ..............................................
+  @file Object.h
+  @author Tucker Walker (tuckerdwalker@gmail.com)
+  @brief 
+  @date 2018-12-26
+  
+  
+.............................................. */
 
 #ifndef OBJECT_HPP
 #define OBJECT_HPP
@@ -17,6 +15,10 @@
 
 using std::string;
 
+/* ..............................................
+  @brief 
+  
+.............................................. */
 class Object {
 	protected:
 		int rowPos;											// a variable which stores the row the ant is on in the matrix

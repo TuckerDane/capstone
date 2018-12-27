@@ -1,13 +1,11 @@
-//FIXME: block commenting
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-//	Name:			Tucker Dane Walker
-//
-//	Date:			09 December 2016
-//
-//	Description:	The Player Class
-//
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/* ..............................................
+  @file Player.h
+  @author Tucker Walker (tuckerdwalker@gmail.com)
+  @brief 
+  @date 2018-12-26
+  
+  
+.............................................. */
 
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
@@ -18,6 +16,10 @@ using std::cout;
 using std::endl;
 using std::cin;
 
+/* ..............................................
+  @brief 
+  
+.............................................. */
 class Player : public Object {
 	private:
 		string currentRoom;						// the room tucker is currently occupying

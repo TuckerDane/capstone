@@ -1,40 +1,73 @@
-/*
-	Name:			Tucker Dane Walker
-	Date:			26 December 2018
-	Description:	The Game Class
-*/
-
+/* ..............................................
+  @file Game.cpp
+  @author Tucker Walker (tuckerdwalker@gmail.com)
+  @brief 
+  @date 2018-12-26
+  
+  
+.............................................. */
 #include "Game.h"
 
-Game::Game() {
+/* ..............................................
+  @brief Construct a new Game:: Game object
+  
+.............................................. */
+Game::Game()
+{
     setTest('a');
     setIsComplete(false);
 }
 
-Game::~Game() {
-
+/* ..............................................
+  @brief Destroy the Game:: Game object
+  
+.............................................. */
+Game::~Game()
+{
 }
 
-void Game::process() {
+/* ..............................................
+  @brief 
+  
+.............................................. */
+void Game::process()
+{
     char newChar;
     cin >> newChar;
     setTest(newChar);
 }
 
-void Game::update() {
-    if (getTest() == 'x') {
+/* ..............................................
+  @brief 
+  
+.............................................. */
+void Game::update()
+{
+    if (getTest() == 'x')
+    {
         setIsComplete(true);
     }
-    setTest(getTest()+1);
+    setTest(getTest() + 1);
 }
 
-void Game::render() {
+/* ..............................................
+  @brief 
+  
+.............................................. */
+void Game::render()
+{
     cout << "The next character is: " << getTest() << "\n";
 }
 
-void Game::run() {
+/* ..............................................
+  @brief 
+  
+.............................................. */
+void Game::run()
+{
     cout << "GAME START\n";
-    while(getIsComplete() == false) {
+    while (getIsComplete() == false)
+    {
         process();
         update();
         render();
@@ -42,18 +75,43 @@ void Game::run() {
     cout << "GAME OVER\n";
 }
 
-bool Game::getIsComplete() {
+/* ..............................................
+  @brief 
+  
+  @return true 
+  @return false 
+.............................................. */
+bool Game::getIsComplete()
+{
     return this->isComplete;
 }
 
-void Game::setIsComplete(bool isComplete) {
+/* ..............................................
+  @brief 
+  
+  @param isComplete 
+.............................................. */
+void Game::setIsComplete(bool isComplete)
+{
     this->isComplete = isComplete;
 }
 
-char Game::getTest() {
+/* ..............................................
+  @brief 
+  
+  @return char 
+.............................................. */
+char Game::getTest()
+{
     return this->test;
 }
 
-void Game::setTest(char test) {
+/* ..............................................
+  @brief 
+  
+  @param test 
+.............................................. */
+void Game::setTest(char test)
+{
     this->test = test;
 }
