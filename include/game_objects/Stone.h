@@ -27,11 +27,12 @@ public:
 	Stone();													 // default constructor for Stone
 	Stone(int row, int col, string c); // constructor for Stone initializing rowPos, colPos, and room
 	~Stone();													 // deconstructor for Stone
-	//FIXME: get and set order
+
 	void setStone(int row, int col, string c); // sets up stone
+	void setWeight(int w);										 // sets the weight of an object
+
 	int getWeight();													 // returns the weight of the object
 	string getName();													 // returns the name of the Object
-	void setWeight(int w);										 // sets the weight of an object
 };
 
 #endif

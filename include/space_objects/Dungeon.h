@@ -71,7 +71,6 @@ class Dungeon
 
 	bool getSwitch(int num); // returns a switch value
 	bool getASwitch();		 // returns aarow switch value
-
 	Player *getPlayer();
 	Space *getRoom(int i);
 };
