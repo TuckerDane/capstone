@@ -14,7 +14,7 @@
 .............................................. */
 Aarow::Aarow() : Object(':', "Silver", 3, 3, "Aarow")
 {
-	this->weight = 2;
+  this->weight = 2;
 }
 
 /* ..............................................
@@ -25,7 +25,7 @@ Aarow::Aarow() : Object(':', "Silver", 3, 3, "Aarow")
 .............................................. */
 Aarow::Aarow(int row, int col) : Object(':', "Generic", row, col, "Aarow")
 {
-	weight = 2;
+  weight = 2;
 }
 
 /* ..............................................
@@ -44,8 +44,8 @@ Aarow::~Aarow()
 .............................................. */
 void Aarow::setPosition(int row, int col)
 {
-	this->setRowPos(row);
-	this->setColPos(col);
+  this->setRowPos(row);
+  this->setColPos(col);
 }
 
 /* ..............................................
@@ -55,7 +55,7 @@ void Aarow::setPosition(int row, int col)
 .............................................. */
 int Aarow::getWeight()
 {
-	return weight;
+  return weight;
 }
 
 /* ..............................................
@@ -65,7 +65,7 @@ int Aarow::getWeight()
 .............................................. */
 string Aarow::getName()
 {
-	return name;
+  return name;
 }
 
 /* ..............................................
@@ -75,5 +75,5 @@ string Aarow::getName()
 .............................................. */
 void Aarow::setWeight(int w)
 {
-	weight = w;
+  weight = w;
 }

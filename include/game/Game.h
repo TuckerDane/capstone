@@ -17,25 +17,26 @@ using namespace std;
   @brief 
   
 .............................................. */
-class Game {
-	private:
-        bool isComplete;
-        char test;
+class Game
+{
+private:
+  bool isComplete;
+  char test;
 
-	public:
-        Game();		// default constructor
-        ~Game();	// deconstructor
+public:
+  Game();  // default constructor
+  ~Game(); // deconstructor
 
-        void process();  // processes game
-        void update();   // updates the game state
-        void render();   // renderst the game state
-        void run();      // runs the game
+  void process(); // processes game
+  void update();  // updates the game state
+  void render();  // renderst the game state
+  void run();     // runs the game
 
-        bool getIsComplete();
-        void setIsComplete(bool isComplete);
+  bool getIsComplete();
+  void setIsComplete(bool isComplete);
 
-        char getTest();
-        void setTest(char test);
+  char getTest();
+  void setTest(char test);
 };
 
 #endif

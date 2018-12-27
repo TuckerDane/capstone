@@ -19,15 +19,14 @@
 class Room : public Space
 {
 protected:
-	Stone *s;
+  Stone *s;
 
 public:
-	Room();
+  Room();
 
-	void setSpSize();
-	void setSpace(string sn, Player *p, Space *l, Space *r, Space *t, Space *b, Object *o, int num);
-	void setObjectPos(Object *o);
+  void setSpSize();
+  void setSpace(string sn, Player *p, Space *l, Space *r, Space *t, Space *b, Object *o, int num);
+  void setObjectPos(Object *o);
 };
 
-
-#endif                                 
+#endif

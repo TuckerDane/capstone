@@ -47,15 +47,15 @@ void GreatRoom::setSpace(string sn, Player *p, Space *l, Space *r, Space *t, Spa
 
 	if (o != NULL)
 	{
-		if (this->getSwitch(0)->getSymbol() == 'A')						// if the switch is an aarow switch
+		if (this->getSwitch(0)->getSymbol() == 'A') // if the switch is an aarow switch
 		{
-			setObjectPos(this->getSwitch(0));							// set the the switch
+			setObjectPos(this->getSwitch(0)); // set the the switch
 		}
 		else
 		{
-			for (int i = 0; i < 5; i++)										// if it is the stone switches
+			for (int i = 0; i < 5; i++) // if it is the stone switches
 			{
-				setObjectPos(this->getSwitch(i));							// set all of the stone switches
+				setObjectPos(this->getSwitch(i)); // set all of the stone switches
 			}
 		}
 	}
@@ -99,7 +99,7 @@ void GreatRoom::setSwitches(Switch *sw, int num)
   @param i 
   @return Switch* 
 .............................................. */
-Switch* GreatRoom::getSwitch(int i)
+Switch *GreatRoom::getSwitch(int i)
 {
 	return s[i];
 }

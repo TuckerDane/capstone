@@ -15,12 +15,8 @@
 .............................................. */
 int main(void)
 {
-	// initialize game
-	Game myGame;
-	// run game
-	myGame.run();
+  Game myGame;  // initialize game
+  myGame.run(); // run the game
 
-	// finish game
-
-	return 0;
+  return 0;
 }

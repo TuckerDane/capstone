@@ -19,15 +19,14 @@
 class hHallWay : public Space
 {
 protected:
-	Aarow a[6];
+  Aarow a[6];
 
 public:
-	hHallWay();
+  hHallWay();
 
-	void setSpSize();
-	void setSpace(string sn, Player *p, Space *l, Space *r, Space *t, Space *b, Object *o, int num);
-	void setObjectPos(Object *o);
+  void setSpSize();
+  void setSpace(string sn, Player *p, Space *l, Space *r, Space *t, Space *b, Object *o, int num);
+  void setObjectPos(Object *o);
 };
 
-
-#endif                                 
+#endif

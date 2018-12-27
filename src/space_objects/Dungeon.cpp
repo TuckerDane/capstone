@@ -14,7 +14,6 @@
 .............................................. */
 Dungeon::Dungeon()
 {
-
 }
 
 /* ..............................................
@@ -23,7 +22,6 @@ Dungeon::Dungeon()
 .............................................. */
 Dungeon::~Dungeon()
 {
-
 }
 
 /* ..............................................
@@ -93,7 +91,6 @@ void Dungeon::setSpaces()
 	sPtr[10]->setSpace("ROOM 11", &tucker, NULL, NULL, sPtr[9], NULL, &green, 11);
 	sPtr[11]->setSpace("ROOM 12", &tucker, NULL, NULL, sPtr[12], sPtr[2], NULL, 12);
 	sPtr[12]->setSpace("ROOM 13", &tucker, NULL, NULL, NULL, sPtr[11], aarowSwitch, 13);
-
 }
 
 /* ..............................................
@@ -101,7 +98,7 @@ void Dungeon::setSpaces()
   
   @return Player* 
 .............................................. */
-Player* Dungeon::getPlayer()
+Player *Dungeon::getPlayer()
 {
 	return &tucker;
 }
@@ -115,7 +112,7 @@ Player* Dungeon::getPlayer()
 void Dungeon::setPlayer(Space *startingRoom, int i)
 {
 	tucker.setPlayerRoom(startingRoom->getSpaceName(), startingRoom->getSpaceNum());
-	tucker.setRowPos(startingRoom->getSpSizeRow()-2);
+	tucker.setRowPos(startingRoom->getSpSizeRow() - 2);
 	tucker.setColPos(startingRoom->getSpSizeCol() / 2);
 }
 
@@ -125,7 +122,7 @@ void Dungeon::setPlayer(Space *startingRoom, int i)
   @param i 
   @return Space* 
 .............................................. */
-Space* Dungeon::getRoom(int i)
+Space *Dungeon::getRoom(int i)
 {
 	return sPtr[i];
 }

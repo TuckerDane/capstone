@@ -8,14 +8,14 @@
 .............................................. */
 #include "Game.h"
 
-/* ..............................................
+/* ..............................................SS
   @brief Construct a new Game:: Game object
   
 .............................................. */
 Game::Game()
 {
-    setTest('a');
-    setIsComplete(false);
+  setTest('a');
+  setIsComplete(false);
 }
 
 /* ..............................................
@@ -32,9 +32,9 @@ Game::~Game()
 .............................................. */
 void Game::process()
 {
-    char newChar;
-    cin >> newChar;
-    setTest(newChar);
+  char newChar;
+  cin >> newChar;
+  setTest(newChar);
 }
 
 /* ..............................................
@@ -43,11 +43,11 @@ void Game::process()
 .............................................. */
 void Game::update()
 {
-    if (getTest() == 'x')
-    {
-        setIsComplete(true);
-    }
-    setTest(getTest() + 1);
+  if (getTest() == 'x')
+  {
+    setIsComplete(true);
+  }
+  setTest(getTest() + 1);
 }
 
 /* ..............................................
@@ -56,7 +56,7 @@ void Game::update()
 .............................................. */
 void Game::render()
 {
-    cout << "The next character is: " << getTest() << "\n";
+  cout << "The next character is: " << getTest() << "\n";
 }
 
 /* ..............................................
@@ -65,14 +65,14 @@ void Game::render()
 .............................................. */
 void Game::run()
 {
-    cout << "GAME START\n";
-    while (getIsComplete() == false)
-    {
-        process();
-        update();
-        render();
-    }
-    cout << "GAME OVER\n";
+  cout << "GAME START\n";
+  while (getIsComplete() == false)
+  {
+    process();
+    update();
+    render();
+  }
+  cout << "GAME OVER\n";
 }
 
 /* ..............................................
@@ -83,7 +83,7 @@ void Game::run()
 .............................................. */
 bool Game::getIsComplete()
 {
-    return this->isComplete;
+  return this->isComplete;
 }
 
 /* ..............................................
@@ -93,7 +93,7 @@ bool Game::getIsComplete()
 .............................................. */
 void Game::setIsComplete(bool isComplete)
 {
-    this->isComplete = isComplete;
+  this->isComplete = isComplete;
 }
 
 /* ..............................................
@@ -103,7 +103,7 @@ void Game::setIsComplete(bool isComplete)
 .............................................. */
 char Game::getTest()
 {
-    return this->test;
+  return this->test;
 }
 
 /* ..............................................
@@ -113,5 +113,5 @@ char Game::getTest()
 .............................................. */
 void Game::setTest(char test)
 {
-    this->test = test;
+  this->test = test;
 }

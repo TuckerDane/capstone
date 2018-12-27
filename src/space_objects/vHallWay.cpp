@@ -23,8 +23,8 @@ vHallWay::vHallWay()
 .............................................. */
 void vHallWay::setSpSize()
 {
-		spSizeRow = 11;
-		spSizeCol = 5;
+	spSizeRow = 11;
+	spSizeCol = 5;
 }
 
 /* ..............................................

@@ -14,7 +14,7 @@
 .............................................. */
 Room::Room()
 {
-	setSpSize();
+  setSpSize();
 }
 
 /* ..............................................
@@ -23,8 +23,8 @@ Room::Room()
 .............................................. */
 void Room::setSpSize()
 {
-	spSizeRow = 11;
-	spSizeCol = 11;
+  spSizeRow = 11;
+  spSizeCol = 11;
 }
 
 /* ..............................................
@@ -41,17 +41,17 @@ void Room::setSpSize()
 .............................................. */
 void Room::setSpace(string sn, Player *p, Space *l, Space *r, Space *t, Space *b, Object *o, int num)
 {
-	spaceName = sn;
-	spaceNum = num;
-	spaceType = "SMALL ROOM";
-	setObjectPos(o);
-	player = p;
-	setSpSize();
-	setDoors(!(l == NULL), !(r == NULL), !(t == NULL), !(b == NULL));
-	left = l;
-	right = r;
-	top = t;
-	bottom = b;
+  spaceName = sn;
+  spaceNum = num;
+  spaceType = "SMALL ROOM";
+  setObjectPos(o);
+  player = p;
+  setSpSize();
+  setDoors(!(l == NULL), !(r == NULL), !(t == NULL), !(b == NULL));
+  left = l;
+  right = r;
+  top = t;
+  bottom = b;
 }
 
 /* ..............................................
@@ -61,5 +61,5 @@ void Room::setSpace(string sn, Player *p, Space *l, Space *r, Space *t, Space *b
 .............................................. */
 void Room::setObjectPos(Object *o)
 {
-	this->setSpPos(o, o->getRowPos(), o->getColPos());
+  this->setSpPos(o, o->getRowPos(), o->getColPos());
 }

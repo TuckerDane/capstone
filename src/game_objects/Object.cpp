@@ -14,11 +14,11 @@
 .............................................. */
 Object::Object()
 {
-	rowPos = 0;
-	colPos = 0;
-	symbol = 'O';
-	name = "null object";
-	type = "generic";
+  rowPos = 0;
+  colPos = 0;
+  symbol = 'O';
+  name = "null object";
+  type = "generic";
 }
 
 /* ..............................................
@@ -32,11 +32,11 @@ Object::Object()
 .............................................. */
 Object::Object(char s, string n, int r, int c, string t)
 {
-	rowPos = r;
-	colPos = c;
-	symbol = s;
-	name = n;
-	type = t;
+  rowPos = r;
+  colPos = c;
+  symbol = s;
+  name = n;
+  type = t;
 }
 
 /* ..............................................
@@ -45,7 +45,6 @@ Object::Object(char s, string n, int r, int c, string t)
 .............................................. */
 Object::~Object()
 {
-
 }
 
 /* ..............................................
@@ -55,7 +54,7 @@ Object::~Object()
 .............................................. */
 int Object::getRowPos()
 {
-	return rowPos;
+  return rowPos;
 }
 
 /* ..............................................
@@ -65,7 +64,7 @@ int Object::getRowPos()
 .............................................. */
 int Object::getColPos()
 {
-	return colPos;
+  return colPos;
 }
 
 /* ..............................................
@@ -75,7 +74,7 @@ int Object::getColPos()
 .............................................. */
 char Object::getSymbol()
 {
-	return symbol;
+  return symbol;
 }
 
 /* ..............................................
@@ -85,7 +84,7 @@ char Object::getSymbol()
 .............................................. */
 string Object::getType()
 {
-	return type;
+  return type;
 }
 
 /* ..............................................
@@ -95,7 +94,7 @@ string Object::getType()
 .............................................. */
 void Object::setRowPos(int r)
 {
-	rowPos = r;
+  rowPos = r;
 }
 
 /* ..............................................
@@ -105,6 +104,5 @@ void Object::setRowPos(int r)
 .............................................. */
 void Object::setColPos(int c)
 {
-	colPos = c;
+  colPos = c;
 }
-

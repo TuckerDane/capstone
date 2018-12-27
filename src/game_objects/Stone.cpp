@@ -14,8 +14,8 @@
 .............................................. */
 Stone::Stone() : Object('O', "Colored", 2, 2, "Stone")
 {
-	color = "white";
-	weight = 10;
+  color = "white";
+  weight = 10;
 }
 
 /* ..............................................
@@ -27,8 +27,8 @@ Stone::Stone() : Object('O', "Colored", 2, 2, "Stone")
 .............................................. */
 Stone::Stone(int row, int col, string c) : Object('O', "Colored", row, col, "Stone")
 {
-	color = c;
-	weight = 10;
+  color = c;
+  weight = 10;
 }
 
 /* ..............................................
@@ -48,10 +48,10 @@ Stone::~Stone()
 .............................................. */
 void Stone::setStone(int row, int col, string c)
 {
-	this->rowPos = row;
-	this->colPos = col;
-	this->color = c;
-	this->type = "Stone";
+  this->rowPos = row;
+  this->colPos = col;
+  this->color = c;
+  this->type = "Stone";
 }
 
 /* ..............................................
@@ -61,7 +61,7 @@ void Stone::setStone(int row, int col, string c)
 .............................................. */
 int Stone::getWeight()
 {
-	return weight;
+  return weight;
 }
 
 /* ..............................................
@@ -71,7 +71,7 @@ int Stone::getWeight()
 .............................................. */
 string Stone::getName()
 {
-	return color;
+  return color;
 }
 
 /* ..............................................
@@ -81,5 +81,5 @@ string Stone::getName()
 .............................................. */
 void Stone::setWeight(int w)
 {
-	weight = w;
+  weight = w;
 }

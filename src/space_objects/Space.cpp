@@ -9,9 +9,9 @@
 #include "Space.h"
 #include <ctime>
 
+using std::cin;
 using std::cout;
 using std::endl;
-using std::cin;
 
 /* ..............................................
   @brief Construct a new Space:: Space object
@@ -21,18 +21,18 @@ Space::Space()
 {
 	spaceName = "DEFAULT ROOM";
 
-	setSpSize(21, 21);										// create a matrix of size 10x10
+	setSpSize(21, 21); // create a matrix of size 10x10
 
-	space = new Object**[getSpSizeRow()];					// create an array (row sizeRow) of rows with pointers to Objects
-	for (int i = 0; i < getSpSizeRow(); i++)				// fill array with columns (sizeColumn) of pointers to Objects
-		space[i] = new Object*[getSpSizeCol()];
+	space = new Object **[getSpSizeRow()];   // create an array (row sizeRow) of rows with pointers to Objects
+	for (int i = 0; i < getSpSizeRow(); i++) // fill array with columns (sizeColumn) of pointers to Objects
+		space[i] = new Object *[getSpSizeCol()];
 
 	// fill matrix with NULL values
-	for (int i = 0; i < getSpSizeRow(); i++)				// i indicates the row
+	for (int i = 0; i < getSpSizeRow(); i++) // i indicates the row
 	{
-		for (int j = 0; j < getSpSizeCol(); j++)			// j indicates the column
+		for (int j = 0; j < getSpSizeCol(); j++) // j indicates the column
 		{
-			setSpPos(NULL, i, j);							// the object position at [sizeRow][sizeColumn] is set to NULL
+			setSpPos(NULL, i, j); // the object position at [sizeRow][sizeColumn] is set to NULL
 		}
 	}
 
@@ -48,19 +48,19 @@ Space::Space()
 .............................................. */
 Space::Space(int sizeRow, int sizeCol)
 {
-	setSpSize(sizeRow, sizeCol);						// Set Default Matrix Size
+	setSpSize(sizeRow, sizeCol); // Set Default Matrix Size
 
-														// Allocate memory for the Matrix
-	space = new Object**[getSpSizeRow()];				// create an array (row sizeRow) of rows with pointers to objects
-	for (int i = 0; i < getSpSizeRow(); i++)			// fill array with columns (sizeColumn) of pointers to objects
-		space[i] = new Object*[getSpSizeCol()];
+	// Allocate memory for the Matrix
+	space = new Object **[getSpSizeRow()];   // create an array (row sizeRow) of rows with pointers to objects
+	for (int i = 0; i < getSpSizeRow(); i++) // fill array with columns (sizeColumn) of pointers to objects
+		space[i] = new Object *[getSpSizeCol()];
 
 	// Fill Default Matrix with NULL values
-	for (int i = 0; i < getSpSizeRow(); i++)			// i indicates the row
+	for (int i = 0; i < getSpSizeRow(); i++) // i indicates the row
 	{
-		for (int j = 0; j < getSpSizeCol(); j++)		// j indicates the column
+		for (int j = 0; j < getSpSizeCol(); j++) // j indicates the column
 		{
-			setSpPos(NULL, i, j);						// the matrix position at [sizeRow][sizeColumn] is set to NULL
+			setSpPos(NULL, i, j); // the matrix position at [sizeRow][sizeColumn] is set to NULL
 		}
 	}
 }
@@ -72,19 +72,18 @@ Space::Space(int sizeRow, int sizeCol)
 Space::~Space()
 {
 
-	for (int i = 0; i < spSizeRow; i++)					// destroys the values stored within the rows of matrix
+	for (int i = 0; i < spSizeRow; i++) // destroys the values stored within the rows of matrix
 	{
-		for (int j = 0; j < spSizeCol; j++)				// destroys the values pointed to in each columnar position of a single row
+		for (int j = 0; j < spSizeCol; j++) // destroys the values pointed to in each columnar position of a single row
 		{
 			if (space[i][j] == NULL)
 			{
-				delete space[i][j];						// destruction of the individual column value
+				delete space[i][j]; // destruction of the individual column value
 			}
 		}
-		delete[] space[i];								// destruction of the row
+		delete[] space[i]; // destruction of the row
 	}
-	delete space;										// destruction of the matrix itself
-
+	delete space; // destruction of the matrix itself
 }
 
 /* ..............................................
@@ -162,7 +161,7 @@ void Space::setDoors(bool leftD, bool rightD, bool topD, bool bottomD)
   @param l 
   @param r 
 .............................................. */
-void Space::setSpacePtrs(Space* t, Space* b, Space* l, Space* r)
+void Space::setSpacePtrs(Space *t, Space *b, Space *l, Space *r)
 {
 	top = t;
 	bottom = b;
@@ -201,7 +200,7 @@ void Space::setSpace(string sn, Player *p, Space *l, Space *r, Space *t, Space *
   @param d 
   @return Door* 
 .............................................. */
-Door* Space::getDoor(string d)
+Door *Space::getDoor(string d)
 {
 	if (d == "left")
 	{
@@ -282,14 +281,14 @@ string Space::getSpaceType()
   @param col 
   @return Object* 
 .............................................. */
-Object* Space::getSpPos(int row, int col)
+Object *Space::getSpPos(int row, int col)
 {
 	if (space[row][col] == NULL)
 	{
 		return NULL;
 	}
 	else
-		return space[row][col];		// return a pointer to the object at row, col
+		return space[row][col]; // return a pointer to the object at row, col
 }
 
 /* ..............................................
@@ -298,49 +297,55 @@ Object* Space::getSpPos(int row, int col)
 .............................................. */
 void Space::printSpace()
 {
-	cout << endl << endl << endl;
+	cout << endl
+		 << endl
+		 << endl;
 	cout << "\t \t \t \t" << this->getSpaceName() << ": " << this->getSpaceType();
-	cout << endl << endl << endl;
+	cout << endl
+		 << endl
+		 << endl;
 
-	for (int i = 0; i < getSpSizeRow(); i++)													// i indicates the row
+	for (int i = 0; i < getSpSizeRow(); i++) // i indicates the row
 	{
 		cout << "\t \t \t";
-		for (int j = 0; j < getSpSizeCol(); j++)												// j indicates the column
+		for (int j = 0; j < getSpSizeCol(); j++) // j indicates the column
 		{
 			cout << " ";
-			if (player->getColPos() == j && player->getRowPos() == i)								// if the player is there
+			if (player->getColPos() == j && player->getRowPos() == i) // if the player is there
 			{
-				cout << player->getSymbol();													// print the player
+				cout << player->getSymbol(); // print the player
 			}
-			else if (getSpPos(i, j) != NULL)													// if there is an object
+			else if (getSpPos(i, j) != NULL) // if there is an object
 			{
-				cout << this->space[i][j]->getSymbol();											// Print out the object's symbol
+				cout << this->space[i][j]->getSymbol(); // Print out the object's symbol
 			}
-			else if ((i == 0 && j == 0) || (i == getSpSizeRow()-1 && j == getSpSizeCol()-1))	// if top left corner wall or bottom right corner wall
+			else if ((i == 0 && j == 0) || (i == getSpSizeRow() - 1 && j == getSpSizeCol() - 1)) // if top left corner wall or bottom right corner wall
 			{
-				cout << '+';																	// print "/"
+				cout << '+'; // print "/"
 			}
-			else if ((i == 0 && j == getSpSizeCol()-1) || (i == getSpSizeRow()-1 && j == 0))	// if top right corner wall or bottom left corner wall
+			else if ((i == 0 && j == getSpSizeCol() - 1) || (i == getSpSizeRow() - 1 && j == 0)) // if top right corner wall or bottom left corner wall
 			{
-				cout << '+';																	// print "\"
+				cout << '+'; // print "\"
 			}
-			else if (i == 0 || i == getSpSizeRow()-1)											// if top wall or bottom wall
+			else if (i == 0 || i == getSpSizeRow() - 1) // if top wall or bottom wall
 			{
-				cout << '-';																	// print "-"
+				cout << '-'; // print "-"
 			}
-			else if (j == 0 || j == getSpSizeCol()-1)											// if left wall or right wall
+			else if (j == 0 || j == getSpSizeCol() - 1) // if left wall or right wall
 			{
-				cout << '|';																	// print "|"
+				cout << '|'; // print "|"
 			}
-			else if (getSpPos(i, j) == NULL)													// if cell is empty
-				cout << ' ';																	// print " "
-			else																				// else there is an error
-				cout << '!';																	// print error symbol
+			else if (getSpPos(i, j) == NULL) // if cell is empty
+				cout << ' ';				 // print " "
+			else							 // else there is an error
+				cout << '!';				 // print error symbol
 		}
 		cout << endl;
 	}
 
-	cout << endl << endl << endl;
+	cout << endl
+		 << endl
+		 << endl;
 }
 
 /* ..............................................
@@ -352,51 +357,51 @@ void Space::printSpace()
 .............................................. */
 bool Space::movePlayer(char dir)
 {
-		if (dir == 'w' || dir == 'W')										// move tucker up
+	if (dir == 'w' || dir == 'W') // move tucker up
+	{
+		if (enterDoorway(dir) == false)
 		{
-			if (enterDoorway(dir) == false)
+			if (player->getRowPos() - 1 != 0) // if tucker doesn't run into a wall
 			{
-				if (player->getRowPos() - 1 != 0)							// if tucker doesn't run into a wall
-				{
-					player->setRowPos((player->getRowPos() - 1));			// move tucker up
-				}
-				player->setSymbol('^');
+				player->setRowPos((player->getRowPos() - 1)); // move tucker up
 			}
+			player->setSymbol('^');
 		}
-		else if (dir == 's' || dir == 'S')									// move tucker down
+	}
+	else if (dir == 's' || dir == 'S') // move tucker down
+	{
+		if (enterDoorway(dir) == false)
 		{
-			if (enterDoorway(dir) == false)
+			if ((player->getRowPos() + 1) != this->getSpSizeRow() - 1) // if tucker doesn't run into a wall
 			{
-				if ((player->getRowPos() + 1) != this->getSpSizeRow() - 1)	// if tucker doesn't run into a wall
-				{
-					player->setRowPos((player->getRowPos() + 1));			// move tucker down
-				}
-				player->setSymbol('v');
+				player->setRowPos((player->getRowPos() + 1)); // move tucker down
 			}
+			player->setSymbol('v');
 		}
-		else if (dir == 'a' || dir == 'A')									// move tucker left
+	}
+	else if (dir == 'a' || dir == 'A') // move tucker left
+	{
+		if (enterDoorway(dir) == false)
 		{
-			if (enterDoorway(dir) == false)
+			if ((player->getColPos() - 1) != 0) // if tucker doesn't run into a wall
 			{
-				if ((player->getColPos() - 1) != 0)							// if tucker doesn't run into a wall
-				{
-					player->setColPos((player->getColPos() - 1));			// move tucker left
-				}
-				player->setSymbol('<');
+				player->setColPos((player->getColPos() - 1)); // move tucker left
 			}
+			player->setSymbol('<');
 		}
-		else if (dir == 'd' || dir == 'D')									// move tucker right
+	}
+	else if (dir == 'd' || dir == 'D') // move tucker right
+	{
+		if (enterDoorway(dir) == false)
 		{
-			if (enterDoorway(dir) == false)
+			if ((player->getColPos() + 1) != this->getSpSizeCol() - 1) // if tucker doesn't run into a wall
 			{
-				if ((player->getColPos() + 1) != this->getSpSizeCol() - 1)	// if tucker doesn't run into a wall
-				{
-					player->setColPos((player->getColPos() + 1));			// move tucker right
-				}
-				player->setSymbol('>');
+				player->setColPos((player->getColPos() + 1)); // move tucker right
 			}
+			player->setSymbol('>');
 		}
-		return true;
+	}
+	return true;
 }
 
 /* ..............................................
@@ -408,27 +413,27 @@ bool Space::movePlayer(char dir)
 .............................................. */
 bool Space::enterDoorway(char dir)
 {
-	if (dir == 'w' || dir == 'W')																		// if tucker moves up
+	if (dir == 'w' || dir == 'W') // if tucker moves up
 	{
-		if (this->getSpPos(player->getRowPos() - 1, player->getColPos()) != NULL)						// and if tucker encounters an open door
+		if (this->getSpPos(player->getRowPos() - 1, player->getColPos()) != NULL) // and if tucker encounters an open door
 		{
 			if (this->getSpPos(player->getRowPos() - 1, player->getColPos())->getSymbol() == ' ')
 			{
-				player->setPlayerRoom(top->getSpaceName(), top->getSpaceNum());							// change rooms
-				player->setRowPos(top->getSpSizeRow()-2);
-				player->setColPos(top->getSpSizeCol()/2);
+				player->setPlayerRoom(top->getSpaceName(), top->getSpaceNum()); // change rooms
+				player->setRowPos(top->getSpSizeRow() - 2);
+				player->setColPos(top->getSpSizeCol() / 2);
 				player->setSymbol('^');
 				return true;
 			}
 		}
 	}
-	else if (dir == 's' || dir == 'S')																	// if tucker moves down
+	else if (dir == 's' || dir == 'S') // if tucker moves down
 	{
-		if (this->getSpPos(player->getRowPos() + 1, player->getColPos()) != NULL)						// and if tucker encounters an open door
+		if (this->getSpPos(player->getRowPos() + 1, player->getColPos()) != NULL) // and if tucker encounters an open door
 		{
 			if (this->getSpPos(player->getRowPos() + 1, player->getColPos())->getSymbol() == ' ')
 			{
-				player->setPlayerRoom(bottom->getSpaceName(), bottom->getSpaceNum());					// change rooms
+				player->setPlayerRoom(bottom->getSpaceName(), bottom->getSpaceNum()); // change rooms
 				player->setRowPos(1);
 				player->setColPos(bottom->getSpSizeCol() / 2);
 				player->setSymbol('v');
@@ -436,27 +441,27 @@ bool Space::enterDoorway(char dir)
 			}
 		}
 	}
-	else if (dir == 'a' || dir == 'A')																	// if tucker moves left
+	else if (dir == 'a' || dir == 'A') // if tucker moves left
 	{
-		if (this->getSpPos(player->getRowPos(), player->getColPos() - 1) != NULL)						// and if tucker encounters an open door
+		if (this->getSpPos(player->getRowPos(), player->getColPos() - 1) != NULL) // and if tucker encounters an open door
 		{
-			if (this->getSpPos(player->getRowPos(), player->getColPos()-1)->getSymbol() == ' ')
+			if (this->getSpPos(player->getRowPos(), player->getColPos() - 1)->getSymbol() == ' ')
 			{
-				player->setPlayerRoom(left->getSpaceName(), left->getSpaceNum());						// change rooms
-				player->setRowPos(left->getSpSizeRow()/2);
+				player->setPlayerRoom(left->getSpaceName(), left->getSpaceNum()); // change rooms
+				player->setRowPos(left->getSpSizeRow() / 2);
 				player->setColPos(left->getSpSizeCol() - 2);
 				player->setSymbol('<');
 				return true;
 			}
 		}
 	}
-	else if (dir == 'd' || dir == 'D')																	// if tucker moves right
+	else if (dir == 'd' || dir == 'D') // if tucker moves right
 	{
-		if (this->getSpPos(player->getRowPos(), player->getColPos() + 1) != NULL)						// and if tucker encounters an open door
+		if (this->getSpPos(player->getRowPos(), player->getColPos() + 1) != NULL) // and if tucker encounters an open door
 		{
-			if (this->getSpPos(player->getRowPos(), player->getColPos()+1)->getSymbol() == ' ')
+			if (this->getSpPos(player->getRowPos(), player->getColPos() + 1)->getSymbol() == ' ')
 			{
-				player->setPlayerRoom(right->getSpaceName(), right->getSpaceNum());						// change rooms
+				player->setPlayerRoom(right->getSpaceName(), right->getSpaceNum()); // change rooms
 				player->setRowPos(right->getSpSizeRow() / 2);
 				player->setColPos(1);
 				player->setSymbol('>');

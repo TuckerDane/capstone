@@ -14,8 +14,8 @@
 .............................................. */
 Switch::Switch() : Object('S', "Colored", 2, 2, "Switch")
 {
-	color = "none";
-	weight = 100;
+  color = "none";
+  weight = 100;
 }
 
 /* ..............................................
@@ -28,9 +28,9 @@ Switch::Switch() : Object('S', "Colored", 2, 2, "Switch")
 .............................................. */
 Switch::Switch(int row, int col, string c, char s) : Object(s, "Colored", row, col, "Switch")
 {
-	color = c;
-	symbol = 'S';
-	tripped = false;
+  color = c;
+  symbol = 'S';
+  tripped = false;
 }
 
 /* ..............................................
@@ -51,11 +51,11 @@ Switch::~Switch()
 .............................................. */
 void Switch::setSwitch(int row, int col, string c, char s)
 {
-	this->symbol = s;
-	this->rowPos = row;
-	this->colPos = col;
-	this->color = c;
-	this->type = "Switch";
+  this->symbol = s;
+  this->rowPos = row;
+  this->colPos = col;
+  this->color = c;
+  this->type = "Switch";
 }
 
 /* ..............................................
@@ -65,7 +65,7 @@ void Switch::setSwitch(int row, int col, string c, char s)
 .............................................. */
 int Switch::getWeight()
 {
-	return weight;
+  return weight;
 }
 
 /* ..............................................
@@ -75,7 +75,7 @@ int Switch::getWeight()
 .............................................. */
 void Switch::setWeight(int w)
 {
-	weight = w;
+  weight = w;
 }
 
 /* ..............................................
@@ -85,7 +85,7 @@ void Switch::setWeight(int w)
 .............................................. */
 string Switch::getName()
 {
-	return color;
+  return color;
 }
 
 /* ..............................................
@@ -95,7 +95,7 @@ string Switch::getName()
 .............................................. */
 void Switch::setTripped(bool t)
 {
-	tripped = t;
+  tripped = t;
 }
 
 /* ..............................................
@@ -106,5 +106,5 @@ void Switch::setTripped(bool t)
 .............................................. */
 bool Switch::getTripped()
 {
-	return tripped;
+  return tripped;
 }

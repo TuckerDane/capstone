@@ -30,8 +30,7 @@ public:
 	void setObjectPos(Object *o);
 	void setSwitches(Switch *sw, int num);
 
-	Switch* getSwitch(int i);
+	Switch *getSwitch(int i);
 };
 
-
-#endif                                 
+#endif

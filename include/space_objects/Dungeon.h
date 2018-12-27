@@ -28,7 +28,7 @@ using std::string;
 .............................................. */
 class Dungeon
 {
-private:
+  private:
 	//PLAYER OBJECT
 	Player tucker;
 
@@ -60,21 +60,20 @@ private:
 
 	Space *sPtr[13];
 
-public:
-	Dungeon();									// default constructor
-	~Dungeon();									// destructor
+  public:
+	Dungeon();  // default constructor
+	~Dungeon(); // destructor
 
 	void setStones();
 	void setSwitches();
 	void setSpaces();
-	void setPlayer(Space *startingRoom, int i);	// sets the player
+	void setPlayer(Space *startingRoom, int i); // sets the player
 
-	bool getSwitch(int num);					// returns a switch value
-	bool getASwitch();							// returns aarow switch value
+	bool getSwitch(int num); // returns a switch value
+	bool getASwitch();		 // returns aarow switch value
 
-	Player* getPlayer();
-	Space* getRoom(int i);
+	Player *getPlayer();
+	Space *getRoom(int i);
 };
 
-
-#endif                                 
+#endif
