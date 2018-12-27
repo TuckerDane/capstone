@@ -7,8 +7,9 @@
 int main(void)
 {
 	// initialize game
-	
+	Game myGame;
 	// run game
+	myGame.run();
 
 	// finish game
 
