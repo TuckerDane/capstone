@@ -22,9 +22,11 @@ APP_DIR  := $(BUILD)/apps
 TARGET   := adventure
 INCLUDE  := -Iinclude/game_objects/
 INCLUDE	 += -Iinclude/space_objects/
+INCLUDE	 += -Iinclude/game/
 SRC      :=								\
 	$(wildcard src/game_objects/*.cpp)	\
 	$(wildcard src/space_objects/*.cpp)	\
+	$(wildcard src/game/*.cpp)			\
 	$(wildcard src/*.cpp)				\
 
 OBJECTS := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
