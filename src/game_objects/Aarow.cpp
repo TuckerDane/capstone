@@ -1,62 +1,78 @@
-/*
-	Name:			Tucker Dane Walker
-	Date:			09 December 2016
-	Description:	The Aarow Class
-*/
-
+/* ..............................................
+  @file Aarow.cpp
+  @author Tucker Walker (tuckerdwalker@gmail.com)
+  @brief 
+  @date 2018-12-26
+  
+  
+.............................................. */
 #include "Aarow.h"
 
-/* 
-	default constructor for Aarow
-*/
+/* ..............................................
+  @brief Construct a new Aarow:: Aarow object
+  
+.............................................. */
 Aarow::Aarow() : Object(':', "Silver", 3, 3, "Aarow")
 {
 	this->weight = 2;
 }
 
-/*
-	constructor for Aarow initializing rowPos and colPos
-*/
+/* ..............................................
+  @brief Construct a new Aarow:: Aarow object
+  
+  @param row 
+  @param col 
+.............................................. */
 Aarow::Aarow(int row, int col) : Object(':', "Generic", row, col, "Aarow")
 {
 	weight = 2;
 }
 
-/*
-	deconstructor for Aarow
-*/
+/* ..............................................
+  @brief Destroy the Aarow:: Aarow object
+  
+.............................................. */
 Aarow::~Aarow()
 {
 }
 
-/*
-	sets its position
-*/
+/* ..............................................
+  @brief 
+  
+  @param row 
+  @param col 
+.............................................. */
 void Aarow::setPosition(int row, int col)
 {
 	this->setRowPos(row);
 	this->setColPos(col);
 }
 
-/*
-	returns the weight of the object
-*/
+/* ..............................................
+  @brief 
+  
+  @return int 
+.............................................. */
 int Aarow::getWeight()
 {
 	return weight;
 }
 
-/*
-	returns the name of the Object
-*/
+/* ..............................................
+  @brief 
+  
+  @return string 
+.............................................. */
 string Aarow::getName()
 {
 	return name;
 }
 
-/*
-	returns the weight of the object
-*/
+/* ..............................................
+  @brief 
+  
+  @param w 
+.............................................. */
 void Aarow::setWeight(int w)
 {
 	weight = w;

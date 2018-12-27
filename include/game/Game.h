@@ -1,8 +1,11 @@
-/*
-	Name:			Tucker Dane Walker
-	Date:			26 December 2018
-	Description:	The Game Class
-*/
+/* ..............................................
+  @file Game.h
+  @author Tucker Walker (tuckerdwalker@gmail.com)
+  @brief 
+  @date 2018-12-27
+  
+  
+.............................................. */
 
 #ifndef GAME_HPP
 #define GAME_HPP
@@ -10,6 +13,10 @@
 #include <iostream>
 using namespace std;
 
+/* ..............................................
+  @brief 
+  
+.............................................. */
 class Game {
 	private:
         bool isComplete;

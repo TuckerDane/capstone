@@ -1,13 +1,11 @@
-//FIXME: block commenting
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-//	Name:			Tucker Dane Walker
-//
-//	Date:			09 December 2016
-//
-//	Description:	The Door Class
-//
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/* ..............................................
+  @file Door.h
+  @author Tucker Walker (tuckerdwalker@gmail.com)
+  @brief 
+  @date 2018-12-26
+  
+  
+.............................................. */
 
 #ifndef DOOR_HPP
 #define DOOR_HPP
@@ -15,6 +13,10 @@
 #include <stdlib.h>
 #include "Object.h"
 
+/* ..............................................
+  @brief 
+  
+.............................................. */
 class Door : public Object {
 	private:
 		bool open;								// true is open, false is locked

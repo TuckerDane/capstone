@@ -1,9 +1,18 @@
-//TODO: add main comment block
-//FIXME: display output
-//FIXME: smooth game loop
-
+/* ..............................................
+  @file Main.cpp
+  @author Tucker Walker (tuckerdwalker@gmail.com)
+  @brief 
+  @date 2018-12-26
+  
+  
+.............................................. */
 #include "Game.h"
 
+/* ..............................................
+  @brief 
+  
+  @return int 
+.............................................. */
 int main(void)
 {
 	// initialize game
