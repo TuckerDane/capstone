@@ -8,7 +8,7 @@
 .............................................. */
 #include "Game.h"
 
-/* ..............................................SS
+/* ..............................................
   @brief Construct a new Game:: Game object
   
 .............................................. */
@@ -25,10 +25,13 @@ Game::Game()
   init_pair(GRASS_PAIR, COLOR_YELLOW, COLOR_GREEN);
   init_pair(PLAYER_PAIR, COLOR_RED, COLOR_MAGENTA);
 
+  /* clear the screen */
   clear();
 
   /* initialize the game map */
   renderMap();
+
+  /* initialize player object */
   this->player.setX(LINES-1);
   this->player.setY(0);
 }
@@ -52,11 +55,6 @@ Game::~Game()
 .............................................. */
 void Game::process()
 {
-  attron(COLOR_PAIR(PLAYER_PAIR));
-  mvaddch(player.getY(), player.getX(), player.getSymbol());
-  attroff(COLOR_PAIR(PLAYER_PAIR));
-  move(player.getY(), player.getX());
-  refresh();
   this->userInput = getch();
 }
 
@@ -117,8 +115,8 @@ void Game::render()
     case KEY_UP:
     case 'w':
     case 'W':
-        if ((player.getY() > 0) && isMoveAllowed(player.getY() - 1, player.getX())) {
-          player.setSymbol('^');
+        player.setSymbol('^');
+        if (player.isMoved()) {
           attron(COLOR_PAIR(EMPTY_PAIR));
           mvaddch(player.getY()+1, player.getX(), EMPTY);
           attroff(COLOR_PAIR(EMPTY_PAIR));
@@ -127,8 +125,8 @@ void Game::render()
     case KEY_DOWN:
     case 's':
     case 'S':
-        if ((player.getY() < LINES - 1) && isMoveAllowed(player.getY() + 1, player.getX())) {
-          player.setSymbol('v');
+        player.setSymbol('v');
+        if (player.isMoved()) {
           attron(COLOR_PAIR(EMPTY_PAIR));
           mvaddch(player.getY()-1, player.getX(), EMPTY);
           attroff(COLOR_PAIR(EMPTY_PAIR));
@@ -137,8 +135,8 @@ void Game::render()
     case KEY_LEFT:
     case 'a':
     case 'A':
-        if ((player.getX() > 0) && isMoveAllowed(player.getY(), player.getX() - 1)) {
-          player.setSymbol('<');
+        player.setSymbol('<');
+        if (player.isMoved()) {
           attron(COLOR_PAIR(EMPTY_PAIR));
           mvaddch(player.getY(), player.getX()+1, EMPTY);
           attroff(COLOR_PAIR(EMPTY_PAIR));
@@ -147,14 +145,19 @@ void Game::render()
     case KEY_RIGHT:
     case 'd':
     case 'D':
-        if ((player.getX() < COLS - 1) && isMoveAllowed(player.getY(), player.getX() + 1)) {
-          player.setSymbol('>');
+        player.setSymbol('>');
+        if (player.isMoved()) {
           attron(COLOR_PAIR(EMPTY_PAIR));
           mvaddch(player.getY(), player.getX()-1, EMPTY);
           attroff(COLOR_PAIR(EMPTY_PAIR));
         }
         break;
     }
+    attron(COLOR_PAIR(PLAYER_PAIR));
+    mvaddch(player.getY(), player.getX(), player.getSymbol());
+    attroff(COLOR_PAIR(PLAYER_PAIR));
+    move(player.getY(), player.getX());
+    refresh();
 }
 
 /* ..............................................

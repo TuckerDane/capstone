@@ -26,9 +26,9 @@
 class Game
 {
 private:
-  bool isComplete;
-  int userInput;
-  Player player;
+  bool isComplete;  // tells if the game is complete or not
+  char userInput;  // holds the user's last keystroke
+  Player player; // the player object
 
 public:
   
@@ -43,7 +43,7 @@ public:
 
   void setIsComplete(bool isComplete); // sets whether or not the game is complete
 
-  char getUserInput(); // gets keyboard input from the user
+  char getUserInput(); // gets the value of the player's last keystroke
 
   bool isGameComplete(); // gets the completion state of the game
   bool isMoveAllowed(int y, int x); // checks to see if the move is ok

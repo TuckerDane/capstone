@@ -51,7 +51,7 @@ public:
 	string getName();				// returns the name of the Object
 	int getX();
 	int getY();
-	bool getMoved();
+	bool isMoved();
 
 	bool addObject(Object *o); // adds an object to backpack and returns true if it worked
 	void displayBackpack();		 // displays the backpack and includes a message on how to use it

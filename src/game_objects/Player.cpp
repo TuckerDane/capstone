@@ -128,7 +128,7 @@ int Player::getY() {
   @return true 
   @return false 
 .............................................. */
-bool Player::getMoved() {
+bool Player::isMoved() {
 	return this->moved;
 }
 
