@@ -4,6 +4,8 @@
   @brief 
   @date 2018-12-26
   
+	TODO: reorder functions
+	TODO: add function descriptions
   
 .............................................. */
 #include "Player.h"

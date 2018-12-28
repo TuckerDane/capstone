@@ -4,7 +4,8 @@
   @brief 
   @date 2018-12-26
   
-  
+  TODO: reorder functions
+  TODO: add function descriptions
 .............................................. */
 #include "Game.h"
 
@@ -28,8 +29,7 @@ Game::Game()
   /* clear the screen */
   clear();
 
-  /* initialize the game map */
-  renderMap();
+  /* TODO: initialize game map(s) as objects */
 
   /* initialize player object */
   this->player.setX(LINES-1);
@@ -60,7 +60,7 @@ void Game::process()
 
 /* ..............................................
   @brief 
-  
+  TODO: figure out a better way to code than switches
 .............................................. */
 void Game::update()
 {
@@ -103,7 +103,8 @@ void Game::update()
 
 /* ..............................................
   @brief 
-  
+  TODO: modularize render
+  TODO: figure out a better way to code than switches
 .............................................. */
 void Game::render()
 {
@@ -162,6 +163,7 @@ void Game::render()
 .............................................. */
 void Game::run()
 {
+  renderMap();
   do {
       process();  // process player input
       update();   // update the game state
