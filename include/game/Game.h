@@ -14,14 +14,9 @@
 
 #define GRASS     ' '
 #define EMPTY     '.'
-#define WATER     '~'
-#define MOUNTAIN  '^'
-#define PLAYER    '*'
 
 #define GRASS_PAIR     1
 #define EMPTY_PAIR     1
-#define WATER_PAIR     2
-#define MOUNTAIN_PAIR  3
 #define PLAYER_PAIR    4
 
 /* ..............................................
@@ -42,16 +37,16 @@ public:
 
   void process(); // processes game
   void update();  // updates the game state
-  void render();  // renderst the game state
+  void render();  // renders the game state
   void run();     // runs the game
+  void renderMap(); // draws the map
 
   void setIsComplete(bool isComplete); // sets whether or not the game is complete
 
-  bool getIsComplete(); // gets the completion state of the game
   char getUserInput(); // gets keyboard input from the user
 
-  int is_move_okay(int y, int x); // checks to see if the move is ok
-  void draw_map(); // draws the map
+  bool isGameComplete(); // gets the completion state of the game
+  bool isMoveAllowed(int y, int x); // checks to see if the move is ok
 };
 
 #endif

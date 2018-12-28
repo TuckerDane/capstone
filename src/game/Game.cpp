@@ -23,14 +23,12 @@ Game::Game()
   /* initialize colors */
   start_color();
   init_pair(GRASS_PAIR, COLOR_YELLOW, COLOR_GREEN);
-  init_pair(WATER_PAIR, COLOR_CYAN, COLOR_BLUE);
-  init_pair(MOUNTAIN_PAIR, COLOR_BLACK, COLOR_WHITE);
   init_pair(PLAYER_PAIR, COLOR_RED, COLOR_MAGENTA);
 
   clear();
 
   /* initialize the game map */
-  draw_map();
+  renderMap();
   this->player.setX(LINES-1);
   this->player.setY(0);
 }
@@ -73,7 +71,7 @@ void Game::update()
     case KEY_UP:
     case 'w':
     case 'W':
-        if ((player.getY() > 0) && is_move_okay(player.getY() - 1, player.getX())) {
+        if ((player.getY() > 0) && isMoveAllowed(player.getY() - 1, player.getX())) {
             player.setY(player.getY() - 1);
             player.setMoved(true);
         }
@@ -81,7 +79,7 @@ void Game::update()
     case KEY_DOWN:
     case 's':
     case 'S':
-        if ((player.getY() < LINES - 1) && is_move_okay(player.getY() + 1, player.getX())) {
+        if ((player.getY() < LINES - 1) && isMoveAllowed(player.getY() + 1, player.getX())) {
             player.setMoved(true);
             player.setY(player.getY() + 1);
         }
@@ -89,7 +87,7 @@ void Game::update()
     case KEY_LEFT:
     case 'a':
     case 'A':
-        if ((player.getX() > 0) && is_move_okay(player.getY(), player.getX() - 1)) {
+        if ((player.getX() > 0) && isMoveAllowed(player.getY(), player.getX() - 1)) {
             player.setMoved(true);
             player.setX(player.getX() - 1);
         }
@@ -97,7 +95,7 @@ void Game::update()
     case KEY_RIGHT:
     case 'd':
     case 'D':
-        if ((player.getX() < COLS - 1) && is_move_okay(player.getY(), player.getX() + 1)) {
+        if ((player.getX() < COLS - 1) && isMoveAllowed(player.getY(), player.getX() + 1)) {
             player.setMoved(true);
             player.setX(player.getX() + 1);
         }
@@ -119,7 +117,7 @@ void Game::render()
     case KEY_UP:
     case 'w':
     case 'W':
-        if ((player.getY() > 0) && is_move_okay(player.getY() - 1, player.getX())) {
+        if ((player.getY() > 0) && isMoveAllowed(player.getY() - 1, player.getX())) {
           player.setSymbol('^');
           attron(COLOR_PAIR(EMPTY_PAIR));
           mvaddch(player.getY()+1, player.getX(), EMPTY);
@@ -129,7 +127,7 @@ void Game::render()
     case KEY_DOWN:
     case 's':
     case 'S':
-        if ((player.getY() < LINES - 1) && is_move_okay(player.getY() + 1, player.getX())) {
+        if ((player.getY() < LINES - 1) && isMoveAllowed(player.getY() + 1, player.getX())) {
           player.setSymbol('v');
           attron(COLOR_PAIR(EMPTY_PAIR));
           mvaddch(player.getY()-1, player.getX(), EMPTY);
@@ -139,7 +137,7 @@ void Game::render()
     case KEY_LEFT:
     case 'a':
     case 'A':
-        if ((player.getX() > 0) && is_move_okay(player.getY(), player.getX() - 1)) {
+        if ((player.getX() > 0) && isMoveAllowed(player.getY(), player.getX() - 1)) {
           player.setSymbol('<');
           attron(COLOR_PAIR(EMPTY_PAIR));
           mvaddch(player.getY(), player.getX()+1, EMPTY);
@@ -149,7 +147,7 @@ void Game::render()
     case KEY_RIGHT:
     case 'd':
     case 'D':
-        if ((player.getX() < COLS - 1) && is_move_okay(player.getY(), player.getX() + 1)) {
+        if ((player.getX() < COLS - 1) && isMoveAllowed(player.getY(), player.getX() + 1)) {
           player.setSymbol('>');
           attron(COLOR_PAIR(EMPTY_PAIR));
           mvaddch(player.getY(), player.getX()-1, EMPTY);
@@ -170,7 +168,7 @@ void Game::run()
       update();   // update the game state
       render();   // render the game state
     }
-    while (getIsComplete() != true);
+    while (isGameComplete() != true);
 }
 
 /* ..............................................
@@ -189,7 +187,7 @@ void Game::setIsComplete(bool isComplete)
   @return true 
   @return false 
 .............................................. */
-bool Game::getIsComplete()
+bool Game::isGameComplete()
 {
   return this->isComplete;
 }
@@ -210,7 +208,7 @@ char Game::getUserInput() {
   @param x 
   @return int 
 .............................................. */
-int Game::is_move_okay(int y, int x)
+bool Game::isMoveAllowed(int y, int x)
 {
   int testch;
 
@@ -224,7 +222,7 @@ int Game::is_move_okay(int y, int x)
   @brief 
   
 .............................................. */
-void Game::draw_map()
+void Game::renderMap()
 {
     int y, x;
 
