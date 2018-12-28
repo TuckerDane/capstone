@@ -125,6 +125,16 @@ int Player::getY() {
 /* ..............................................
   @brief 
   
+  @return true 
+  @return false 
+.............................................. */
+bool Player::getMoved() {
+	return this->moved;
+}
+
+/* ..............................................
+  @brief 
+  
   @param o 
   @return true 
   @return false 
@@ -272,4 +282,8 @@ string Player::getName()
 void Player::setWeight(int w)
 {
 	weight = w;
+}
+
+void Player::setMoved(bool moved) {
+	this->moved = moved;
 }

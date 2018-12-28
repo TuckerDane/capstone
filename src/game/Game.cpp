@@ -54,14 +54,11 @@ Game::~Game()
 .............................................. */
 void Game::process()
 {
-  /* by default, you get a blinking cursor - use it to
-      indicate player * */
   attron(COLOR_PAIR(PLAYER_PAIR));
-  mvaddch(player.getY(), player.getX(), PLAYER);
+  mvaddch(player.getY(), player.getX(), player.getSymbol());
   attroff(COLOR_PAIR(PLAYER_PAIR));
   move(player.getY(), player.getX());
   refresh();
-
   this->ch = getch();
 }
 
@@ -71,24 +68,21 @@ void Game::process()
 .............................................. */
 void Game::update()
 {
+  player.setMoved(false);
   switch (this->ch) {
     case KEY_UP:
     case 'w':
     case 'W':
         if ((player.getY() > 0) && is_move_okay(player.getY() - 1, player.getX())) {
-            attron(COLOR_PAIR(EMPTY_PAIR));
-            mvaddch(player.getY(), player.getX(), EMPTY);
-            attroff(COLOR_PAIR(EMPTY_PAIR));
             player.setY(player.getY() - 1);
+            player.setMoved(true);
         }
         break;
     case KEY_DOWN:
     case 's':
     case 'S':
         if ((player.getY() < LINES - 1) && is_move_okay(player.getY() + 1, player.getX())) {
-            attron(COLOR_PAIR(EMPTY_PAIR));
-            mvaddch(player.getY(), player.getX(), EMPTY);
-            attroff(COLOR_PAIR(EMPTY_PAIR));
+            player.setMoved(true);
             player.setY(player.getY() + 1);
         }
         break;
@@ -96,9 +90,7 @@ void Game::update()
     case 'a':
     case 'A':
         if ((player.getX() > 0) && is_move_okay(player.getY(), player.getX() - 1)) {
-            attron(COLOR_PAIR(EMPTY_PAIR));
-            mvaddch(player.getY(), player.getX(), EMPTY);
-            attroff(COLOR_PAIR(EMPTY_PAIR));
+            player.setMoved(true);
             player.setX(player.getX() - 1);
         }
         break;
@@ -106,9 +98,7 @@ void Game::update()
     case 'd':
     case 'D':
         if ((player.getX() < COLS - 1) && is_move_okay(player.getY(), player.getX() + 1)) {
-            attron(COLOR_PAIR(EMPTY_PAIR));
-            mvaddch(player.getY(), player.getX(), EMPTY);
-            attroff(COLOR_PAIR(EMPTY_PAIR));
+            player.setMoved(true);
             player.setX(player.getX() + 1);
         }
         break;
@@ -125,7 +115,48 @@ void Game::update()
 .............................................. */
 void Game::render()
 {
-
+  switch (this->ch) {
+    case KEY_UP:
+    case 'w':
+    case 'W':
+        if ((player.getY() > 0) && is_move_okay(player.getY() - 1, player.getX())) {
+          player.setSymbol('^');
+          attron(COLOR_PAIR(EMPTY_PAIR));
+          mvaddch(player.getY()+1, player.getX(), EMPTY);
+          attroff(COLOR_PAIR(EMPTY_PAIR));
+        }
+        break;
+    case KEY_DOWN:
+    case 's':
+    case 'S':
+        if ((player.getY() < LINES - 1) && is_move_okay(player.getY() + 1, player.getX())) {
+          player.setSymbol('v');
+          attron(COLOR_PAIR(EMPTY_PAIR));
+          mvaddch(player.getY()-1, player.getX(), EMPTY);
+          attroff(COLOR_PAIR(EMPTY_PAIR));
+        }
+        break;
+    case KEY_LEFT:
+    case 'a':
+    case 'A':
+        if ((player.getX() > 0) && is_move_okay(player.getY(), player.getX() - 1)) {
+          player.setSymbol('<');
+          attron(COLOR_PAIR(EMPTY_PAIR));
+          mvaddch(player.getY(), player.getX()+1, EMPTY);
+          attroff(COLOR_PAIR(EMPTY_PAIR));
+        }
+        break;
+    case KEY_RIGHT:
+    case 'd':
+    case 'D':
+        if ((player.getX() < COLS - 1) && is_move_okay(player.getY(), player.getX() + 1)) {
+          player.setSymbol('>');
+          attron(COLOR_PAIR(EMPTY_PAIR));
+          mvaddch(player.getY(), player.getX()-1, EMPTY);
+          attroff(COLOR_PAIR(EMPTY_PAIR));
+        }
+        break;
+    }
 }
 
 /* ..............................................
@@ -137,6 +168,7 @@ void Game::run()
   do {
       process();  // process player input
       update();   // update the game state
+      render();   // render the game state
     }
     while (getIsComplete() != true);
 }
@@ -183,7 +215,6 @@ int Game::is_move_okay(int y, int x)
   int testch;
 
   /* return true if the space is okay to move into */
-
   testch = mvinch(y, x);
   return (((testch & A_CHARTEXT) == GRASS)
           || ((testch & A_CHARTEXT) == EMPTY));
@@ -196,8 +227,6 @@ int Game::is_move_okay(int y, int x)
 void Game::draw_map()
 {
     int y, x;
-
-    /* draw the quest map */
 
     /* background */
     attron(COLOR_PAIR(GRASS_PAIR));

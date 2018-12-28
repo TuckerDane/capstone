@@ -29,6 +29,7 @@ private:
 	int maxCarry = 20;	 // the max weight tucker can carry is 20 lbs
 	int numItems;				 // the number of items the player is carrying
 	int x, y;
+	bool moved;
 
 public:
 	Player();
@@ -42,6 +43,7 @@ public:
 	void setWeight(int w);									// sets the weight of an object
 	void setX(int y);
 	void setY(int y);
+	void setMoved(bool moved);
 
 	string getPlayerRoom(); // a function which gets the room the player is in
 	int getCRoom();					// gets the room tucker is in
@@ -49,6 +51,7 @@ public:
 	string getName();				// returns the name of the Object
 	int getX();
 	int getY();
+	bool getMoved();
 
 	bool addObject(Object *o); // adds an object to backpack and returns true if it worked
 	void displayBackpack();		 // displays the backpack and includes a message on how to use it
