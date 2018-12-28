@@ -59,7 +59,7 @@ void Game::process()
   attroff(COLOR_PAIR(PLAYER_PAIR));
   move(player.getY(), player.getX());
   refresh();
-  this->ch = getch();
+  this->userInput = getch();
 }
 
 /* ..............................................
@@ -69,7 +69,7 @@ void Game::process()
 void Game::update()
 {
   player.setMoved(false);
-  switch (this->ch) {
+  switch (this->userInput) {
     case KEY_UP:
     case 'w':
     case 'W':
@@ -115,7 +115,7 @@ void Game::update()
 .............................................. */
 void Game::render()
 {
-  switch (this->ch) {
+  switch (this->userInput) {
     case KEY_UP:
     case 'w':
     case 'W':
@@ -199,8 +199,8 @@ bool Game::getIsComplete()
   
   @return char 
 .............................................. */
-char Game::getCh() {
-  return this->ch;
+char Game::getUserInput() {
+  return this->userInput;
 }
 
 /* ..............................................

@@ -12,7 +12,7 @@
 #include <ncurses.h>
 #include "Player.h"
 
-#define GRASS ' '
+#define GRASS     ' '
 #define EMPTY     '.'
 #define WATER     '~'
 #define MOUNTAIN  '^'
@@ -32,7 +32,7 @@ class Game
 {
 private:
   bool isComplete;
-  int ch;
+  int userInput;
   Player player;
 
 public:
@@ -45,13 +45,13 @@ public:
   void render();  // renderst the game state
   void run();     // runs the game
 
-  void setIsComplete(bool isComplete);
+  void setIsComplete(bool isComplete); // sets whether or not the game is complete
 
-  bool getIsComplete();
-  char getCh();
+  bool getIsComplete(); // gets the completion state of the game
+  char getUserInput(); // gets keyboard input from the user
 
-  int is_move_okay(int y, int x);
-  void draw_map();
+  int is_move_okay(int y, int x); // checks to see if the move is ok
+  void draw_map(); // draws the map
 };
 
 #endif
