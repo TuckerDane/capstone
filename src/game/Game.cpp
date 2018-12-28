@@ -65,37 +65,33 @@ void Game::process()
 void Game::update()
 {
   player.setMoved(false);
-  switch (this->userInput) {
+  switch ((unsigned int)this->userInput) {
     case KEY_UP:
     case 'w':
     case 'W':
         if ((player.getY() > 0) && isMoveAllowed(player.getY() - 1, player.getX())) {
-            player.setY(player.getY() - 1);
-            player.setMoved(true);
+            player.move('w');
         }
         break;
     case KEY_DOWN:
     case 's':
     case 'S':
         if ((player.getY() < LINES - 1) && isMoveAllowed(player.getY() + 1, player.getX())) {
-            player.setMoved(true);
-            player.setY(player.getY() + 1);
+            player.move('s');
         }
         break;
     case KEY_LEFT:
     case 'a':
     case 'A':
         if ((player.getX() > 0) && isMoveAllowed(player.getY(), player.getX() - 1)) {
-            player.setMoved(true);
-            player.setX(player.getX() - 1);
+            player.move('a');
         }
         break;
     case KEY_RIGHT:
     case 'd':
     case 'D':
         if ((player.getX() < COLS - 1) && isMoveAllowed(player.getY(), player.getX() + 1)) {
-            player.setMoved(true);
-            player.setX(player.getX() + 1);
+            player.move('d');
         }
         break;
     case 'q':
@@ -111,7 +107,7 @@ void Game::update()
 .............................................. */
 void Game::render()
 {
-  switch (this->userInput) {
+  switch ((unsigned int)this->userInput) {
     case KEY_UP:
     case 'w':
     case 'W':
@@ -207,23 +203,6 @@ char Game::getUserInput() {
 /* ..............................................
   @brief 
   
-  @param y 
-  @param x 
-  @return int 
-.............................................. */
-bool Game::isMoveAllowed(int y, int x)
-{
-  int testch;
-
-  /* return true if the space is okay to move into */
-  testch = mvinch(y, x);
-  return (((testch & A_CHARTEXT) == GRASS)
-          || ((testch & A_CHARTEXT) == EMPTY));
-}
-
-/* ..............................................
-  @brief 
-  
 .............................................. */
 void Game::renderMap()
 {
@@ -235,4 +214,22 @@ void Game::renderMap()
         mvhline(y, 0, GRASS, COLS);
     }
     attroff(COLOR_PAIR(GRASS_PAIR));
+}
+
+/* ..............................................
+  @brief 
+  
+  @param y 
+  @param x 
+  @return true 
+  @return false 
+.............................................. */
+bool Game::isMoveAllowed(int y, int x)
+{
+  int testch;
+
+  /* return true if the space is okay to move into */
+  testch = mvinch(y, x);
+  return (((testch & A_CHARTEXT) == GRASS)
+          || ((testch & A_CHARTEXT) == EMPTY));
 }

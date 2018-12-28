@@ -44,6 +44,7 @@ public:
 	void setX(int y);
 	void setY(int y);
 	void setMoved(bool moved);
+	void move(char direction);
 
 	string getPlayerRoom(); // a function which gets the room the player is in
 	int getCRoom();					// gets the room tucker is in

@@ -284,6 +284,38 @@ void Player::setWeight(int w)
 	weight = w;
 }
 
+/* ..............................................
+  @brief 
+  
+  @param moved 
+.............................................. */
 void Player::setMoved(bool moved) {
 	this->moved = moved;
+}
+
+/* ..............................................
+  @brief 
+  
+  @param direction 
+.............................................. */
+void Player::move(char direction) {
+	if(direction == 'w') {
+		setY(getY() - 1);
+		setMoved(true);
+	}
+	else if (direction == 's') {
+		setMoved(true);
+		setY(getY() + 1);
+	}
+	else if (direction == 'a') {
+		setMoved(true);
+		setX(getX() - 1);
+	}
+	else if (direction == 'd') {
+		setMoved(true);
+		setX(getX() + 1);
+	}
+	else {
+		setMoved(false);
+	}
 }
