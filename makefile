@@ -14,8 +14,8 @@
 #
 
 CXX      := g++
-CXXFLAGS := -pedantic-errors -Wall -std=c++0x -g
-LDFLAGS  := -lncurses -ltinfo
+CXXFLAGS := -pedantic-errors -Wall -std=c++11 -g
+LDFLAGS  := -lncurses
 BUILD    := ./build
 OBJ_DIR  := $(BUILD)/objects
 APP_DIR  := $(BUILD)/apps
