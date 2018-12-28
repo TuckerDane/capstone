@@ -16,6 +16,12 @@ Player::Player() : Object('^', "Tucker", 2, 2, "Player")
 {
 }
 
+Player::Player(int row, int col) : Object('^', "Tucker", row, col, "Player")
+{
+	this->y = col;
+	this->x = row;
+}
+
 /* ..............................................
   @brief Construct a new Player:: Player object
   
@@ -63,6 +69,24 @@ void Player::setPlayerRoom(string room, int i)
 /* ..............................................
   @brief 
   
+  @param x 
+.............................................. */
+void Player::setX(int x) {
+  this->x = x;
+}
+
+/* ..............................................
+  @brief 
+  
+  @param y 
+.............................................. */
+void Player::setY(int y) {
+  this->y = y;
+}
+
+/* ..............................................
+  @brief 
+  
   @return string 
 .............................................. */
 string Player::getPlayerRoom()
@@ -78,6 +102,24 @@ string Player::getPlayerRoom()
 int Player::getCRoom()
 {
 	return cRoom;
+}
+
+/* ..............................................
+  @brief 
+  
+  @return int 
+.............................................. */
+int Player::getX() {
+  return this->x;
+}
+
+/* ..............................................
+  @brief 
+  
+  @return int 
+.............................................. */
+int Player::getY() {
+  return this->y;
 }
 
 /* ..............................................

@@ -28,9 +28,11 @@ private:
 	Object *backpack[9]; // a backpack with 10 slots in it
 	int maxCarry = 20;	 // the max weight tucker can carry is 20 lbs
 	int numItems;				 // the number of items the player is carrying
+	int x, y;
 
 public:
-	Player();																			// default constructor for Player
+	Player();
+	Player(int row, int col);																			// default constructor for Player
 	Player(int row, int col, string room, int r); // constructor for Player initializing rowPos, colPos, and room
 	~Player();																		// deconstructor for Player
 
@@ -38,11 +40,15 @@ public:
 	void setSymbol(char s);									// a function which changes the player's symbol
 	void setPlayerRoom(string room, int i); // a function which changes the room the player is in
 	void setWeight(int w);									// sets the weight of an object
+	void setX(int y);
+	void setY(int y);
 
 	string getPlayerRoom(); // a function which gets the room the player is in
 	int getCRoom();					// gets the room tucker is in
 	int getWeight();				// returns the weight of the object
 	string getName();				// returns the name of the Object
+	int getX();
+	int getY();
 
 	bool addObject(Object *o); // adds an object to backpack and returns true if it worked
 	void displayBackpack();		 // displays the backpack and includes a message on how to use it

@@ -9,9 +9,20 @@
 
 #ifndef GAME_HPP
 #define GAME_HPP
+#include <ncurses.h>
+#include "Player.h"
 
-#include <iostream>
-using namespace std;
+#define GRASS ' '
+#define EMPTY     '.'
+#define WATER     '~'
+#define MOUNTAIN  '^'
+#define PLAYER    '*'
+
+#define GRASS_PAIR     1
+#define EMPTY_PAIR     1
+#define WATER_PAIR     2
+#define MOUNTAIN_PAIR  3
+#define PLAYER_PAIR    4
 
 /* ..............................................
   @brief 
@@ -21,9 +32,11 @@ class Game
 {
 private:
   bool isComplete;
-  char test;
+  int ch;
+  Player player;
 
 public:
+  
   Game();  // default constructor
   ~Game(); // deconstructor
 
@@ -32,11 +45,13 @@ public:
   void render();  // renderst the game state
   void run();     // runs the game
 
-  bool getIsComplete();
   void setIsComplete(bool isComplete);
 
-  char getTest();
-  void setTest(char test);
+  bool getIsComplete();
+  char getCh();
+
+  int is_move_okay(int y, int x);
+  void draw_map();
 };
 
 #endif

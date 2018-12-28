@@ -14,8 +14,25 @@
 .............................................. */
 Game::Game()
 {
-  setTest('a');
-  setIsComplete(false);
+  /* initialize ncurses */
+  initscr();
+  keypad(stdscr, TRUE);
+  cbreak();
+  noecho();
+
+  /* initialize colors */
+  start_color();
+  init_pair(GRASS_PAIR, COLOR_YELLOW, COLOR_GREEN);
+  init_pair(WATER_PAIR, COLOR_CYAN, COLOR_BLUE);
+  init_pair(MOUNTAIN_PAIR, COLOR_BLACK, COLOR_WHITE);
+  init_pair(PLAYER_PAIR, COLOR_RED, COLOR_MAGENTA);
+
+  clear();
+
+  /* initialize the game map */
+  draw_map();
+  this->player.setX(LINES-1);
+  this->player.setY(0);
 }
 
 /* ..............................................
@@ -24,6 +41,11 @@ Game::Game()
 .............................................. */
 Game::~Game()
 {
+  /* Destroy ncurses */
+  endwin();
+
+  /* Destroy player */
+  player.~Player();
 }
 
 /* ..............................................
@@ -32,9 +54,15 @@ Game::~Game()
 .............................................. */
 void Game::process()
 {
-  char newChar;
-  cin >> newChar;
-  setTest(newChar);
+  /* by default, you get a blinking cursor - use it to
+      indicate player * */
+  attron(COLOR_PAIR(PLAYER_PAIR));
+  mvaddch(player.getY(), player.getX(), PLAYER);
+  attroff(COLOR_PAIR(PLAYER_PAIR));
+  move(player.getY(), player.getX());
+  refresh();
+
+  this->ch = getch();
 }
 
 /* ..............................................
@@ -43,11 +71,52 @@ void Game::process()
 .............................................. */
 void Game::update()
 {
-  if (getTest() == 'x')
-  {
-    setIsComplete(true);
-  }
-  setTest(getTest() + 1);
+  switch (this->ch) {
+    case KEY_UP:
+    case 'w':
+    case 'W':
+        if ((player.getY() > 0) && is_move_okay(player.getY() - 1, player.getX())) {
+            attron(COLOR_PAIR(EMPTY_PAIR));
+            mvaddch(player.getY(), player.getX(), EMPTY);
+            attroff(COLOR_PAIR(EMPTY_PAIR));
+            player.setY(player.getY() - 1);
+        }
+        break;
+    case KEY_DOWN:
+    case 's':
+    case 'S':
+        if ((player.getY() < LINES - 1) && is_move_okay(player.getY() + 1, player.getX())) {
+            attron(COLOR_PAIR(EMPTY_PAIR));
+            mvaddch(player.getY(), player.getX(), EMPTY);
+            attroff(COLOR_PAIR(EMPTY_PAIR));
+            player.setY(player.getY() + 1);
+        }
+        break;
+    case KEY_LEFT:
+    case 'a':
+    case 'A':
+        if ((player.getX() > 0) && is_move_okay(player.getY(), player.getX() - 1)) {
+            attron(COLOR_PAIR(EMPTY_PAIR));
+            mvaddch(player.getY(), player.getX(), EMPTY);
+            attroff(COLOR_PAIR(EMPTY_PAIR));
+            player.setX(player.getX() - 1);
+        }
+        break;
+    case KEY_RIGHT:
+    case 'd':
+    case 'D':
+        if ((player.getX() < COLS - 1) && is_move_okay(player.getY(), player.getX() + 1)) {
+            attron(COLOR_PAIR(EMPTY_PAIR));
+            mvaddch(player.getY(), player.getX(), EMPTY);
+            attroff(COLOR_PAIR(EMPTY_PAIR));
+            player.setX(player.getX() + 1);
+        }
+        break;
+    case 'q':
+    case 'Q':
+        setIsComplete(true);
+        break;
+    }
 }
 
 /* ..............................................
@@ -56,23 +125,30 @@ void Game::update()
 .............................................. */
 void Game::render()
 {
-  cout << "The next character is: " << getTest() << "\n";
+
+}
+
+/* ..............................................
+  @brief  runs the game while the game is not
+          complete
+.............................................. */
+void Game::run()
+{
+  do {
+      process();  // process player input
+      update();   // update the game state
+    }
+    while (getIsComplete() != true);
 }
 
 /* ..............................................
   @brief 
   
+  @param isComplete 
 .............................................. */
-void Game::run()
+void Game::setIsComplete(bool isComplete)
 {
-  cout << "GAME START\n";
-  while (getIsComplete() == false)
-  {
-    process();
-    update();
-    render();
-  }
-  cout << "GAME OVER\n";
+  this->isComplete = isComplete;
 }
 
 /* ..............................................
@@ -89,29 +165,44 @@ bool Game::getIsComplete()
 /* ..............................................
   @brief 
   
-  @param isComplete 
-.............................................. */
-void Game::setIsComplete(bool isComplete)
-{
-  this->isComplete = isComplete;
-}
-
-/* ..............................................
-  @brief 
-  
   @return char 
 .............................................. */
-char Game::getTest()
-{
-  return this->test;
+char Game::getCh() {
+  return this->ch;
 }
 
 /* ..............................................
   @brief 
   
-  @param test 
+  @param y 
+  @param x 
+  @return int 
 .............................................. */
-void Game::setTest(char test)
+int Game::is_move_okay(int y, int x)
 {
-  this->test = test;
+  int testch;
+
+  /* return true if the space is okay to move into */
+
+  testch = mvinch(y, x);
+  return (((testch & A_CHARTEXT) == GRASS)
+          || ((testch & A_CHARTEXT) == EMPTY));
+}
+
+/* ..............................................
+  @brief 
+  
+.............................................. */
+void Game::draw_map()
+{
+    int y, x;
+
+    /* draw the quest map */
+
+    /* background */
+    attron(COLOR_PAIR(GRASS_PAIR));
+    for (y = 0; y < LINES; y++) {
+        mvhline(y, 0, GRASS, COLS);
+    }
+    attroff(COLOR_PAIR(GRASS_PAIR));
 }
