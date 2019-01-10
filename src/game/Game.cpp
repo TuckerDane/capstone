@@ -126,12 +126,16 @@ void Game::update()
 .............................................. */
 void Game::render()
 {
-    if (player.isMoved()) {
-      mvaddchWithColor(getPlayersPreviousYpos(), getPlayersPreviousXpos(), EMPTY, EMPTY_PAIR);
-    }        
-    mvaddchWithColor(player.getY(), player.getX(), player.getSymbol(), PLAYER_PAIR);
-    move(player.getY(), player.getX());
-    refresh();
+  renderPlayer();
+  refresh();
+}
+
+void Game::renderPlayer()
+{
+  if (player.isMoved()) {
+    mvaddchWithColor(getPlayersPreviousYpos(), getPlayersPreviousXpos(), EMPTY, EMPTY_PAIR);  // render player's previous position
+  }
+  mvaddchWithColor(player.getY(), player.getX(), player.getSymbol(), PLAYER_PAIR);            // render the player       
 }
 
 /* ..............................................

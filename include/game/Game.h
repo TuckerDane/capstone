@@ -40,6 +40,7 @@ public:
   void process(); // processes game
   void update();  // updates the game state
   void render();  // renders the game state
+  void renderPlayer();  // renders player if moved
   void run();     // runs the game
   void renderMap(); // draws the map
   void mvaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR);
