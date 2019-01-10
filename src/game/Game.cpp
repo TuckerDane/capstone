@@ -20,11 +20,12 @@ Game::Game()
   keypad(stdscr, TRUE);
   cbreak();
   noecho();
+  curs_set(0);
 
   /* initialize colors */
-  start_color();
-  init_pair(GRASS_PAIR, COLOR_YELLOW, COLOR_GREEN);
-  init_pair(PLAYER_PAIR, COLOR_RED, COLOR_MAGENTA);
+  // start_color();
+  // init_pair(GRASS_PAIR, COLOR_YELLOW, COLOR_GREEN);
+  // init_pair(PLAYER_PAIR, COLOR_RED, COLOR_MAGENTA);
 
   /* clear the screen */
   clear();
@@ -114,9 +115,9 @@ void Game::render()
     case 'W':
         player.setSymbol('^');
         if (player.isMoved()) {
-          attron(COLOR_PAIR(EMPTY_PAIR));
+          //attron(COLOR_PAIR(EMPTY_PAIR));
           mvaddch(player.getY()+1, player.getX(), EMPTY);
-          attroff(COLOR_PAIR(EMPTY_PAIR));
+          //attroff(COLOR_PAIR(EMPTY_PAIR));
         }
         break;
     case KEY_DOWN:
@@ -124,9 +125,9 @@ void Game::render()
     case 'S':
         player.setSymbol('v');
         if (player.isMoved()) {
-          attron(COLOR_PAIR(EMPTY_PAIR));
+          //attron(COLOR_PAIR(EMPTY_PAIR));
           mvaddch(player.getY()-1, player.getX(), EMPTY);
-          attroff(COLOR_PAIR(EMPTY_PAIR));
+          //attroff(COLOR_PAIR(EMPTY_PAIR));
         }
         break;
     case KEY_LEFT:
@@ -134,9 +135,9 @@ void Game::render()
     case 'A':
         player.setSymbol('<');
         if (player.isMoved()) {
-          attron(COLOR_PAIR(EMPTY_PAIR));
+          //attron(COLOR_PAIR(EMPTY_PAIR));
           mvaddch(player.getY(), player.getX()+1, EMPTY);
-          attroff(COLOR_PAIR(EMPTY_PAIR));
+          //attroff(COLOR_PAIR(EMPTY_PAIR));
         }
         break;
     case KEY_RIGHT:
@@ -144,15 +145,15 @@ void Game::render()
     case 'D':
         player.setSymbol('>');
         if (player.isMoved()) {
-          attron(COLOR_PAIR(EMPTY_PAIR));
+          //attron(COLOR_PAIR(EMPTY_PAIR));
           mvaddch(player.getY(), player.getX()-1, EMPTY);
-          attroff(COLOR_PAIR(EMPTY_PAIR));
+          //attroff(COLOR_PAIR(EMPTY_PAIR));
         }
         break;
     }
-    attron(COLOR_PAIR(PLAYER_PAIR));
+    //attron(COLOR_PAIR(PLAYER_PAIR));
     mvaddch(player.getY(), player.getX(), player.getSymbol());
-    attroff(COLOR_PAIR(PLAYER_PAIR));
+    //attroff(COLOR_PAIR(PLAYER_PAIR));
     move(player.getY(), player.getX());
     refresh();
 }
@@ -211,11 +212,11 @@ void Game::renderMap()
     int y, x;
 
     /* background */
-    attron(COLOR_PAIR(GRASS_PAIR));
+    //attron(COLOR_PAIR(GRASS_PAIR));
     for (y = 0; y < LINES; y++) {
         mvhline(y, 0, GRASS, COLS);
     }
-    attroff(COLOR_PAIR(GRASS_PAIR));
+    //attroff(COLOR_PAIR(GRASS_PAIR));
 }
 
 /* ..............................................
