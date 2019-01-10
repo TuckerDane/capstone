@@ -13,7 +13,7 @@
 #include "Player.h"
 
 #define GRASS     ' '
-#define EMPTY     '.'
+#define EMPTY     ' '
 
 #define GRASS_PAIR     1
 #define EMPTY_PAIR     1
@@ -40,6 +40,7 @@ public:
   void render();  // renders the game state
   void run();     // runs the game
   void renderMap(); // draws the map
+  void mvaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR);
 
   void setIsComplete(bool isComplete); // sets whether or not the game is complete
 
