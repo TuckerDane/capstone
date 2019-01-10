@@ -66,32 +66,49 @@ void Game::process()
 void Game::update()
 {
   player.setMoved(false);
-  switch ((unsigned int)this->userInput) {
+  switch ((unsigned int)this->userInput)
+  {
     case KEY_UP:
     case 'w':
     case 'W':
-        if ((player.getY() > 0) && isMoveAllowed(player.getY() - 1, player.getX())) {
+        player.setSymbol('^');
+        if ((player.getY() > 0) && isMoveAllowed(player.getY() - 1, player.getX()))
+        {
+            setPlayersPreviousXpos(player.getX());
+            setPlayersPreviousYpos(player.getY()); 
             player.move('w');
         }
         break;
     case KEY_DOWN:
     case 's':
     case 'S':
-        if ((player.getY() < LINES - 1) && isMoveAllowed(player.getY() + 1, player.getX())) {
+        player.setSymbol('v');
+        if ((player.getY() < LINES - 1) && isMoveAllowed(player.getY() + 1, player.getX()))
+        {
+            setPlayersPreviousXpos(player.getX());
+            setPlayersPreviousYpos(player.getY()); 
             player.move('s');
         }
         break;
     case KEY_LEFT:
     case 'a':
     case 'A':
-        if ((player.getX() > 0) && isMoveAllowed(player.getY(), player.getX() - 1)) {
+        player.setSymbol('<');
+        if ((player.getX() > 0) && isMoveAllowed(player.getY(), player.getX() - 1))
+        {
+            setPlayersPreviousXpos(player.getX());
+            setPlayersPreviousYpos(player.getY());           
             player.move('a');
         }
         break;
     case KEY_RIGHT:
     case 'd':
     case 'D':
-        if ((player.getX() < COLS - 1) && isMoveAllowed(player.getY(), player.getX() + 1)) {
+        player.setSymbol('>');
+        if ((player.getX() < COLS - 1) && isMoveAllowed(player.getY(), player.getX() + 1))
+        {
+            setPlayersPreviousXpos(player.getX());
+            setPlayersPreviousYpos(player.getY());           
             player.move('d');
         }
         break;
@@ -109,40 +126,9 @@ void Game::update()
 .............................................. */
 void Game::render()
 {
-  switch ((unsigned int)this->userInput) {
-    case KEY_UP:
-    case 'w':
-    case 'W':
-        player.setSymbol('^');
-        if (player.isMoved()) {
-          mvaddchWithColor(player.getY()+1, player.getX(), EMPTY, EMPTY_PAIR);
-        }
-        break;
-    case KEY_DOWN:
-    case 's':
-    case 'S':
-        player.setSymbol('v');
-        if (player.isMoved()) {
-          mvaddchWithColor(player.getY()-1, player.getX(), EMPTY, EMPTY_PAIR);
-        }
-        break;
-    case KEY_LEFT:
-    case 'a':
-    case 'A':
-        player.setSymbol('<');
-        if (player.isMoved()) {
-          mvaddchWithColor(player.getY(), player.getX()+1, EMPTY, EMPTY_PAIR);
-        }
-        break;
-    case KEY_RIGHT:
-    case 'd':
-    case 'D':
-        player.setSymbol('>');
-        if (player.isMoved()) {
-          mvaddchWithColor(player.getY(), player.getX()-1, EMPTY, EMPTY_PAIR);
-        }
-        break;
-    }
+    if (player.isMoved()) {
+      mvaddchWithColor(getPlayersPreviousYpos(), getPlayersPreviousXpos(), EMPTY, EMPTY_PAIR);
+    }        
     mvaddchWithColor(player.getY(), player.getX(), player.getSymbol(), PLAYER_PAIR);
     move(player.getY(), player.getX());
     refresh();
@@ -171,6 +157,46 @@ void Game::run()
 void Game::setIsComplete(bool isComplete)
 {
   this->isComplete = isComplete;
+}
+
+/* ..............................................
+  @brief 
+  
+  @param xPos 
+.............................................. */
+void Game::setPlayersPreviousXpos(int xPos)
+{
+  this->playersPreviousXpos = xPos;
+}
+
+/* ..............................................
+  @brief 
+  
+  @param yPos 
+.............................................. */
+void Game::setPlayersPreviousYpos(int yPos)
+{
+  this->playersPreviousYpos = yPos;
+}
+
+/* ..............................................
+  @brief 
+  
+  @return int 
+.............................................. */
+int Game::getPlayersPreviousXpos()
+{
+  return this->playersPreviousXpos;
+}
+
+/* ..............................................
+  @brief 
+  
+  @return int 
+.............................................. */
+int Game::getPlayersPreviousYpos()
+{
+  return this->playersPreviousYpos;
 }
 
 /* ..............................................

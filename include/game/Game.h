@@ -29,6 +29,8 @@ private:
   bool isComplete;  // tells if the game is complete or not
   char userInput;  // holds the user's last keystroke
   Player player; // the player object
+  int playersPreviousXpos;
+  int playersPreviousYpos;
 
 public:
   
@@ -41,8 +43,12 @@ public:
   void run();     // runs the game
   void renderMap(); // draws the map
   void mvaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR);
-
   void setIsComplete(bool isComplete); // sets whether or not the game is complete
+  void setPlayersPreviousXpos(int xPos);
+  void setPlayersPreviousYpos(int yPos);
+
+  int getPlayersPreviousXpos();
+  int getPlayersPreviousYpos();
 
   char getUserInput(); // gets the value of the player's last keystroke
 
