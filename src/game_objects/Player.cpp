@@ -13,20 +13,19 @@
   
 .............................................. */
 
-Player::Player() : Object(0, 0, 150, COLOR_BLACK, '^', "Player", "Adventurer")
+Player::Player() : Object(0, 0, 150, COLOR_BLACK, '^', "player_object", "adventurer")
 {
 	this->maxCarry = 300;
 	this->numItems = 0;
-	this->inventory = new Object *[MAX_INVENTORY];
+	for (int itemSlot = 0; itemSlot < MAX_INVENTORY; itemSlot++)
+	{
+		this->inventory[itemSlot] = NULL;
+	}
 	this->isMoved = false;
 }
 
 Player::~Player()
 {
-	for (int i = 0; i < MAX_INVENTORY; i++)
-	{
-		delete inventory[i];
-	}
 }
 
 /* ..............................................
@@ -49,9 +48,12 @@ void Player::setNumItems(int numItems)
 	this->numItems = numItems;
 }
 
-void Player::setInventory(Object **inventory, int numItems)
+void Player::setInventory(Object *inventory[MAX_INVENTORY], int numItems)
 {
-	this->inventory = inventory;
+	for (int itemSlot = 0; itemSlot < MAX_INVENTORY; itemSlot++)
+	{
+		this->inventory[itemSlot] = inventory[itemSlot];
+	}
 	this->numItems = numItems;
 }
 

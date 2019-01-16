@@ -244,7 +244,7 @@ char Game::getUserInput() {
 .............................................. */
 void Game::renderMap()
 {
-    int y, x;
+    int y;
 
     /* background */
     attron(COLOR_PAIR(GRASS_PAIR));

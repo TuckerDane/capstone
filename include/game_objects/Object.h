@@ -34,15 +34,15 @@ using std::string;
 .............................................. */
 class Object
 {
-protected:
+  protected:
 	int xPos, yPos; // the coordinate positions
-	int weight;			// how much the object weighs
-	int color;			// ncurses colors
-	char symbol;		// holds the symbol of the object
-	string type;		// holds the type name of the object
-	string name;		// holds the name of the object
+	int weight;		// how much the object weighs
+	int color;		// ncurses colors
+	char symbol;	// holds the symbol of the object
+	string type;	// holds the type name of the object
+	string name;	// holds the name of the object
 
-public:
+  public:
 	// CONSTRUCTOR/DESTRUCTORS
 	Object();
 	Object(int xPos, int yPos, int weight, int color, char symbol, string type, string name);
@@ -51,7 +51,7 @@ public:
 	// SETTERS
 	virtual void setXPos(int xPos);
 	virtual void setYPos(int yPos);
-	virtual void setWeight(int weight) = 0;
+	virtual void setWeight(int weight);
 	virtual void setColor(int color);
 	virtual void setSymbol(char symbol);
 	virtual void setType(string type);
@@ -60,7 +60,7 @@ public:
 	// GETTERS
 	virtual int getXPos();
 	virtual int getYPos();
-	virtual int getWeight() = 0;
+	virtual int getWeight();
 	virtual int getColor();
 	virtual char getSymbol();
 	virtual string getType();

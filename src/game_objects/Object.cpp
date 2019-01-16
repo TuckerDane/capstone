@@ -71,7 +71,7 @@ void Object::setSymbol(char symbol)
 
 void Object::setType(string type)
 {
-  this->type = setType;
+  this->type = type;
 }
 
 void Object::setName(string name)
