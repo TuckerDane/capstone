@@ -2,107 +2,119 @@
   @file Object.cpp
   @author Tucker Walker (tuckerdwalker@gmail.com)
   @brief 
-  @date 2018-12-26
+  @date 2019-01-16
   
   
 .............................................. */
 #include "Object.h"
 
 /* ..............................................
-  @brief Construct a new Object:: Object object
+  CONSTRUCTORS / DESTRUCTORS
   
 .............................................. */
+
 Object::Object()
 {
-  rowPos = 0;
-  colPos = 0;
-  symbol = 'O';
-  name = "null object";
-  type = "generic";
+  this->xPos = 0;
+  this->yPos = 0;
+  this->weight = 0;
+  this->color = COLOR_BLACK;
+  this->symbol = '?';
+  this->type = "generic";
+  this->name = "unnamed";
 }
 
-/* ..............................................
-  @brief Construct a new Object:: Object object
-  
-  @param s 
-  @param n 
-  @param r 
-  @param c 
-  @param t 
-.............................................. */
-Object::Object(char s, string n, int r, int c, string t)
+Object::Object(int xPos, int yPos, int weight, int color, char symbol, string type, string name)
 {
-  rowPos = r;
-  colPos = c;
-  symbol = s;
-  name = n;
-  type = t;
+  this->xPos = xPos;
+  this->yPos = yPos;
+  this->weight = weight;
+  this->color = color;
+  this->symbol = symbol;
+  this->type = type;
+  this->name = name;
 }
 
-/* ..............................................
-  @brief Destroy the Object:: Object object
-  
-.............................................. */
 Object::~Object()
 {
 }
 
 /* ..............................................
-  @brief 
+  SETTERS 
   
-  @return int 
 .............................................. */
-int Object::getRowPos()
+
+void Object::setXPos(int xPos)
 {
-  return rowPos;
+  this->xPos = xPos;
+}
+
+void Object::setYPos(int yPos)
+{
+  this->yPos = yPos;
+}
+
+void Object::setWeight(int weight)
+{
+  this->weight = weight;
+}
+
+void Object::setColor(int color)
+{
+  this->color = color;
+}
+
+void Object::setSymbol(char symbol)
+{
+  this->symbol = symbol;
+}
+
+void Object::setType(string type)
+{
+  this->type = setType;
+}
+
+void Object::setName(string name)
+{
+  this->name = name;
 }
 
 /* ..............................................
-  @brief 
+  GETTERS
   
-  @return int 
 .............................................. */
-int Object::getColPos()
+
+int Object::getXPos()
 {
-  return colPos;
+  return this->xPos;
 }
 
-/* ..............................................
-  @brief 
-  
-  @return char 
-.............................................. */
+int Object::getYPos()
+{
+  return this->yPos;
+}
+
+int Object::getWeight()
+{
+  return this->weight;
+}
+
+int Object::getColor()
+{
+  return this->color;
+}
+
 char Object::getSymbol()
 {
-  return symbol;
+  return this->symbol;
 }
 
-/* ..............................................
-  @brief 
-  
-  @return string 
-.............................................. */
 string Object::getType()
 {
-  return type;
+  return this->type;
 }
 
-/* ..............................................
-  @brief 
-  
-  @param r 
-.............................................. */
-void Object::setRowPos(int r)
+string Object::getName()
 {
-  rowPos = r;
-}
-
-/* ..............................................
-  @brief 
-  
-  @param c 
-.............................................. */
-void Object::setColPos(int c)
-{
-  colPos = c;
+  return this->name;
 }

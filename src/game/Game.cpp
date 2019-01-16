@@ -33,8 +33,8 @@ Game::Game()
   /* TODO: initialize game map(s) as objects */
 
   /* initialize player object */
-  this->player.setX(LINES-1);
-  this->player.setY(0);
+  this->player.setXPos(LINES-1);
+  this->player.setYPos(0);
 }
 
 /* ..............................................
@@ -65,17 +65,17 @@ void Game::process()
 .............................................. */
 void Game::update()
 {
-  player.setMoved(false);
+  player.setIsMoved(false);
   switch ((unsigned int)this->userInput)
   {
     case KEY_UP:
     case 'w':
     case 'W':
         player.setSymbol('^');
-        if ((player.getY() > 0) && isMoveAllowed(player.getY() - 1, player.getX()))
+        if ((player.getYPos() > 0) && isMoveAllowed(player.getYPos() - 1, player.getXPos()))
         {
-            setPlayersPreviousXpos(player.getX());
-            setPlayersPreviousYpos(player.getY()); 
+            setPlayersPreviousXpos(player.getXPos());
+            setPlayersPreviousYpos(player.getYPos()); 
             player.move('w');
         }
         break;
@@ -83,10 +83,10 @@ void Game::update()
     case 's':
     case 'S':
         player.setSymbol('v');
-        if ((player.getY() < LINES - 1) && isMoveAllowed(player.getY() + 1, player.getX()))
+        if ((player.getYPos() < LINES - 1) && isMoveAllowed(player.getYPos() + 1, player.getXPos()))
         {
-            setPlayersPreviousXpos(player.getX());
-            setPlayersPreviousYpos(player.getY()); 
+            setPlayersPreviousXpos(player.getXPos());
+            setPlayersPreviousYpos(player.getYPos()); 
             player.move('s');
         }
         break;
@@ -94,10 +94,10 @@ void Game::update()
     case 'a':
     case 'A':
         player.setSymbol('<');
-        if ((player.getX() > 0) && isMoveAllowed(player.getY(), player.getX() - 1))
+        if ((player.getXPos() > 0) && isMoveAllowed(player.getYPos(), player.getXPos() - 1))
         {
-            setPlayersPreviousXpos(player.getX());
-            setPlayersPreviousYpos(player.getY());           
+            setPlayersPreviousXpos(player.getXPos());
+            setPlayersPreviousYpos(player.getYPos());           
             player.move('a');
         }
         break;
@@ -105,10 +105,10 @@ void Game::update()
     case 'd':
     case 'D':
         player.setSymbol('>');
-        if ((player.getX() < COLS - 1) && isMoveAllowed(player.getY(), player.getX() + 1))
+        if ((player.getXPos() < COLS - 1) && isMoveAllowed(player.getYPos(), player.getXPos() + 1))
         {
-            setPlayersPreviousXpos(player.getX());
-            setPlayersPreviousYpos(player.getY());           
+            setPlayersPreviousXpos(player.getXPos());
+            setPlayersPreviousYpos(player.getYPos());           
             player.move('d');
         }
         break;
@@ -132,10 +132,10 @@ void Game::render()
 
 void Game::renderPlayer()
 {
-  if (player.isMoved()) {
+  if (player.getIsMoved()) {
     mvaddchWithColor(getPlayersPreviousYpos(), getPlayersPreviousXpos(), EMPTY, EMPTY_PAIR);  // render player's previous position
   }
-  mvaddchWithColor(player.getY(), player.getX(), player.getSymbol(), PLAYER_PAIR);            // render the player       
+  mvaddchWithColor(player.getYPos(), player.getXPos(), player.getSymbol(), PLAYER_PAIR);            // render the player       
 }
 
 /* ..............................................
