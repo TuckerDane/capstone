@@ -13,51 +13,69 @@
 #include "Player.h"
 #include "Item.h"
 
-#define GRASS     ' '
-#define EMPTY     ' '
+#define GRASS ' '
+#define EMPTY ' '
 
-#define GRASS_PAIR     1
-#define EMPTY_PAIR     1
-#define PLAYER_PAIR    4
+#define GRASS_PAIR 1
+#define EMPTY_PAIR 1
+#define PLAYER_PAIR 4
 
-/* ..............................................
-  @brief 
-  
-.............................................. */
 class Game
 {
 private:
-  bool isComplete;  // tells if the game is complete or not
-  char userInput;  // holds the user's last keystroke
-  Player player; // the player object
+  bool isComplete;
+  char userInput;
+  Player player;
   Item item;
-  int playersPreviousXpos;
-  int playersPreviousYpos;
 
 public:
-  
-  Game();  // default constructor
-  ~Game(); // deconstructor
+  /* ..............................................
+    GAME.CPP
+    
+  .............................................. */
 
-  void process(); // processes game
-  void update();  // updates the game state
-  void render();  // renders the game state
-  void renderPlayer();  // renders player if moved
+  // CONSTRUCTORS/DESTRUCTORS
+  Game();
+  ~Game();
+
+  // ACTIONS
+  void run();
+
+  /* ..............................................
+    PROCESS.CPP
+    
+  .............................................. */
+
+  // ACTIONS
+  void process(); // gets input from the user and stores it in userInput
+
+  /* ..............................................
+    UPDATE.CPP
+    
+  .............................................. */
+
+  // SETTERS
+  void setIsComplete(bool isComplete);
+
+  // GETTERS
+  bool getIsComplete();
+  bool isMoveAllowed(int y, int x);
+  char getUserInput();
+
+  // ACTIONS
+  void update();
+
+  /* ..............................................
+    RENDER.CPP
+    
+  .............................................. */
+
+  // ACTIONS
+  void render();
+  void renderMap();
   void renderItem();
-  void run();     // runs the game
-  void renderMap(); // draws the map
+  void renderPlayer();
   void mvaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR);
-  void setIsComplete(bool isComplete); // sets whether or not the game is complete
-  void setPlayersPreviousXpos(int xPos);
-  void setPlayersPreviousYpos(int yPos);
-
-  int getPlayersPreviousXpos();
-  int getPlayersPreviousYpos();
-
-  char getUserInput(); // gets the value of the player's last keystroke
-
-  bool isGameComplete(); // gets the completion state of the game
-  bool isMoveAllowed(int y, int x); // checks to see if the move is ok
 };
 
 #endif

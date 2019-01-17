@@ -9,10 +9,12 @@
 .............................................. */
 #include "Game.h"
 
+
 /* ..............................................
-  @brief Construct a new Game:: Game object
+  CONSTRUCTORS / DESTRUCTORS
   
 .............................................. */
+
 Game::Game()
 {
   /* initialize ncurses */
@@ -30,8 +32,6 @@ Game::Game()
   /* clear the screen */
   clear();
 
-  /* TODO: initialize game map(s) as objects */
-
   /* initialize player object */
   this->player.setXPos(LINES-1);
   this->player.setYPos(0);
@@ -41,10 +41,6 @@ Game::Game()
   this->item.setYPos(5);
 }
 
-/* ..............................................
-  @brief Destroy the Game:: Game object
-  
-.............................................. */
 Game::~Game()
 {
   /* Destroy ncurses */
@@ -55,227 +51,16 @@ Game::~Game()
 }
 
 /* ..............................................
-  @brief 
+  ACTIONS
   
 .............................................. */
-void Game::process()
-{
-  this->userInput = getch();
-}
 
-/* ..............................................
-  @brief 
-  TODO: figure out a better way to code than switches
-.............................................. */
-void Game::update()
-{
-  player.setIsMoved(false);
-  switch ((unsigned int)this->userInput)
-  {
-    case KEY_UP:
-    case 'w':
-    case 'W':
-        player.setSymbol('^');
-        if ((player.getYPos() > 0) && isMoveAllowed(player.getYPos() - 1, player.getXPos()))
-        {
-            setPlayersPreviousXpos(player.getXPos());
-            setPlayersPreviousYpos(player.getYPos()); 
-            player.move('w');
-        }
-        break;
-    case KEY_DOWN:
-    case 's':
-    case 'S':
-        player.setSymbol('v');
-        if ((player.getYPos() < LINES - 1) && isMoveAllowed(player.getYPos() + 1, player.getXPos()))
-        {
-            setPlayersPreviousXpos(player.getXPos());
-            setPlayersPreviousYpos(player.getYPos()); 
-            player.move('s');
-        }
-        break;
-    case KEY_LEFT:
-    case 'a':
-    case 'A':
-        player.setSymbol('<');
-        if ((player.getXPos() > 0) && isMoveAllowed(player.getYPos(), player.getXPos() - 1))
-        {
-            setPlayersPreviousXpos(player.getXPos());
-            setPlayersPreviousYpos(player.getYPos());           
-            player.move('a');
-        }
-        break;
-    case KEY_RIGHT:
-    case 'd':
-    case 'D':
-        player.setSymbol('>');
-        if ((player.getXPos() < COLS - 1) && isMoveAllowed(player.getYPos(), player.getXPos() + 1))
-        {
-            setPlayersPreviousXpos(player.getXPos());
-            setPlayersPreviousYpos(player.getYPos());           
-            player.move('d');
-        }
-        break;
-    case 'q':
-    case 'Q':
-        setIsComplete(true);
-        break;
-    }
-}
-
-/* ..............................................
-  @brief 
-  TODO: modularize render
-  TODO: figure out a better way to code than switches
-.............................................. */
-void Game::render()
-{
-  renderMap();
-  renderItem();
-  renderPlayer();
-  refresh();
-}
-
-void Game::renderPlayer()
-{
-  mvaddchWithColor(player.getYPos(), player.getXPos(), player.getSymbol(), PLAYER_PAIR);            // render the player       
-}
-
-void Game::renderItem()
-{
-  mvaddchWithColor(item.getYPos(), item.getXPos(), item.getSymbol(), PLAYER_PAIR);
-}
-
-/* ..............................................
-  @brief  runs the game while the game is not
-          complete
-.............................................. */
 void Game::run()
 {
-  //renderMap();
   do {
       render();   // render the game state
       process();  // process player input
       update();   // update the game state
     }
-    while (isGameComplete() != true);
-}
-
-/* ..............................................
-  @brief 
-  
-  @param isComplete 
-.............................................. */
-void Game::setIsComplete(bool isComplete)
-{
-  this->isComplete = isComplete;
-}
-
-/* ..............................................
-  @brief 
-  
-  @param xPos 
-.............................................. */
-void Game::setPlayersPreviousXpos(int xPos)
-{
-  this->playersPreviousXpos = xPos;
-}
-
-/* ..............................................
-  @brief 
-  
-  @param yPos 
-.............................................. */
-void Game::setPlayersPreviousYpos(int yPos)
-{
-  this->playersPreviousYpos = yPos;
-}
-
-/* ..............................................
-  @brief 
-  
-  @return int 
-.............................................. */
-int Game::getPlayersPreviousXpos()
-{
-  return this->playersPreviousXpos;
-}
-
-/* ..............................................
-  @brief 
-  
-  @return int 
-.............................................. */
-int Game::getPlayersPreviousYpos()
-{
-  return this->playersPreviousYpos;
-}
-
-/* ..............................................
-  @brief 
-  
-  @param yPos 
-  @param xPos 
-  @param TILE_SYMBOL 
-  @param TILE_PAIR 
-.............................................. */
-void Game::mvaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR)
-{
-  attron(COLOR_PAIR(TILE_PAIR));
-  mvaddch(yPos, xPos, TILE_SYMBOL);
-  attroff(COLOR_PAIR(TILE_PAIR));
-}
-
-/* ..............................................
-  @brief 
-  
-  @return true 
-  @return false 
-.............................................. */
-bool Game::isGameComplete()
-{
-  return this->isComplete;
-}
-
-/* ..............................................
-  @brief 
-  
-  @return char 
-.............................................. */
-char Game::getUserInput() {
-  return this->userInput;
-}
-
-/* ..............................................
-  @brief 
-  
-.............................................. */
-void Game::renderMap()
-{
-    int y;
-
-    /* background */
-    attron(COLOR_PAIR(GRASS_PAIR));
-    for (y = 0; y < LINES; y++) {
-        mvhline(y, 0, GRASS, COLS);
-    }
-    attroff(COLOR_PAIR(GRASS_PAIR));
-}
-
-/* ..............................................
-  @brief 
-  
-  @param y 
-  @param x 
-  @return true 
-  @return false 
-.............................................. */
-bool Game::isMoveAllowed(int y, int x)
-{
-  int testch;
-
-  /* return true if the space is okay to move into */
-  testch = mvinch(y, x);
-  return (((testch & A_CHARTEXT) == GRASS)
-          || ((testch & A_CHARTEXT) == EMPTY) || ((testch & A_CHARTEXT) == '?'));
+    while (getIsComplete() != true);
 }
