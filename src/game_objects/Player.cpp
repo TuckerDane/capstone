@@ -4,163 +4,177 @@
   @brief 
   @date 2018-12-26
   
-	TODO: reorder functions
-	TODO: add function descriptions
   
 .............................................. */
 #include "Player.h"
 
 /* ..............................................
-  @brief Construct a new Player:: Player object
+  CONSTRUCTORS / DESTRUCTORS
   
 .............................................. */
-Player::Player() : Object('^', "Tucker", 2, 2, "Player")
+
+Player::Player() : Object(-1, -1, 150, COLOR_BLACK, '^', "player_object", "adventurer")
 {
+	this->maxCarry = 300;
+	this->numItems = 0;
+	for (int itemSlot = 0; itemSlot < MAX_INVENTORY; itemSlot++)
+	{
+		this->inventory[itemSlot] = NULL;
+	}
+	this->isMoved = false;
 }
 
-Player::Player(int row, int col) : Object('^', "Tucker", row, col, "Player")
-{
-	this->y = col;
-	this->x = row;
-}
-
-/* ..............................................
-  @brief Construct a new Player:: Player object
-  
-  @param row 
-  @param col 
-  @param room 
-  @param r 
-.............................................. */
-Player::Player(int row, int col, string room, int r) : Object('^', "Tucker", row, col, "Player")
-{
-	currentRoom = room;
-	cRoom = r;
-}
-
-/* ..............................................
-  @brief Destroy the Player:: Player object
-  
-.............................................. */
 Player::~Player()
 {
 }
 
 /* ..............................................
-  @brief 
+  SETTERS
   
-  @param s 
 .............................................. */
-void Player::setSymbol(char s)
+
+void Player::setMaxCarry(int maxCarry)
 {
-	symbol = s;
+	this->maxCarry = maxCarry;
 }
 
-/* ..............................................
-  @brief 
-  
-  @param room 
-  @param i 
-.............................................. */
-void Player::setPlayerRoom(string room, int i)
+void Player::setCarryWeight(int carryWeight)
 {
-	currentRoom = room;
-	cRoom = i;
+	this->carryWeight = carryWeight;
 }
 
-/* ..............................................
-  @brief 
-  
-  @param x 
-.............................................. */
-void Player::setX(int x) {
-  this->x = x;
-}
-
-/* ..............................................
-  @brief 
-  
-  @param y 
-.............................................. */
-void Player::setY(int y) {
-  this->y = y;
-}
-
-/* ..............................................
-  @brief 
-  
-  @return string 
-.............................................. */
-string Player::getPlayerRoom()
+void Player::setNumItems(int numItems)
 {
-	return currentRoom;
+	this->numItems = numItems;
 }
 
-/* ..............................................
-  @brief 
-  
-  @return int 
-.............................................. */
-int Player::getCRoom()
+void Player::setInventory(Object *inventory[MAX_INVENTORY], int numItems)
 {
-	return cRoom;
-}
-
-/* ..............................................
-  @brief 
-  
-  @return int 
-.............................................. */
-int Player::getX() {
-  return this->x;
-}
-
-/* ..............................................
-  @brief 
-  
-  @return int 
-.............................................. */
-int Player::getY() {
-  return this->y;
-}
-
-/* ..............................................
-  @brief 
-  
-  @return true 
-  @return false 
-.............................................. */
-bool Player::isMoved() {
-	return this->moved;
-}
-
-/* ..............................................
-  @brief 
-  
-  @param o 
-  @return true 
-  @return false 
-.............................................. */
-bool Player::addObject(Object *o)
-{
-	if (o->getWeight() <= (this->maxCarry - this->weight)) // if the object doesn't weigh too much
+	for (int itemSlot = 0; itemSlot < MAX_INVENTORY; itemSlot++)
 	{
-		if (this->numItems < 9) // and there is a slot for it in the backpack
+		this->inventory[itemSlot] = inventory[itemSlot];
+	}
+	this->numItems = numItems;
+}
+
+void Player::setInventoryItem(Object *item, int itemSlot)
+{
+	this->inventory[itemSlot] = item;
+}
+
+void Player::setIsMoved(bool isMoved)
+{
+	this->isMoved = isMoved;
+}
+
+/* ..............................................
+  GETTERS
+  
+.............................................. */
+
+int Player::getMaxCarry()
+{
+	return this->maxCarry;
+}
+
+int Player::getCarryWeight()
+{
+	return this->carryWeight;
+}
+
+int Player::getNumItems()
+{
+	return this->numItems;
+}
+
+/* ..............................................
+  @brief returns the entire player inventory
+  
+  @return Object** 
+.............................................. */
+Object **Player::getInventory()
+{
+	return this->inventory;
+}
+
+/* ..............................................
+  @brief returns a specific inventory item
+  
+  @param itemSlot 
+  @return Object* 
+.............................................. */
+Object *Player::getInventoryItem(int itemSlot)
+{
+	return this->inventory[itemSlot];
+}
+
+bool Player::getIsMoved()
+{
+	return this->isMoved;
+}
+
+/* ..............................................
+  ACTIONS
+  
+.............................................. */
+
+/* ..............................................
+  @brief moves the Player x/y position by one space
+  
+  @param direction 
+.............................................. */
+void Player::move(char direction)
+{
+	if (direction == 'w')
+	{
+		setYPos(getYPos() - 1);
+	}
+	else if (direction == 's')
+	{
+		setYPos(getYPos() + 1);
+	}
+	else if (direction == 'a')
+	{
+		setXPos(getXPos() - 1);
+	}
+	else if (direction == 'd')
+	{
+		setXPos(getXPos() + 1);
+	}
+	else
+	{
+		cerr << "ERROR: Player.move failed; invalid direction!";
+	}
+	setIsMoved(true);
+}
+
+/* ..............................................
+  @brief adds an Object into the player's inventory
+  
+  @param item 
+  @return true 
+  @return false 
+.............................................. */
+bool Player::pickUp(Object *item)
+{
+	if (item->getWeight() <= (this->maxCarry - this->carryWeight)) // if the object doesn't weigh too much
+	{
+		if (this->numItems < MAX_INVENTORY) // and there is a slot for it in the backpack
 		{
 			bool found = false; // find an open (NULL) slot
-			int index = 0;
+			int itemSlot = 0;
 
 			while (found == false) // conduct a linear search of the backpack for the slot
 			{
-				if (backpack[index] == NULL)
+				if (this->inventory[itemSlot] == NULL)
 				{
-					found = true;																	// when found, set to true
-					backpack[index] = o;													// and set the object pointer to the address of the object
-					this->numItems++;															// add to the item counter
-					this->weight += backpack[index]->getWeight(); // add to the weight of the player
+					found = true;																				 // when found, set to true
+					this->inventory[itemSlot] = item;											 // and set the object pointer to the address of the object
+					this->numItems++;																		 // add to the item counter
+					this->weight += this->inventory[itemSlot]->getWeight(); // add to the weight of the player
 					return true;
 				}
-				index++;
+				itemSlot++;
 			}
 		}
 	}
@@ -168,156 +182,28 @@ bool Player::addObject(Object *o)
 }
 
 /* ..............................................
-  @brief 
-  
-.............................................. */
-void Player::displayBackpack()
-{
-	cout << "\tYOU CAN CARRY UP TO 20 LBS" << endl;
-	cout << "\tTHE FOLLOWING ARE THE ITEMS YOU HAVE IN YOUR BACKPACK: " << endl
-			 << endl;
-	cout << "\titem\tsymbol\tname\t\tweight\n";
-	cout << "\t----\t------\t----\t\t------\n";
-
-	for (int i = 0; i < 9; i++)
-	{
-		if (backpack[i] == NULL)
-		{
-			cout << "\t" << i + 1 << "\t\tOPEN SLOT\t" << endl;
-		}
-		else
-		{
-			cout << "\t" << i + 1 << "\t";																	 // item
-			cout << backpack[i]->getSymbol() << "\t";												 // symbol
-			cout << backpack[i]->getName() << " " << backpack[i]->getType(); // name
-			cout << "\t" << backpack[i]->getWeight() << " lbs" << endl;			 // weight
-		}
-	}
-	cout << endl;
-	cout << "\tYOU ARE CURRENTLY CARRYING " << this->getWeight() << " LBS" << endl;
-	cout << "\tPRESS E TO PICK UP ITEMS AND PUT THEM IN YOUR BACKPACK " << endl;
-	cout << "\tPRESS THE CORRESPONDING NUMBER TO DROP ITEMS FROM YOUR BACKPACK " << endl
-			 << endl;
-}
-
-/* ..............................................
-  @brief 
+  @brief drops an Object from the player's inventory
   
   @param i 
   @return Object* 
 .............................................. */
-Object *Player::dropObject(int i)
+Object *Player::drop(int itemSlot)
 {
-	while (0 < i && i < 10) // if the player inputs a valid number
+	while (0 <= itemSlot && itemSlot < MAX_INVENTORY) // if the player inputs a valid inventory item slot
 	{
-		if (this->backpack[i - 1] == NULL) // if the number corresponds to an empty space in the pack
+		if (this->inventory[itemSlot] == NULL) // if itemSlot is an empty space in the inventory
 		{
 			return NULL; // return NULL
 		}
 		else // else
 		{
-			Object *temp = backpack[i - 1]; // set the object in backpack to a temporary variable
-			backpack[i - 1] = NULL;					// set the backpack slot to empty
+			Object *temp = this->inventory[itemSlot]; // set the object in the inventory to a temporary variable
+			this->inventory[itemSlot] = NULL;					// set the inventory itemSlot to empty
 
-			this->weight -= temp->getWeight(); // subtract the weight of the object from the player
+			this->carryWeight -= temp->getWeight(); // subtract the weight of the object from the player's carryWeight
 			this->numItems--;									 // reduce the item counter
 			return temp;											 // return the dropped item
 		}
 	}
 	return NULL;
-}
-
-/* ..............................................
-  @brief 
-  
-  @param i 
-  @return string 
-.............................................. */
-string Player::checkObject(int i)
-{
-	while (0 < i && i < 10) // if the player inputs a valid number
-	{
-		if (this->backpack[i - 1] != NULL) // and it refers to a slot that is not null
-		{
-			if (this->backpack[i - 1]->getType() == "Stone") // and if the number corresponds to a stone
-			{
-				return this->backpack[i - 1]->getName(); // return the name of the stone (the color)
-			}
-			else // else
-			{
-				return "nocolor"; // return an invalid color
-			}
-		}
-		else
-		{
-			return "nocolor";
-		}
-	}
-	return "nocolor";
-}
-
-/* ..............................................
-  @brief 
-  
-  @return int 
-.............................................. */
-int Player::getWeight()
-{
-	return weight;
-}
-
-/* ..............................................
-  @brief 
-  
-  @return string 
-.............................................. */
-string Player::getName()
-{
-	return name;
-}
-
-/* ..............................................
-  @brief 
-  
-  @param w 
-.............................................. */
-void Player::setWeight(int w)
-{
-	weight = w;
-}
-
-/* ..............................................
-  @brief 
-  
-  @param moved 
-.............................................. */
-void Player::setMoved(bool moved) {
-	this->moved = moved;
-}
-
-/* ..............................................
-  @brief 
-  
-  @param direction 
-.............................................. */
-void Player::move(char direction) {
-	if(direction == 'w') {
-		setY(getY() - 1);
-		setMoved(true);
-	}
-	else if (direction == 's') {
-		setMoved(true);
-		setY(getY() + 1);
-	}
-	else if (direction == 'a') {
-		setMoved(true);
-		setX(getX() - 1);
-	}
-	else if (direction == 'd') {
-		setMoved(true);
-		setX(getX() + 1);
-	}
-	else {
-		setMoved(false);
-	}
 }

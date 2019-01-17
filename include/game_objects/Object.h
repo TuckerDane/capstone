@@ -16,37 +16,55 @@
 using std::string;
 
 /* ..............................................
+  GLOBALS
+  
+.............................................. */
+#define COLOR_BLACK 0
+#define COLOR_RED 1
+#define COLOR_GREEN 2
+#define COLOR_YELLOW 3
+#define COLOR_BLUE 4
+#define COLOR_MAGENTA 5
+#define COLOR_CYAN 6
+#define COLOR_WHITE 7
+
+/* ..............................................
   @brief 
   
 .............................................. */
 class Object
 {
-protected:
-	int rowPos;	// a variable which stores the row the ant is on in the matrix
-	int colPos;	// a variable which stores the column the ant is on in the matrix
-	int weight;	// how much the object weighs
-	char symbol; // holds the symbol of the object
-	string type; // holds the type name of the object
-	string name; // holds the name of the object
-							 //TODO: add color attribute
+  protected:
+	int xPos, yPos; // the coordinate positions
+	int weight;		// how much the object weighs
+	int color;		// ncurses colors
+	char symbol;	// holds the symbol of the object
+	string type;	// holds the type name of the object
+	string name;	// holds the name of the object
 
-public:
-	Object();																					// default constructor for Object
-	Object(char s, string n, int r, int c, string t); // constructor for inherited classes
-	~Object();																				// deconstructor for Object
+  public:
+	// CONSTRUCTOR/DESTRUCTORS
+	Object();
+	Object(int xPos, int yPos, int weight, int color, char symbol, string type, string name);
+	~Object();
 
-	//TODO: add setColor
-	virtual void setWeight(int w) = 0; // sets the weight of an object
-	virtual void setRowPos(int r);		 // set rowPos of the Object
-	virtual void setColPos(int c);		 // set colPos of the Object
+	// SETTERS
+	virtual void setXPos(int xPos);
+	virtual void setYPos(int yPos);
+	virtual void setWeight(int weight);
+	virtual void setColor(int color);
+	virtual void setSymbol(char symbol);
+	virtual void setType(string type);
+	virtual void setName(string name);
 
-	//TODO: add getColor
-	virtual int getRowPos();			// returns the row of the Object
-	virtual int getColPos();			// returns the column of the Object
-	virtual char getSymbol();			// returns the type of the Object
-	virtual int getWeight() = 0;	// returns the weight of the object
-	virtual string getName() = 0; // returns the name of the Object
-	virtual string getType();			// returns the type of Object
+	// GETTERS
+	virtual int getXPos();
+	virtual int getYPos();
+	virtual int getWeight();
+	virtual int getColor();
+	virtual char getSymbol();
+	virtual string getType();
+	virtual string getName();
 };
 
 #endif
