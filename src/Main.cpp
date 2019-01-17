@@ -11,7 +11,7 @@
 /* ..............................................
   @brief Main entry point to instantiate the game
   
-  @return int 
+  @return int  
 .............................................. */
 int main(void)
 {
