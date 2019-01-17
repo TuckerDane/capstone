@@ -11,6 +11,7 @@
 #define GAME_HPP
 #include <ncurses.h>
 #include "Player.h"
+#include "Item.h"
 
 #define GRASS     ' '
 #define EMPTY     ' '
@@ -29,6 +30,7 @@ private:
   bool isComplete;  // tells if the game is complete or not
   char userInput;  // holds the user's last keystroke
   Player player; // the player object
+  Item item;
   int playersPreviousXpos;
   int playersPreviousYpos;
 
@@ -41,6 +43,7 @@ public:
   void update();  // updates the game state
   void render();  // renders the game state
   void renderPlayer();  // renders player if moved
+  void renderItem();
   void run();     // runs the game
   void renderMap(); // draws the map
   void mvaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR);

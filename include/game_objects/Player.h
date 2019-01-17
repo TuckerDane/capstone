@@ -29,14 +29,14 @@ using std::endl;
 .............................................. */
 class Player : public Object
 {
-  private:
-	int maxCarry;					  // the maximum weight the player can carry
-	int carryWeight;				  // the current amount of weight the player is carrying
-	int numItems;					  // the number of items in the player's inventory
+private:
+	int maxCarry;											// the maximum weight the player can carry
+	int carryWeight;									// the current amount of weight the player is carrying
+	int numItems;											// the number of items in the player's inventory
 	Object *inventory[MAX_INVENTORY]; // an inventory capable of carrying 10 Objects
-	bool isMoved;					  // true of the player moved, false if the player did not move
+	bool isMoved;											// true of the player moved, false if the player did not move
 
-  public:
+public:
 	// CONSTRUCTOR/DESTRUCTORS
 	Player();
 	~Player();
@@ -53,13 +53,13 @@ class Player : public Object
 	int getMaxCarry();
 	int getCarryWeight();
 	int getNumItems();
-	Object **getInventory();				// returns the entire player inventory
+	Object **getInventory();								// returns the entire player inventory
 	Object *getInventoryItem(int itemSlot); // returns a specific inventory item
 	bool getIsMoved();
 
 	// ACTIONS
-	void move(char direction);  // moves the Player x/y position by one space
-	bool pickUp(Object *item);  // adds an Object into the player's inventory
+	void move(char direction);	// moves the Player x/y position by one space
+	bool pickUp(Object *item);	// adds an Object into the player's inventory
 	Object *drop(int itemSlot); // drops an Object from the player's inventory
 };
 

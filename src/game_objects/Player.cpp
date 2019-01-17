@@ -13,7 +13,7 @@
   
 .............................................. */
 
-Player::Player() : Object(0, 0, 150, COLOR_BLACK, '^', "player_object", "adventurer")
+Player::Player() : Object(-1, -1, 150, COLOR_BLACK, '^', "player_object", "adventurer")
 {
 	this->maxCarry = 300;
 	this->numItems = 0;

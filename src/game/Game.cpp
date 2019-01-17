@@ -35,6 +35,10 @@ Game::Game()
   /* initialize player object */
   this->player.setXPos(LINES-1);
   this->player.setYPos(0);
+
+  /* initialize item object */
+  this->item.setXPos(LINES-5);
+  this->item.setYPos(5);
 }
 
 /* ..............................................
@@ -126,16 +130,20 @@ void Game::update()
 .............................................. */
 void Game::render()
 {
+  renderMap();
+  renderItem();
   renderPlayer();
   refresh();
 }
 
 void Game::renderPlayer()
 {
-  if (player.getIsMoved()) {
-    mvaddchWithColor(getPlayersPreviousYpos(), getPlayersPreviousXpos(), EMPTY, EMPTY_PAIR);  // render player's previous position
-  }
   mvaddchWithColor(player.getYPos(), player.getXPos(), player.getSymbol(), PLAYER_PAIR);            // render the player       
+}
+
+void Game::renderItem()
+{
+  mvaddchWithColor(item.getYPos(), item.getXPos(), item.getSymbol(), PLAYER_PAIR);
 }
 
 /* ..............................................
@@ -144,11 +152,11 @@ void Game::renderPlayer()
 .............................................. */
 void Game::run()
 {
-  renderMap();
+  //renderMap();
   do {
+      render();   // render the game state
       process();  // process player input
       update();   // update the game state
-      render();   // render the game state
     }
     while (isGameComplete() != true);
 }
@@ -269,5 +277,5 @@ bool Game::isMoveAllowed(int y, int x)
   /* return true if the space is okay to move into */
   testch = mvinch(y, x);
   return (((testch & A_CHARTEXT) == GRASS)
-          || ((testch & A_CHARTEXT) == EMPTY));
+          || ((testch & A_CHARTEXT) == EMPTY) || ((testch & A_CHARTEXT) == '?'));
 }

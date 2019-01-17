@@ -20,7 +20,7 @@ Object::Object()
   this->weight = 0;
   this->color = COLOR_BLACK;
   this->symbol = '?';
-  this->type = "generic";
+  this->type = "generic_object";
   this->name = "unnamed";
 }
 
