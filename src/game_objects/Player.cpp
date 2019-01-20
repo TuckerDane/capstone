@@ -13,10 +13,10 @@
   
 .............................................. */
 
-Player::Player() : Object(-1, -1, 150, COLOR_BLACK, '^', "player_object", "adventurer")
+Player::Player() : Object(-1, -1, COLOR_BLACK, '^', "player_object", "adventurer")
 {
-	this->maxCarry = 300;
 	this->numItems = 0;
+	this->currentSpace = 0;
 	for (int itemSlot = 0; itemSlot < MAX_INVENTORY; itemSlot++)
 	{
 		this->inventory[itemSlot] = NULL;
@@ -33,14 +33,14 @@ Player::~Player()
   
 .............................................. */
 
-void Player::setMaxCarry(int maxCarry)
+void Player::setMaxCarryWeight(int maxCarryWeight)
 {
-	this->maxCarry = maxCarry;
+	this->maxCarryWeight = maxCarryWeight;
 }
 
-void Player::setCarryWeight(int carryWeight)
+void Player::setCurrentCarryWeight(int carryCurrentCarryWeight)
 {
-	this->carryWeight = carryWeight;
+	this->currentCarryWeight = currentCarryWeight;
 }
 
 void Player::setNumItems(int numItems)
@@ -48,7 +48,12 @@ void Player::setNumItems(int numItems)
 	this->numItems = numItems;
 }
 
-void Player::setInventory(Object *inventory[MAX_INVENTORY], int numItems)
+void Player::setCurrentSpace(int currentSpace)
+{
+	this->currentSpace = currentSpace;
+}
+
+void Player::setInventory(Item *inventory[MAX_INVENTORY], int numItems)
 {
 	for (int itemSlot = 0; itemSlot < MAX_INVENTORY; itemSlot++)
 	{
@@ -57,7 +62,7 @@ void Player::setInventory(Object *inventory[MAX_INVENTORY], int numItems)
 	this->numItems = numItems;
 }
 
-void Player::setInventoryItem(Object *item, int itemSlot)
+void Player::setInventoryItem(Item *item, int itemSlot)
 {
 	this->inventory[itemSlot] = item;
 }
@@ -72,14 +77,14 @@ void Player::setIsMoved(bool isMoved)
   
 .............................................. */
 
-int Player::getMaxCarry()
+int Player::getMaxCarryWeight()
 {
-	return this->maxCarry;
+	return this->maxCarryWeight;
 }
 
-int Player::getCarryWeight()
+int Player::getCurrentCarryWeight()
 {
-	return this->carryWeight;
+	return this->currentCarryWeight;
 }
 
 int Player::getNumItems()
@@ -87,12 +92,17 @@ int Player::getNumItems()
 	return this->numItems;
 }
 
+int Player::getCurrentSpace()
+{
+	return this->currentSpace;
+}
+
 /* ..............................................
   @brief returns the entire player inventory
   
-  @return Object** 
+  @return Item** 
 .............................................. */
-Object **Player::getInventory()
+Item **Player::getInventory()
 {
 	return this->inventory;
 }
@@ -101,9 +111,9 @@ Object **Player::getInventory()
   @brief returns a specific inventory item
   
   @param itemSlot 
-  @return Object* 
+  @return Item* 
 .............................................. */
-Object *Player::getInventoryItem(int itemSlot)
+Item *Player::getInventoryItem(int itemSlot)
 {
 	return this->inventory[itemSlot];
 }
@@ -149,15 +159,15 @@ void Player::move(char direction)
 }
 
 /* ..............................................
-  @brief adds an Object into the player's inventory
+  @brief adds an Item into the player's inventory
   
   @param item 
   @return true 
   @return false 
 .............................................. */
-bool Player::pickUp(Object *item)
+bool Player::pickUp(Item *item)
 {
-	if (item->getWeight() <= (this->maxCarry - this->carryWeight)) // if the object doesn't weigh too much
+	if (item->getWeight() <= (this->maxCarryWeight - this->currentCarryWeight)) // if the Item doesn't weigh too much
 	{
 		if (this->numItems < MAX_INVENTORY) // and there is a slot for it in the backpack
 		{
@@ -168,10 +178,10 @@ bool Player::pickUp(Object *item)
 			{
 				if (this->inventory[itemSlot] == NULL)
 				{
-					found = true;																				 // when found, set to true
-					this->inventory[itemSlot] = item;											 // and set the object pointer to the address of the object
-					this->numItems++;																		 // add to the item counter
-					this->weight += this->inventory[itemSlot]->getWeight(); // add to the weight of the player
+					found = true;														// when found, set to true
+					this->inventory[itemSlot] = item;									// and set the Item pointer to the address of the Item
+					this->numItems++;													// add to the item counter
+					this->currentCarryWeight += this->inventory[itemSlot]->getWeight(); // add to the current carry weight of the player
 					return true;
 				}
 				itemSlot++;
@@ -182,12 +192,12 @@ bool Player::pickUp(Object *item)
 }
 
 /* ..............................................
-  @brief drops an Object from the player's inventory
+  @brief drops an Item from the player's inventory
   
   @param i 
-  @return Object* 
+  @return Item* 
 .............................................. */
-Object *Player::drop(int itemSlot)
+Item *Player::drop(int itemSlot)
 {
 	while (0 <= itemSlot && itemSlot < MAX_INVENTORY) // if the player inputs a valid inventory item slot
 	{
@@ -197,12 +207,12 @@ Object *Player::drop(int itemSlot)
 		}
 		else // else
 		{
-			Object *temp = this->inventory[itemSlot]; // set the object in the inventory to a temporary variable
-			this->inventory[itemSlot] = NULL;					// set the inventory itemSlot to empty
+			Item *temp = this->inventory[itemSlot]; // set the Item in the inventory to a temporary variable
+			this->inventory[itemSlot] = NULL;		// set the inventory itemSlot to empty
 
-			this->carryWeight -= temp->getWeight(); // subtract the weight of the object from the player's carryWeight
-			this->numItems--;									 // reduce the item counter
-			return temp;											 // return the dropped item
+			this->currentCarryWeight -= temp->getWeight(); // subtract the weight of the Item from the player's carryWeight
+			this->numItems--;							   // reduce the item counter
+			return temp;								   // return the dropped item
 		}
 	}
 	return NULL;

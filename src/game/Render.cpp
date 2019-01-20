@@ -17,7 +17,6 @@
 void Game::render()
 {
   renderMap();
-  renderItem();
   renderPlayer();
   refresh();
 }
@@ -32,11 +31,6 @@ void Game::renderMap()
         mvhline(y, 0, GRASS, COLS);
     }
     attroff(COLOR_PAIR(GRASS_PAIR));
-}
-
-void Game::renderItem()
-{
-  mvaddchWithColor(item.getYPos(), item.getXPos(), item.getSymbol(), PLAYER_PAIR);
 }
 
 void Game::renderPlayer()

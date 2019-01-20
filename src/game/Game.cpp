@@ -4,11 +4,8 @@
   @brief 
   @date 2018-12-26
   
-  TODO: reorder functions
-  TODO: add function descriptions
 .............................................. */
 #include "Game.h"
-
 
 /* ..............................................
   CONSTRUCTORS / DESTRUCTORS
@@ -33,12 +30,10 @@ Game::Game()
   clear();
 
   /* initialize player object */
-  this->player.setXPos(LINES-1);
+  this->player.setXPos(LINES - 1);
   this->player.setYPos(0);
 
-  /* initialize item object */
-  this->item.setXPos(LINES-5);
-  this->item.setYPos(5);
+  /* initialize spaces */
 }
 
 Game::~Game()
@@ -57,10 +52,10 @@ Game::~Game()
 
 void Game::run()
 {
-  do {
-      render();   // render the game state
-      process();  // process player input
-      update();   // update the game state
-    }
-    while (getIsComplete() != true);
+  do
+  {
+    render();  // render the game state
+    process(); // process player input
+    update();  // update the game state
+  } while (getIsComplete() != true);
 }
