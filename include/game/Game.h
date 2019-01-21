@@ -77,6 +77,7 @@ public:
   // ACTIONS
   void render();
   void renderMap();
+  void renderSpace();
   void renderItem();
   void renderPlayer();
   void mvaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR);

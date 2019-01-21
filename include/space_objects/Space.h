@@ -22,10 +22,6 @@ using std::string;
   GLOBALS
   
 .............................................. */
-#define MAX_HEIGHT  50
-#define MAX_WIDTH   50
-#define MAX_AREA    MAX_HEIGHT*MAX_WIDTH
-#define MAX_ITEMS   MAX_AREA
 
 /* ..............................................
   @brief 
@@ -33,32 +29,38 @@ using std::string;
 .............................................. */
 class Space
 {
-  protected:
-    char walls[MAX_AREA];
-    Item* items[MAX_ITEMS];
-    string type;
-    string name;
-    string description;
+protected:
+  static const int MAX_HEIGHT = 50;
+  static const int MAX_WIDTH = 50;
+  static const int MAX_ITEMS = MAX_WIDTH * MAX_HEIGHT;
+  char walls[MAX_WIDTH][MAX_HEIGHT];
+  Item *items[MAX_ITEMS];
+  string type;
+  string name;
+  string description;
 
-  public:
-	// CONSTRUCTOR/DESTRUCTORS
-	Space();
-	~Space();
+public:
+  // CONSTRUCTOR/DESTRUCTORS
+  Space();
+  ~Space();
 
-	// SETTERS
-    void setWalls(string spaceFile);
-    void setItems();
-    void setItem();
-    void setType(string type);
-    void setName(string name);
-    void setDescription(string description);
+  // SETTERS
+  void setWalls(string spaceFile);
+  void setItems();
+  void setItem();
+  void setType(string type);
+  void setName(string name);
+  void setDescription(string description);
 
-	// GETTERS
-	  char* getWalls();
-    Item** getItems();
-    string getType();
-    string getName();
-    string getDescription();
+  // GETTERS
+  int getMaxHeight();
+  int getMaxWidth();
+  int getMaxItems();
+  char getWall(int height, int width);
+  Item **getItems();
+  string getType();
+  string getName();
+  string getDescription();
 };
 
 #endif

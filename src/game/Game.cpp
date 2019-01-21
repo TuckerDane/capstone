@@ -30,8 +30,8 @@ Game::Game()
   clear();
 
   /* initialize player object */
-  this->player.setXPos(LINES - 1);
-  this->player.setYPos(0);
+  this->player.setXPos(8);
+  this->player.setYPos(8);
 
   /* initialize spaces */
 }

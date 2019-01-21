@@ -37,7 +37,8 @@ Space::~Space()
 
 void Space::setWalls(string spaceFile)
 {
-    int i = 0;
+    int width = 0;
+    int height = 0;
     char c;
     fstream file;
     file.open(spaceFile,fstream::in);
@@ -46,9 +47,17 @@ void Space::setWalls(string spaceFile)
         file.get(c);
         while(file.good())
         {
-            this->walls[i] = c;
-            i++;
-           file.get(c);
+            if (c != '\n')
+            {
+                this->walls[height][width] = c;
+                width++;
+            }
+            else
+            {
+                width = 0;
+                height++;
+            }
+            file.get(c);
         }
     }
     file.close();
@@ -84,9 +93,24 @@ void Space::setDescription(string description)
   
 .............................................. */
 
-char* Space::getWalls()
+int Space::getMaxHeight()
 {
-    return this->walls;
+    return this->MAX_HEIGHT;
+}
+
+int Space::getMaxWidth()
+{
+    return this->MAX_WIDTH;
+}
+
+int Space::getMaxItems()
+{
+    return this->MAX_ITEMS;
+}
+
+char Space::getWall(int height, int width)
+{
+    return this->walls[height][width];
 }
 
 Item** Space::getItems()

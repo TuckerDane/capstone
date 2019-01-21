@@ -17,6 +17,7 @@
 void Game::render()
 {
   renderMap();
+  renderSpace();
   renderPlayer();
   refresh();
 }
@@ -31,6 +32,29 @@ void Game::renderMap()
         mvhline(y, 0, GRASS, COLS);
     }
     attroff(COLOR_PAIR(GRASS_PAIR));
+}
+
+void Game::renderSpace()
+{
+  int spaceIndex = 0;
+  int refreshCounter = 0;
+  for (int height = 0; height < this->spaces[spaceIndex].getMaxHeight(); height++)
+  {
+    for (int width = 0; width < this->spaces[spaceIndex].getMaxWidth(); width++)
+    {
+        char c = this->spaces[spaceIndex].getWall(height, width);
+        if (c == '+' || c == '-' || c == '|' || c == ' ' || c == '\\' || c == '/')
+        {
+          mvaddchWithColor(height+5, width+5, c, PLAYER_PAIR);
+          refreshCounter++;
+          if(refreshCounter > 5)
+          {
+            refresh();
+            refreshCounter = 0;
+          }
+        }
+    }
+  }
 }
 
 void Game::renderPlayer()
