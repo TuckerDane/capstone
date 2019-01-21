@@ -10,8 +10,10 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 #include <ncurses.h>
+#include "Space.h"
 #include "Player.h"
-#include "Item.h"
+
+#define MAX_SPACES 10
 
 #define GRASS ' '
 #define EMPTY ' '
@@ -26,7 +28,7 @@ private:
   bool isComplete;
   char userInput;
   Player player;
-  Item item;
+  Space spaces[MAX_SPACES];
 
 public:
   /* ..............................................
@@ -56,11 +58,13 @@ public:
 
   // SETTERS
   void setIsComplete(bool isComplete);
+  void setSpace(Space space, int spaceIndex);
 
   // GETTERS
   bool getIsComplete();
   bool isMoveAllowed(int y, int x);
   char getUserInput();
+  Space getSpace(int spaceIndex);
 
   // ACTIONS
   void update();
@@ -73,6 +77,7 @@ public:
   // ACTIONS
   void render();
   void renderMap();
+  void renderSpace();
   void renderItem();
   void renderPlayer();
   void mvaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR);

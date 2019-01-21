@@ -19,6 +19,11 @@ void Game::setIsComplete(bool isComplete)
     this->isComplete = isComplete;
 }
 
+void Game::setSpace(Space space, int spaceIndex)
+{
+    this->spaces[spaceIndex] = space;
+}
+
 /* ..............................................
   GETTERS
   
@@ -41,6 +46,11 @@ bool Game::isMoveAllowed(int y, int x)
 char Game::getUserInput()
 {
     return this->userInput;
+}
+
+Space Game::getSpace(int spaceIndex)
+{
+    return spaces[spaceIndex];
 }
 
 /* ..............................................

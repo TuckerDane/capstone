@@ -7,7 +7,7 @@
   
 .............................................. */
 #include "Game.h"
-
+#include "Space.h"
 /* ..............................................
   @brief Main entry point to instantiate the game
   

@@ -8,12 +8,37 @@
 .............................................. */
 #include "Item.h"
 
-Item::Item() : Object(-1, -1, 0, COLOR_BLACK, '?', "item_object", "item")
-{
+/* ..............................................
+  CONSTRUCTORS/DECONSTRUCTORS 
+  
+.............................................. */
 
+Item::Item() : Object(-1, -1, COLOR_BLACK, '?', "item_object", "item")
+{
+  this->weight = 0;
 }
 
 Item::~Item()
 {
     
+}
+
+/* ..............................................
+  SETTERS 
+  
+.............................................. */
+
+void Item::setWeight(int weight)
+{
+  this->weight = weight;
+}
+
+/* ..............................................
+  GETTERS 
+  
+.............................................. */
+
+int Item::getWeight()
+{
+  return this->weight;
 }
