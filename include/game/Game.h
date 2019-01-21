@@ -72,7 +72,7 @@ public:
   /* ..............................................
     RENDER.CPP
     
-  .............................................. */
+  .............................................. */   
 
   // ACTIONS
   void render();
@@ -80,7 +80,8 @@ public:
   void renderSpace();
   void renderItem();
   void renderPlayer();
-  void mvaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR);
+  void mvaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR); 
+  // comment by marisa    
 };
 
 #endif
