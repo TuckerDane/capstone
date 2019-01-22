@@ -1,5 +1,5 @@
 #!/bin/bash
-
+export TERM=rxvt-unicode
 FILE="./build/apps/adventure"
 if [ -f $FILE ]; then
    ./build/apps/adventure

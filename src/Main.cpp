@@ -15,14 +15,7 @@
 .............................................. */
 int main(void)
 {
-  initscr();
-  WINDOW* win = newwin(10, 10, 10, 10);
-  refresh();
-  box(win, 0, 0);
-  wrefresh(win);
-  int c = getch();
-  endwin();
-  //Game myGame;
-  //myGame.run();
+  Game myGame;
+  myGame.run();
   return 0;
 }

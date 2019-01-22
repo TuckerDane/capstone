@@ -16,36 +16,44 @@
 
 void Game::render()
 {
-  //renderMap();
-  //renderSpace();
-  //renderPlayer();
-  renderWorld();
   refresh();
+  renderStatus();
+  renderWorld();
+  renderNarrative();  
+}
+
+void Game::renderStatus()
+{
+  box(this->statusWindow, 0, 0);
+  wbkgd(this->statusWindow, COLOR_PAIR(MENU_PAIR));
+  wrefresh(this->statusWindow);
 }
 
 void Game::renderWorld()
 {
   box(this->worldWindow, 0, 0);
+  renderMap();
+  renderPlayer();
   wrefresh(this->worldWindow);
+}
 
+void Game::renderNarrative()
+{
+  box(this->narrativeWindow, 0, 0);
+  wbkgd(this->narrativeWindow, COLOR_PAIR(MENU_PAIR));
+  wrefresh(this->narrativeWindow);
 }
 
 void Game::renderMap()
 {
-    int y;
-
     /* background */
-    attron(COLOR_PAIR(GRASS_PAIR));
-    for (y = 0; y < LINES; y++) {
-        mvhline(y, 0, GRASS, COLS);
-    }
-    attroff(COLOR_PAIR(GRASS_PAIR));
+    wbkgd(this->worldWindow, COLOR_PAIR(PLAYER_PAIR));
+    renderSpace();
 }
 
 void Game::renderSpace()
 {
   int spaceIndex = 0;
-  int refreshCounter = 0;
   for (int height = 0; height < this->spaces[spaceIndex].getMaxHeight(); height++)
   {
     for (int width = 0; width < this->spaces[spaceIndex].getMaxWidth(); width++)
@@ -53,13 +61,7 @@ void Game::renderSpace()
         char c = this->spaces[spaceIndex].getWall(height, width);
         if (c == '+' || c == '-' || c == '|' || c == ' ' || c == '\\' || c == '/')
         {
-          mvaddchWithColor(height+5, width+5, c, PLAYER_PAIR);
-          refreshCounter++;
-          if(refreshCounter > 5)
-          {
-            refresh();
-            refreshCounter = 0;
-          }
+          mvwaddchWithColor(height+1, width+1, c, PLAYER_PAIR);
         }
     }
   }
@@ -67,12 +69,12 @@ void Game::renderSpace()
 
 void Game::renderPlayer()
 {
-  mvaddchWithColor(player.getYPos(), player.getXPos(), player.getSymbol(), PLAYER_PAIR);            // render the player       
+  mvwaddchWithColor(player.getYPos(), player.getXPos(), player.getSymbol(), PLAYER_PAIR);            // render the player       
 }
 
-void Game::mvaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR)
+void Game::mvwaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR)
 {
   attron(COLOR_PAIR(TILE_PAIR));
-  mvaddch(yPos, xPos, TILE_SYMBOL);
+  mvwaddch(this->worldWindow, yPos, xPos, TILE_SYMBOL);
   attroff(COLOR_PAIR(TILE_PAIR));
 }
