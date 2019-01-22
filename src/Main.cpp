@@ -7,7 +7,7 @@
   
 .............................................. */
 #include "Game.h"
-#include <ncurses.h>
+
 /* ..............................................
   @brief Main entry point to instantiate the game
   
