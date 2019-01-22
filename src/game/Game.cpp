@@ -25,9 +25,9 @@ Game::Game()
   curs_set(0);
 
   /* initialize windows */
-  this->statusWindow = newwin(5, 150, 0, 0);
-  this->worldWindow = newwin(30, 150, 5, 0);
-  this->narrativeWindow = newwin(5, 150, 35, 0);
+  this->statusWindow = newwin(STATUS_WINDOW_HEIGHT, WINDOW_WIDTH, 0, 0);
+  this->worldWindow = newwin(WORLD_WINDOW_HEIGHT, WINDOW_WIDTH, STATUS_WINDOW_HEIGHT, 0);
+  this->narrativeWindow = newwin(NARRATIVE_WINDOW_HEIGHT, WINDOW_WIDTH, STATUS_WINDOW_HEIGHT+WORLD_WINDOW_HEIGHT, 0);
   refresh();
 
   /* initialize colors */
@@ -35,13 +35,14 @@ Game::Game()
   init_pair(GRASS_PAIR, COLOR_YELLOW, COLOR_GREEN);
   init_pair(PLAYER_PAIR, COLOR_BLACK, COLOR_GREEN);
   init_pair(MENU_PAIR, COLOR_BLACK, COLOR_BLUE);
+  init_pair(DUNGEON_PAIR, COLOR_BLACK, COLOR_GREEN);
 
   /* clear the screen */
   clear();
 
   /* initialize player object */
-  this->player.setXPos(2);
-  this->player.setYPos(2);
+  this->player.setXPos(5);
+  this->player.setYPos(5);
 
   /* initialize spaces */
 

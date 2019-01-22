@@ -47,7 +47,7 @@ void Game::renderNarrative()
 void Game::renderMap()
 {
     /* background */
-    wbkgd(this->worldWindow, COLOR_PAIR(PLAYER_PAIR));
+    wbkgd(this->worldWindow, COLOR_PAIR(DUNGEON_PAIR));
     renderSpace();
 }
 
@@ -61,7 +61,7 @@ void Game::renderSpace()
         char c = this->spaces[spaceIndex].getWall(height, width);
         if (c == '+' || c == '-' || c == '|' || c == ' ' || c == '\\' || c == '/')
         {
-          mvwaddchWithColor(height+1, width+1, c, PLAYER_PAIR);
+          mvwaddchWithColor(height+1, width+1, c, DUNGEON_PAIR);
         }
     }
   }
