@@ -29,6 +29,10 @@ private:
   char userInput;
   Player player;
   Space spaces[MAX_SPACES];
+  WINDOW* worldWindow;
+  WINDOW* statusWindow;
+  WINDOW* inventoryWindow;
+  WINDOW* narrativeWindow;
 
 public:
   /* ..............................................
@@ -76,6 +80,7 @@ public:
 
   // ACTIONS
   void render();
+  void renderWorld();
   void renderMap();
   void renderSpace();
   void renderItem();

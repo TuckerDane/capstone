@@ -21,6 +21,10 @@ Game::Game()
   noecho();
   curs_set(0);
 
+  /* initialize windows */
+  this->worldWindow = newwin(10, 10, 10 , 10);
+  refresh();
+
   /* initialize colors */
   start_color();
   init_pair(GRASS_PAIR, COLOR_YELLOW, COLOR_GREEN);
@@ -34,6 +38,7 @@ Game::Game()
   this->player.setYPos(8);
 
   /* initialize spaces */
+
 }
 
 Game::~Game()

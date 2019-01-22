@@ -16,10 +16,18 @@
 
 void Game::render()
 {
-  renderMap();
-  renderSpace();
-  renderPlayer();
+  //renderMap();
+  //renderSpace();
+  //renderPlayer();
+  renderWorld();
   refresh();
+}
+
+void Game::renderWorld()
+{
+  box(this->worldWindow, 0, 0);
+  wrefresh(this->worldWindow);
+
 }
 
 void Game::renderMap()

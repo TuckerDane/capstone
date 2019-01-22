@@ -7,7 +7,7 @@
   
 .............................................. */
 #include "Game.h"
-#include "Space.h"
+#include <ncurses.h>
 /* ..............................................
   @brief Main entry point to instantiate the game
   
@@ -15,7 +15,14 @@
 .............................................. */
 int main(void)
 {
-  Game myGame;
-  myGame.run();
+  initscr();
+  WINDOW* win = newwin(10, 10, 10, 10);
+  refresh();
+  box(win, 0, 0);
+  wrefresh(win);
+  int c = getch();
+  endwin();
+  //Game myGame;
+  //myGame.run();
   return 0;
 }
