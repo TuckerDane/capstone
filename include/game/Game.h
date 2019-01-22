@@ -20,7 +20,14 @@
 
 #define GRASS_PAIR 1
 #define EMPTY_PAIR 1
+#define MENU_PAIR 2
+#define DUNGEON_PAIR 3
 #define PLAYER_PAIR 4
+
+#define WINDOW_WIDTH 150
+#define WORLD_WINDOW_HEIGHT 30
+#define NARRATIVE_WINDOW_HEIGHT 5
+#define STATUS_WINDOW_HEIGHT 5
 
 class Game
 {
@@ -29,6 +36,9 @@ private:
   char userInput;
   Player player;
   Space spaces[MAX_SPACES];
+  WINDOW* statusWindow;
+  WINDOW* worldWindow;
+  WINDOW* narrativeWindow;
 
 public:
   /* ..............................................
@@ -76,12 +86,14 @@ public:
 
   // ACTIONS
   void render();
+  void renderStatus();
+  void renderWorld();
+  void renderNarrative();
   void renderMap();
   void renderSpace();
   void renderItem();
   void renderPlayer();
-  void mvaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR); 
-  // comment by marisa    
+  void mvwaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR); 
 };
 
 #endif

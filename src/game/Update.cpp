@@ -39,8 +39,8 @@ bool Game::isMoveAllowed(int y, int x)
     int testch;
 
     /* return true if the space is okay to move into */
-    testch = mvinch(y, x);
-    return (((testch & A_CHARTEXT) == GRASS) || ((testch & A_CHARTEXT) == EMPTY) || ((testch & A_CHARTEXT) == '?'));
+    testch = mvwinch(this->worldWindow, y, x);
+    return (((testch & A_CHARTEXT) == GRASS) || ((testch & A_CHARTEXT) == EMPTY));
 }
 
 char Game::getUserInput()

@@ -15,25 +15,37 @@
 Game::Game()
 {
   /* initialize ncurses */
+  setlocale(LC_ALL, "");
   initscr();
-  keypad(stdscr, TRUE);
   cbreak();
   noecho();
+  nonl();
+  intrflush(stdscr, FALSE);
+  keypad(stdscr, TRUE);
   curs_set(0);
+
+  /* initialize windows */
+  this->statusWindow = newwin(STATUS_WINDOW_HEIGHT, WINDOW_WIDTH, 0, 0);
+  this->worldWindow = newwin(WORLD_WINDOW_HEIGHT, WINDOW_WIDTH, STATUS_WINDOW_HEIGHT, 0);
+  this->narrativeWindow = newwin(NARRATIVE_WINDOW_HEIGHT, WINDOW_WIDTH, STATUS_WINDOW_HEIGHT+WORLD_WINDOW_HEIGHT, 0);
+  refresh();
 
   /* initialize colors */
   start_color();
   init_pair(GRASS_PAIR, COLOR_YELLOW, COLOR_GREEN);
   init_pair(PLAYER_PAIR, COLOR_BLACK, COLOR_GREEN);
+  init_pair(MENU_PAIR, COLOR_BLACK, COLOR_BLUE);
+  init_pair(DUNGEON_PAIR, COLOR_BLACK, COLOR_GREEN);
 
   /* clear the screen */
   clear();
 
   /* initialize player object */
-  this->player.setXPos(8);
-  this->player.setYPos(8);
+  this->player.setXPos(5);
+  this->player.setYPos(5);
 
   /* initialize spaces */
+
 }
 
 Game::~Game()

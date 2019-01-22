@@ -30,10 +30,10 @@ using std::string;
 class Space
 {
 protected:
-  static const int MAX_HEIGHT = 50;
-  static const int MAX_WIDTH = 50;
+  static const int MAX_HEIGHT = 28;
+  static const int MAX_WIDTH = 148;
   static const int MAX_ITEMS = MAX_WIDTH * MAX_HEIGHT;
-  char walls[MAX_WIDTH][MAX_HEIGHT];
+  char walls[MAX_HEIGHT][MAX_WIDTH];
   Item *items[MAX_ITEMS];
   string type;
   string name;
