@@ -7,6 +7,7 @@
   
 .............................................. */
 #include "Player.h"
+#include <string.h>	// for strlen
 
 /* ..............................................
   CONSTRUCTORS / DESTRUCTORS
@@ -225,7 +226,10 @@ void Player::printInventory()
 {
 
 	char msg[] = "This is a test message";
-	printw(msg);
+	int row, col;
+	getmaxyx(stdscr,row,col);		/* get the number of rows and columns */
+	mvprintw(row/2,(col-strlen(msg))/2,"%s",msg);	// prints to particular spot on screen
+	//printw(msg);	// prints to top left, and then tabbed over each next call
 	refresh();
 	getch();
 
