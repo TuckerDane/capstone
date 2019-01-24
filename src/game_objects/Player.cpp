@@ -220,16 +220,14 @@ Item *Player::drop(int itemSlot)
 
 /* ..............................................
   @brief prints player's inventory
-  
-  @param item
 .............................................. */
 void Player::printInventory()
 {
 
 	char msg[] = "This is a test message";
-	//printw(msg);
-	//refresh();
-	//getch();
+	printw(msg);
+	refresh();
+	getch();
 
 	for (int i=0; i < numItems; i++)
 	{
