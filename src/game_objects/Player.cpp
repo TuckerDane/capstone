@@ -219,23 +219,24 @@ Item *Player::drop(int itemSlot)
 	return NULL;
 }
 
-/* ..............................................
-  @brief prints player's inventory
-.............................................. */
-void Player::printInventory()
-{
+// /* ..............................................
+//   @brief prints player's inventory
+// .............................................. */
+// void Player::printInventory()
+// {
 
-	char msg[] = "This is a test message";
-	int row, col;
-	getmaxyx(stdscr,row,col);		/* get the number of rows and columns */
-	mvprintw(row/2,(col-strlen(msg))/2,"%s",msg);	// prints to particular spot on screen
-	//printw(msg);	// prints to top left, and then tabbed over each next call
-	refresh();
-	getch();
+// 	char msg[] = "This is a test message";
+// 	int row, col;
+// 	getmaxyx(stdscr,row,col);		/* get the number of rows and columns */
+// 	wprintw(worldWindow, msg);
+// 	//mvprintw(row/2,(col-strlen(msg))/2,"%s",msg);	// prints to particular spot on screen
+// 	//printw(msg);	// prints to top left, and then tabbed over each next call
+// 	refresh();
+// 	getch();
 
-	for (int i=0; i < numItems; i++)
-	{
-		// world window becomes inventory window
-		// inventory prints item name, weight, and description to screen (testing in world window 1st, then may try to print to narrative window if it is poor visually)
-	}
-}
+// 	for (int i=0; i < numItems; i++)
+// 	{
+// 		// world window becomes inventory window
+// 		// inventory prints item name, weight, and description to screen (testing in world window 1st, then may try to print to narrative window if it is poor visually)
+// 	}
+// }

@@ -94,6 +94,7 @@ public:
   void renderItem();
   void renderPlayer();
   void mvwaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR); 
+  void renderInventory();
 };
 
 #endif

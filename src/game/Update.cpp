@@ -100,7 +100,7 @@ void Game::update()
         break;
     case 'i':
     case 'I':
-        player.printInventory();    // change to open inventory window later
+        renderInventory();    // change to open inventory window later
         break;
     case 'q':
     case 'Q':

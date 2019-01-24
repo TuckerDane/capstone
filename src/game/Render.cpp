@@ -78,3 +78,15 @@ void Game::mvwaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAI
   mvwaddch(this->worldWindow, yPos, xPos, TILE_SYMBOL);
   wattroff(this->worldWindow, COLOR_PAIR(TILE_PAIR));
 }
+
+/* ..............................................
+  @brief prints player's inventory to worldWindow
+.............................................. */
+void Game::renderInventory()
+{
+  char msg[] = "This is a test message";
+  box(this->worldWindow, 0, 0);
+  mvwprintw(this->worldWindow, 1, 1, msg);
+  wrefresh(this->worldWindow);
+	getch();
+}
