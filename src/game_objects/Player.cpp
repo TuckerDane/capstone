@@ -223,8 +223,14 @@ Item *Player::drop(int itemSlot)
   
   @param item
 .............................................. */
-void Player::printInventory(Item *inv)
+void Player::printInventory()
 {
+
+	char msg[] = "This is a test message";
+	//printw(msg);
+	//refresh();
+	//getch();
+
 	for (int i=0; i < numItems; i++)
 	{
 		// world window becomes inventory window

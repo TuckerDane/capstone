@@ -98,6 +98,10 @@ void Game::update()
             player.move('d');
         }
         break;
+    case 'i':
+    case 'I':
+        player.printInventory();    // change to open inventory window later
+        break;
     case 'q':
     case 'Q':
         setIsComplete(true);
