@@ -47,7 +47,7 @@ void Game::renderNarrative()
 void Game::renderMap()
 {
     /* background */
-    wbkgd(this->worldWindow, COLOR_PAIR(DUNGEON_PAIR));
+    wbkgd(this->worldWindow, COLOR_PAIR(GRASS_PAIR));
     renderSpace();
 }
 
@@ -74,7 +74,7 @@ void Game::renderPlayer()
 
 void Game::mvwaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR)
 {
-  attron(COLOR_PAIR(TILE_PAIR));
+  wattron(this->worldWindow, COLOR_PAIR(TILE_PAIR));
   mvwaddch(this->worldWindow, yPos, xPos, TILE_SYMBOL);
-  attroff(COLOR_PAIR(TILE_PAIR));
+  wattroff(this->worldWindow, COLOR_PAIR(TILE_PAIR));
 }
