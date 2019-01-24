@@ -32,10 +32,12 @@ Game::Game()
 
   /* initialize colors */
   start_color();
-  init_pair(GRASS_PAIR, COLOR_YELLOW, COLOR_GREEN);
-  init_pair(PLAYER_PAIR, COLOR_BLACK, COLOR_GREEN);
+
+  init_pair(GRASS_PAIR, COLOR_BLACK, COLOR_GREEN);
+  init_pair(EMPTY_PAIR, COLOR_WHITE, COLOR_BLACK);
   init_pair(MENU_PAIR, COLOR_BLACK, COLOR_BLUE);
-  init_pair(DUNGEON_PAIR, COLOR_BLACK, COLOR_GREEN);
+  init_pair(DUNGEON_PAIR, COLOR_WHITE, COLOR_BLACK);
+  init_pair(PLAYER_PAIR, COLOR_CYAN, COLOR_BLACK);
 
   /* clear the screen */
   clear();
