@@ -24,6 +24,11 @@ void Game::setSpace(Space space, int spaceIndex)
     this->spaces[spaceIndex] = space;
 }
 
+void Game::setNarrative(string narrative)
+{
+    this->narrative = narrative;
+}
+
 /* ..............................................
   GETTERS
   
@@ -50,7 +55,12 @@ char Game::getUserInput()
 
 Space Game::getSpace(int spaceIndex)
 {
-    return spaces[spaceIndex];
+    return this->spaces[spaceIndex];
+}
+
+string Game::getNarrative()
+{
+    return this->narrative;
 }
 
 /* ..............................................
