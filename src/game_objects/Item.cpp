@@ -13,7 +13,7 @@
   
 .............................................. */
 
-Item::Item() : Object(-1, -1, COLOR_BLACK, '?', "item_object", "item")
+Item::Item() : Object(-1, -1, COLOR_BLACK, '?', "item_object", "item", "item_decription")
 {
   this->weight = 0;
 }

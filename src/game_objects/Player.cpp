@@ -13,7 +13,7 @@
   
 .............................................. */
 
-Player::Player() : Object(-1, -1, COLOR_BLACK, '^', "player_object", "adventurer")
+Player::Player() : Object(-1, -1, COLOR_BLACK, '^', "player_object", "adventurer", "none")
 {
 	this->numItems = 0;
 	this->currentSpace = 0;
@@ -216,4 +216,18 @@ Item *Player::drop(int itemSlot)
 		}
 	}
 	return NULL;
+}
+
+/* ..............................................
+  @brief prints player's inventory
+  
+  @param item
+.............................................. */
+void Player::printInventory(Item *inv)
+{
+	for (int i=0; i < numItems; i++)
+	{
+		// world window becomes inventory window
+		// inventory prints item name, weight, and description to screen (testing in world window 1st, then may try to print to narrative window if it is poor visually)
+	}
 }
