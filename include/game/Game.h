@@ -42,6 +42,7 @@ private:
   WINDOW* inventoryWindow;
   WINDOW* narrativeWindow;
   string narrative;
+  WINDOW* developerWindow;
   WINDOW* currentWindow;
 
 public:
@@ -98,6 +99,7 @@ public:
   void renderStatus();
   void renderWorld();
   void renderInventory();
+  void renderDev();
   void renderNarrative();
   void renderMap();
   void renderSpace();

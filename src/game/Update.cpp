@@ -129,6 +129,17 @@ void Game::update()
             this->setCurrentWindow(this->worldWindow);
         }
         break;
+    case '`':
+    case '~':
+        if (this->getCurrentWindow() != this->developerWindow)
+        {
+            this->setCurrentWindow(this->developerWindow);
+        }
+        else
+        {
+            this->setCurrentWindow(this->worldWindow);
+        }
+    break;
     case 'q':
     case 'Q':
         setIsComplete(true);

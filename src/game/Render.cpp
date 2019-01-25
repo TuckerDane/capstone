@@ -22,6 +22,22 @@ void Game::render()
   renderNarrative();  
 }
 
+void Game::renderCurrentWindow()
+{
+  if (getCurrentWindow() == this->inventoryWindow)
+  {
+    renderInventory();
+  }
+  else if (getCurrentWindow() == this->worldWindow)
+  {
+    renderWorld();
+  }
+  else if (getCurrentWindow() == this->developerWindow)
+  {
+    renderDev();
+  }
+}
+
 void Game::renderStatus()
 {
   box(this->statusWindow, 0, 0);
@@ -37,6 +53,23 @@ void Game::renderWorld()
   wrefresh(this->worldWindow);
 }
 
+<<<<<<< HEAD
+=======
+void Game::renderInventory()
+{
+  box(this->inventoryWindow, 0, 0);
+  wbkgd(this->inventoryWindow, COLOR_PAIR(MENU_PAIR));
+  wrefresh(this->inventoryWindow);
+}
+
+void Game::renderDev()
+{
+  box(this->inventoryWindow, 0, 0);
+  wbkgd(this->inventoryWindow, COLOR_PAIR(DUNGEON_PAIR));
+  wrefresh(this->inventoryWindow);
+}
+
+>>>>>>> e8ee1e2... adds developer window
 void Game::renderNarrative()
 {
   box(this->narrativeWindow, 0, 0);
