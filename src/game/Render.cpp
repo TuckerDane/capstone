@@ -18,8 +18,24 @@ void Game::render()
 {
   refresh();
   renderStatus();
-  renderWorld();
+  renderCurrentWindow();
   renderNarrative();  
+}
+
+void Game::renderCurrentWindow()
+{
+  if (getCurrentWindow() == this->inventoryWindow)
+  {
+    renderInventory();
+  }
+  else if (getCurrentWindow() == this->worldWindow)
+  {
+    renderWorld();
+  }
+  else if (getCurrentWindow() == this->developerWindow)
+  {
+    renderDev();
+  }
 }
 
 void Game::renderStatus()
@@ -37,17 +53,32 @@ void Game::renderWorld()
   wrefresh(this->worldWindow);
 }
 
+void Game::renderInventory()
+{
+  box(this->inventoryWindow, 0, 0);
+  wbkgd(this->inventoryWindow, COLOR_PAIR(MENU_PAIR));
+  wrefresh(this->inventoryWindow);
+}
+
+void Game::renderDev()
+{
+  box(this->inventoryWindow, 0, 0);
+  wbkgd(this->inventoryWindow, COLOR_PAIR(DUNGEON_PAIR));
+  wrefresh(this->inventoryWindow);
+}
+
 void Game::renderNarrative()
 {
   box(this->narrativeWindow, 0, 0);
   wbkgd(this->narrativeWindow, COLOR_PAIR(MENU_PAIR));
+  mvwprintw(this->narrativeWindow, 1, 1, this->getNarrative().c_str()); // print a string to position 1, 1 of a window. must be type c_str. strings can be converted with .s_str() function
   wrefresh(this->narrativeWindow);
 }
 
 void Game::renderMap()
 {
     /* background */
-    wbkgd(this->worldWindow, COLOR_PAIR(DUNGEON_PAIR));
+    wbkgd(this->worldWindow, COLOR_PAIR(GRASS_PAIR));
     renderSpace();
 }
 
@@ -74,7 +105,7 @@ void Game::renderPlayer()
 
 void Game::mvwaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR)
 {
-  attron(COLOR_PAIR(TILE_PAIR));
+  wattron(this->worldWindow, COLOR_PAIR(TILE_PAIR));
   mvwaddch(this->worldWindow, yPos, xPos, TILE_SYMBOL);
-  attroff(COLOR_PAIR(TILE_PAIR));
+  wattroff(this->worldWindow, COLOR_PAIR(TILE_PAIR));
 }
