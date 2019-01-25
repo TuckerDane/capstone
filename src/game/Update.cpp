@@ -123,10 +123,12 @@ void Game::update()
         if (this->getCurrentWindow() == this->worldWindow)
         {
             this->setCurrentWindow(this->inventoryWindow);
+            this->setNarrative("switched to inventory window!");
         }
         else if (this->getCurrentWindow() == this->inventoryWindow)
         {
             this->setCurrentWindow(this->worldWindow);
+            this->setNarrative("switched to world window!    ");
         }
         break;
     case '`':
@@ -134,6 +136,7 @@ void Game::update()
         if (this->getCurrentWindow() != this->developerWindow)
         {
             this->setCurrentWindow(this->developerWindow);
+            this->setNarrative("switched to developer window!");
         }
         else
         {
