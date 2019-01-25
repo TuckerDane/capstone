@@ -27,6 +27,8 @@ Game::Game()
   /* initialize windows */
   this->statusWindow = newwin(STATUS_WINDOW_HEIGHT, WINDOW_WIDTH, 0, 0);
   this->worldWindow = newwin(WORLD_WINDOW_HEIGHT, WINDOW_WIDTH, STATUS_WINDOW_HEIGHT, 0);
+  this->inventoryWindow = newwin(WORLD_WINDOW_HEIGHT, WINDOW_WIDTH, STATUS_WINDOW_HEIGHT, 0);
+  this->developerWindow = newwin(WORLD_WINDOW_HEIGHT, WINDOW_WIDTH, STATUS_WINDOW_HEIGHT, 0);
   this->narrativeWindow = newwin(NARRATIVE_WINDOW_HEIGHT, WINDOW_WIDTH, STATUS_WINDOW_HEIGHT+WORLD_WINDOW_HEIGHT, 0);
   refresh();
 
@@ -42,12 +44,13 @@ Game::Game()
   /* clear the screen */
   clear();
 
-  /* initialize player object */
+  /* initialize Game class variables */
+  this->isComplete = false;
   this->player.setXPos(5);
   this->player.setYPos(5);
-
-  /* initialize spaces */
-
+  // TODO: init spaces
+  this->narrative = "default narrative";
+  this->currentWindow = this->worldWindow;
 }
 
 Game::~Game()

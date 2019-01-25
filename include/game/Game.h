@@ -10,6 +10,7 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 #include <ncurses.h>
+#include <string>
 #include "Space.h"
 #include "Player.h"
 
@@ -19,10 +20,10 @@
 #define EMPTY ' '
 
 #define GRASS_PAIR 1
-#define EMPTY_PAIR 1
-#define MENU_PAIR 2
-#define DUNGEON_PAIR 3
-#define PLAYER_PAIR 4
+#define EMPTY_PAIR 2
+#define MENU_PAIR 3
+#define DUNGEON_PAIR 4
+#define PLAYER_PAIR 5
 
 #define WINDOW_WIDTH 150
 #define WORLD_WINDOW_HEIGHT 30
@@ -38,7 +39,11 @@ private:
   Space spaces[MAX_SPACES];
   WINDOW* statusWindow;
   WINDOW* worldWindow;
+  WINDOW* inventoryWindow;
   WINDOW* narrativeWindow;
+  string narrative;
+  WINDOW* developerWindow;
+  WINDOW* currentWindow;
 
 public:
   /* ..............................................
@@ -69,12 +74,16 @@ public:
   // SETTERS
   void setIsComplete(bool isComplete);
   void setSpace(Space space, int spaceIndex);
+  void setNarrative(string narrative);
+  void setCurrentWindow(WINDOW* window);
 
   // GETTERS
   bool getIsComplete();
   bool isMoveAllowed(int y, int x);
   char getUserInput();
   Space getSpace(int spaceIndex);
+  string getNarrative();
+  WINDOW* getCurrentWindow();
 
   // ACTIONS
   void update();
@@ -86,15 +95,17 @@ public:
 
   // ACTIONS
   void render();
+  void renderCurrentWindow();
   void renderStatus();
   void renderWorld();
+  void renderInventory();
+  void renderDev();
   void renderNarrative();
   void renderMap();
   void renderSpace();
   void renderItem();
   void renderPlayer();
   void mvwaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR); 
-  void renderInventory();
 };
 
 #endif

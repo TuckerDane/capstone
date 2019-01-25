@@ -24,6 +24,16 @@ void Game::setSpace(Space space, int spaceIndex)
     this->spaces[spaceIndex] = space;
 }
 
+void Game::setNarrative(string narrative)
+{
+    this->narrative = narrative;
+}
+
+void Game::setCurrentWindow(WINDOW* window)
+{
+    this->currentWindow = window;
+}
+
 /* ..............................................
   GETTERS
   
@@ -50,7 +60,17 @@ char Game::getUserInput()
 
 Space Game::getSpace(int spaceIndex)
 {
-    return spaces[spaceIndex];
+    return this->spaces[spaceIndex];
+}
+
+string Game::getNarrative()
+{
+    return this->narrative;
+}
+
+WINDOW* Game::getCurrentWindow()
+{
+    return this->currentWindow;
 }
 
 /* ..............................................
@@ -100,8 +120,26 @@ void Game::update()
         break;
     case 'i':
     case 'I':
-        renderInventory();    // change to open inventory window later
+        if (this->getCurrentWindow() == this->worldWindow)
+        {
+            this->setCurrentWindow(this->inventoryWindow);
+        }
+        else if (this->getCurrentWindow() == this->inventoryWindow)
+        {
+            this->setCurrentWindow(this->worldWindow);
+        }
         break;
+    case '`':
+    case '~':
+        if (this->getCurrentWindow() != this->developerWindow)
+        {
+            this->setCurrentWindow(this->developerWindow);
+        }
+        else
+        {
+            this->setCurrentWindow(this->worldWindow);
+        }
+    break;
     case 'q':
     case 'Q':
         setIsComplete(true);
