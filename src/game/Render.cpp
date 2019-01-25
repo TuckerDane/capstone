@@ -55,6 +55,7 @@ void Game::renderWorld()
 
 void Game::renderInventory()
 {
+  werase(this->inventoryWindow);
   box(this->inventoryWindow, 0, 0);
   wbkgd(this->inventoryWindow, COLOR_PAIR(MENU_PAIR));
   wrefresh(this->inventoryWindow);
@@ -62,13 +63,15 @@ void Game::renderInventory()
 
 void Game::renderDev()
 {
-  box(this->inventoryWindow, 0, 0);
-  wbkgd(this->inventoryWindow, COLOR_PAIR(DUNGEON_PAIR));
-  wrefresh(this->inventoryWindow);
+  werase(this->developerWindow);
+  box(this->developerWindow, 0, 0);
+  wbkgd(this->developerWindow, COLOR_PAIR(DUNGEON_PAIR));
+  wrefresh(this->developerWindow);
 }
 
 void Game::renderNarrative()
 {
+  werase(this->narrativeWindow);
   box(this->narrativeWindow, 0, 0);
   wbkgd(this->narrativeWindow, COLOR_PAIR(MENU_PAIR));
   mvwprintw(this->narrativeWindow, 1, 1, this->getNarrative().c_str()); // print a string to position 1, 1 of a window. must be type c_str. strings can be converted with .s_str() function
