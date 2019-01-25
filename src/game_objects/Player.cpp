@@ -229,9 +229,45 @@ void Player::printInventory(WINDOW* win)
 	char border[] = "---------";
 	mvwprintw(win, 2, 1, border);
 
+numItems=10; // for testing
 // inventory prints item name, weight, and description to screen (testing in world window 1st, then may try to print to narrative window if it is poor visually)
-	for (int i=0; i < numItems; i++)
-	{
-		mvwprintw(win, i + 3, 1, "inventoryStuffGoesHere");
+	int choice;
+	int highlight = 0;
+
+	while(1){		
+		for (int i=0; i < numItems; i++)
+		{
+			if(i == highlight)
+			{
+				wattron(win, A_REVERSE);
+			}
+			mvwprintw(win, i + 3, 1, "inventoryStuffGoesHere"); // inventory[i].c_str
+			wattroff(win, A_REVERSE);
+		}
+		
+		choice = getch();
+
+		switch (choice)
+		{
+			case 'i':
+			case 'I':
+				return;
+			case 'w':
+			case 'W':
+				highlight--;
+				if(highlight == -1)
+					highlight = 0;
+				break;
+			case 's':
+			case 'S':
+				highlight++;
+				if(highlight == numItems)
+					highlight = numItems - 1;
+				break;
+			default:
+				break;
+			// '\r' for return
+		}
 	}
+	
 }
