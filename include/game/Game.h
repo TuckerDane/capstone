@@ -39,8 +39,10 @@ private:
   Space spaces[MAX_SPACES];
   WINDOW* statusWindow;
   WINDOW* worldWindow;
+  WINDOW* inventoryWindow;
   WINDOW* narrativeWindow;
   string narrative;
+  WINDOW* currentWindow;
 
 public:
   /* ..............................................
@@ -72,6 +74,7 @@ public:
   void setIsComplete(bool isComplete);
   void setSpace(Space space, int spaceIndex);
   void setNarrative(string narrative);
+  void setCurrentWindow(WINDOW* window);
 
   // GETTERS
   bool getIsComplete();
@@ -79,6 +82,7 @@ public:
   char getUserInput();
   Space getSpace(int spaceIndex);
   string getNarrative();
+  WINDOW* getCurrentWindow();
 
   // ACTIONS
   void update();
@@ -90,8 +94,10 @@ public:
 
   // ACTIONS
   void render();
+  void renderCurrentWindow();
   void renderStatus();
   void renderWorld();
+  void renderInventory();
   void renderNarrative();
   void renderMap();
   void renderSpace();

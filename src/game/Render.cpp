@@ -41,7 +41,6 @@ void Game::renderNarrative()
 {
   box(this->narrativeWindow, 0, 0);
   wbkgd(this->narrativeWindow, COLOR_PAIR(MENU_PAIR));
-  mvwprintw(this->narrativeWindow, 1, 1, this->getNarrative().c_str()); // print a string to position 1, 1 of a window. must be type c_str. strings can be converted with .s_str() function
   wrefresh(this->narrativeWindow);
 }
 

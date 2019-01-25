@@ -29,6 +29,11 @@ void Game::setNarrative(string narrative)
     this->narrative = narrative;
 }
 
+void Game::setCurrentWindow(WINDOW* window)
+{
+    this->currentWindow = window;
+}
+
 /* ..............................................
   GETTERS
   
@@ -61,6 +66,11 @@ Space Game::getSpace(int spaceIndex)
 string Game::getNarrative()
 {
     return this->narrative;
+}
+
+WINDOW* Game::getCurrentWindow()
+{
+    return this->currentWindow;
 }
 
 /* ..............................................
@@ -106,6 +116,17 @@ void Game::update()
         if ((player.getXPos() < COLS - 1) && isMoveAllowed(player.getYPos(), player.getXPos() + 1))
         {
             player.move('d');
+        }
+        break;
+    case 'i':
+    case 'I':
+        if (this->getCurrentWindow() == this->worldWindow)
+        {
+            this->setCurrentWindow(this->inventoryWindow);
+        }
+        else if (this->getCurrentWindow() == this->inventoryWindow)
+        {
+            this->setCurrentWindow(this->worldWindow);
         }
         break;
     case 'q':
