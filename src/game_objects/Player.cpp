@@ -224,21 +224,14 @@ Item *Player::drop(int itemSlot)
 .............................................. */
 void Player::printInventory(WINDOW* win)
 {
-	//int row, col;
-	//getmaxyx(stdscr,row,col);		/* get the number of rows and columns */
-	char msg[] = "This is a test message";
-	//box(win, 0, 0);
-	mvwprintw(win, 1, 1, msg);
-	//wrefresh(win);
-	//getch();
+	char title[] = "INVENTORY";
+	mvwprintw(win, 1, 1, title);
+	char border[] = "---------";
+	mvwprintw(win, 2, 1, border);
 
-	//wprintw(win, msg);
-	//mvprintw(row/2,(col-strlen(msg))/2,"%s",msg);	// prints to particular spot on screen
-	//printw(msg);	// prints to top left, and then tabbed over each next call
-
+// inventory prints item name, weight, and description to screen (testing in world window 1st, then may try to print to narrative window if it is poor visually)
 	for (int i=0; i < numItems; i++)
 	{
-		// world window becomes inventory window
-		// inventory prints item name, weight, and description to screen (testing in world window 1st, then may try to print to narrative window if it is poor visually)
+		mvwprintw(win, i + 3, 1, "inventoryStuffGoesHere");
 	}
 }
