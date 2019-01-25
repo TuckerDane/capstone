@@ -42,12 +42,12 @@ Game::Game()
   /* clear the screen */
   clear();
 
-  /* initialize player object */
+  /* initialize Game class variables */
+  this->isComplete = false;
   this->player.setXPos(5);
   this->player.setYPos(5);
-
-  /* initialize spaces */
-
+  // TODO: init spaces
+  this->narrative = "default narrative";
 }
 
 Game::~Game()

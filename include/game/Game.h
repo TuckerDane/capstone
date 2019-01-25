@@ -10,6 +10,7 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 #include <ncurses.h>
+#include <string>
 #include "Space.h"
 #include "Player.h"
 
@@ -19,10 +20,10 @@
 #define EMPTY ' '
 
 #define GRASS_PAIR 1
-#define EMPTY_PAIR 1
-#define MENU_PAIR 2
-#define DUNGEON_PAIR 3
-#define PLAYER_PAIR 4
+#define EMPTY_PAIR 2
+#define MENU_PAIR 3
+#define DUNGEON_PAIR 4
+#define PLAYER_PAIR 5
 
 #define WINDOW_WIDTH 150
 #define WORLD_WINDOW_HEIGHT 30
@@ -39,6 +40,7 @@ private:
   WINDOW* statusWindow;
   WINDOW* worldWindow;
   WINDOW* narrativeWindow;
+  string narrative;
 
 public:
   /* ..............................................
@@ -69,12 +71,14 @@ public:
   // SETTERS
   void setIsComplete(bool isComplete);
   void setSpace(Space space, int spaceIndex);
+  void setNarrative(string narrative);
 
   // GETTERS
   bool getIsComplete();
   bool isMoveAllowed(int y, int x);
   char getUserInput();
   Space getSpace(int spaceIndex);
+  string getNarrative();
 
   // ACTIONS
   void update();
