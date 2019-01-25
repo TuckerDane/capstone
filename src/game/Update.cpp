@@ -124,11 +124,15 @@ void Game::update()
         {
             this->setCurrentWindow(this->inventoryWindow);
             this->setNarrative("switched to inventory window!");
+            renderNarrative();
+            renderInventory();
         }
         else if (this->getCurrentWindow() == this->inventoryWindow)
         {
             this->setCurrentWindow(this->worldWindow);
             this->setNarrative("switched to world window!    ");
+            renderWorld();
+            renderNarrative();
         }
         break;
     case '`':

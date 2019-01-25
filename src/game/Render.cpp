@@ -57,6 +57,7 @@ void Game::renderInventory()
 {
   box(this->inventoryWindow, 0, 0);
   wbkgd(this->inventoryWindow, COLOR_PAIR(MENU_PAIR));
+  player.printInventory(this->inventoryWindow);
   wrefresh(this->inventoryWindow);
 }
 

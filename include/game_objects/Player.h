@@ -65,7 +65,7 @@ public:
 	void move(char direction); // moves the Player x/y position by one space
 	bool pickUp(Item *item);	 // adds an Object into the player's inventory
 	Item *drop(int itemSlot);	// drops an Object from the player's inventory
-	//void printInventory();	// prints player's inventory
+	void printInventory(WINDOW* win);	// prints player's inventory
 };
 
 #endif
