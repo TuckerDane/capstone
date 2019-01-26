@@ -85,19 +85,33 @@ void Game::update()
     case KEY_UP:
     case 'w':
     case 'W':
-        player.setSymbol('^');
-        if ((player.getYPos() > 0) && isMoveAllowed(player.getYPos() - 1, player.getXPos()))
+        if (this->getCurrentWindow() == this->inventoryWindow)
         {
-            player.move('w');
+            player.setSelectedItemIndex(player.getSelectedItemIndex() - 1);
+        }
+        else
+        {
+            player.setSymbol('^');
+            if ((player.getYPos() > 0) && isMoveAllowed(player.getYPos() - 1, player.getXPos()))
+            {
+                player.move('w');
+            }
         }
         break;
     case KEY_DOWN:
     case 's':
     case 'S':
-        player.setSymbol('v');
-        if ((player.getYPos() < LINES - 1) && isMoveAllowed(player.getYPos() + 1, player.getXPos()))
+        if (this->getCurrentWindow() == this->inventoryWindow)
         {
-            player.move('s');
+            player.setSelectedItemIndex(player.getSelectedItemIndex() + 1);
+        }
+        else
+        {
+            player.setSymbol('v');
+            if ((player.getYPos() < LINES - 1) && isMoveAllowed(player.getYPos() + 1, player.getXPos()))
+            {
+                player.move('s');
+            }
         }
         break;
     case KEY_LEFT:

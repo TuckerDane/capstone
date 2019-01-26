@@ -21,9 +21,10 @@ Object::Object()
   this->symbol = '?';
   this->type = "generic_object";
   this->name = "unnamed";
+  this->description = "none";
 }
 
-Object::Object(int xPos, int yPos, int color, char symbol, string type, string name)
+Object::Object(int xPos, int yPos, int color, char symbol, string type, string name, string description)
 {
   this->xPos = xPos;
   this->yPos = yPos;
@@ -31,6 +32,7 @@ Object::Object(int xPos, int yPos, int color, char symbol, string type, string n
   this->symbol = symbol;
   this->type = type;
   this->name = name;
+  this->description = description;
 }
 
 Object::~Object()
@@ -72,6 +74,11 @@ void Object::setName(string name)
   this->name = name;
 }
 
+void Object::setDescription(string description)
+{
+  this->description = description;
+}
+
 /* ..............................................
   GETTERS
   
@@ -105,4 +112,9 @@ string Object::getType()
 string Object::getName()
 {
   return this->name;
+}
+
+string Object::getDescription()
+{
+  return this->description;
 }

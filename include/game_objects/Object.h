@@ -40,11 +40,12 @@ class Object
 	char symbol;	// holds the symbol of the object
 	string type;	// holds the type name of the object
 	string name;	// holds the name of the object
+	string description;	// holds description of the object
 
   public:
 	// CONSTRUCTOR/DESTRUCTORS
 	Object();
-	Object(int xPos, int yPos, int color, char symbol, string type, string name);
+	Object(int xPos, int yPos, int color, char symbol, string type, string name, string description);
 	~Object();
 
 	// SETTERS
@@ -54,6 +55,7 @@ class Object
 	virtual void setSymbol(char symbol);
 	virtual void setType(string type);
 	virtual void setName(string name);
+	virtual void setDescription(string description);
 
 	// GETTERS
 	virtual int getXPos();
@@ -62,6 +64,7 @@ class Object
 	virtual char getSymbol();
 	virtual string getType();
 	virtual string getName();
+	virtual string getDescription();
 };
 
 #endif

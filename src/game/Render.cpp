@@ -58,6 +58,23 @@ void Game::renderInventory()
   werase(this->inventoryWindow);
   box(this->inventoryWindow, 0, 0);
   wbkgd(this->inventoryWindow, COLOR_PAIR(MENU_PAIR));
+
+  mvwprintw(this->inventoryWindow, 2, 2, "INVENTORY");
+
+  Item** inventory = player.getInventory();
+
+  for (int i=0; i < player.getNumItems(); i++)
+  {
+    if(i == player.getSelectedItemIndex())
+    {
+      wattron(this->inventoryWindow, A_REVERSE);
+    }
+    string line =  i + " " + inventory[i]->getName() + " (" + std::to_string(inventory[i]->getWeight()) + "): " + inventory[i]->getDescription();
+    mvwprintw(this->inventoryWindow, i + 3, 2, line.c_str());
+
+    wattroff(this->inventoryWindow, A_REVERSE);
+  }
+
   wrefresh(this->inventoryWindow);
 }
 
