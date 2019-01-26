@@ -13,17 +13,13 @@
 #include <string>
 #include "Room.h"
 #include "Player.h"
+#include "Door.h"
+#include "Key.h"
 
 #define MAX_ROOMS 10
 
 #define GRASS ' '
 #define EMPTY ' '
-
-#define GRASS_PAIR 1
-#define EMPTY_PAIR 2
-#define MENU_PAIR 3
-#define DUNGEON_PAIR 4
-#define PLAYER_PAIR 5
 
 #define WINDOW_WIDTH 150
 #define WORLD_WINDOW_HEIGHT 30
@@ -36,14 +32,14 @@ private:
   bool isComplete;
   char userInput;
   Player player;
-  Room rooms[MAX_ROOMS];
-  WINDOW* statusWindow;
-  WINDOW* worldWindow;
-  WINDOW* inventoryWindow;
-  WINDOW* narrativeWindow;
+  Room *rooms[MAX_ROOMS];
+  WINDOW *statusWindow;
+  WINDOW *worldWindow;
+  WINDOW *inventoryWindow;
+  WINDOW *narrativeWindow;
   string narrative;
-  WINDOW* developerWindow;
-  WINDOW* currentWindow;
+  WINDOW *developerWindow;
+  WINDOW *currentWindow;
 
 public:
   /* ..............................................
@@ -73,27 +69,29 @@ public:
 
   // SETTERS
   void setIsComplete(bool isComplete);
-  void setRoom(Room room, int roomIndex);
+  void setRoom(Room *room, int roomIndex);
   void setNarrative(string narrative);
-  void setCurrentWindow(WINDOW* window);
+  void setCurrentWindow(WINDOW *window);
 
   // GETTERS
   bool getIsComplete();
   bool isMoveAllowed(int y, int x);
   char getUserInput();
-  Room getRoom(int roomIndex);
+  Room *getRoom(int roomIndex);
   string getNarrative();
-  WINDOW* getCurrentWindow();
+  WINDOW *getCurrentWindow();
 
   // ACTIONS
   void update();
+  void resolveDoorMovement();
 
   /* ..............................................
     RENDER.CPP
     
-  .............................................. */   
+  .............................................. */
 
   // ACTIONS
+  void initColorPairs();
   void render();
   void renderCurrentWindow();
   void renderStatus();
@@ -101,11 +99,12 @@ public:
   void renderInventory();
   void renderDev();
   void renderNarrative();
-  void renderMap();
   void renderRoom();
-  void renderItem();
+  void renderWalls();
+  void renderDoors();
+  void renderItems();
   void renderPlayer();
-  void mvwaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR); 
+  void mvwaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR);
 };
 
 #endif
