@@ -55,6 +55,7 @@ void Game::renderWorld()
 
 void Game::renderInventory()
 {
+  werase(this->inventoryWindow);
   box(this->inventoryWindow, 0, 0);
   wbkgd(this->inventoryWindow, COLOR_PAIR(MENU_PAIR));
 
@@ -79,13 +80,15 @@ void Game::renderInventory()
 
 void Game::renderDev()
 {
-  box(this->inventoryWindow, 0, 0);
-  wbkgd(this->inventoryWindow, COLOR_PAIR(DUNGEON_PAIR));
-  wrefresh(this->inventoryWindow);
+  werase(this->developerWindow);
+  box(this->developerWindow, 0, 0);
+  wbkgd(this->developerWindow, COLOR_PAIR(DUNGEON_PAIR));
+  wrefresh(this->developerWindow);
 }
 
 void Game::renderNarrative()
 {
+  werase(this->narrativeWindow);
   box(this->narrativeWindow, 0, 0);
   wbkgd(this->narrativeWindow, COLOR_PAIR(MENU_PAIR));
   mvwprintw(this->narrativeWindow, 1, 1, this->getNarrative().c_str()); // print a string to position 1, 1 of a window. must be type c_str. strings can be converted with .s_str() function
@@ -96,17 +99,17 @@ void Game::renderMap()
 {
     /* background */
     wbkgd(this->worldWindow, COLOR_PAIR(GRASS_PAIR));
-    renderSpace();
+    renderRoom();
 }
 
-void Game::renderSpace()
+void Game::renderRoom()
 {
-  int spaceIndex = 0;
-  for (int height = 0; height < this->spaces[spaceIndex].getMaxHeight(); height++)
+  int roomIndex = 0;
+  for (int height = 0; height < this->rooms[roomIndex].getMaxHeight(); height++)
   {
-    for (int width = 0; width < this->spaces[spaceIndex].getMaxWidth(); width++)
+    for (int width = 0; width < this->rooms[roomIndex].getMaxWidth(); width++)
     {
-        char c = this->spaces[spaceIndex].getWall(height, width);
+        char c = this->rooms[roomIndex].getWall(height, width);
         if (c == '+' || c == '-' || c == '|' || c == ' ' || c == '\\' || c == '/')
         {
           mvwaddchWithColor(height+1, width+1, c, DUNGEON_PAIR);

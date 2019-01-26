@@ -19,9 +19,9 @@ void Game::setIsComplete(bool isComplete)
     this->isComplete = isComplete;
 }
 
-void Game::setSpace(Space space, int spaceIndex)
+void Game::setRoom(Room room, int roomIndex)
 {
-    this->spaces[spaceIndex] = space;
+    this->rooms[roomIndex] = room;
 }
 
 void Game::setNarrative(string narrative)
@@ -48,7 +48,7 @@ bool Game::isMoveAllowed(int y, int x)
 {
     int testch;
 
-    /* return true if the space is okay to move into */
+    /* return true if the oom is okay to move into */
     testch = mvwinch(this->worldWindow, y, x);
     return (((testch & A_CHARTEXT) == GRASS) || ((testch & A_CHARTEXT) == EMPTY));
 }
@@ -58,9 +58,9 @@ char Game::getUserInput()
     return this->userInput;
 }
 
-Space Game::getSpace(int spaceIndex)
+Room Game::getRoom(int roomIndex)
 {
-    return this->spaces[spaceIndex];
+    return this->rooms[roomIndex];
 }
 
 string Game::getNarrative()

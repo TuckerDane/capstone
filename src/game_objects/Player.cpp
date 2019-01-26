@@ -16,7 +16,7 @@
 Player::Player() : Object(-1, -1, COLOR_BLACK, '^', "player_object", "adventurer", "none")
 {
 	this->numItems = 0;
-	this->currentSpace = 0;
+	this->currentRoom = 0;
 	for (int itemSlot = 0; itemSlot < MAX_INVENTORY; itemSlot++)
 	{
 		this->inventory[itemSlot] = NULL;
@@ -49,9 +49,9 @@ void Player::setNumItems(int numItems)
 	this->numItems = numItems;
 }
 
-void Player::setCurrentSpace(int currentSpace)
+void Player::setCurrentRoom(int currentRoom)
 {
-	this->currentSpace = currentSpace;
+	this->currentRoom = currentRoom;
 }
 
 void Player::setInventory(Item *inventory[MAX_INVENTORY], int numItems)
@@ -98,9 +98,9 @@ int Player::getNumItems()
 	return this->numItems;
 }
 
-int Player::getCurrentSpace()
+int Player::getCurrentRoom()
 {
-	return this->currentSpace;
+	return this->currentRoom;
 }
 
 /* ..............................................
@@ -140,7 +140,7 @@ bool Player::getIsMoved()
 .............................................. */
 
 /* ..............................................
-  @brief moves the Player x/y position by one space
+  @brief moves the Player x/y position by one room
   
   @param direction 
 .............................................. */
@@ -212,7 +212,7 @@ Item *Player::drop(int itemSlot)
 {
 	while (0 <= itemSlot && itemSlot < MAX_INVENTORY) // if the player inputs a valid inventory item slot
 	{
-		if (this->inventory[itemSlot] == NULL) // if itemSlot is an empty space in the inventory
+		if (this->inventory[itemSlot] == NULL) // if itemSlot is an empty room in the inventory
 		{
 			return NULL; // return NULL
 		}

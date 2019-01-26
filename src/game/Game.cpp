@@ -48,7 +48,7 @@ Game::Game()
   this->isComplete = false;
   this->player.setXPos(5);
   this->player.setYPos(5);
-  // TODO: init spaces
+  // TODO: init rooms
   this->narrative = "default narrative";
   this->currentWindow = this->worldWindow;
 }
