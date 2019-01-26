@@ -12,6 +12,7 @@
 
 #include <stdlib.h>
 #include "Object.h"
+#include "Door.h"
 
 /* ..............................................
   @brief 
@@ -19,19 +20,23 @@
 .............................................. */
 class Item : public Object
 {
-  private:
-  	int weight;		// how much the object weights
+protected:
+  int weight; // how much the object weights
 
-  public:
-    // CONSTRUCTORS/DECONSTRUCTORS
-    Item();  // default constructor for Item
-    ~Item(); // deconstructor for Item
+public:
+  // CONSTRUCTORS/DECONSTRUCTORS
+  Item();          // default constructor for Item
+  virtual ~Item(); // deconstructor for Item
 
-    // SETTERS
-    void setWeight(int weight);
+  // SETTERS
+  void setWeight(int weight);
 
-    // GETTERS
-    int getWeight();
+  // GETTERS
+  int getWeight();
+
+  // Actions
+  virtual bool use(); // returns true if use() is successful, false if unsuccessful
+  virtual bool use(int playerYPos, int playerXPos, Door** doors);
 };
 
 #endif

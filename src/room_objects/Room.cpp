@@ -20,14 +20,48 @@ Room::Room()
     {
         this->items[i] = NULL;
     }
-    this->type = "Generic";
+    for (int i = 0; i < MAX_DOORS; i++)
+    {
+        this->doors[i] = NULL;
+    }
+    this->type = "Room";
+    this->name = "Generic Room";
+    this->description = "A generic room";
+    this->tileColor = 0;
+}
+
+Room::Room(string roomFile)
+{
+    this->setWalls(roomFile);
+    for (int i = 0; i < MAX_ITEMS; i++)
+    {
+        this->items[i] = NULL;
+    }
+    for (int i = 0; i < MAX_DOORS; i++)
+    {
+        this->doors[i] = NULL;
+    }
+    this->type = "Room";
     this->name = "Generic Room";
     this->description = "A generic room";
 }
 
 Room::~Room()
 {
-    
+    for (int i = 0; i < MAX_DOORS; i++)
+    {
+        if (doors[i] != NULL)
+        {
+            delete doors[i];
+        }
+    }
+    for (int i = 0; i < MAX_ITEMS; i++)
+    {
+        if (items[i] != NULL)
+        {
+            delete items[i];
+        }
+    }
 }
 
 /* ..............................................
@@ -41,11 +75,11 @@ void Room::setWalls(string roomFile)
     int height = 0;
     char c;
     fstream file;
-    file.open(roomFile,fstream::in);
+    file.open(roomFile, fstream::in);
     if (file.is_open())
     {
         file.get(c);
-        while(file.good())
+        while (file.good())
         {
             if (c != '\n')
             {
@@ -88,6 +122,16 @@ void Room::setDescription(string description)
     this->description = description;
 }
 
+void Room::setDoor(Door *door, int doorIndex)
+{
+    doors[doorIndex] = door;
+}
+
+void Room::setTileColor(int tileColor)
+{
+    this->tileColor = COLOR_BLACK;
+}
+
 /* ..............................................
   GETTERS 
   
@@ -108,12 +152,17 @@ int Room::getMaxItems()
     return this->MAX_ITEMS;
 }
 
+int Room::getMaxDoors()
+{
+    return this->MAX_DOORS;
+}
+
 char Room::getWall(int height, int width)
 {
     return this->walls[height][width];
 }
 
-Item** Room::getItems()
+Item **Room::getItems()
 {
     return this->items;
 }
@@ -131,4 +180,19 @@ string Room::getName()
 string Room::getDescription()
 {
     return this->description;
+}
+
+Door *Room::getDoor(int doorIndex)
+{
+    return doors[doorIndex];
+}
+
+Door **Room::getDoors()
+{
+    return doors;
+}
+
+int Room::getTileColor()
+{
+    return tileColor;
 }

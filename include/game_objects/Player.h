@@ -13,16 +13,11 @@
 #include <stdlib.h>
 #include "Object.h"
 #include "Item.h"
+#include "Key.h"
 using std::cerr;
 using std::cin;
 using std::cout;
 using std::endl;
-
-/* ..............................................
-  GLOBALS
-  
-.............................................. */
-#define MAX_INVENTORY 10
 
 /* ..............................................
   @brief 
@@ -30,16 +25,17 @@ using std::endl;
 .............................................. */
 class Player : public Object
 {
-private:
-	int maxCarryWeight;							// the maximum weight the player can carry
-	int currentCarryWeight;					// the current amount of weight the player is carrying
-	int numItems;										// the number of items in the player's inventory
-	int currentRoom;								// the current room the player is in
+  private:
+	static const int MAX_INVENTORY = 10;
+	int maxCarryWeight;				// the maximum weight the player can carry
+	int currentCarryWeight;			// the current amount of weight the player is carrying
+	int numItems;					// the number of items in the player's inventory
+	int currentRoom;				// the current room the player is in
 	Item *inventory[MAX_INVENTORY]; // an inventory capable of carrying 10 Items
-	bool isMoved;										// true of the player moved, false if the player did not move
+	bool isMoved;					// true of the player moved, false if the player did not move
 	int selectedItemIndex;
 
-public:
+  public:
 	// CONSTRUCTOR/DESTRUCTORS
 	Player();
 	~Player();
@@ -60,14 +56,15 @@ public:
 	int getNumItems();
 	int getCurrentRoom();
 	int getSelectedItemIndex();
-	Item **getInventory();								// returns the entire player inventory
+	Item **getInventory();				  // returns the entire player inventory
 	Item *getInventoryItem(int itemSlot); // returns a specific inventory item
 	bool getIsMoved();
+	int getMaxInventory();
 
 	// ACTIONS
 	void move(char direction); // moves the Player x/y position by one room
-	bool pickUp(Item *item);	 // adds an Object into the player's inventory
-	Item *drop(int itemSlot);	// drops an Object from the player's inventory
+	bool pickUp(Item *item);   // adds an Object into the player's inventory
+	Item *drop(int itemSlot);  // drops an Object from the player's inventory
 };
 
 #endif
