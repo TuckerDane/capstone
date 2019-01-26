@@ -70,7 +70,7 @@ void Game::renderInventory()
       wattron(this->inventoryWindow, A_REVERSE);
     }
     string line =  i + " " + inventory[i]->getName() + " (" + std::to_string(inventory[i]->getWeight()) + "): " + inventory[i]->getDescription();
-    mvwprintw(this->inventoryWindow, i + 3, 2, line.c_str()); // ADD ITEM WEIGHT LATER
+    mvwprintw(this->inventoryWindow, i + 3, 2, line.c_str());
 
     wattroff(this->inventoryWindow, A_REVERSE);
   }
