@@ -34,7 +34,7 @@ private:
 	int maxCarryWeight;							// the maximum weight the player can carry
 	int currentCarryWeight;					// the current amount of weight the player is carrying
 	int numItems;										// the number of items in the player's inventory
-	int currentSpace;								// the current space the player is in
+	int currentRoom;								// the current room the player is in
 	Item *inventory[MAX_INVENTORY]; // an inventory capable of carrying 10 Items
 	bool isMoved;										// true of the player moved, false if the player did not move
 
@@ -47,7 +47,7 @@ public:
 	void setMaxCarryWeight(int maxCarryWeight);
 	void setCurrentCarryWeight(int currentCarryWeight);
 	void setNumItems(int numItems);
-	void setCurrentSpace(int curentSpace);
+	void setCurrentRoom(int curentRoom);
 	void setInventory(Item *inventory[MAX_INVENTORY], int numItems);
 	void setInventoryItem(Item *item, int itemSlot);
 	void setIsMoved(bool isMoved);
@@ -56,13 +56,13 @@ public:
 	int getMaxCarryWeight();
 	int getCurrentCarryWeight();
 	int getNumItems();
-	int getCurrentSpace();
+	int getCurrentRoom();
 	Item **getInventory();								// returns the entire player inventory
 	Item *getInventoryItem(int itemSlot); // returns a specific inventory item
 	bool getIsMoved();
 
 	// ACTIONS
-	void move(char direction); // moves the Player x/y position by one space
+	void move(char direction); // moves the Player x/y position by one room
 	bool pickUp(Item *item);	 // adds an Object into the player's inventory
 	Item *drop(int itemSlot);	// drops an Object from the player's inventory
 };
