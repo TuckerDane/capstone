@@ -82,17 +82,17 @@ void Game::renderMap()
 {
     /* background */
     wbkgd(this->worldWindow, COLOR_PAIR(GRASS_PAIR));
-    renderSpace();
+    renderRoom();
 }
 
-void Game::renderSpace()
+void Game::renderRoom()
 {
-  int spaceIndex = 0;
-  for (int height = 0; height < this->spaces[spaceIndex].getMaxHeight(); height++)
+  int roomIndex = 0;
+  for (int height = 0; height < this->rooms[roomIndex].getMaxHeight(); height++)
   {
-    for (int width = 0; width < this->spaces[spaceIndex].getMaxWidth(); width++)
+    for (int width = 0; width < this->rooms[roomIndex].getMaxWidth(); width++)
     {
-        char c = this->spaces[spaceIndex].getWall(height, width);
+        char c = this->rooms[roomIndex].getWall(height, width);
         if (c == '+' || c == '-' || c == '|' || c == ' ' || c == '\\' || c == '/')
         {
           mvwaddchWithColor(height+1, width+1, c, DUNGEON_PAIR);

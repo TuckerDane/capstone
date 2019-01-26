@@ -1,5 +1,5 @@
 /* ..............................................
-  @file Space.h
+  @file Room.h
   @author Tucker Walker (tuckerdwalker@gmail.com)
   @brief 
   @date 2019-01-20
@@ -7,8 +7,8 @@
   
 .............................................. */
 
-#ifndef SPACE_HPP
-#define SPACE_HPP
+#ifndef ROOM_HPP
+#define ROOM_HPP
 
 #include <iostream>
 #include <fstream>
@@ -27,7 +27,7 @@ using std::string;
   @brief 
   
 .............................................. */
-class Space
+class Room
 {
 protected:
   static const int MAX_HEIGHT = 28;
@@ -41,11 +41,11 @@ protected:
 
 public:
   // CONSTRUCTOR/DESTRUCTORS
-  Space();
-  ~Space();
+  Room();
+  ~Room();
 
   // SETTERS
-  void setWalls(string spaceFile);
+  void setWalls(string roomFile);
   void setItems();
   void setItem();
   void setType(string type);

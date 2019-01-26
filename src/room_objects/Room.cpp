@@ -1,31 +1,31 @@
 /* ..............................................
-  @file Space.cpp
+  @file Room.cpp
   @author Tucker Walker (tuckerdwalker@gmail.com)
   @brief 
   @date 2019-01-20
   
   
 .............................................. */
-#include "Space.h"
+#include "Room.h"
 
 /* ..............................................
   CONSTRUCTORS/DECONSTRUCTORS 
   
 .............................................. */
 
-Space::Space()
+Room::Room()
 {
-    this->setWalls("spaces/generic.space");
+    this->setWalls("rooms/generic.room");
     for (int i = 0; i < MAX_ITEMS; i++)
     {
         this->items[i] = NULL;
     }
     this->type = "Generic";
-    this->name = "Generic Space";
-    this->description = "A generic space";
+    this->name = "Generic Room";
+    this->description = "A generic room";
 }
 
-Space::~Space()
+Room::~Room()
 {
     
 }
@@ -35,13 +35,13 @@ Space::~Space()
   
 .............................................. */
 
-void Space::setWalls(string spaceFile)
+void Room::setWalls(string roomFile)
 {
     int width = 0;
     int height = 0;
     char c;
     fstream file;
-    file.open(spaceFile,fstream::in);
+    file.open(roomFile,fstream::in);
     if (file.is_open())
     {
         file.get(c);
@@ -63,27 +63,27 @@ void Space::setWalls(string spaceFile)
     file.close();
 }
 
-void Space::setItems()
+void Room::setItems()
 {
     //TODO: setItems()
 }
 
-void Space::setItem()
+void Room::setItem()
 {
     //TODO: setItem()
 }
 
-void Space::setType(string type)
+void Room::setType(string type)
 {
     this->type = type;
 }
 
-void Space::setName(string name)
+void Room::setName(string name)
 {
     this->name = name;
 }
 
-void Space::setDescription(string description)
+void Room::setDescription(string description)
 {
     this->description = description;
 }
@@ -93,42 +93,42 @@ void Space::setDescription(string description)
   
 .............................................. */
 
-int Space::getMaxHeight()
+int Room::getMaxHeight()
 {
     return this->MAX_HEIGHT;
 }
 
-int Space::getMaxWidth()
+int Room::getMaxWidth()
 {
     return this->MAX_WIDTH;
 }
 
-int Space::getMaxItems()
+int Room::getMaxItems()
 {
     return this->MAX_ITEMS;
 }
 
-char Space::getWall(int height, int width)
+char Room::getWall(int height, int width)
 {
     return this->walls[height][width];
 }
 
-Item** Space::getItems()
+Item** Room::getItems()
 {
     return this->items;
 }
 
-string Space::getType()
+string Room::getType()
 {
     return this->type;
 }
 
-string Space::getName()
+string Room::getName()
 {
     return this->name;
 }
 
-string Space::getDescription()
+string Room::getDescription()
 {
     return this->description;
 }

@@ -11,10 +11,10 @@
 #define GAME_HPP
 #include <ncurses.h>
 #include <string>
-#include "Space.h"
+#include "Room.h"
 #include "Player.h"
 
-#define MAX_SPACES 10
+#define MAX_ROOMS 10
 
 #define GRASS ' '
 #define EMPTY ' '
@@ -36,7 +36,7 @@ private:
   bool isComplete;
   char userInput;
   Player player;
-  Space spaces[MAX_SPACES];
+  Room rooms[MAX_ROOMS];
   WINDOW* statusWindow;
   WINDOW* worldWindow;
   WINDOW* inventoryWindow;
@@ -73,7 +73,7 @@ public:
 
   // SETTERS
   void setIsComplete(bool isComplete);
-  void setSpace(Space space, int spaceIndex);
+  void setRoom(Room room, int roomIndex);
   void setNarrative(string narrative);
   void setCurrentWindow(WINDOW* window);
 
@@ -81,7 +81,7 @@ public:
   bool getIsComplete();
   bool isMoveAllowed(int y, int x);
   char getUserInput();
-  Space getSpace(int spaceIndex);
+  Room getRoom(int roomIndex);
   string getNarrative();
   WINDOW* getCurrentWindow();
 
@@ -102,7 +102,7 @@ public:
   void renderDev();
   void renderNarrative();
   void renderMap();
-  void renderSpace();
+  void renderRoom();
   void renderItem();
   void renderPlayer();
   void mvwaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR); 
