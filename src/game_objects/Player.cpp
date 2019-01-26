@@ -7,7 +7,6 @@
   
 .............................................. */
 #include "Player.h"
-#include <string.h>	// for strlen
 
 /* ..............................................
   CONSTRUCTORS / DESTRUCTORS
@@ -23,6 +22,7 @@ Player::Player() : Object(-1, -1, COLOR_BLACK, '^', "player_object", "adventurer
 		this->inventory[itemSlot] = NULL;
 	}
 	this->isMoved = false;
+	setSelectedItemIndex(0);
 }
 
 Player::~Player()
@@ -66,6 +66,11 @@ void Player::setInventory(Item *inventory[MAX_INVENTORY], int numItems)
 void Player::setInventoryItem(Item *item, int itemSlot)
 {
 	this->inventory[itemSlot] = item;
+}
+
+void Player::setSelectedItemIndex(int itemIndex)
+{
+	this->selectedItemIndex = itemIndex;
 }
 
 void Player::setIsMoved(bool isMoved)
@@ -117,6 +122,11 @@ Item **Player::getInventory()
 Item *Player::getInventoryItem(int itemSlot)
 {
 	return this->inventory[itemSlot];
+}
+
+int Player::getSelectedItemIndex()
+{
+	return this->selectedItemIndex;
 }
 
 bool Player::getIsMoved()

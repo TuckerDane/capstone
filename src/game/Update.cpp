@@ -87,7 +87,7 @@ void Game::update()
     case 'W':
         if (this->getCurrentWindow() == this->inventoryWindow)
         {
-            highlight--;
+            player.setSelectedItemIndex(player.getSelectedItemIndex() - 1);
         }
         else
         {
@@ -103,7 +103,7 @@ void Game::update()
     case 'S':
         if (this->getCurrentWindow() == this->inventoryWindow)
         {
-            highlight++;
+            player.setSelectedItemIndex(player.getSelectedItemIndex() + 1);
         }
         else
         {
@@ -161,9 +161,5 @@ void Game::update()
     case 'Q':
         setIsComplete(true);
         break;
-    // //if current window is inventory....
-    // case 'w':
-    //     if(this->currentWindow == this->inventoryWindow)
-    //         highlight mode ==true
     }
 }

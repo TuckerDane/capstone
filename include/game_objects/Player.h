@@ -37,6 +37,7 @@ private:
 	int currentSpace;								// the current space the player is in
 	Item *inventory[MAX_INVENTORY]; // an inventory capable of carrying 10 Items
 	bool isMoved;										// true of the player moved, false if the player did not move
+	int selectedItemIndex;
 
 public:
 	// CONSTRUCTOR/DESTRUCTORS
@@ -50,6 +51,7 @@ public:
 	void setCurrentSpace(int curentSpace);
 	void setInventory(Item *inventory[MAX_INVENTORY], int numItems);
 	void setInventoryItem(Item *item, int itemSlot);
+	void setSelectedItemIndex(int itemIndex);
 	void setIsMoved(bool isMoved);
 
 	// GETTERS
@@ -57,6 +59,7 @@ public:
 	int getCurrentCarryWeight();
 	int getNumItems();
 	int getCurrentSpace();
+	int getSelectedItemIndex();
 	Item **getInventory();								// returns the entire player inventory
 	Item *getInventoryItem(int itemSlot); // returns a specific inventory item
 	bool getIsMoved();

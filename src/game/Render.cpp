@@ -59,20 +59,16 @@ void Game::renderInventory()
   wbkgd(this->inventoryWindow, COLOR_PAIR(MENU_PAIR));
 
   mvwprintw(this->inventoryWindow, 2, 2, "INVENTORY");
-  //mvwprintw(this->inventoryWindow, 3, 2, "---------");
-
 
   Item** inventory = player.getInventory();
-  //int numItems = 10; //FOR LOOP TESTING. USUALLY: player.getNumItems();
 
   for (int i=0; i < player.getNumItems(); i++)
   {
-    if(i == highlight)
+    if(i == player.getSelectedItemIndex())
     {
       wattron(this->inventoryWindow, A_REVERSE);
     }
-    //mvwprintw(this->inventoryWindow, i + 3, 2, "inventoryStuffGoesHere"); // FOR TESTING
-    string line =  i + " " + inventory[i]->getName() + " " + inventory[i]->getDescription();
+    string line =  i + " " + inventory[i]->getName() + " (" + std::to_string(inventory[i]->getWeight()) + "): " + inventory[i]->getDescription();
     mvwprintw(this->inventoryWindow, i + 3, 2, line.c_str()); // ADD ITEM WEIGHT LATER
 
     wattroff(this->inventoryWindow, A_REVERSE);
