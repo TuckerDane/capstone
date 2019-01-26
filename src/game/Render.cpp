@@ -57,7 +57,27 @@ void Game::renderInventory()
 {
   box(this->inventoryWindow, 0, 0);
   wbkgd(this->inventoryWindow, COLOR_PAIR(MENU_PAIR));
-  player.printInventory(this->inventoryWindow);
+
+  mvwprintw(this->inventoryWindow, 2, 2, "INVENTORY");
+  //mvwprintw(this->inventoryWindow, 3, 2, "---------");
+
+
+  Item** inventory = player.getInventory();
+  //int numItems = 10; //FOR LOOP TESTING. USUALLY: player.getNumItems();
+
+  for (int i=0; i < player.getNumItems(); i++)
+  {
+    if(i == highlight)
+    {
+      wattron(this->inventoryWindow, A_REVERSE);
+    }
+    //mvwprintw(this->inventoryWindow, i + 3, 2, "inventoryStuffGoesHere"); // FOR TESTING
+    string line =  i + " " + inventory[i]->getName() + " " + inventory[i]->getDescription();
+    mvwprintw(this->inventoryWindow, i + 3, 2, line.c_str()); // ADD ITEM WEIGHT LATER
+
+    wattroff(this->inventoryWindow, A_REVERSE);
+  }
+
   wrefresh(this->inventoryWindow);
 }
 

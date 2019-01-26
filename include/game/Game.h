@@ -93,6 +93,8 @@ public:
     
   .............................................. */   
 
+  int highlight = 0;
+
   // ACTIONS
   void render();
   void renderCurrentWindow();

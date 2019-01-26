@@ -85,19 +85,33 @@ void Game::update()
     case KEY_UP:
     case 'w':
     case 'W':
-        player.setSymbol('^');
-        if ((player.getYPos() > 0) && isMoveAllowed(player.getYPos() - 1, player.getXPos()))
+        if (this->getCurrentWindow() == this->inventoryWindow)
         {
-            player.move('w');
+            highlight--;
+        }
+        else
+        {
+            player.setSymbol('^');
+            if ((player.getYPos() > 0) && isMoveAllowed(player.getYPos() - 1, player.getXPos()))
+            {
+                player.move('w');
+            }
         }
         break;
     case KEY_DOWN:
     case 's':
     case 'S':
-        player.setSymbol('v');
-        if ((player.getYPos() < LINES - 1) && isMoveAllowed(player.getYPos() + 1, player.getXPos()))
+        if (this->getCurrentWindow() == this->inventoryWindow)
         {
-            player.move('s');
+            highlight++;
+        }
+        else
+        {
+            player.setSymbol('v');
+            if ((player.getYPos() < LINES - 1) && isMoveAllowed(player.getYPos() + 1, player.getXPos()))
+            {
+                player.move('s');
+            }
         }
         break;
     case KEY_LEFT:
@@ -124,15 +138,11 @@ void Game::update()
         {
             this->setCurrentWindow(this->inventoryWindow);
             this->setNarrative("switched to inventory window!");
-            renderNarrative();
-            renderInventory();
         }
         else if (this->getCurrentWindow() == this->inventoryWindow)
         {
             this->setCurrentWindow(this->worldWindow);
             this->setNarrative("switched to world window!    ");
-            renderWorld();
-            renderNarrative();
         }
         break;
     case '`':
@@ -151,5 +161,9 @@ void Game::update()
     case 'Q':
         setIsComplete(true);
         break;
+    // //if current window is inventory....
+    // case 'w':
+    //     if(this->currentWindow == this->inventoryWindow)
+    //         highlight mode ==true
     }
 }
