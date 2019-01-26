@@ -25,11 +25,11 @@ Game::Game()
   curs_set(0);
 
   /* initialize windows */
-  this->statusWindow = newwin(STATUS_WINDOW_HEIGHT, WINDOW_WIDTH, 0, 0);
-  this->worldWindow = newwin(WORLD_WINDOW_HEIGHT, WINDOW_WIDTH, STATUS_WINDOW_HEIGHT, 0);
-  this->inventoryWindow = newwin(WORLD_WINDOW_HEIGHT, WINDOW_WIDTH, STATUS_WINDOW_HEIGHT, 0);
-  this->developerWindow = newwin(WORLD_WINDOW_HEIGHT, WINDOW_WIDTH, STATUS_WINDOW_HEIGHT, 0);
-  this->narrativeWindow = newwin(NARRATIVE_WINDOW_HEIGHT, WINDOW_WIDTH, STATUS_WINDOW_HEIGHT+WORLD_WINDOW_HEIGHT, 0);
+  statusWindow = newwin(STATUS_WINDOW_HEIGHT, WINDOW_WIDTH, 0, 0);
+  worldWindow = newwin(WORLD_WINDOW_HEIGHT, WINDOW_WIDTH, STATUS_WINDOW_HEIGHT, 0);
+  inventoryWindow = newwin(WORLD_WINDOW_HEIGHT, WINDOW_WIDTH, STATUS_WINDOW_HEIGHT, 0);
+  developerWindow = newwin(WORLD_WINDOW_HEIGHT, WINDOW_WIDTH, STATUS_WINDOW_HEIGHT, 0);
+  narrativeWindow = newwin(NARRATIVE_WINDOW_HEIGHT, WINDOW_WIDTH, STATUS_WINDOW_HEIGHT + WORLD_WINDOW_HEIGHT, 0);
   refresh();
 
   /* initialize colors */
@@ -45,21 +45,29 @@ Game::Game()
   clear();
 
   /* initialize Game class variables */
-  this->isComplete = false;
-  this->player.setXPos(5);
-  this->player.setYPos(5);
-  // TODO: init rooms
-  this->narrative = "default narrative";
-  this->currentWindow = this->worldWindow;
+  isComplete = false;
+  player.setCurrentRoom(0);
+  player.setXPos(5);
+  player.setYPos(5);
+  player.setInventoryItem(new Key("Yellow Key", 1), 0);
+  player.setInventoryItem(new Key("Blue Key", 2), 1);
+  player.setNumItems(2);
+
+  /* initialize Rooms */
+
+  // room 0
+  rooms[0] = new Room("rooms/generic.room");
+  rooms[0]->setDoor(new Door(5, 23, 1, 0, 1, true), 0);
+  rooms[0]->setDoor(new Door(15, 23, 1, 0, 2, true), 1);
+
+  narrative = "default narrative";
+  currentWindow = worldWindow;
 }
 
 Game::~Game()
 {
   /* Destroy ncurses */
   endwin();
-
-  /* Destroy player */
-  player.~Player();
 }
 
 /* ..............................................

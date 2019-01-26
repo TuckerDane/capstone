@@ -20,7 +20,6 @@ Item::Item() : Object(-1, -1, COLOR_BLACK, '?', "item_object", "item", "item_dec
 
 Item::~Item()
 {
-    
 }
 
 /* ..............................................
@@ -41,4 +40,19 @@ void Item::setWeight(int weight)
 int Item::getWeight()
 {
   return this->weight;
+}
+
+/* ..............................................
+  ACTIONS
+  
+.............................................. */
+
+bool Item::use()
+{
+  return false;
+}
+
+bool Item::use(Door *door)
+{
+  return false;
 }

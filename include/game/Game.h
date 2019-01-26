@@ -13,6 +13,8 @@
 #include <string>
 #include "Room.h"
 #include "Player.h"
+#include "Door.h"
+#include "Key.h"
 
 #define MAX_ROOMS 10
 
@@ -36,14 +38,14 @@ private:
   bool isComplete;
   char userInput;
   Player player;
-  Room rooms[MAX_ROOMS];
-  WINDOW* statusWindow;
-  WINDOW* worldWindow;
-  WINDOW* inventoryWindow;
-  WINDOW* narrativeWindow;
+  Room *rooms[MAX_ROOMS];
+  WINDOW *statusWindow;
+  WINDOW *worldWindow;
+  WINDOW *inventoryWindow;
+  WINDOW *narrativeWindow;
   string narrative;
-  WINDOW* developerWindow;
-  WINDOW* currentWindow;
+  WINDOW *developerWindow;
+  WINDOW *currentWindow;
 
 public:
   /* ..............................................
@@ -73,17 +75,17 @@ public:
 
   // SETTERS
   void setIsComplete(bool isComplete);
-  void setRoom(Room room, int roomIndex);
+  void setRoom(Room *room, int roomIndex);
   void setNarrative(string narrative);
-  void setCurrentWindow(WINDOW* window);
+  void setCurrentWindow(WINDOW *window);
 
   // GETTERS
   bool getIsComplete();
   bool isMoveAllowed(int y, int x);
   char getUserInput();
-  Room getRoom(int roomIndex);
+  Room *getRoom(int roomIndex);
   string getNarrative();
-  WINDOW* getCurrentWindow();
+  WINDOW *getCurrentWindow();
 
   // ACTIONS
   void update();
@@ -91,7 +93,7 @@ public:
   /* ..............................................
     RENDER.CPP
     
-  .............................................. */   
+  .............................................. */
 
   // ACTIONS
   void render();
@@ -101,11 +103,12 @@ public:
   void renderInventory();
   void renderDev();
   void renderNarrative();
-  void renderMap();
   void renderRoom();
-  void renderItem();
+  void renderWalls();
+  void renderDoors();
+  void renderItems();
   void renderPlayer();
-  void mvwaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR); 
+  void mvwaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR);
 };
 
 #endif

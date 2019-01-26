@@ -19,7 +19,7 @@ void Game::setIsComplete(bool isComplete)
     this->isComplete = isComplete;
 }
 
-void Game::setRoom(Room room, int roomIndex)
+void Game::setRoom(Room *room, int roomIndex)
 {
     this->rooms[roomIndex] = room;
 }
@@ -29,7 +29,7 @@ void Game::setNarrative(string narrative)
     this->narrative = narrative;
 }
 
-void Game::setCurrentWindow(WINDOW* window)
+void Game::setCurrentWindow(WINDOW *window)
 {
     this->currentWindow = window;
 }
@@ -58,7 +58,7 @@ char Game::getUserInput()
     return this->userInput;
 }
 
-Room Game::getRoom(int roomIndex)
+Room *Game::getRoom(int roomIndex)
 {
     return this->rooms[roomIndex];
 }
@@ -68,7 +68,7 @@ string Game::getNarrative()
     return this->narrative;
 }
 
-WINDOW* Game::getCurrentWindow()
+WINDOW *Game::getCurrentWindow()
 {
     return this->currentWindow;
 }
@@ -87,7 +87,18 @@ void Game::update()
     case 'W':
         if (this->getCurrentWindow() == this->inventoryWindow)
         {
-            player.setSelectedItemIndex(player.getSelectedItemIndex() - 1);
+            if(player.getSelectedItemIndex() != 0)
+            {
+                player.setSelectedItemIndex(player.getSelectedItemIndex() - 1);
+            }  
+            if (player.getInventoryItem(player.getSelectedItemIndex()) != NULL)
+            {
+                narrative = player.getInventoryItem(player.getSelectedItemIndex())->getDescription();
+            }
+            else
+            {
+                narrative = "an empty item slot";
+            }
         }
         else
         {
@@ -103,7 +114,18 @@ void Game::update()
     case 'S':
         if (this->getCurrentWindow() == this->inventoryWindow)
         {
-            player.setSelectedItemIndex(player.getSelectedItemIndex() + 1);
+            if(player.getSelectedItemIndex() != player.getMaxInventory() -1)
+            {
+                player.setSelectedItemIndex(player.getSelectedItemIndex() + 1);
+            }
+            if (player.getInventoryItem(player.getSelectedItemIndex()) != NULL)
+            {
+                narrative = player.getInventoryItem(player.getSelectedItemIndex())->getDescription();
+            }
+            else
+            {
+                narrative = "an empty item slot";
+            }
         }
         else
         {
@@ -156,7 +178,26 @@ void Game::update()
         {
             this->setCurrentWindow(this->worldWindow);
         }
-    break;
+        break;
+    case 'e':
+    case 'E':
+        if ((player.getXPos() < COLS - 1) && isMoveAllowed(player.getYPos(), player.getXPos() + 1))
+        {
+            if(player.getInventoryItem(player.getSelectedItemIndex()) == NULL)
+            {
+                narrative = "you do not have an item selected to use";
+            }
+            else
+            {
+                if(player.getInventoryItem(player.getSelectedItemIndex())->getType() == "item_object")
+                {
+                    player.getInventoryItem(player.getSelectedItemIndex())->use(rooms[0]->getDoor(0));
+                    player.getInventoryItem(player.getSelectedItemIndex())->use(rooms[0]->getDoor(1));
+                    narrative = "you used " + player.getInventoryItem(player.getSelectedItemIndex())->getName();
+                }
+            }
+        }
+        break;
     case 'q':
     case 'Q':
         setIsComplete(true);
