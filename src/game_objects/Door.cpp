@@ -21,10 +21,10 @@ Door::Door() : Object(-1, -1, COLOR_BLACK, '#', "door_object", "door", "Door: an
     this->locked = false;
 }
 
-Door::Door(int xPos, int yPos, int nextRoom, int nextDoor, int password, bool locked) : Object()
+Door::Door(int yPosition, int xPos, int nextRoom, int nextDoor, int password, bool locked) : Object()
 {
-    this->xPos = xPos;
     this->yPos = yPos;
+    this->xPos = xPos;
     this->nextRoom = nextRoom;
     this->nextDoor = nextDoor;
     this->password = password;

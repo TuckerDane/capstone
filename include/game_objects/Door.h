@@ -27,7 +27,7 @@ private:
 public:
   // CONSTRUCTORS/DECONSTRUCTORS
   Door(); // default constructor for Door
-  Door(int xPos, int yPos, int nextRoom, int nextDoor, int password, bool locked);
+  Door(int yPosition, int xPos, int nextRoom, int nextDoor, int password, bool locked);
   ~Door(); // deconstructor for Door
 
   // SETTERS
