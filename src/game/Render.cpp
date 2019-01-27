@@ -42,7 +42,7 @@ void Game::renderStatus()
 {
   werase(this->statusWindow);
   box(this->statusWindow, 0, 0);
-  wbkgd(this->statusWindow, COLOR_PAIR(MENU_PAIR));
+  wbkgd(this->statusWindow, COLOR_PAIR(BLACK_ON_BLUE));
   mvwprintw(this->statusWindow, 1, 2, "Item");
   mvwprintw(this->statusWindow, 2, 2, "----");
   if(player.getInventoryItem(player.getSelectedItemIndex()) == NULL)
@@ -59,7 +59,7 @@ void Game::renderStatus()
 void Game::renderWorld()
 {
   box(this->worldWindow, 0, 0);
-  wbkgd(this->worldWindow, COLOR_PAIR(GRASS_PAIR));
+  wbkgd(this->worldWindow, COLOR_PAIR(BLACK_ON_GREEN));
   renderRoom();
   renderPlayer();
   wrefresh(this->worldWindow);
@@ -69,7 +69,7 @@ void Game::renderInventory()
 {
   werase(this->inventoryWindow);
   box(this->inventoryWindow, 0, 0);
-  wbkgd(this->inventoryWindow, COLOR_PAIR(MENU_PAIR));
+  wbkgd(this->inventoryWindow, COLOR_PAIR(BLACK_ON_BLUE));
 
   mvwprintw(this->inventoryWindow, 1, 2, "INVENTORY");
   mvwprintw(this->inventoryWindow, 2, 2, "================================================================================================================================================");
@@ -103,7 +103,7 @@ void Game::renderDev()
 {
   werase(this->developerWindow);
   box(this->developerWindow, 0, 0);
-  wbkgd(this->developerWindow, COLOR_PAIR(DUNGEON_PAIR));
+  wbkgd(this->developerWindow, COLOR_PAIR(RED_ON_BLACK));
   wrefresh(this->developerWindow);
 }
 
@@ -111,7 +111,7 @@ void Game::renderNarrative()
 {
   werase(this->narrativeWindow);
   box(this->narrativeWindow, 0, 0);
-  wbkgd(this->narrativeWindow, COLOR_PAIR(MENU_PAIR));
+  wbkgd(this->narrativeWindow, COLOR_PAIR(BLACK_ON_BLUE));
   mvwprintw(this->narrativeWindow, 2, 2, this->getNarrative().c_str());
   wrefresh(this->narrativeWindow);
 }
@@ -132,7 +132,7 @@ void Game::renderWalls()
       char c = this->rooms[this->player.getCurrentRoom()]->getWall(height, width);
       if (c == '+' || c == '-' || c == '|' || c == ' ' || c == '\\' || c == '/')
       {
-        mvwaddchWithColor(height + 1, width + 1, c, DUNGEON_PAIR);
+        mvwaddchWithColor(height + 1, width + 1, c, WHITE_ON_BLACK);
       }
     }
   }
@@ -146,7 +146,34 @@ void Game::renderDoors()
   {
     if (doors[i] != NULL)
     {
-      mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), DUNGEON_PAIR);
+      if (doors[i]->getColor() == 1)
+      {
+        mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), RED_ON_BLACK);
+      }
+      else if (doors[i]->getColor() == 2)
+      {
+        mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), GREEN_ON_BLACK);
+      }
+      else if (doors[i]->getColor() == 3)
+      {
+        mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), YELLOW_ON_BLACK);
+      }
+      else if (doors[i]->getColor() == 4)
+      {
+        mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), BLUE_ON_BLACK);
+      }
+      else if (doors[i]->getColor() == 5)
+      {
+        mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), MAGENTA_ON_BLACK);
+      }
+      else if (doors[i]->getColor() == 6)
+      {
+        mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), CYAN_ON_BLACK);
+      }
+      else
+      {
+        mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), WHITE_ON_BLACK);
+      }
     }
   }
 }
@@ -158,7 +185,7 @@ void Game::renderItems()
 
 void Game::renderPlayer()
 {
-  mvwaddchWithColor(player.getYPos(), player.getXPos(), player.getSymbol(), PLAYER_PAIR); // render the player
+  mvwaddchWithColor(player.getYPos(), player.getXPos(), player.getSymbol(), CYAN_ON_BLACK); // render the player
 }
 
 void Game::mvwaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR)

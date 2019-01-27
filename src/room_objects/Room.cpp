@@ -27,6 +27,7 @@ Room::Room()
     this->type = "Room";
     this->name = "Generic Room";
     this->description = "A generic room";
+    this->tileColor = 0;
 }
 
 Room::Room(string roomFile)
@@ -126,6 +127,11 @@ void Room::setDoor(Door *door, int doorIndex)
     doors[doorIndex] = door;
 }
 
+void Room::setTileColor(int tileColor)
+{
+    this->tileColor = COLOR_BLACK;
+}
+
 /* ..............................................
   GETTERS 
   
@@ -184,4 +190,9 @@ Door *Room::getDoor(int doorIndex)
 Door **Room::getDoors()
 {
     return doors;
+}
+
+int Room::getTileColor()
+{
+    return tileColor;
 }

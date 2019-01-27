@@ -23,6 +23,14 @@ using std::string;
   GLOBALS
   
 .............................................. */
+#define COLOR_BLACK 0
+#define COLOR_RED 1
+#define COLOR_GREEN 2
+#define COLOR_YELLOW 3
+#define COLOR_BLUE 4
+#define COLOR_MAGENTA 5
+#define COLOR_CYAN 6
+#define COLOR_WHITE 7
 
 /* ..............................................
   @brief 
@@ -41,6 +49,7 @@ protected:
   string type;
   string name;
   string description;
+  int tileColor;
 
 public:
   // CONSTRUCTOR/DESTRUCTORS
@@ -56,6 +65,7 @@ public:
   void setName(string name);
   void setDescription(string description);
   void setDoor(Door *door, int doorIndex);
+  void setTileColor(int color);
 
   // GETTERS
   int getMaxHeight();
@@ -69,6 +79,7 @@ public:
   string getDescription();
   Door *getDoor(int doorIndex);
   Door **getDoors();
+  int getTileColor();
 };
 
 #endif

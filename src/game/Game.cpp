@@ -34,12 +34,7 @@ Game::Game()
 
   /* initialize colors */
   start_color();
-
-  init_pair(GRASS_PAIR, COLOR_BLACK, COLOR_GREEN);
-  init_pair(EMPTY_PAIR, COLOR_WHITE, COLOR_BLACK);
-  init_pair(MENU_PAIR, COLOR_BLACK, COLOR_BLUE);
-  init_pair(DUNGEON_PAIR, COLOR_WHITE, COLOR_BLACK);
-  init_pair(PLAYER_PAIR, COLOR_CYAN, COLOR_BLACK);
+  initColorPairs();
 
   /* clear the screen */
   clear();
@@ -57,8 +52,8 @@ Game::Game()
 
   // room 0
   rooms[0] = new Room("rooms/generic.room");
-  rooms[0]->setDoor(new Door(5, 23, 1, 0, 1, true), 0);
-  rooms[0]->setDoor(new Door(15, 23, 1, 0, 2, true), 1);
+  rooms[0]->setDoor(new Door(5, 23, 1, 0, 1, true, COLOR_YELLOW), 0);
+  rooms[0]->setDoor(new Door(15, 23, 1, 0, 2, true, COLOR_BLUE), 1);
 
   narrative = "default narrative";
   currentWindow = worldWindow;

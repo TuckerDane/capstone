@@ -21,12 +21,6 @@
 #define GRASS ' '
 #define EMPTY ' '
 
-#define GRASS_PAIR 1
-#define EMPTY_PAIR 2
-#define MENU_PAIR 3
-#define DUNGEON_PAIR 4
-#define PLAYER_PAIR 5
-
 #define WINDOW_WIDTH 150
 #define WORLD_WINDOW_HEIGHT 30
 #define NARRATIVE_WINDOW_HEIGHT 5
@@ -96,6 +90,7 @@ public:
   .............................................. */
 
   // ACTIONS
+  void initColorPairs();
   void render();
   void renderCurrentWindow();
   void renderStatus();
