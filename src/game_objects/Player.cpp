@@ -27,6 +27,13 @@ Player::Player() : Object(-1, -1, COLOR_BLACK, '^', "player_object", "adventurer
 
 Player::~Player()
 {
+	for (int i = 0; i < MAX_INVENTORY; i++)
+	{
+		if (inventory[i] != NULL)
+		{
+			delete inventory[i];
+		}
+	}
 }
 
 /* ..............................................
@@ -101,6 +108,11 @@ int Player::getNumItems()
 int Player::getCurrentRoom()
 {
 	return this->currentRoom;
+}
+
+int Player::getMaxInventory()
+{
+	return this->MAX_INVENTORY;
 }
 
 /* ..............................................

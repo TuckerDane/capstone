@@ -19,7 +19,7 @@ void Game::setIsComplete(bool isComplete)
     this->isComplete = isComplete;
 }
 
-void Game::setRoom(Room room, int roomIndex)
+void Game::setRoom(Room *room, int roomIndex)
 {
     this->rooms[roomIndex] = room;
 }
@@ -29,7 +29,7 @@ void Game::setNarrative(string narrative)
     this->narrative = narrative;
 }
 
-void Game::setCurrentWindow(WINDOW* window)
+void Game::setCurrentWindow(WINDOW *window)
 {
     this->currentWindow = window;
 }
@@ -53,12 +53,12 @@ bool Game::isMoveAllowed(int y, int x)
     return (((testch & A_CHARTEXT) == GRASS) || ((testch & A_CHARTEXT) == EMPTY));
 }
 
-char Game::getUserInput()
+unsigned int Game::getUserInput()
 {
     return this->userInput;
 }
 
-Room Game::getRoom(int roomIndex)
+Room *Game::getRoom(int roomIndex)
 {
     return this->rooms[roomIndex];
 }
@@ -68,7 +68,7 @@ string Game::getNarrative()
     return this->narrative;
 }
 
-WINDOW* Game::getCurrentWindow()
+WINDOW *Game::getCurrentWindow()
 {
     return this->currentWindow;
 }
@@ -80,14 +80,25 @@ WINDOW* Game::getCurrentWindow()
 void Game::update()
 {
     player.setIsMoved(false);
-    switch ((unsigned int)this->userInput)
+    switch (this->userInput)
     {
     case KEY_UP:
     case 'w':
     case 'W':
         if (this->getCurrentWindow() == this->inventoryWindow)
         {
-            player.setSelectedItemIndex(player.getSelectedItemIndex() - 1);
+            if(player.getSelectedItemIndex() != 0)
+            {
+                player.setSelectedItemIndex(player.getSelectedItemIndex() - 1);
+            }  
+            if (player.getInventoryItem(player.getSelectedItemIndex()) != NULL)
+            {
+                narrative = player.getInventoryItem(player.getSelectedItemIndex())->getDescription();
+            }
+            else
+            {
+                narrative = "an empty item slot";
+            }
         }
         else
         {
@@ -95,6 +106,7 @@ void Game::update()
             if ((player.getYPos() > 0) && isMoveAllowed(player.getYPos() - 1, player.getXPos()))
             {
                 player.move('w');
+                resolveDoorMovement();
             }
         }
         break;
@@ -103,7 +115,18 @@ void Game::update()
     case 'S':
         if (this->getCurrentWindow() == this->inventoryWindow)
         {
-            player.setSelectedItemIndex(player.getSelectedItemIndex() + 1);
+            if(player.getSelectedItemIndex() != player.getMaxInventory() -1)
+            {
+                player.setSelectedItemIndex(player.getSelectedItemIndex() + 1);
+            }
+            if (player.getInventoryItem(player.getSelectedItemIndex()) != NULL)
+            {
+                narrative = player.getInventoryItem(player.getSelectedItemIndex())->getDescription();
+            }
+            else
+            {
+                narrative = "an empty item slot";
+            }
         }
         else
         {
@@ -111,6 +134,7 @@ void Game::update()
             if ((player.getYPos() < LINES - 1) && isMoveAllowed(player.getYPos() + 1, player.getXPos()))
             {
                 player.move('s');
+                resolveDoorMovement();
             }
         }
         break;
@@ -121,6 +145,7 @@ void Game::update()
         if ((player.getXPos() > 0) && isMoveAllowed(player.getYPos(), player.getXPos() - 1))
         {
             player.move('a');
+            resolveDoorMovement();
         }
         break;
     case KEY_RIGHT:
@@ -130,6 +155,7 @@ void Game::update()
         if ((player.getXPos() < COLS - 1) && isMoveAllowed(player.getYPos(), player.getXPos() + 1))
         {
             player.move('d');
+            resolveDoorMovement();
         }
         break;
     case 'i':
@@ -156,10 +182,50 @@ void Game::update()
         {
             this->setCurrentWindow(this->worldWindow);
         }
-    break;
+        break;
+    case 'e':
+    case 'E':
+        if(player.getInventoryItem(player.getSelectedItemIndex()) == NULL)
+        {
+            narrative = "you do not have an item selected to use";
+        }
+        else
+        {
+            if(player.getInventoryItem(player.getSelectedItemIndex())->getType() == "key")
+            {
+                bool result = player.getInventoryItem(player.getSelectedItemIndex())->use(player.getYPos(), player.getXPos(), getRoom(player.getCurrentRoom())->getDoors());
+                if (result)
+                {
+                    narrative = "you used the " + player.getInventoryItem(player.getSelectedItemIndex())->getName();
+                }
+                else
+                {
+                    narrative = "the " + player.getInventoryItem(player.getSelectedItemIndex())->getName() +" does not work here...";
+                }                        
+            }
+        }
+        break;
     case 'q':
     case 'Q':
         setIsComplete(true);
         break;
+    }
+}
+
+void Game::resolveDoorMovement()
+{
+    // for possible doors in room
+    Door** doors = rooms[player.getCurrentRoom()]->getDoors();
+    for (int i=0; i<4; i++)
+    {
+        if (doors[i] != NULL)
+        {
+            if (player.getXPos() == doors[i]->getXPos() && player.getYPos() == doors[i]->getYPos() && doors[i]->getNextRoom() != -1)
+            {
+                player.setCurrentRoom(doors[i]->getNextRoom());
+                player.setYPos(doors[i]->getNextYPos());
+                player.setXPos(doors[i]->getNextXPos());
+            }
+        }
     }
 }
