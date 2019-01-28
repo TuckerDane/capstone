@@ -105,6 +105,17 @@ void Game::renderDev()
   werase(this->developerWindow);
   box(this->developerWindow, 0, 0);
   wbkgd(this->developerWindow, COLOR_PAIR(RED_ON_BLACK));
+  int startingLine = 0;
+  int lines = devConsole.getNumLogLines();
+  int maxHeight = devConsole.getMaxHeight();
+  if (lines > maxHeight)
+  {
+    startingLine = lines - maxHeight;
+  }
+  for (int height = 0; height < maxHeight; height++)
+  {
+    mvwprintw(this->developerWindow, height+1, 2, devConsole.getLogLine(startingLine+height).c_str());
+  }
   wrefresh(this->developerWindow);
 }
 

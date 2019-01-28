@@ -11,6 +11,7 @@
 #define GAME_HPP
 #include <ncurses.h>
 #include <string>
+#include "Console.h"
 #include "Room.h"
 #include "Player.h"
 #include "Door.h"
@@ -32,6 +33,7 @@ private:
   bool isComplete;
   char userInput;
   Player player;
+  Console devConsole;
   Room *rooms[MAX_ROOMS];
   WINDOW *statusWindow;
   WINDOW *worldWindow;
