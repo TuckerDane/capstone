@@ -8,6 +8,7 @@
 .............................................. */
 
 #include "Render.h"
+#include <string>
 
 /* ..............................................
   ACTIONS
@@ -53,6 +54,14 @@ void Game::renderStatus()
   {
     mvwprintw(this->statusWindow, 3, 2, player.getInventoryItem(player.getSelectedItemIndex())->getName().c_str());
   }
+  
+  string hp;
+  hp = std::to_string(player.getHP());
+  mvwprintw(this->statusWindow, 1, 22, "HP");
+  mvwprintw(this->statusWindow, 2, 20, "------");
+  mvwprintw(this->statusWindow, 3, 22, hp.c_str());
+
+
   wrefresh(this->statusWindow);
 }
 
@@ -132,7 +141,7 @@ void Game::renderRoom()
 {
   renderWalls();
   renderDoors();
-  //TODO: renderItems();
+  renderItems();
 }
 
 void Game::renderWalls()
@@ -192,7 +201,43 @@ void Game::renderDoors()
 
 void Game::renderItems()
 {
-  //TODO: renderItems
+  Item **items = rooms[player.getCurrentRoom()]->getItems();
+  
+  for(int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
+  {
+    if (items[i] != NULL)
+    {
+     															//insert if color is black? same for doors, hidden doors or items? Lamp/light stretch goal 
+      if (items[i]->getColor() == 1) //if color is red
+      {
+        mvwaddchWithColor(items[i]->getYPos(), items[i]->getXPos(), items[i]->getSymbol(), RED_ON_BLACK);
+      }
+      else if (items[i]->getColor() == 2) //if color is green
+      {
+        mvwaddchWithColor(items[i]->getYPos(), items[i]->getXPos(), items[i]->getSymbol(), GREEN_ON_BLACK);
+      }
+      else if (items[i]->getColor() == 3) //yellow
+      {
+        mvwaddchWithColor(items[i]->getYPos(), items[i]->getXPos(), items[i]->getSymbol(), YELLOW_ON_BLACK);
+      }
+      else if (items[i]->getColor() == 4) //blue
+      {
+        mvwaddchWithColor(items[i]->getYPos(), items[i]->getXPos(), items[i]->getSymbol(), BLUE_ON_BLACK);
+      }
+      else if (items[i]->getColor() == 5) //magenta
+      {
+        mvwaddchWithColor(items[i]->getYPos(), items[i]->getXPos(), items[i]->getSymbol(), MAGENTA_ON_BLACK);
+      }
+      else if (items[i]->getColor() == 6) //cyan
+      {
+        mvwaddchWithColor(items[i]->getYPos(), items[i]->getXPos(), items[i]->getSymbol(), CYAN_ON_BLACK);
+      }
+      else
+      {
+        mvwaddchWithColor(items[i]->getYPos(), items[i]->getXPos(), items[i]->getSymbol(), WHITE_ON_BLACK);
+      }
+    }
+  }
 }
 
 void Game::renderPlayer()

@@ -85,7 +85,7 @@ void Game::update()
     case KEY_UP:
     case 'w':
     case 'W':
-        if (this->getCurrentWindow() == this->inventoryWindow)
+        if (this->getCurrentWindow() == this->inventoryWindow)       //Inventory Management
         {
             if(player.getSelectedItemIndex() != 0)
             {
@@ -100,14 +100,34 @@ void Game::update()
                 narrative = "an empty item slot";
             }
         }
-        else
+        else                                        //--------------------------- Player movement in worldWindow
         {
             player.setSymbol('^');
+/*           
             if ((player.getYPos() > 0) && isMoveAllowed(player.getYPos() - 1, player.getXPos()))
             {
                 player.move('w');
                 resolveDoorMovement();
             }
+*/
+            if(player.getYPos() > 0)
+            {
+	        if(isMoveAllowed(player.getYPos() - 1, player.getXPos()))
+                {
+                    player.move('w');
+                    resolveDoorMovement();
+                }
+                else if((mvwinch(this->worldWindow, player.getYPos() - 1, player.getXPos()) & A_CHARTEXT) == POTION)
+                {
+                    player.move('w');
+		    resolvePotionMovement();
+                }
+                else if((mvwinch(this->worldWindow, player.getYPos() - 1, player.getXPos()) & A_CHARTEXT) == TRAP)
+                {
+                    player.move('w');
+		    resolveTrapMovement();
+                }
+	    }
         }
         break;
     case KEY_DOWN:
@@ -228,4 +248,40 @@ void Game::resolveDoorMovement()
             }
         }
     }
+}
+
+void Game::resolvePotionMovement()  //player walks on a potion
+{
+	Item **items = rooms[player.getCurrentRoom()]->getItems();
+	for(int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
+	{
+		if(items[i] != NULL)
+		{
+			if (player.getXPos() == items[i]->getXPos() && player.getYPos() == items[i]->getYPos()) //if x and y value match
+			{
+				if(player.getHP() < player.getMaxHP())
+				{
+					player.healHP(items[i]->getHealing());
+				}
+				else
+					break;
+			}
+		}		
+	}
+}
+
+void Game::resolveTrapMovement()  //player walks on a trap
+{
+	Item **items = rooms[player.getCurrentRoom()]->getItems();
+	for(int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
+	{
+		if(items[i] != NULL)
+		{
+			if (player.getXPos() == items[i]->getXPos() && player.getYPos() == items[i]->getYPos()) //if x and y value match
+			{
+				player.damageHP(items[i]->getDamage());
+			}
+		}		
+	}
+
 }

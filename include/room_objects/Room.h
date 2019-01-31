@@ -15,6 +15,8 @@
 #include <string>
 #include "Item.h"
 #include "Door.h"
+#include "Trap.h"
+#include "Potion.h"
 
 using std::fstream;
 using std::string;
@@ -60,7 +62,7 @@ public:
   // SETTERS
   void setWalls(string roomFile);
   void setItems();
-  void setItem();
+  void setItem(Item *item, int itemIndex);
   void setType(string type);
   void setName(string name);
   void setDescription(string description);
@@ -74,6 +76,7 @@ public:
   int getMaxDoors();
   char getWall(int height, int width);
   Item **getItems();
+  Item *getItem(int itemIndex);
   string getType();
   string getName();
   string getDescription();

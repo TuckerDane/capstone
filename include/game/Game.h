@@ -16,11 +16,17 @@
 #include "Player.h"
 #include "Door.h"
 #include "Key.h"
+#include "Trap.h"
+#include "Potion.h"
 
 #define MAX_ROOMS 10
 
 #define GRASS ' '
 #define EMPTY ' '
+#define POTION 'P'
+#define TRAP 'T'
+//#define MOVABLE 'M'
+//#define IMMOVABLE 'O'
 
 #define WINDOW_WIDTH 150
 #define WORLD_WINDOW_HEIGHT 30
@@ -86,6 +92,8 @@ public:
   // ACTIONS
   void update();
   void resolveDoorMovement();
+  void resolvePotionMovement();  //user steps on a potion
+  void resolveTrapMovement();    //user steps on a trap
 
   /* ..............................................
     RENDER.CPP
