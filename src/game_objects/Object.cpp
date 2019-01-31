@@ -124,7 +124,7 @@ string Object::getDescription()
   
 .............................................. */
 
-int Object::getPairColor(int objectColor){
+int Object::setColorPair(int objectColor){
   if (objectColor == 1)
   {
     return 1;
