@@ -87,13 +87,18 @@ void Game::renderInventory()
     }
     if (inventory[i] != NULL)
     {
-      line = std::to_string(i+1) + "\t" + inventory[i]->getName() + "\t" + std::to_string(inventory[i]->getWeight());
+      line = std::to_string(i+1);
+      mvwprintw(this->inventoryWindow, i + 5, 2, line.c_str());
+      line = inventory[i]->getName();
+      mvwprintw(this->inventoryWindow, i + 5, 8, line.c_str());
+      line = std::to_string(inventory[i]->getWeight());
+      mvwprintw(this->inventoryWindow, i + 5, 26, line.c_str());
     }
     else
     {
       line = std::to_string(i+1) + "\tempty slot";
+      mvwprintw(this->inventoryWindow, i + 5, 2, line.c_str());
     }
-    mvwprintw(this->inventoryWindow, i + 5, 2, line.c_str());
     wattroff(this->inventoryWindow, A_REVERSE);
   }
 
@@ -158,34 +163,8 @@ void Game::renderDoors()
   {
     if (doors[i] != NULL)
     {
-      if (doors[i]->getColor() == 1)
-      {
-        mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), RED_ON_BLACK);
-      }
-      else if (doors[i]->getColor() == 2)
-      {
-        mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), GREEN_ON_BLACK);
-      }
-      else if (doors[i]->getColor() == 3)
-      {
-        mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), YELLOW_ON_BLACK);
-      }
-      else if (doors[i]->getColor() == 4)
-      {
-        mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), BLUE_ON_BLACK);
-      }
-      else if (doors[i]->getColor() == 5)
-      {
-        mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), MAGENTA_ON_BLACK);
-      }
-      else if (doors[i]->getColor() == 6)
-      {
-        mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), CYAN_ON_BLACK);
-      }
-      else
-      {
-        mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), WHITE_ON_BLACK);
-      }
+      int doorColor = doors[i]->setColorPair(doors[i]->getColor());
+      mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), doorColor);
     }
   }
 }

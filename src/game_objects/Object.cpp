@@ -118,3 +118,43 @@ string Object::getDescription()
 {
   return this->description;
 }
+
+/* ..............................................
+  ACTIONS
+  
+.............................................. */
+
+int Object::setColorPair(int objectColor){
+  if (objectColor == 1)
+  {
+    return 1;
+  }
+  else if (objectColor == 2)
+  {
+    return 15;
+  }
+  else if (objectColor == 3)
+  {
+    return 23;
+  }
+  else if (objectColor == 4)
+  {
+    return 30;
+  }
+  else if (objectColor == 5)
+  {
+    return 37;
+  }
+  else if (objectColor == 6)
+  {
+    return 44;
+  }
+  else if (objectColor == 7)
+  {
+    return 51;
+  }
+  else
+  {
+    return 0; 
+  }
+}
