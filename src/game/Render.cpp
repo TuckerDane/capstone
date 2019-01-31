@@ -163,34 +163,8 @@ void Game::renderDoors()
   {
     if (doors[i] != NULL)
     {
-      if (doors[i]->getColor() == 1)
-      {
-        mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), RED_ON_BLACK);
-      }
-      else if (doors[i]->getColor() == 2)
-      {
-        mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), GREEN_ON_BLACK);
-      }
-      else if (doors[i]->getColor() == 3)
-      {
-        mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), YELLOW_ON_BLACK);
-      }
-      else if (doors[i]->getColor() == 4)
-      {
-        mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), BLUE_ON_BLACK);
-      }
-      else if (doors[i]->getColor() == 5)
-      {
-        mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), MAGENTA_ON_BLACK);
-      }
-      else if (doors[i]->getColor() == 6)
-      {
-        mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), CYAN_ON_BLACK);
-      }
-      else
-      {
-        mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), WHITE_ON_BLACK);
-      }
+      int doorColor = doors[i]->getPairColor(doors[i]->getColor());
+      mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), doorColor);
     }
   }
 }

@@ -65,6 +65,9 @@ class Object
 	virtual string getType();
 	virtual string getName();
 	virtual string getDescription();
+
+	// ACTIONS
+	virtual int getPairColor(int objectColor);
 };
 
 #endif
