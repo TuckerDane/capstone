@@ -87,8 +87,6 @@ void Game::renderInventory()
     }
     if (inventory[i] != NULL)
     {
-      //line = std::to_string(i+1) + "\t" + inventory[i]->getName() + "\t" + std::to_string(inventory[i]->getWeight());
-
       line = std::to_string(i+1);
       mvwprintw(this->inventoryWindow, i + 5, 2, line.c_str());
       line = inventory[i]->getName();
