@@ -163,7 +163,7 @@ void Game::renderDoors()
   {
     if (doors[i] != NULL)
     {
-      int doorColor = doors[i]->getPairColor(doors[i]->getColor());
+      int doorColor = doors[i]->setColorPair(doors[i]->getColor());
       mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), doorColor);
     }
   }
