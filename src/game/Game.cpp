@@ -58,7 +58,10 @@ Game::Game()
   rooms[0]->setDoor(new Door(10, 35, 1, 5, 2, 3, true, COLOR_GREEN), 2);
 //set trap and potion for room 0
 rooms[0]->setItem(new Potion(6, 8),0);
-rooms[0]->setItem(new Trap(15, 5),1);
+rooms[0]->setItem(new Trap(6, 12),1);
+//set movable and immovable objects
+rooms[0]->setItem(new Movable(15, 4), 2);
+rooms[0]->setItem(new Immovable(15, 12), 3);
 
   rooms[1] = new Room("rooms/round.room");
   rooms[1]->setDoor(new Door(5, 1, 0, 10, 34, 3, true, COLOR_GREEN), 2);

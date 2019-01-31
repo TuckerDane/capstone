@@ -1,11 +1,11 @@
 /*......................................
- @file Potion.h
- @date 1/30/19
+ @file Immovable.hpp
+ @date 1/31/19
 
 ......................................*/
 
-#ifndef POTION_HPP
-#define POTION_HPP
+#ifndef IMMOVABLE_HPP
+#define IMMOVABLE_HPP
 
 #include "Item.h"
 
@@ -15,19 +15,19 @@
 
 .....................................*/
 
-class Potion : public Item
+class Immovable : public Item
 {
 
 public:
 	//CONSTRUCTOR/DESTRUCTOR
-	Potion();
-	Potion(int yPos, int xPos);
-	~Potion();
+	Immovable();
+	Immovable(int yPos, int xPos);
+	~Immovable();
 	
 	//SETTERS
 	//GETTERS
 	//ACTION
-	void moveItem(char direction);
+	void itemAction();
 };
 
 #endif

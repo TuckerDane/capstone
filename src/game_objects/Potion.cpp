@@ -49,7 +49,7 @@ ACTIONS
 
 ............................................*/
 
-void Potion::itemAction()
+void Potion::moveItem(char direction)
 {
 	//filler for later use  (call to heal from inventory?)
 }

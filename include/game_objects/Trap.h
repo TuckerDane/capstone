@@ -27,7 +27,7 @@ public:
 	//SETTERS
 	//GETTERS
 	//ACTION
-	void itemAction();
+	void moveItem(char direction);
 };
 
 #endif

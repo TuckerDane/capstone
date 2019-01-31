@@ -18,6 +18,8 @@
 #include "Key.h"
 #include "Trap.h"
 #include "Potion.h"
+#include "Movable.h"
+#include "Immovable.h"
 
 #define MAX_ROOMS 10
 
@@ -25,8 +27,8 @@
 #define EMPTY ' '
 #define POTION 'P'
 #define TRAP 'T'
-//#define MOVABLE 'M'
-//#define IMMOVABLE 'O'
+#define MOVABLE 'M'
+#define IMMOVABLE 'O'
 
 #define WINDOW_WIDTH 150
 #define WORLD_WINDOW_HEIGHT 30
@@ -94,6 +96,7 @@ public:
   void resolveDoorMovement();
   void resolvePotionMovement();  //user steps on a potion
   void resolveTrapMovement();    //user steps on a trap
+  void resolveMovingItem(char direction); //user pushes an item forward in the direction they are trying to go
 
   /* ..............................................
     RENDER.CPP

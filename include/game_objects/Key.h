@@ -36,7 +36,6 @@ public:
 
   // ACTIONS
   bool use(int playerYPos, int playerXPos, Door** rooms);
-  void itemAction();
 };
 
 #endif

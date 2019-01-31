@@ -94,7 +94,3 @@ bool Key::use(int playerYPos, int playerXPos, Door** doors)
   return false;
 }
 
-void Key::itemAction()
-{
-	//filler
-}

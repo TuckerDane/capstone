@@ -74,7 +74,7 @@ bool Item::use(int playerYPos, int playerXPos, Door** doors)
   return false;
 }
 
-void Item::itemAction()
+void Item::moveItem(char direction)
 {
 	//filler
 }

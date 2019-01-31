@@ -49,7 +49,7 @@ ACTIONS
 
 ............................................*/
 
-void Trap::itemAction()
+void Trap::moveItem(char direction)
 {
 	//filler for later use  (laying a trap?)
 }
