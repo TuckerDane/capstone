@@ -84,7 +84,7 @@ void Game::update()
     case KEY_UP:
     case 'w':
     case 'W':
-        if (this->getCurrentWindow() == this->inventoryWindow)
+        if (this->getCurrentWindow() == this->inventoryWindow)       //Inventory Management
         {
             if(player.getSelectedItemIndex() != 0)
             {
@@ -99,20 +99,38 @@ void Game::update()
                 narrative = "an empty item slot";
             }
         }
-        else
+        else                                        //--------------------------- Player movement in worldWindow
         {
             player.setSymbol('^');
-            if ((player.getYPos() > 0) && isMoveAllowed(player.getYPos() - 1, player.getXPos()))
+            if(player.getYPos() > 0)
             {
-                player.move('w');
-                resolveDoorMovement();
-            }
+	        if(isMoveAllowed(player.getYPos() - 1, player.getXPos()))  //empty space
+                {
+                    player.move('w');
+                    resolveDoorMovement();
+                }
+                else if((mvwinch(this->worldWindow, player.getYPos() - 1, player.getXPos()) & A_CHARTEXT) == POTION)
+                {
+                    player.move('w');
+		    resolvePotionMovement();
+                }
+                else if((mvwinch(this->worldWindow, player.getYPos() - 1, player.getXPos()) & A_CHARTEXT) == TRAP)
+                {
+                    player.move('w');
+		    resolveTrapMovement();
+                }
+                else if(((mvwinch(this->worldWindow, player.getYPos() - 1, player.getXPos()) & A_CHARTEXT) == MOVABLE) && isMoveAllowed(player.getYPos() - 2, player.getXPos()))
+                {
+		    resolveMovingItem('w');   //move item
+                    player.move('w');         //move player
+                }
+	    }
         }
         break;
     case KEY_DOWN:
     case 's':
     case 'S':
-        if (this->getCurrentWindow() == this->inventoryWindow)
+        if (this->getCurrentWindow() == this->inventoryWindow)  //inventory management
         {
             if(player.getSelectedItemIndex() != player.getMaxInventory() -1)
             {
@@ -127,34 +145,88 @@ void Game::update()
                 narrative = "an empty item slot";
             }
         }
-        else
+        else					//-------------------------Player Movement in worldWindow
         {
             player.setSymbol('v');
-            if ((player.getYPos() < LINES - 1) && isMoveAllowed(player.getYPos() + 1, player.getXPos()))
+            if(player.getYPos() < LINES - 1)
             {
-                player.move('s');
-                resolveDoorMovement();
-            }
+	        if(isMoveAllowed(player.getYPos() + 1, player.getXPos()))  //empty space
+                {
+                    player.move('s');
+                    resolveDoorMovement();
+                }
+                else if((mvwinch(this->worldWindow, player.getYPos() + 1, player.getXPos()) & A_CHARTEXT) == POTION)
+                {
+                    player.move('s');
+		    resolvePotionMovement();
+                }
+                else if((mvwinch(this->worldWindow, player.getYPos() + 1, player.getXPos()) & A_CHARTEXT) == TRAP)
+                {
+                    player.move('s');
+		    resolveTrapMovement();
+                }
+                else if(((mvwinch(this->worldWindow, player.getYPos() + 1, player.getXPos()) & A_CHARTEXT) == MOVABLE) && isMoveAllowed(player.getYPos() + 2, player.getXPos()))
+                {
+		    resolveMovingItem('s');   //move item
+                    player.move('s');         //move player
+                }
+	    }
         }
         break;
     case KEY_LEFT:
     case 'a':
     case 'A':
         player.setSymbol('<');
-        if ((player.getXPos() > 0) && isMoveAllowed(player.getYPos(), player.getXPos() - 1))
+        if(player.getXPos() > 0)
         {
-            player.move('a');
-            resolveDoorMovement();
+	        if(isMoveAllowed(player.getYPos(), player.getXPos() - 1))  //empty space
+                {
+                    player.move('a');
+                    resolveDoorMovement();
+                }
+                else if((mvwinch(this->worldWindow, player.getYPos(), player.getXPos() - 1) & A_CHARTEXT) == POTION)
+                {
+                    player.move('a');
+		    resolvePotionMovement();
+                }
+                else if((mvwinch(this->worldWindow, player.getYPos(), player.getXPos() - 1) & A_CHARTEXT) == TRAP)
+                {
+                    player.move('a');
+		    resolveTrapMovement();
+                }
+                else if(((mvwinch(this->worldWindow, player.getYPos(), player.getXPos() - 1) & A_CHARTEXT) == MOVABLE) && isMoveAllowed(player.getYPos(), player.getXPos() - 2))
+                {
+		    resolveMovingItem('a');   //move item
+                    player.move('a');         //move player
+                }
         }
         break;
     case KEY_RIGHT:
     case 'd':
     case 'D':
         player.setSymbol('>');
-        if ((player.getXPos() < COLS - 1) && isMoveAllowed(player.getYPos(), player.getXPos() + 1))
+        if(player.getXPos() < COLS - 1)
         {
-            player.move('d');
-            resolveDoorMovement();
+	        if(isMoveAllowed(player.getYPos(), player.getXPos() + 1))  //empty space
+                {
+                    player.move('d');
+                    resolveDoorMovement();
+                }
+                else if((mvwinch(this->worldWindow, player.getYPos(), player.getXPos() + 1) & A_CHARTEXT) == POTION)
+                {
+                    player.move('d');
+		    resolvePotionMovement();
+                }
+                else if((mvwinch(this->worldWindow, player.getYPos(), player.getXPos() + 1) & A_CHARTEXT) == TRAP)
+                {
+                    player.move('d');
+		    resolveTrapMovement();
+                }
+                else if(((mvwinch(this->worldWindow, player.getYPos(), player.getXPos() + 1) & A_CHARTEXT) == MOVABLE) && isMoveAllowed(player.getYPos(), player.getXPos() + 2))
+                {
+		    resolveMovingItem('d');   //move item
+                    player.move('d');         //move player
+                }
         }
         break;
     case 'i':
@@ -262,4 +334,70 @@ void Game::useKey()
     {
         narrative = "the " + player.getSelectedItem()->getName() + " does not work here...";
     } 
+}
+
+void Game::resolvePotionMovement()  //player walks on a potion
+{
+	Item **items = rooms[player.getCurrentRoom()]->getItems();
+	for(int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
+	{
+		if(items[i] != NULL)
+		{
+			if (player.getXPos() == items[i]->getXPos() && player.getYPos() == items[i]->getYPos()) //if x and y value match
+			{
+				if(player.getHP() < player.getMaxHP())
+				{
+					player.healHP(items[i]->getHealing());
+				}
+				else
+					break;
+			}
+		}		
+	}
+}
+
+void Game::resolveTrapMovement()  //player walks on a trap
+{
+	Item **items = rooms[player.getCurrentRoom()]->getItems();
+	for(int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
+	{
+		if(items[i] != NULL)
+		{
+			if (player.getXPos() == items[i]->getXPos() && player.getYPos() == items[i]->getYPos()) //if x and y value match
+			{
+				player.damageHP(items[i]->getDamage());
+			}
+		}		
+	}
+}
+
+void Game::resolveMovingItem(char direction)  //moving an item
+{
+	Item **items = rooms[player.getCurrentRoom()]->getItems();
+	for(int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
+	{
+		if(items[i] != NULL)
+		{
+			if(direction == 'w')
+			{
+				if((player.getYPos() - 1 == items[i]->getYPos()) && (player.getXPos() == items[i]->getXPos()))
+					items[i]->moveItem('w');
+			}
+			if(direction == 's')
+			{
+				if((player.getYPos() + 1 == items[i]->getYPos()) && (player.getXPos() == items[i]->getXPos()))
+					items[i]->moveItem('s');
+			}
+			if(direction == 'a')
+			{
+				if((player.getXPos() - 1 == items[i]->getXPos()) && (player.getYPos() == items[i]->getYPos()))
+					items[i]->moveItem('a');
+			}
+			if(direction == 'd')
+			{
+				if((player.getXPos() + 1 == items[i]->getXPos()) && (player.getYPos() == items[i]->getYPos()))
+					items[i]->moveItem('d');
+			}
+		}
+	}
 }
