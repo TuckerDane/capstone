@@ -36,7 +36,7 @@ public:
 
   // Actions
   virtual bool use(); // returns true if use() is successful, false if unsuccessful
-  virtual bool use(int playerYPos, int playerXPos, Door** doors);
+  virtual bool use(Door* door);
 };
 
 #endif

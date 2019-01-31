@@ -136,6 +136,11 @@ Item *Player::getInventoryItem(int itemSlot)
 	return this->inventory[itemSlot];
 }
 
+Item *Player::getSelectedItem()
+{
+	return this->inventory[this->selectedItemIndex];
+}
+
 int Player::getSelectedItemIndex()
 {
 	return this->selectedItemIndex;

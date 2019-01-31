@@ -82,38 +82,3 @@ bool Key::use(Door* door)
     return false;
   }
 }
-
-bool Key::use(int playerYPos, int playerXPos, Door** doors)
-{
-  // for all doors possible in the room
-  for (int i=0; i < 4; i++)
-  {
-    // if the door exsists
-    if (doors[i] != NULL)
-    {
-      // and if the player is next to the door
-      if (abs(doors[i]->getYPos() - playerYPos) + abs(doors[i]->getXPos() - playerXPos) == 1)
-      {
-        // if the key's password is equal to the door's password
-        if (this->password == doors[i]->getPassword())
-        {
-          // if the door is locked
-          if(doors[i]->getLocked() == true)
-          {
-            // unlock the door
-            doors[i]->setLocked(false);
-            doors[i]->setSymbol(' ');
-          }
-          else
-          {
-            // otherwise lock the door
-            doors[i]->setLocked(true);
-            doors[i]->setSymbol('#');
-          }
-          return true;
-        } 
-      }
-    }
-  }
-  return false;
-}

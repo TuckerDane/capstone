@@ -6,8 +6,7 @@
   
   
 .............................................. */
-
-#include "Update.h"
+#include "Update.hpp"
 
 /* ..............................................
   SETTERS
@@ -185,23 +184,15 @@ void Game::update()
         break;
     case 'e':
     case 'E':
-        if(player.getInventoryItem(player.getSelectedItemIndex()) == NULL)
+        if(player.getSelectedItem() == NULL)
         {
             narrative = "you do not have an item selected to use";
         }
         else
         {
-            if(player.getInventoryItem(player.getSelectedItemIndex())->getType() == "key")
+            if(player.getSelectedItem()->getType() == "key")
             {
-                bool result = player.getInventoryItem(player.getSelectedItemIndex())->use(player.getYPos(), player.getXPos(), getRoom(player.getCurrentRoom())->getDoors());
-                if (result)
-                {
-                    narrative = "you used the " + player.getInventoryItem(player.getSelectedItemIndex())->getName();
-                }
-                else
-                {
-                    narrative = "the " + player.getInventoryItem(player.getSelectedItemIndex())->getName() +" does not work here...";
-                }                        
+                useKey();                  
             }
         }
         break;
@@ -228,4 +219,35 @@ void Game::resolveDoorMovement()
             }
         }
     }
+}
+
+void Game::useKey()
+{
+    bool keyIsUsed = false;
+
+    // go through all of the doors in the room the player's in
+    Door** doors = rooms[player.getCurrentRoom()]->getDoors();
+    for (int i=0; i < rooms[player.getCurrentRoom()]->getMaxDoors(); i++)
+    {
+        // if the door exists
+        Door* door = doors[i];
+        if (door != NULL)
+        {
+            // and if the player is next to the door
+            if (abs(door->getYPos() - player.getYPos()) + abs(door->getXPos() - player.getXPos()) == 1)
+            {
+                // use the key on the door
+                keyIsUsed = player.getSelectedItem()->use(door);
+            }
+        }
+    }
+    
+    if (keyIsUsed)
+    {
+        narrative = "you used the " + player.getSelectedItem()->getName();
+    }
+    else
+    {
+        narrative = "the " + player.getSelectedItem()->getName() + " does not work here...";
+    } 
 }
