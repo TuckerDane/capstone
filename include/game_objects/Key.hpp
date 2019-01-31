@@ -35,6 +35,7 @@ public:
   int getPassword();
 
   // ACTIONS
+  bool use(Door* door);
   bool use(int playerYPos, int playerXPos, Door** rooms);
 };
 

@@ -3,3 +3,4 @@
 build/
 logs/
 tests/build/
+tests/adventure_tests
