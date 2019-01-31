@@ -6,7 +6,7 @@
   
   
 .............................................. */
-#include "Key.h"
+#include "Key.hpp"
 
 /* ..............................................
   CONSTRUCTORS / DESTRUCTORS
@@ -59,6 +59,30 @@ int Key::getPassword()
   ACTIONS
   
 .............................................. */
+bool Key::use(Door* door)
+{
+  if (this->password == door->getPassword())
+  {
+    if(door->getLocked() == true)
+    {
+      // unlock the door
+      door->setLocked(false);
+      door->setSymbol(' ');
+    }
+    else
+    {
+      // otherwise lock the door
+      door->setLocked(true);
+      door->setSymbol('#');
+    }
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
 bool Key::use(int playerYPos, int playerXPos, Door** doors)
 {
   // for all doors possible in the room

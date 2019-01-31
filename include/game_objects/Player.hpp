@@ -1,5 +1,5 @@
 /* ..............................................
-  @file Player.h
+  @file Player.hpp
   @author Tucker Walker (tuckerdwalker@gmail.com)
   @brief 
   @date 2018-12-26
@@ -11,9 +11,9 @@
 #define PLAYER_HPP
 
 #include <stdlib.h>
-#include "Object.h"
-#include "Item.h"
-#include "Key.h"
+#include "Object.hpp"
+#include "Item.hpp"
+#include "Key.hpp"
 using std::cerr;
 using std::cin;
 using std::cout;

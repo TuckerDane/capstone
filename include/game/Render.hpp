@@ -1,5 +1,5 @@
 #ifndef RENDER_HPP
 #define RENDER_HPP
-#include "Game.h"
-#include "Colors.h"
+#include "Game.hpp"
+#include "Colors.hpp"
 #endif

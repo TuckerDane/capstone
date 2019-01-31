@@ -7,7 +7,7 @@
   
 .............................................. */
 
-#include "Colors.h"
+#include "Colors.hpp"
 
 void Game::initColorPairs()
 {

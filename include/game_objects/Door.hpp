@@ -1,5 +1,5 @@
 /* ..............................................
-  @file Door.h
+  @file Door.hpp
   @author Tucker Walker (tuckerdwalker@gmail.com)
   @brief 
   @date 2019-01-26
@@ -10,7 +10,7 @@
 #ifndef DOOR_HPP
 #define DOOR_HPP
 
-#include "Object.h"
+#include "Object.hpp"
 
 /* ..............................................
   @brief 

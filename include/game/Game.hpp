@@ -1,5 +1,5 @@
 /* ..............................................
-  @file Game.h
+  @file Game.hpp
   @author Tucker Walker (tuckerdwalker@gmail.com)
   @brief 
   @date 2018-12-27
@@ -11,11 +11,11 @@
 #define GAME_HPP
 #include <ncurses.h>
 #include <string>
-#include "Console.h"
-#include "Room.h"
-#include "Player.h"
-#include "Door.h"
-#include "Key.h"
+#include "Console.hpp"
+#include "Room.hpp"
+#include "Player.hpp"
+#include "Door.hpp"
+#include "Key.hpp"
 
 #define MAX_ROOMS 10
 

@@ -6,7 +6,7 @@
   
   
 .............................................. */
-#include "Room.h"
+#include "Room.hpp"
 
 /* ..............................................
   CONSTRUCTORS/DECONSTRUCTORS 

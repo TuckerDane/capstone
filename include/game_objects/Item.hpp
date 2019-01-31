@@ -1,5 +1,5 @@
 /* ..............................................
-  @file Item.h
+  @file Item.hpp
   @author Tucker Walker (tuckerdwalker@gmail.com)
   @brief 
   @date 2019-01-16
@@ -11,8 +11,8 @@
 #define ITEM_HPP
 
 #include <stdlib.h>
-#include "Object.h"
-#include "Door.h"
+#include "Object.hpp"
+#include "Door.hpp"
 
 /* ..............................................
   @brief 
