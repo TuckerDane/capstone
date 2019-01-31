@@ -87,13 +87,20 @@ void Game::renderInventory()
     }
     if (inventory[i] != NULL)
     {
-      line = std::to_string(i+1) + "\t" + inventory[i]->getName() + "\t" + std::to_string(inventory[i]->getWeight());
+      //line = std::to_string(i+1) + "\t" + inventory[i]->getName() + "\t" + std::to_string(inventory[i]->getWeight());
+
+      line = std::to_string(i+1);
+      mvwprintw(this->inventoryWindow, i + 5, 2, line.c_str());
+      line = inventory[i]->getName();
+      mvwprintw(this->inventoryWindow, i + 5, 8, line.c_str());
+      line = std::to_string(inventory[i]->getWeight());
+      mvwprintw(this->inventoryWindow, i + 5, 26, line.c_str());
     }
     else
     {
       line = std::to_string(i+1) + "\tempty slot";
+      mvwprintw(this->inventoryWindow, i + 5, 2, line.c_str());
     }
-    mvwprintw(this->inventoryWindow, i + 5, 2, line.c_str());
     wattroff(this->inventoryWindow, A_REVERSE);
   }
 
