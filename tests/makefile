@@ -17,9 +17,8 @@ CXX      := g++
 CXXFLAGS := -pedantic-errors -Wall -std=c++11 -g
 LDFLAGS  := -lncurses
 BUILD    := ./build
-LOG_DIR  := ./logs
 OBJ_DIR  := $(BUILD)/objects
-APP_DIR  := $(BUILD)/apps
+APP_DIR  := ./
 TARGET   := adventure_tests
 INCLUDE  := -Iinclude/
 INCLUDE	 += -I../include/game_objects
@@ -53,5 +52,4 @@ release: all
 
 clean:
 	-@rm -rvf $(OBJ_DIR)/*
-	-@rm -rvf $(APP_DIR)/*
-	-@rm -rvf $(LOG_DIR)/*
+	-rm ./adventure_tests
