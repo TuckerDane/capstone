@@ -86,6 +86,7 @@ public:
   // ACTIONS
   void update();
   void resolveDoorMovement();
+  void useKey();
 
   /* ..............................................
     RENDER.CPP

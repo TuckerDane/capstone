@@ -52,7 +52,7 @@ bool Item::use()
   return false;
 }
 
-bool Item::use(int playerYPos, int playerXPos, Door** doors)
+bool Item::use(Door* door)
 {
   return false;
 }
