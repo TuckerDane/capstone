@@ -22,6 +22,9 @@ OBJ_DIR  := $(BUILD)/objects
 APP_DIR  := $(BUILD)/apps
 TARGET   := adventure_tests
 INCLUDE  := -Iinclude/
+INCLUDE	 += -I../include/game_objects
+INCLUDE	 += -I../include/room_objects
+INCLUDE	 += -I../include/game
 SRC      :=	$(wildcard src/*.cpp)
 
 OBJECTS := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
