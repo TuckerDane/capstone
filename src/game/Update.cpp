@@ -198,8 +198,20 @@ void Game::update()
         break;
     case 'q':
     case 'Q':
-        setIsComplete(true);
-        break;
+        string temp = getNarrative();
+        this->setNarrative("Would you like to quit? Press Y to confirm or any other key to return to <Adventure Game>.");
+        renderNarrative();
+        unsigned int confirm = getch();
+        if(confirm == 'y' || confirm == 'Y')
+        {
+            setIsComplete(true);
+            break;
+        }
+        else
+        {
+            this->setNarrative(temp);
+            break;
+        }           
     }
 }
 
