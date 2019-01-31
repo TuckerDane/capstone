@@ -1,5 +1,5 @@
 /* ..............................................
-  @file Room.h
+  @file Room.hpp
   @author Tucker Walker (tuckerdwalker@gmail.com)
   @brief 
   @date 2019-01-20
@@ -13,8 +13,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "Item.h"
-#include "Door.h"
+#include "Item.hpp"
+#include "Door.hpp"
 
 using std::fstream;
 using std::string;

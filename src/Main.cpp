@@ -6,7 +6,7 @@
   
   
 .............................................. */
-#include "Game.h"
+#include "Game.hpp"
 
 /* ..............................................
   @brief Main entry point to instantiate the game

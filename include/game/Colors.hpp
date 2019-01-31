@@ -1,5 +1,5 @@
 /* ..............................................
-  @file Colors.h
+  @file Colors.hpp
   @author Tucker Walker (tuckerdwalker@gmail.com)
   @brief 
   @date 2019-01-26
@@ -10,7 +10,7 @@
 #ifndef COLORS_HPP
 #define COLORS_HPP
 
-#include "Game.h"
+#include "Game.hpp"
 
 #define RED_ON_BLACK 1
 #define RED_ON_GREEN 2

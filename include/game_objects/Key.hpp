@@ -1,5 +1,5 @@
 /* ..............................................
-  @file Key.h
+  @file Key.hpp
   @author Tucker Walker (tuckerdwalker@gmail.com)
   @brief 
   @date 2019-01-26
@@ -10,8 +10,8 @@
 #ifndef KEY_HPP
 #define KEY_HPP
 
-#include "Item.h"
-#include "Door.h"
+#include "Item.hpp"
+#include "Door.hpp"
 
 /* ..............................................
   @brief 
