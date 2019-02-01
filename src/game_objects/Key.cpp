@@ -15,20 +15,20 @@
 
 Key::Key() : Item()
 {
-  this->name = "normal key";
-  this->type = "key";
-  this->weight = 1;
-  this->password = -1;
-  this->description = "used to unlock doors";
+  name = "normal key";
+  type = "key";
+  weight = 1;
+  password = -1;
+  description = "used to unlock doors";
 }
 
 Key::Key(string name, int password) : Item()
 {
-  this->type = "key";
+  type = "key";
   this->name = name;
-  this->weight = 1;
+  weight = 1;
   this->password = password;
-  this->description = "used to unlock doors";
+  description = "used to unlock doors";
 }
 
 Key::~Key()
@@ -52,18 +52,18 @@ void Key::setPassword(int password)
 
 int Key::getPassword()
 {
-  return this->password;
+  return password;
 }
 
 /* ..............................................
   ACTIONS
   
 .............................................. */
-bool Key::use(Door* door)
+bool Key::use(Door *door)
 {
-  if (this->password == door->getPassword())
+  if (password == door->getPassword())
   {
-    if(door->getLocked() == true)
+    if (door->getLocked() == true)
     {
       // unlock the door
       door->setLocked(false);

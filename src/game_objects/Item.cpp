@@ -7,9 +7,7 @@
   
 .............................................. */
 #include "Item.hpp"
-#include <iostream>
 
-using namespace std;
 /* ..............................................
   CONSTRUCTORS/DECONSTRUCTORS 
   
@@ -17,7 +15,7 @@ using namespace std;
 
 Item::Item() : Object(-1, -1, COLOR_BLACK, '?', "item_object", "item", "item_decription")
 {
-  this->weight = 0;
+  weight = 0;
 }
 
 Item::~Item()
@@ -34,6 +32,11 @@ void Item::setWeight(int weight)
   this->weight = weight;
 }
 
+void Item::setDamage(int damage)
+{
+  this->damage = damage;
+}
+
 /* ..............................................
   GETTERS 
   
@@ -41,22 +44,17 @@ void Item::setWeight(int weight)
 
 int Item::getWeight()
 {
-  return this->weight;
+  return weight;
 }
 
 int Item::getHealing()
 {
-  return this->healing;
+  return healing;
 }
 
 int Item::getDamage()
 {
-  return this->damage;
-}
-
-void Item::setDamage(int damage)
-{
-  this->damage = damage;
+  return damage;
 }
 
 /* ..............................................
@@ -69,12 +67,12 @@ bool Item::use()
   return false;
 }
 
-bool Item::use(Door* door)
+bool Item::use(Door *door)
 {
   return false;
 }
 
 void Item::triggerItemActions(char direction)
 {
-	//filler
+  //filler
 }

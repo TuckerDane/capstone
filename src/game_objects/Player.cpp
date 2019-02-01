@@ -15,13 +15,13 @@
 
 Player::Player() : Object(-1, -1, COLOR_BLACK, '^', "player_object", "adventurer", "none")
 {
-	this->numItems = 0;
-	this->currentRoom = 0;
+	numItems = 0;
+	currentRoom = 0;
 	for (int itemSlot = 0; itemSlot < MAX_INVENTORY; itemSlot++)
 	{
-		this->inventory[itemSlot] = NULL;
+		inventory[itemSlot] = NULL;
 	}
-	this->isMoved = false;
+	isMoved = false;
 	setSelectedItemIndex(0);
 	hp = 10;
 	maxHP = 10;
@@ -89,7 +89,7 @@ void Player::setIsMoved(bool isMoved)
 
 void Player::setHP(int newHP)
 {
-	this->hp = newHP;  
+	this->hp = newHP;
 }
 
 void Player::setMaxHP(int newMaxHP)
@@ -103,38 +103,39 @@ void Player::setMaxHP(int newMaxHP)
 
 int Player::getMaxCarryWeight()
 {
-	return this->maxCarryWeight;
+	return maxCarryWeight;
 }
 
 int Player::getCurrentCarryWeight()
 {
-	return this->currentCarryWeight;
+	return currentCarryWeight;
 }
 
 int Player::getNumItems()
 {
-	return this->numItems;
+	return numItems;
 }
 
 int Player::getCurrentRoom()
 {
-	return this->currentRoom;
+	return currentRoom;
 }
 
 int Player::getMaxInventory()
 {
-	return this->MAX_INVENTORY;
+	return MAX_INVENTORY;
 }
 
 int Player::getHP()
 {
-	return this->hp;
+	return hp;
 }
 
 int Player::getMaxHP()
 {
-	return this->maxHP;
+	return maxHP;
 }
+
 /* ..............................................
   @brief returns the entire player inventory
   
@@ -142,7 +143,7 @@ int Player::getMaxHP()
 .............................................. */
 Item **Player::getInventory()
 {
-	return this->inventory;
+	return inventory;
 }
 
 /* ..............................................
@@ -153,22 +154,22 @@ Item **Player::getInventory()
 .............................................. */
 Item *Player::getInventoryItem(int itemSlot)
 {
-	return this->inventory[itemSlot];
+	return inventory[itemSlot];
 }
 
 Item *Player::getSelectedItem()
 {
-	return this->inventory[this->selectedItemIndex];
+	return inventory[selectedItemIndex];
 }
 
 int Player::getSelectedItemIndex()
 {
-	return this->selectedItemIndex;
+	return selectedItemIndex;
 }
 
 bool Player::getIsMoved()
 {
-	return this->isMoved;
+	return isMoved;
 }
 
 /* ..............................................
@@ -215,21 +216,21 @@ void Player::move(char direction)
 .............................................. */
 bool Player::pickUp(Item *item)
 {
-	if (item->getWeight() <= (this->maxCarryWeight - this->currentCarryWeight)) // if the Item doesn't weigh too much
+	if (item->getWeight() <= (maxCarryWeight - currentCarryWeight)) // if the Item doesn't weigh too much
 	{
-		if (this->numItems < MAX_INVENTORY) // and there is a slot for it in the backpack
+		if (numItems < MAX_INVENTORY) // and there is a slot for it in the backpack
 		{
 			bool found = false; // find an open (NULL) slot
 			int itemSlot = 0;
 
 			while (found == false) // conduct a linear search of the backpack for the slot
 			{
-				if (this->inventory[itemSlot] == NULL)
+				if (inventory[itemSlot] == NULL)
 				{
-					found = true;														// when found, set to true
-					this->inventory[itemSlot] = item;									// and set the Item pointer to the address of the Item
-					this->numItems++;													// add to the item counter
-					this->currentCarryWeight += this->inventory[itemSlot]->getWeight(); // add to the current carry weight of the player
+					found = true;											// when found, set to true
+					inventory[itemSlot] = item;								// and set the Item pointer to the address of the Item
+					numItems++;												// add to the item counter
+					currentCarryWeight += inventory[itemSlot]->getWeight(); // add to the current carry weight of the player
 					return true;
 				}
 				itemSlot++;
@@ -249,18 +250,18 @@ Item *Player::drop(int itemSlot)
 {
 	while (0 <= itemSlot && itemSlot < MAX_INVENTORY) // if the player inputs a valid inventory item slot
 	{
-		if (this->inventory[itemSlot] == NULL) // if itemSlot is an empty room in the inventory
+		if (inventory[itemSlot] == NULL) // if itemSlot is an empty room in the inventory
 		{
 			return NULL; // return NULL
 		}
 		else // else
 		{
-			Item *temp = this->inventory[itemSlot]; // set the Item in the inventory to a temporary variable
-			this->inventory[itemSlot] = NULL;		// set the inventory itemSlot to empty
+			Item *temp = inventory[itemSlot]; // set the Item in the inventory to a temporary variable
+			inventory[itemSlot] = NULL;		  // set the inventory itemSlot to empty
 
-			this->currentCarryWeight -= temp->getWeight(); // subtract the weight of the Item from the player's carryWeight
-			this->numItems--;							   // reduce the item counter
-			return temp;								   // return the dropped item
+			currentCarryWeight -= temp->getWeight(); // subtract the weight of the Item from the player's carryWeight
+			numItems--;								 // reduce the item counter
+			return temp;							 // return the dropped item
 		}
 	}
 	return NULL;
@@ -274,7 +275,7 @@ Item *Player::drop(int itemSlot)
 
 void Player::damageHP(int hpChange)
 {
-	this->hp -= hpChange;
+	hp -= hpChange;
 }
 
 /* ..............................................
@@ -285,9 +286,9 @@ void Player::damageHP(int hpChange)
 
 void Player::healHP(int hpChange)
 {
-	this->hp += hpChange;
-	if (this->hp > this->maxHP)
+	hp += hpChange;
+	if (hp > maxHP)
 	{
-		this->hp = maxHP;
+		hp = maxHP;
 	}
 }

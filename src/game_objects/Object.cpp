@@ -15,13 +15,13 @@
 
 Object::Object()
 {
-  this->xPos = 0;
-  this->yPos = 0;
-  this->color = COLOR_BLACK;
-  this->symbol = '?';
-  this->type = "generic_object";
-  this->name = "unnamed";
-  this->description = "none";
+  xPos = 0;
+  yPos = 0;
+  color = COLOR_BLACK;
+  symbol = '?';
+  type = "generic_object";
+  name = "unnamed";
+  description = "none";
 }
 
 Object::Object(int xPos, int yPos, int color, char symbol, string type, string name, string description)
@@ -86,37 +86,37 @@ void Object::setDescription(string description)
 
 int Object::getXPos()
 {
-  return this->xPos;
+  return xPos;
 }
 
 int Object::getYPos()
 {
-  return this->yPos;
+  return yPos;
 }
 
 int Object::getColor()
 {
-  return this->color;
+  return color;
 }
 
 char Object::getSymbol()
 {
-  return this->symbol;
+  return symbol;
 }
 
 string Object::getType()
 {
-  return this->type;
+  return type;
 }
 
 string Object::getName()
 {
-  return this->name;
+  return name;
 }
 
 string Object::getDescription()
 {
-  return this->description;
+  return description;
 }
 
 /* ..............................................
@@ -124,37 +124,38 @@ string Object::getDescription()
   
 .............................................. */
 
-int Object::setColorPair(int objectColor){
-  if (objectColor == 1)
+int Object::setColorPair(int objectColor)
+{
+  if (objectColor == COLOR_RED)
   {
-    return 1;
+    return RED_ON_BLACK;
   }
-  else if (objectColor == 2)
+  else if (objectColor == COLOR_GREEN)
   {
-    return 15;
+    return GREEN_ON_BLACK;
   }
-  else if (objectColor == 3)
+  else if (objectColor == COLOR_YELLOW)
   {
-    return 23;
+    return YELLOW_ON_BLACK;
   }
-  else if (objectColor == 4)
+  else if (objectColor == COLOR_BLUE)
   {
-    return 30;
+    return BLUE_ON_BLACK;
   }
-  else if (objectColor == 5)
+  else if (objectColor == COLOR_MAGENTA)
   {
-    return 37;
+    return MAGENTA_ON_BLACK;
   }
-  else if (objectColor == 6)
+  else if (objectColor == COLOR_CYAN)
   {
-    return 44;
+    return CYAN_ON_BLACK;
   }
-  else if (objectColor == 7)
+  else if (objectColor == COLOR_WHITE)
   {
-    return 51;
+    return WHITE_ON_BLACK;
   }
   else
   {
-    return 0; 
+    return 0;
   }
 }

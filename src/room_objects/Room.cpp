@@ -15,35 +15,35 @@
 
 Room::Room()
 {
-    this->setWalls("rooms/generic.room");
+    setWalls("rooms/generic.room");
     for (int i = 0; i < MAX_ITEMS; i++)
     {
-        this->items[i] = NULL;
+        items[i] = NULL;
     }
     for (int i = 0; i < MAX_DOORS; i++)
     {
-        this->doors[i] = NULL;
+        doors[i] = NULL;
     }
-    this->type = "Room";
-    this->name = "Generic Room";
-    this->description = "A generic room";
-    this->tileColor = 0;
+    type = "Room";
+    name = "Generic Room";
+    description = "A generic room";
+    tileColor = 0;
 }
 
 Room::Room(string roomFile)
 {
-    this->setWalls(roomFile);
+    setWalls(roomFile);
     for (int i = 0; i < MAX_ITEMS; i++)
     {
-        this->items[i] = NULL;
+        items[i] = NULL;
     }
     for (int i = 0; i < MAX_DOORS; i++)
     {
-        this->doors[i] = NULL;
+        doors[i] = NULL;
     }
-    this->type = "Room";
-    this->name = "Generic Room";
-    this->description = "A generic room";
+    type = "Room";
+    name = "Generic Room";
+    description = "A generic room";
 }
 
 Room::~Room()
@@ -83,7 +83,7 @@ void Room::setWalls(string roomFile)
         {
             if (c != '\n')
             {
-                this->walls[height][width] = c;
+                walls[height][width] = c;
                 width++;
             }
             else
@@ -104,7 +104,7 @@ void Room::setItems()
 
 void Room::setItem(Item *item, int itemIndex)
 {
-	items[itemIndex] = item;
+    items[itemIndex] = item;
 }
 
 void Room::setType(string type)
@@ -129,7 +129,7 @@ void Room::setDoor(Door *door, int doorIndex)
 
 void Room::setTileColor(int tileColor)
 {
-    this->tileColor = COLOR_BLACK;
+    this->tileColor = tileColor;
 }
 
 /* ..............................................
@@ -139,32 +139,32 @@ void Room::setTileColor(int tileColor)
 
 int Room::getMaxHeight()
 {
-    return this->MAX_HEIGHT;
+    return MAX_HEIGHT;
 }
 
 int Room::getMaxWidth()
 {
-    return this->MAX_WIDTH;
+    return MAX_WIDTH;
 }
 
 int Room::getMaxItems()
 {
-    return this->MAX_ITEMS;
+    return MAX_ITEMS;
 }
 
 int Room::getMaxDoors()
 {
-    return this->MAX_DOORS;
+    return MAX_DOORS;
 }
 
 char Room::getWall(int height, int width)
 {
-    return this->walls[height][width];
+    return walls[height][width];
 }
 
 Item **Room::getItems()
 {
-    return this->items;
+    return items;
 }
 
 Item *Room::getItem(int itemIndex)
@@ -174,17 +174,17 @@ Item *Room::getItem(int itemIndex)
 
 string Room::getType()
 {
-    return this->type;
+    return type;
 }
 
 string Room::getName()
 {
-    return this->name;
+    return name;
 }
 
 string Room::getDescription()
 {
-    return this->description;
+    return description;
 }
 
 Door *Room::getDoor(int doorIndex)

@@ -6,7 +6,6 @@
   
   
 .............................................. */
-
 #ifndef GAME_HPP
 #define GAME_HPP
 #include <ncurses.h>
@@ -20,6 +19,7 @@
 #include "Potion.hpp"
 #include "Movable.hpp"
 #include "Immovable.hpp"
+#include "Colors.hpp"
 
 #define MAX_ROOMS 10
 
@@ -31,7 +31,6 @@
 #define WALL4 '/'
 #define WALL5 '+'
 #define DOOR '#'
-
 
 #define WINDOW_WIDTH 150
 #define WORLD_WINDOW_HEIGHT 30
@@ -99,8 +98,8 @@ public:
   void update();
   void resolveDoorMovement();
   void useKey();
-  void resolveHealing();  //user takes healing
-  void resolveDamage();    //user takes damage
+  void resolveHealing();                  //user takes healing
+  void resolveDamage();                   //user takes damage
   void resolveMovingItem(char direction); //user pushes an item forward in the direction they are trying to go
   void resolveItemAction(char direction);
 
@@ -110,8 +109,8 @@ public:
   .............................................. */
 
   // ACTIONS
-  void initColorPairs();
   void render();
+  void colorWindow(WINDOW *window, int colorPair);
   void renderCurrentWindow();
   void renderStatus();
   void renderWorld();

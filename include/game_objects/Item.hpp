@@ -6,11 +6,11 @@
   
   
 .............................................. */
-
 #ifndef ITEM_HPP
 #define ITEM_HPP
 
 #include <stdlib.h>
+#include <iostream>
 #include "Object.hpp"
 #include "Door.hpp"
 
@@ -24,6 +24,7 @@ protected:
   int weight; // how much the object weights
   int healing = 0;
   int damage = 0;
+
 public:
   // CONSTRUCTORS/DECONSTRUCTORS
   Item();          // default constructor for Item
@@ -39,7 +40,7 @@ public:
   int getDamage();
   // Actions
   virtual bool use(); // returns true if use() is successful, false if unsuccessful
-  virtual bool use(Door* door);
+  virtual bool use(Door *door);
   virtual void triggerItemActions(char direction);
 };
 
