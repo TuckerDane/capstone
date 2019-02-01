@@ -27,7 +27,7 @@ public:
 	//SETTERS
 	//GETTERS
 	//ACTION
-	void itemAction();
+	void triggerItemActions();
 };
 
 #endif

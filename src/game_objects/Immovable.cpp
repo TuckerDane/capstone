@@ -44,3 +44,4 @@ GETTERS
 ACTIONS
 
 ............................................*/
+//triggerItemActions. Do we want immovable objects to have an action that can be triggered?

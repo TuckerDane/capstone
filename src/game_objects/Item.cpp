@@ -74,7 +74,7 @@ bool Item::use(Door* door)
   return false;
 }
 
-void Item::moveItem(char direction)
+void Item::triggerItemActions(char direction)
 {
 	//filler
 }

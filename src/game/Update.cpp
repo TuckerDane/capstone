@@ -52,6 +52,14 @@ bool Game::isMoveAllowed(int y, int x)
     return (((testch & A_CHARTEXT) == GRASS) || ((testch & A_CHARTEXT) == EMPTY));
 }
 
+bool Game::isNotAWall(int y, int x)  //not a wall or a door
+{
+	int testch = mvwinch(this->worldWindow, y, x);
+	return (((testch & A_CHARTEXT) != WALL1) && ((testch & A_CHARTEXT) != WALL2) && ((testch & A_CHARTEXT) != WALL3) &&
+		((testch & A_CHARTEXT) != WALL4) && ((testch & A_CHARTEXT) != WALL5) && ((testch & A_CHARTEXT) != DOOR));  //if it is a wall, return false
+	
+}
+
 unsigned int Game::getUserInput()
 {
     return this->userInput;
@@ -109,20 +117,10 @@ void Game::update()
                     player.move('w');
                     resolveDoorMovement();
                 }
-                else if((mvwinch(this->worldWindow, player.getYPos() - 1, player.getXPos()) & A_CHARTEXT) == POTION)
+                else if(isNotAWall(player.getYPos() - 1, player.getXPos())) 
                 {
                     player.move('w');
-		    resolvePotionMovement();
-                }
-                else if((mvwinch(this->worldWindow, player.getYPos() - 1, player.getXPos()) & A_CHARTEXT) == TRAP)
-                {
-                    player.move('w');
-		    resolveTrapMovement();
-                }
-                else if(((mvwinch(this->worldWindow, player.getYPos() - 1, player.getXPos()) & A_CHARTEXT) == MOVABLE) && isMoveAllowed(player.getYPos() - 2, player.getXPos()))
-                {
-		    resolveMovingItem('w');   //move item
-                    player.move('w');         //move player
+		    resolveItemAction('w');
                 }
 	    }
         }
@@ -155,20 +153,10 @@ void Game::update()
                     player.move('s');
                     resolveDoorMovement();
                 }
-                else if((mvwinch(this->worldWindow, player.getYPos() + 1, player.getXPos()) & A_CHARTEXT) == POTION)
+                else if(isNotAWall(player.getYPos() + 1, player.getXPos()))
                 {
                     player.move('s');
-		    resolvePotionMovement();
-                }
-                else if((mvwinch(this->worldWindow, player.getYPos() + 1, player.getXPos()) & A_CHARTEXT) == TRAP)
-                {
-                    player.move('s');
-		    resolveTrapMovement();
-                }
-                else if(((mvwinch(this->worldWindow, player.getYPos() + 1, player.getXPos()) & A_CHARTEXT) == MOVABLE) && isMoveAllowed(player.getYPos() + 2, player.getXPos()))
-                {
-		    resolveMovingItem('s');   //move item
-                    player.move('s');         //move player
+		    resolveItemAction('s');
                 }
 	    }
         }
@@ -184,20 +172,10 @@ void Game::update()
                     player.move('a');
                     resolveDoorMovement();
                 }
-                else if((mvwinch(this->worldWindow, player.getYPos(), player.getXPos() - 1) & A_CHARTEXT) == POTION)
+                else if(isNotAWall(player.getYPos(), player.getXPos() - 1))
                 {
                     player.move('a');
-		    resolvePotionMovement();
-                }
-                else if((mvwinch(this->worldWindow, player.getYPos(), player.getXPos() - 1) & A_CHARTEXT) == TRAP)
-                {
-                    player.move('a');
-		    resolveTrapMovement();
-                }
-                else if(((mvwinch(this->worldWindow, player.getYPos(), player.getXPos() - 1) & A_CHARTEXT) == MOVABLE) && isMoveAllowed(player.getYPos(), player.getXPos() - 2))
-                {
-		    resolveMovingItem('a');   //move item
-                    player.move('a');         //move player
+		    resolveItemAction('a');
                 }
         }
         break;
@@ -212,20 +190,10 @@ void Game::update()
                     player.move('d');
                     resolveDoorMovement();
                 }
-                else if((mvwinch(this->worldWindow, player.getYPos(), player.getXPos() + 1) & A_CHARTEXT) == POTION)
+                else if(isNotAWall(player.getYPos(), player.getXPos() + 1)) 
                 {
                     player.move('d');
-		    resolvePotionMovement();
-                }
-                else if((mvwinch(this->worldWindow, player.getYPos(), player.getXPos() + 1) & A_CHARTEXT) == TRAP)
-                {
-                    player.move('d');
-		    resolveTrapMovement();
-                }
-                else if(((mvwinch(this->worldWindow, player.getYPos(), player.getXPos() + 1) & A_CHARTEXT) == MOVABLE) && isMoveAllowed(player.getYPos(), player.getXPos() + 2))
-                {
-		    resolveMovingItem('d');   //move item
-                    player.move('d');         //move player
+		    resolveItemAction('d');
                 }
         }
         break;
@@ -336,7 +304,7 @@ void Game::useKey()
     } 
 }
 
-void Game::resolvePotionMovement()  //player walks on a potion
+void Game::resolveHealing()  //player walks on a potion
 {
 	Item **items = rooms[player.getCurrentRoom()]->getItems();
 	for(int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
@@ -356,7 +324,7 @@ void Game::resolvePotionMovement()  //player walks on a potion
 	}
 }
 
-void Game::resolveTrapMovement()  //player walks on a trap
+void Game::resolveDamage()  //player walks on a trap
 {
 	Item **items = rooms[player.getCurrentRoom()]->getItems();
 	for(int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
@@ -380,24 +348,93 @@ void Game::resolveMovingItem(char direction)  //moving an item
 		{
 			if(direction == 'w')
 			{
-				if((player.getYPos() - 1 == items[i]->getYPos()) && (player.getXPos() == items[i]->getXPos()))
-					items[i]->moveItem('w');
+				if((player.getYPos() == items[i]->getYPos()) && (player.getXPos() == items[i]->getXPos()))
+					items[i]->triggerItemActions('w');
 			}
 			if(direction == 's')
 			{
-				if((player.getYPos() + 1 == items[i]->getYPos()) && (player.getXPos() == items[i]->getXPos()))
-					items[i]->moveItem('s');
+				if((player.getYPos() == items[i]->getYPos()) && (player.getXPos() == items[i]->getXPos()))
+					items[i]->triggerItemActions('s');
 			}
 			if(direction == 'a')
 			{
-				if((player.getXPos() - 1 == items[i]->getXPos()) && (player.getYPos() == items[i]->getYPos()))
-					items[i]->moveItem('a');
+				if((player.getXPos() == items[i]->getXPos()) && (player.getYPos() == items[i]->getYPos()))
+					items[i]->triggerItemActions('a');
 			}
 			if(direction == 'd')
 			{
-				if((player.getXPos() + 1 == items[i]->getXPos()) && (player.getYPos() == items[i]->getYPos()))
-					items[i]->moveItem('d');
+				if((player.getXPos() == items[i]->getXPos()) && (player.getYPos() == items[i]->getYPos()))
+					items[i]->triggerItemActions('d');
 			}
 		}
 	}
 }
+
+void Game::resolveItemAction(char direction)
+{
+	Item **items = rooms[player.getCurrentRoom()]->getItems();
+	for(int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
+	{
+		if(items[i] != NULL)
+		{
+			if (player.getXPos() == items[i]->getXPos() && player.getYPos() == items[i]->getYPos()) //if x and y value match
+			{
+				//get the symbol, then resolve the action of the corresponding symbol
+				if(items[i]->getSymbol() == 'P')
+					resolveHealing();
+				else if(items[i]->getSymbol() == 'T')
+					resolveDamage();
+				else if(items[i]->getSymbol() == 'M')
+				{
+					if(direction == 'w')
+					{
+						if(isMoveAllowed(player.getYPos() - 1, player.getXPos())) //item can be moved
+						{
+							resolveDamage();
+							resolveHealing();		//TODO: resolutionStep() or leave it?
+							resolveMovingItem(direction);
+						}
+						else
+							player.setYPos(player.getYPos() + 1);  //item cannot be move, move the player back
+					}
+					if(direction == 's')
+					{
+						if(isMoveAllowed(player.getYPos() + 1, player.getXPos())) //item can be moved
+						{
+							resolveDamage();
+							resolveHealing();
+							resolveMovingItem(direction);
+						}
+						else
+							player.setYPos(player.getYPos() - 1);  //item cannot be move, move the player back
+					}
+					if(direction == 'a')
+					{
+						if(isMoveAllowed(player.getYPos(), player.getXPos() - 1)) //item can be moved
+						{
+							resolveDamage();
+							resolveHealing();
+							resolveMovingItem(direction);
+						}
+						else
+							player.setXPos(player.getXPos() + 1);  //item cannot be move, move the player back
+					}
+					if(direction == 'd')
+					{
+						if(isMoveAllowed(player.getYPos(), player.getXPos() + 1)) //item can be moved
+						{
+							resolveDamage();
+							resolveHealing();
+							resolveMovingItem(direction);
+						}
+						else
+							player.setXPos(player.getXPos() - 1);  //item cannot be move, move the player back
+					}
+				}
+				else if(items[i]->getSymbol() == 'O')
+					break;
+			}
+		}
+	}
+}
+

@@ -51,6 +51,8 @@ class Player : public Object
 	void setInventoryItem(Item *item, int itemSlot);
 	void setSelectedItemIndex(int itemIndex);
 	void setIsMoved(bool isMoved);
+	void setHP(int newHP);
+	void setMaxHP(int newMaxHP);
 
 	// GETTERS
 	int getMaxCarryWeight();

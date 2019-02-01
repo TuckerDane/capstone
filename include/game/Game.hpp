@@ -25,10 +25,13 @@
 
 #define GRASS ' '
 #define EMPTY ' '
-#define POTION 'P'
-#define TRAP 'T'
-#define MOVABLE 'M'
-#define IMMOVABLE 'O'
+#define WALL1 '-'
+#define WALL2 '|'
+#define WALL3 '\\'
+#define WALL4 '/'
+#define WALL5 '+'
+#define DOOR '#'
+
 
 #define WINDOW_WIDTH 150
 #define WORLD_WINDOW_HEIGHT 30
@@ -86,6 +89,7 @@ public:
   // GETTERS
   bool getIsComplete();
   bool isMoveAllowed(int y, int x);
+  bool isNotAWall(int y, int x);
   unsigned int getUserInput();
   Room *getRoom(int roomIndex);
   string getNarrative();
@@ -95,9 +99,10 @@ public:
   void update();
   void resolveDoorMovement();
   void useKey();
-  void resolvePotionMovement();  //user steps on a potion
-  void resolveTrapMovement();    //user steps on a trap
+  void resolveHealing();  //user takes healing
+  void resolveDamage();    //user takes damage
   void resolveMovingItem(char direction); //user pushes an item forward in the direction they are trying to go
+  void resolveItemAction(char direction);
 
   /* ..............................................
     RENDER.CPP

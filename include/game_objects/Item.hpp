@@ -40,7 +40,7 @@ public:
   // Actions
   virtual bool use(); // returns true if use() is successful, false if unsuccessful
   virtual bool use(Door* door);
-  virtual void moveItem(char direction);
+  virtual void triggerItemActions(char direction);
 };
 
 #endif

@@ -26,7 +26,7 @@ Potion::Potion(int yPos, int xPos)
 {
 	this->yPos = yPos;
 	this->xPos = xPos;
-	this->name = "Health_Potion";
+	this->name = "Potion";
 	this->type = "potion_item";
 	this->weight = 2;
 	this->healing = 4;
@@ -49,7 +49,7 @@ ACTIONS
 
 ............................................*/
 
-void Potion::moveItem(char direction)
+void Potion::triggerItemActions(char direction)
 {
-	//filler for later use  (call to heal from inventory?)
+	//filler for later use if needed (triggering a buff, healing an enemy or door, etc)
 }

@@ -66,8 +66,8 @@ rooms[0]->setItem(new Immovable(15, 12), 3);
   rooms[1] = new Room("rooms/round.room");
   rooms[1]->setDoor(new Door(5, 1, 0, 10, 34, 3, true, COLOR_GREEN), 2);
 //set trap and potion for room 1
-rooms[1]->setItem(new Potion(5, 5),0);
-rooms[1]->setItem(new Trap(7, 7),1);
+rooms[1]->setItem(new Movable(5, 5, COLOR_GREEN, 1, 1),0);
+rooms[1]->setItem(new Movable(7, 7, COLOR_RED, 1, 2),1);
 
   narrative = "default narrative";
   currentWindow = worldWindow;

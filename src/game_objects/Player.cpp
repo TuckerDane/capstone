@@ -87,6 +87,15 @@ void Player::setIsMoved(bool isMoved)
 	this->isMoved = isMoved;
 }
 
+void Player::setHP(int newHP)
+{
+	this->hp = newHP;  
+}
+
+void Player::setMaxHP(int newMaxHP)
+{
+	this->maxHP = newMaxHP;
+}
 /* ..............................................
   GETTERS
   

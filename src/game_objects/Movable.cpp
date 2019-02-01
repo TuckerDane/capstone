@@ -31,6 +31,24 @@ Movable::Movable(int yPos, int xPos)
 	this->description = "This boulder is round-ish, maybe you can push it";
 }
 
+Movable::Movable(int yPos, int xPos, int color, int number, int choice)
+{
+	this->yPos = yPos;
+	this->xPos = xPos;
+	this->name = "boulder";
+	this->type = "movable";
+	this->symbol = 'M';
+	this->color = color;
+	this->description = "This boulder is round-ish, maybe you can push it";
+
+	if(choice == 1) //number is healing
+	{
+		this->healing = number;
+	}
+	else
+		this->damage = number;
+}
+
 Movable::~Movable()
 {
 	
@@ -45,7 +63,7 @@ ACTIONS
 
 ............................................*/
 
-void Movable::moveItem(char direction)
+void Movable::triggerItemActions(char direction)
 {
 	//filler for later use  (call to heal from inventory?)
 	if (direction == 'w')
