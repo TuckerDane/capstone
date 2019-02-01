@@ -1,6 +1,6 @@
 ./build
 .vscode/
 build/
-logs/
+logs/*.log
 tests/build/
 tests/adventure_tests
