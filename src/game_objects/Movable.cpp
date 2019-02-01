@@ -3,63 +3,64 @@
  @date 1/31/19
 
 ............................................*/
-
 #include "Movable.hpp"
 
 /*............................................
-CONSTRUCTOR/DESTRUCTORS
+  CONSTRUCTOR/DESTRUCTORS
 
 ............................................*/
 
 Movable::Movable()
 {
-	this->name = "boulder";
-	this->type = "movable";
-	this->symbol = 'M';
-	this->color = COLOR_CYAN;
-	this->description = "This boulder is round-ish, maybe you can push it";
+	name = "boulder";
+	type = "movable";
+	symbol = 'M';
+	color = COLOR_CYAN;
+	description = "This boulder is round-ish, maybe you can push it";
 }
 
 Movable::Movable(int yPos, int xPos)
 {
 	this->yPos = yPos;
 	this->xPos = xPos;
-	this->name = "boulder";
-	this->type = "movable";
-	this->symbol = 'M';
-	this->color = COLOR_CYAN;
-	this->description = "This boulder is round-ish, maybe you can push it";
+	name = "boulder";
+	type = "movable";
+	symbol = 'M';
+	color = COLOR_CYAN;
+	description = "This boulder is round-ish, maybe you can push it";
 }
 
 Movable::Movable(int yPos, int xPos, int color, int number, int choice)
 {
 	this->yPos = yPos;
 	this->xPos = xPos;
-	this->name = "boulder";
-	this->type = "movable";
-	this->symbol = 'M';
+	name = "boulder";
+	type = "movable";
+	symbol = 'M';
 	this->color = color;
-	this->description = "This boulder is round-ish, maybe you can push it";
+	description = "This boulder is round-ish, maybe you can push it";
 
-	if(choice == 1) //number is healing
+	if (choice == 1) //number is healing
 	{
-		this->healing = number;
+		healing = number;
 	}
 	else
-		this->damage = number;
+	{
+		damage = number;
+	}
 }
 
 Movable::~Movable()
 {
-	
 }
+
 /*............................................
-GETTERS
+  GETTERS
 
 ............................................*/
 
 /*............................................
-ACTIONS
+  ACTIONS
 
 ............................................*/
 

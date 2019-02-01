@@ -15,11 +15,11 @@
 
 Door::Door() : Object(-1, -1, COLOR_BLACK, '#', "door_object", "door", "Door: an opening between adjacent rooms")
 {
-    this->nextRoom = -1;
-    this->nextYPos = -1;
-    this->nextXPos = -1;
-    this->password = -1;
-    this->locked = false;
+    nextRoom = -1;
+    nextYPos = -1;
+    nextXPos = -1;
+    password = -1;
+    locked = false;
 }
 
 Door::Door(int yPos, int xPos, int nextRoom, int nextYPos, int nextXPos, int password, bool locked, int color) : Object()
@@ -82,25 +82,25 @@ void Door::setLocked(bool locked)
 
 int Door::getNextRoom()
 {
-    return this->nextRoom;
+    return nextRoom;
 }
 
 int Door::getNextYPos()
 {
-    return this->nextYPos;
+    return nextYPos;
 }
 
 int Door::getNextXPos()
 {
-    return this->nextXPos;
+    return nextXPos;
 }
 
 int Door::getPassword()
 {
-    return this->password;
+    return password;
 }
 
 bool Door::getLocked()
 {
-    return this->locked;
+    return locked;
 }

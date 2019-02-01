@@ -3,41 +3,39 @@
  @date 1/30/19
 
 ............................................*/
-
 #include "Potion.hpp"
 
 /*............................................
-CONSTRUCTOR/DESTRUCTORS
+  CONSTRUCTOR/DESTRUCTORS
 
 ............................................*/
 
 Potion::Potion()
 {
-	this->name = "Health_Potion";
-	this->type = "potion_item";
-	this->weight = 2;
-	this->healing = 4;
-	this->symbol = 'P';
-	this->color = COLOR_GREEN;
-	this->description = "Heals the player for 4 HP";
+	name = "Health_Potion";
+	type = "potion_item";
+	weight = 2;
+	healing = 4;
+	symbol = 'P';
+	color = COLOR_GREEN;
+	description = "Heals the player for 4 HP";
 }
 
 Potion::Potion(int yPos, int xPos)
 {
 	this->yPos = yPos;
 	this->xPos = xPos;
-	this->name = "Potion";
-	this->type = "potion_item";
-	this->weight = 2;
-	this->healing = 4;
-	this->symbol = 'P';
-	this->color = COLOR_GREEN;
-	this->description = "Heals the player for 4 HP";
+	name = "Potion";
+	type = "potion_item";
+	weight = 2;
+	healing = 4;
+	symbol = 'P';
+	color = COLOR_GREEN;
+	description = "Heals the player for 4 HP";
 }
 
 Potion::~Potion()
 {
-	
 }
 /*............................................
 GETTERS
