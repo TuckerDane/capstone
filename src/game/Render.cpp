@@ -187,35 +187,9 @@ void Game::renderItems()
   {
     if (items[i] != NULL)
     {
+      int itemColor = items[i]->setColorPair(items[i]->getColor());
+      mvwaddchWithColor(items[i]->getYPos(), items[i]->getXPos(), items[i]->getSymbol(), itemColor);
       //insert if color is black? same for doors, hidden doors or items? Lamp/light stretch goal
-      if (items[i]->getColor() == 1) //if color is red
-      {
-        mvwaddchWithColor(items[i]->getYPos(), items[i]->getXPos(), items[i]->getSymbol(), RED_ON_BLACK);
-      }
-      else if (items[i]->getColor() == 2) //if color is green
-      {
-        mvwaddchWithColor(items[i]->getYPos(), items[i]->getXPos(), items[i]->getSymbol(), GREEN_ON_BLACK);
-      }
-      else if (items[i]->getColor() == 3) //yellow
-      {
-        mvwaddchWithColor(items[i]->getYPos(), items[i]->getXPos(), items[i]->getSymbol(), YELLOW_ON_BLACK);
-      }
-      else if (items[i]->getColor() == 4) //blue
-      {
-        mvwaddchWithColor(items[i]->getYPos(), items[i]->getXPos(), items[i]->getSymbol(), BLUE_ON_BLACK);
-      }
-      else if (items[i]->getColor() == 5) //magenta
-      {
-        mvwaddchWithColor(items[i]->getYPos(), items[i]->getXPos(), items[i]->getSymbol(), MAGENTA_ON_BLACK);
-      }
-      else if (items[i]->getColor() == 6) //cyan
-      {
-        mvwaddchWithColor(items[i]->getYPos(), items[i]->getXPos(), items[i]->getSymbol(), CYAN_ON_BLACK);
-      }
-      else
-      {
-        mvwaddchWithColor(items[i]->getYPos(), items[i]->getXPos(), items[i]->getSymbol(), WHITE_ON_BLACK);
-      }
     }
   }
 }
