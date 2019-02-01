@@ -23,6 +23,8 @@ Player::Player() : Object(-1, -1, COLOR_BLACK, '^', "player_object", "adventurer
 	}
 	this->isMoved = false;
 	setSelectedItemIndex(0);
+	hp = 10;
+	maxHP = 10;
 }
 
 Player::~Player()
@@ -85,6 +87,15 @@ void Player::setIsMoved(bool isMoved)
 	this->isMoved = isMoved;
 }
 
+void Player::setHP(int newHP)
+{
+	this->hp = newHP;  
+}
+
+void Player::setMaxHP(int newMaxHP)
+{
+	this->maxHP = newMaxHP;
+}
 /* ..............................................
   GETTERS
   
@@ -115,6 +126,15 @@ int Player::getMaxInventory()
 	return this->MAX_INVENTORY;
 }
 
+int Player::getHP()
+{
+	return this->hp;
+}
+
+int Player::getMaxHP()
+{
+	return this->maxHP;
+}
 /* ..............................................
   @brief returns the entire player inventory
   
@@ -244,4 +264,30 @@ Item *Player::drop(int itemSlot)
 		}
 	}
 	return NULL;
+}
+
+/* ..............................................
+  @brief damages the player
+  
+  @param change in HP
+.............................................. */
+
+void Player::damageHP(int hpChange)
+{
+	this->hp -= hpChange;
+}
+
+/* ..............................................
+  @brief damages the player
+  
+  @param change in HP
+.............................................. */
+
+void Player::healHP(int hpChange)
+{
+	this->hp += hpChange;
+	if (this->hp > this->maxHP)
+	{
+		this->hp = maxHP;
+	}
 }

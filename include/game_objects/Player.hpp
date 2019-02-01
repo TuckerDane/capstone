@@ -34,6 +34,8 @@ class Player : public Object
 	Item *inventory[MAX_INVENTORY]; // an inventory capable of carrying 10 Items
 	bool isMoved;					// true of the player moved, false if the player did not move
 	int selectedItemIndex;
+	int hp;			//health points for the player, maxHP prevents the player from going higher than starting hp
+	int maxHP;
 
   public:
 	// CONSTRUCTOR/DESTRUCTORS
@@ -49,6 +51,8 @@ class Player : public Object
 	void setInventoryItem(Item *item, int itemSlot);
 	void setSelectedItemIndex(int itemIndex);
 	void setIsMoved(bool isMoved);
+	void setHP(int newHP);
+	void setMaxHP(int newMaxHP);
 
 	// GETTERS
 	int getMaxCarryWeight();
@@ -61,11 +65,15 @@ class Player : public Object
 	Item *getInventoryItem(int itemSlot); // returns a specific inventory item
 	bool getIsMoved();
 	int getMaxInventory();
+	int getHP();
+	int getMaxHP();
 
 	// ACTIONS
 	void move(char direction); // moves the Player x/y position by one room
 	bool pickUp(Item *item);   // adds an Object into the player's inventory
 	Item *drop(int itemSlot);  // drops an Object from the player's inventory
+	void damageHP(int);
+	void healHP(int);
 };
 
 #endif

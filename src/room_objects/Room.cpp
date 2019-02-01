@@ -102,9 +102,9 @@ void Room::setItems()
     //TODO: setItems()
 }
 
-void Room::setItem()
+void Room::setItem(Item *item, int itemIndex)
 {
-    //TODO: setItem()
+	items[itemIndex] = item;
 }
 
 void Room::setType(string type)
@@ -165,6 +165,11 @@ char Room::getWall(int height, int width)
 Item **Room::getItems()
 {
     return this->items;
+}
+
+Item *Room::getItem(int itemIndex)
+{
+    return items[itemIndex];
 }
 
 string Room::getType()
