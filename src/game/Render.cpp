@@ -98,14 +98,13 @@ void Game::renderInventory()
     {
       if (inventory[i] == NULL)
       {
-        highlightColor = A_REVERSE;
-        wattron(inventoryWindow, highlightColor);
+        highlightColor = WHITE_ON_BLACK;
       }
       else
       {
         highlightColor = inventory[i]->setColorPair(inventory[i]->getColor(), COLOR_BLACK);
-        wattron(inventoryWindow, COLOR_PAIR(highlightColor));
       }
+      wattron(inventoryWindow, COLOR_PAIR(highlightColor));
     }
     if (inventory[i] != NULL)
     {
@@ -121,15 +120,7 @@ void Game::renderInventory()
       line = std::to_string(i + 1) + "\tempty slot";
       mvwprintw(inventoryWindow, i + 5, 2, line.c_str());
     }
-
-    if (inventory[i] == NULL)
-    {
-      wattroff(inventoryWindow, highlightColor);
-    }
-    else
-    {
-      wattroff(inventoryWindow, COLOR_PAIR(highlightColor));
-    } 
+    wattroff(inventoryWindow, COLOR_PAIR(highlightColor)); 
   }
 
   wrefresh(inventoryWindow);
