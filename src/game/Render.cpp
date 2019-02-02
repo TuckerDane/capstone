@@ -131,7 +131,24 @@ void Game::renderDev()
   }
   for (int height = 0; height < maxHeight; height++)
   {
-    mvwprintw(developerWindow, height + 1, 2, devConsole.getLogLine(startingLine + height).c_str());
+    string logLine = devConsole.getLogLine(startingLine + height);
+    int textColor;
+    if (logLine.find("ERROR") != std::string::npos)
+    {
+      textColor = RED_ON_BLACK;
+    }
+    else if (logLine.find("SUCCESS") != std::string::npos)
+    {
+      textColor = GREEN_ON_BLACK;
+    }
+    else
+    {
+      textColor = WHITE_ON_BLACK;
+    }
+
+    wattron(developerWindow, COLOR_PAIR(textColor));
+    mvwprintw(developerWindow, height + 1, 2, logLine.c_str());
+    wattroff(developerWindow, COLOR_PAIR(textColor));
   }
   wrefresh(developerWindow);
 }
