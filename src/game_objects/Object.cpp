@@ -124,35 +124,70 @@ string Object::getDescription()
   
 .............................................. */
 
-int Object::setColorPair(int objectColor)
+int Object::setColorPair(int objectColor, int backgroundColor)
 {
   if (objectColor == COLOR_RED)
   {
-    return RED_ON_BLACK;
+    if (backgroundColor == COLOR_BLACK)
+      return RED_ON_BLACK;
+    else if(backgroundColor == COLOR_BLUE)
+      return RED_ON_BLUE;
+    else
+      return 0;    
   }
   else if (objectColor == COLOR_GREEN)
   {
-    return GREEN_ON_BLACK;
+    if (backgroundColor == COLOR_BLACK)
+      return GREEN_ON_BLACK;
+    else if(backgroundColor == COLOR_BLUE)
+      return GREEN_ON_BLUE;
+    else
+      return 0;
   }
   else if (objectColor == COLOR_YELLOW)
   {
-    return YELLOW_ON_BLACK;
+    if (backgroundColor == COLOR_BLACK)
+      return YELLOW_ON_BLACK;
+    else if(backgroundColor == COLOR_BLUE)
+      return YELLOW_ON_BLUE;
+    else
+      return 0;
   }
   else if (objectColor == COLOR_BLUE)
   {
-    return BLUE_ON_BLACK;
+    if (backgroundColor == COLOR_BLACK)
+      return BLUE_ON_BLACK;
+    else if(backgroundColor == COLOR_BLUE)  // TODO: Figure out what to do in this case
+      return BLUE_ON_BLACK;
+    else
+      return 0;
   }
   else if (objectColor == COLOR_MAGENTA)
   {
-    return MAGENTA_ON_BLACK;
+    if (backgroundColor == COLOR_BLACK)
+      return MAGENTA_ON_BLACK;
+    else if(backgroundColor == COLOR_BLUE)
+      return MAGENTA_ON_BLUE;
+    else
+      return 0;
   }
   else if (objectColor == COLOR_CYAN)
   {
-    return CYAN_ON_BLACK;
+    if (backgroundColor == COLOR_BLACK)
+      return CYAN_ON_BLACK;
+    else if(backgroundColor == COLOR_BLUE)
+      return CYAN_ON_BLUE;
+    else
+      return 0;
   }
   else if (objectColor == COLOR_WHITE)
   {
-    return WHITE_ON_BLACK;
+    if (backgroundColor == COLOR_BLACK)
+      return WHITE_ON_BLACK;
+    else if(backgroundColor == COLOR_BLUE)
+      return WHITE_ON_BLUE;
+    else
+      return 0;
   }
   else
   {

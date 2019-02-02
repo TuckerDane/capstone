@@ -45,9 +45,9 @@ Game::Game()
   player.setCurrentRoom(0);
   player.setXPos(5);
   player.setYPos(5);
-  player.setInventoryItem(new Key("Yellow Key", 1), 0);
-  player.setInventoryItem(new Key("Blue Key", 2), 1);
-  player.setInventoryItem(new Key("Green Key", 3), 2);
+  player.setInventoryItem(new Key("Yellow Key", 1, COLOR_YELLOW), 0);
+  player.setInventoryItem(new Key("Blue Key", 2, COLOR_BLUE), 1);
+  player.setInventoryItem(new Key("Green Key", 3, COLOR_GREEN), 2);
   player.setNumItems(2);
 
   /* initialize Rooms */

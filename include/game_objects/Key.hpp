@@ -24,7 +24,7 @@ private:
 public:
   // CONSTRUCTORS/DECONSTRUCTORS
   Key(); // default constructor for Key
-  Key(string name, int password);
+  Key(string name, int password, int color);
   ~Key(); // deconstructor for Key
 
   // SETTERS
