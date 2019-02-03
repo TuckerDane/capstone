@@ -26,6 +26,7 @@ void Game::setRoom(Room *room, int roomIndex)
 void Game::setNarrative(string narrative)
 {
     this->narrative = narrative;
+    devConsole.log(narrative);
 }
 
 void Game::setCurrentWindow(WINDOW *window)
@@ -198,34 +199,34 @@ void Game::update()
         break;
     case 'i':
     case 'I':
-        if (this->getCurrentWindow() == this->worldWindow)
+        if (getCurrentWindow() == worldWindow)
         {
-            this->setCurrentWindow(this->inventoryWindow);
-            this->setNarrative("switched to inventory window!");
+            setCurrentWindow(inventoryWindow);
+            setNarrative("switched to inventory window!");
         }
-        else if (this->getCurrentWindow() == this->inventoryWindow)
+        else if (getCurrentWindow() == inventoryWindow)
         {
-            this->setCurrentWindow(this->worldWindow);
-            this->setNarrative("switched to world window!");
+            setCurrentWindow(worldWindow);
+            setNarrative("switched to world window!");
         }
         break;
     case '`':
     case '~':
-        if (this->getCurrentWindow() != this->developerWindow)
+        if (getCurrentWindow() != developerWindow)
         {
-            this->setCurrentWindow(this->developerWindow);
-            this->setNarrative("switched to developer window!");
+            setCurrentWindow(developerWindow);
+            setNarrative("switched to developer window!");
         }
         else
         {
-            this->setCurrentWindow(this->worldWindow);
+            setCurrentWindow(worldWindow);
         }
         break;
     case 'e':
     case 'E':
         if (player.getSelectedItem() == NULL)
         {
-            narrative = "you do not have an item selected to use";
+            setNarrative("you do not have an item selected to use");
         }
         else
         {
@@ -238,7 +239,7 @@ void Game::update()
     case 'q':
     case 'Q':
         string temp = getNarrative();
-        this->setNarrative("Would you like to quit? Press Y to confirm or any other key to return to <Adventure Game>.");
+        setNarrative("Would you like to quit? Press Y to confirm or any other key to return to <Adventure Game>.");
         renderNarrative();
         unsigned int confirm = getch();
         if (confirm == 'y' || confirm == 'Y')
@@ -248,7 +249,7 @@ void Game::update()
         }
         else
         {
-            this->setNarrative(temp);
+            setNarrative(temp);
             break;
         }
     }
@@ -295,11 +296,11 @@ void Game::useKey()
 
     if (keyIsUsed)
     {
-        narrative = "you used the " + player.getSelectedItem()->getName();
+        setNarrative("you used the " + player.getSelectedItem()->getName());
     }
     else
     {
-        narrative = "the " + player.getSelectedItem()->getName() + " does not work here...";
+        setNarrative("the " + player.getSelectedItem()->getName() + " does not work here...");
     }
 }
 
