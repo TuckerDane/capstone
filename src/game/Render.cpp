@@ -93,9 +93,18 @@ void Game::renderInventory()
   string line;
   for (int i = 0; i < player.getMaxInventory(); i++)
   {
+    int highlightColor;
     if (i == player.getSelectedItemIndex())
     {
-      wattron(inventoryWindow, A_REVERSE);
+      if (inventory[i] == NULL)
+      {
+        highlightColor = WHITE_ON_BLACK;
+      }
+      else
+      {
+        highlightColor = inventory[i]->setColorPair(inventory[i]->getColor(), COLOR_BLACK);
+      }
+      wattron(inventoryWindow, COLOR_PAIR(highlightColor));
     }
     if (inventory[i] != NULL)
     {
@@ -111,7 +120,7 @@ void Game::renderInventory()
       line = std::to_string(i + 1) + "\tempty slot";
       mvwprintw(inventoryWindow, i + 5, 2, line.c_str());
     }
-    wattroff(inventoryWindow, A_REVERSE);
+    wattroff(inventoryWindow, COLOR_PAIR(highlightColor)); 
   }
 
   wrefresh(inventoryWindow);
@@ -190,7 +199,7 @@ void Game::renderDoors()
   {
     if (doors[i] != NULL)
     {
-      int doorColor = doors[i]->setColorPair(doors[i]->getColor());
+      int doorColor = doors[i]->setColorPair(doors[i]->getColor(), COLOR_BLACK);
       mvwaddchWithColor(doors[i]->getYPos(), doors[i]->getXPos(), doors[i]->getSymbol(), doorColor);
     }
   }
@@ -204,7 +213,7 @@ void Game::renderItems()
   {
     if (items[i] != NULL)
     {
-      int itemColor = items[i]->setColorPair(items[i]->getColor());
+      int itemColor = items[i]->setColorPair(items[i]->getColor(), COLOR_BLACK);
       mvwaddchWithColor(items[i]->getYPos(), items[i]->getXPos(), items[i]->getSymbol(), itemColor);
       //insert if color is black? same for doors, hidden doors or items? Lamp/light stretch goal
     }

@@ -20,15 +20,17 @@ Key::Key() : Item()
   weight = 1;
   password = -1;
   description = "used to unlock doors";
+  color = 0;
 }
 
-Key::Key(string name, int password) : Item()
+Key::Key(string name, int password, int color) : Item()
 {
   type = "key";
   this->name = name;
   weight = 1;
   this->password = password;
   description = "used to unlock doors";
+  this->color =  color;
 }
 
 Key::~Key()
