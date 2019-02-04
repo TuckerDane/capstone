@@ -23,7 +23,7 @@ Player::Player() : Object(-1, -1, COLOR_BLACK, '^', "player_object", "adventurer
 	}
 	isMoved = false;
 	setSelectedItemIndex(0);
-	setPermSelectedItemIndex(0);
+	setEquippedItemIndex(0);
 	hp = 10;
 	maxHP = 10;
 	currentCarryWeight = 0;
@@ -85,9 +85,9 @@ void Player::setSelectedItemIndex(int itemIndex)
 	this->selectedItemIndex = itemIndex;
 }
 
-void Player::setPermSelectedItemIndex(int itemIndex)
+void Player::setEquippedItemIndex(int itemIndex)
 {
-	this->permSelectedItemIndex = itemIndex;
+	this->equippedItemIndex = itemIndex;
 }
 
 void Player::setIsMoved(bool isMoved)
@@ -175,9 +175,9 @@ int Player::getSelectedItemIndex()
 	return selectedItemIndex;
 }
 
-int Player::getPermSelectedItemIndex()
+int Player::getEquippedItemIndex()
 {
-	return permSelectedItemIndex;
+	return equippedItemIndex;
 }
 
 bool Player::getIsMoved()

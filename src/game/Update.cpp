@@ -94,7 +94,7 @@ void Game::update()
 	{
             if (player.getSelectedItemIndex() > -1)
             {
-                player.setPermSelectedItemIndex(player.getSelectedItemIndex());
+                player.setEquippedItemIndex(player.getSelectedItemIndex());
             }
             break;
 	}
