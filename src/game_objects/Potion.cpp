@@ -4,6 +4,7 @@
 
 ............................................*/
 #include "Potion.hpp"
+#include "Player.hpp"
 
 /*............................................
   CONSTRUCTOR/DESTRUCTORS
@@ -13,7 +14,7 @@
 Potion::Potion()
 {
 	name = "Health_Potion";
-	type = "potion_item";
+	type = "potion";
 	weight = 2;
 	healing = 4;
 	symbol = 'P';
@@ -26,7 +27,7 @@ Potion::Potion(int yPos, int xPos)
 	this->yPos = yPos;
 	this->xPos = xPos;
 	name = "Potion";
-	type = "potion_item";
+	type = "potion";
 	weight = 2;
 	healing = 4;
 	symbol = 'P';
@@ -49,5 +50,5 @@ ACTIONS
 
 void Potion::triggerItemActions(char direction)
 {
-	//filler for later use if needed (triggering a buff, healing an enemy or door, etc)
+	//filler for later use if needde (triggering a buff, healing an enemy or door, etc)
 }

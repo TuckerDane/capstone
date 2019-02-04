@@ -89,8 +89,17 @@ void Game::update()
     player.setIsMoved(false);
     switch (this->userInput)
     {
+    case 'j':
+    case 'J':
+	{
+            if (player.getSelectedItemIndex() > -1)
+            {
+                player.setPermSelectedItemIndex(player.getSelectedItemIndex());
+            }
+            break;
+	}
     case KEY_UP:
-    case 'w':
+    case 'w': 
     case 'W':
         if (this->getCurrentWindow() == this->inventoryWindow) //Inventory Management
         {
@@ -228,30 +237,40 @@ void Game::update()
         {
             setNarrative("you do not have an item selected to use");
         }
-        else
+        else if (player.getSelectedItem()->getType() == "key")
         {
-            if (player.getSelectedItem()->getType() == "key")
-            {
                 useKey();
-            }
         }
+	else if(player.getSelectedItem()->getType() == "potion")
+	{
+		usePotion(player.getSelectedItem());
+	}
         break;
+    case 'p':
+    case 'P':
+	pickUpItem();
+	break;
+    case ';':
+    case ':':
+	dropItem();
+	break;
     case 'q':
     case 'Q':
-        string temp = getNarrative();
+    {
+	 string temp = getNarrative();
         setNarrative("Would you like to quit? Press Y to confirm or any other key to return to <Adventure Game>.");
         renderNarrative();
         unsigned int confirm = getch();
         if (confirm == 'y' || confirm == 'Y')
         {
             setIsComplete(true);
-            break;
         }
         else
         {
             setNarrative(temp);
-            break;
         }
+	break;
+    }
     }
 }
 
@@ -322,6 +341,18 @@ void Game::resolveHealing() //player walks on a potion
             }
         }
     }
+}
+
+void Game::usePotion(Item* item)
+{
+        if (player.getHP() < player.getMaxHP())
+        {
+              player.healHP(item->getHealing());
+	      setNarrative("You healed " + item->getHealing());
+        }
+	else
+	      setNarrative("You feel great! Why would you want to heal?");
+	
 }
 
 void Game::resolveDamage() //player walks on a trap
@@ -437,3 +468,102 @@ void Game::resolveItemAction(char direction)
         }
     }
 }
+
+void Game::pickUpItem() //player walks on a potion
+{
+    Item **items = rooms[player.getCurrentRoom()]->getItems();
+    bool pickedUpItem;
+    Item* theItem;
+    for (int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
+    {
+        if (items[i] != NULL)
+        {
+            if(player.getSymbol() == '^')
+	    {
+		if(((player.getYPos() - 1) == items[i]->getYPos()) && player.getXPos() == items[i]->getXPos())
+		{
+		     theItem = items[i];
+		     pickedUpItem = player.pickUp(theItem);
+		} 
+	    }
+
+	    else if(player.getSymbol() == 'v')   
+	    {
+		if(((player.getYPos() + 1) == items[i]->getYPos()) && player.getXPos() == items[i]->getXPos())
+		{
+		     theItem = items[i];
+		     pickedUpItem = player.pickUp(theItem);
+		} 
+	    }
+
+	    else if(player.getSymbol() == '<')   
+	    {
+		if(((player.getXPos() - 1) == items[i]->getXPos()) && player.getYPos() == items[i]->getYPos())
+		{
+		     theItem = items[i];
+		     pickedUpItem = player.pickUp(theItem);
+		} 
+	    }
+
+	    else
+	    {
+		if(((player.getXPos() + 1) == items[i]->getXPos()) && player.getYPos() == items[i]->getYPos())
+		{
+		     theItem = items[i];
+		     pickedUpItem = player.pickUp(theItem);
+		} 
+	    }
+	
+	    if (pickedUpItem) 
+            {
+            	setNarrative("You picked up the " + theItem->getName());
+		theItem->setXPos(-1);
+		theItem->setYPos(-1);
+	    }
+        }
+    }
+}
+
+void Game::dropItem()
+{
+	Item* droppedItem = player.drop(player.getSelectedItemIndex());  //get the item that has been dropped
+	Item** items = rooms[player.getCurrentRoom()]->getItems();		//get the items in the room
+	int itemIndex = 0;							//index for item array
+	bool itemHasBeenDropped = false;
+	
+	while ((itemHasBeenDropped == false)) //&& (itemIndex < rooms[player.getCurrentRoom()]->getMaxItems()))
+	{
+		if(items[itemIndex] != NULL) 
+		{
+			if(items[itemIndex]->getYPos() == player.getYPos() && items[itemIndex]->getXPos() == player.getXPos())
+			{
+				setNarrative("Item is already here. You cannot drop another here");
+				break;
+			}
+		}
+		else //items[i] == NULL
+		{
+			droppedItem->setXPos(player.getXPos());
+			droppedItem->setYPos(player.getYPos());
+			items[itemIndex] = droppedItem;
+			itemHasBeenDropped = true;
+		}
+		itemIndex++;
+	}
+	if(itemHasBeenDropped == true)
+	{
+		setNarrative("You have dropped " + droppedItem->getName());
+	}
+	else
+		setNarrative("You are unable to drop the item here");
+}
+
+
+
+
+
+
+
+
+
+
