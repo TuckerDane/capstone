@@ -20,7 +20,7 @@ TEST_CASE("default constructor sets Key Class variables", "[Key]")
 
 TEST_CASE("overload constructor sets Key Class variables", "[Key]")
 {
-    Key k("keyname", 1);
+    Key k("keyname", 1, COLOR_BLUE);
     REQUIRE( k.getType() == "key" );
     REQUIRE( k.getName() == "keyname");
     REQUIRE( k.getPassword() == 1);
