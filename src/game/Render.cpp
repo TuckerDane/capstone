@@ -52,13 +52,13 @@ void Game::renderStatus()
   // render player's selected item
   mvwprintw(statusWindow, 1, 2, "Item");
   mvwprintw(statusWindow, 2, 2, "----");
-  if (player.getInventoryItem(player.getSelectedItemIndex()) == NULL)
+  if (player.getInventoryItem(player.getEquippedItemIndex()) == NULL)
   {
     mvwprintw(statusWindow, 3, 2, "none");
   }
   else
   {
-    mvwprintw(statusWindow, 3, 2, player.getInventoryItem(player.getSelectedItemIndex())->getName().c_str());
+    mvwprintw(statusWindow, 3, 2, player.getInventoryItem(player.getEquippedItemIndex())->getName().c_str());
   }
 
   // render player's HP
@@ -110,7 +110,14 @@ void Game::renderInventory()
     {
       line = std::to_string(i + 1);
       mvwprintw(inventoryWindow, i + 5, 2, line.c_str());
-      line = inventory[i]->getName();
+      if(i == player.getEquippedItemIndex())
+      {
+	line = inventory[i]->getName() + "*";
+      }
+      else
+      {
+	line = inventory[i]->getName();
+      }
       mvwprintw(inventoryWindow, i + 5, 8, line.c_str());
       line = std::to_string(inventory[i]->getWeight());
       mvwprintw(inventoryWindow, i + 5, 26, line.c_str());

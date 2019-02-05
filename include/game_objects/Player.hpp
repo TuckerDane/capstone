@@ -33,6 +33,7 @@ private:
 	Item *inventory[MAX_INVENTORY]; // an inventory capable of carrying 10 Items
 	bool isMoved;										// true of the player moved, false if the player did not move
 	int selectedItemIndex;
+	int equippedItemIndex;
 	int hp; //health points for the player, maxHP prevents the player from going higher than starting hp
 	int maxHP;
 
@@ -49,6 +50,7 @@ public:
 	void setInventory(Item *inventory[MAX_INVENTORY], int numItems);
 	void setInventoryItem(Item *item, int itemSlot);
 	void setSelectedItemIndex(int itemIndex);
+	void setEquippedItemIndex(int itemIndex);
 	void setIsMoved(bool isMoved);
 	void setHP(int newHP);
 	void setMaxHP(int newMaxHP);
@@ -59,6 +61,7 @@ public:
 	int getNumItems();
 	int getCurrentRoom();
 	int getSelectedItemIndex();
+	int getEquippedItemIndex();
 	Item *getSelectedItem();
 	Item **getInventory();								// returns the entire player inventory
 	Item *getInventoryItem(int itemSlot); // returns a specific inventory item
