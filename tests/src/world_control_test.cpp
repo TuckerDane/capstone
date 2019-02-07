@@ -1,11 +1,6 @@
-#define CATCH_CONFIG_MAIN
 #include "catch.hpp"
-// #include "Object.hpp"
-// #include "Player.hpp"
-// #include "Door.hpp"
-// #include "../../src/game_objects/Object.cpp"
-// #include "../../src/game_objects/Player.cpp"
-// #include "../../src/game_objects/Door.cpp"
+#include "Player.hpp"
+#include "../../src/game_objects/Player.cpp"
 
 //SKELETON
 // TEST_CASE("TEST CASE DESCRIPTION HERE", "[KEYWORD]")
@@ -18,17 +13,17 @@
     // REQUIRE( k.getDescription() == "used to unlock doors");
 // }
 
-// Test if w || W || KEY_UP, player moves up (3 SEPERATE TESTS PER KEY)
-// TEST_CASE("w key makes player position go from (x,y) to (x,y-1)", "[movement][w]")
-// {
-//     Player p;
-//     int originalX = p.getXPos();
-//     int originalY = p.getYPos();
+// Test if w || W || KEY_UP, player moves up
+TEST_CASE("w key makes player position go from (x,y) to (x,y-1)", "[movement][UP]")
+{
+    Player p;
+    int originalX = p.getXPos();
+    int originalY = p.getYPos();
 
-//     p.move('w');
-//     REQUIRE( p.getXPos() == originalX );
-//     REQUIRE( p.getYPos() == (originalY - 1) );
-// }
+    p.move('w');
+    REQUIRE( p.getXPos() == originalX );
+    REQUIRE( p.getYPos() == (originalY - 1) );
+}
     
     // unless there is a locked door
     // unless there is a wall
