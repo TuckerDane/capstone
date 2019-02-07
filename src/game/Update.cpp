@@ -472,7 +472,7 @@ void Game::resolveItemAction(char direction)
 void Game::pickUpItem() //player walks on a potion
 {
     Item **items = rooms[player.getCurrentRoom()]->getItems();
-    bool pickedUpItem;
+    bool pickedUpItem = false;
     Item* theItem;
     for (int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
     {
