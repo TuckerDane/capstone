@@ -3,10 +3,12 @@
 #include "Key.hpp"
 #include "Item.hpp"
 #include "Object.hpp"
+#include "Colors.hpp"
 #include "../../src/game_objects/Key.cpp"
 #include "../../src/game_objects/Item.cpp"
 #include "../../src/game_objects/Object.cpp"
 #include "../../src/game_objects/Door.cpp"
+#include "../../src/game/Colors.cpp"
 
 TEST_CASE("default constructor sets Key Class variables", "[Key]")
 {
@@ -16,16 +18,18 @@ TEST_CASE("default constructor sets Key Class variables", "[Key]")
     REQUIRE( k.getPassword() == -1);
     REQUIRE( k.getWeight() == 1);
     REQUIRE( k.getDescription() == "used to unlock doors");
+    REQUIRE( k.getColor() == COLOR_BLACK);
 }
 
 TEST_CASE("overload constructor sets Key Class variables", "[Key]")
 {
-    Key k("keyname", 1);
+    Key k("keyname", 1, COLOR_YELLOW);
     REQUIRE( k.getType() == "key" );
     REQUIRE( k.getName() == "keyname");
     REQUIRE( k.getPassword() == 1);
     REQUIRE( k.getWeight() == 1);
     REQUIRE( k.getDescription() == "used to unlock doors");   
+    REQUIRE( k.getColor() == COLOR_YELLOW);
 }
 
 TEST_CASE("set Key password", "[key][set]")
