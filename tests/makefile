@@ -24,7 +24,10 @@ INCLUDE  := -Iinclude/
 INCLUDE	 += -I../include/game_objects
 INCLUDE	 += -I../include/room_objects
 INCLUDE	 += -I../include/game
-SRC      :=	$(wildcard src/*.cpp)
+SRC      :=	$(wildcard src/*.cpp)			\
+	$(wildcard ../src/game_objects/*.cpp)	\
+	$(wildcard ../src/room_objects/*.cpp)	\
+	$(wildcard ../src/game/*.cpp)			\
 
 OBJECTS := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
@@ -51,5 +54,5 @@ release: CXXFLAGS += -O2
 release: all
 
 clean:
-	-@rm -rvf $(OBJ_DIR)/*
+	-@rm -rvf $(BUILD)/*
 	-rm ./adventure_tests
