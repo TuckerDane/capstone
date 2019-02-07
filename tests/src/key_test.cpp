@@ -1,11 +1,9 @@
 #include "catch.hpp"
 #include "Key.hpp"
-#include "Item.hpp"
 #include "Door.hpp"
-#include "Object.hpp"
 #include "Colors.hpp"
 
-TEST_CASE("default constructor sets Key Class variables", "[Key][Constructor]")
+TEST_CASE("default constructor sets Key Class variables", "[key][constructor]")
 {
     Key k;
     REQUIRE( k.getType() == "key" );
@@ -16,7 +14,7 @@ TEST_CASE("default constructor sets Key Class variables", "[Key][Constructor]")
     REQUIRE( k.getColor() == COLOR_BLACK);
 }
 
-TEST_CASE("overload constructor sets Key Class variables", "[Key][Constructor]")
+TEST_CASE("overload constructor sets Key Class variables", "[key][constructor]")
 {
     Key k("keyname", 1, COLOR_BLUE);
     REQUIRE( k.getType() == "key" );

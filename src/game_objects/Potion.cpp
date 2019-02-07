@@ -13,7 +13,7 @@
 
 Potion::Potion()
 {
-	name = "Health_Potion";
+	name = "generic potion";
 	type = "potion";
 	weight = 2;
 	healing = 4;
@@ -26,7 +26,7 @@ Potion::Potion(int yPos, int xPos)
 {
 	this->yPos = yPos;
 	this->xPos = xPos;
-	name = "Potion";
+	name = "health potion";
 	type = "potion";
 	weight = 2;
 	healing = 4;
@@ -38,6 +38,7 @@ Potion::Potion(int yPos, int xPos)
 Potion::~Potion()
 {
 }
+
 /*............................................
 GETTERS
 
