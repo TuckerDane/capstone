@@ -10,7 +10,7 @@
 #include "../../src/game_objects/Door.cpp"
 #include "../../src/game/Colors.cpp"
 
-TEST_CASE("default constructor sets Key Class variables", "[Key]")
+TEST_CASE("default constructor sets Key Class variables", "[Key][Constructor]")
 {
     Key k;
     REQUIRE( k.getType() == "key" );
@@ -21,7 +21,7 @@ TEST_CASE("default constructor sets Key Class variables", "[Key]")
     REQUIRE( k.getColor() == COLOR_BLACK);
 }
 
-TEST_CASE("overload constructor sets Key Class variables", "[Key]")
+TEST_CASE("overload constructor sets Key Class variables", "[Key][Constructor]")
 {
     Key k("keyname", 1, COLOR_YELLOW);
     REQUIRE( k.getType() == "key" );
