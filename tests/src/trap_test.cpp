@@ -1,7 +1,5 @@
 #include "catch.hpp"
 #include "Trap.hpp"
-#include "Item.hpp"
-#include "Object.hpp"
 #include "Colors.hpp"
 
 TEST_CASE("default constructor sets Trap Class variables", "[trap][constructor]")
@@ -68,4 +66,14 @@ TEST_CASE("set trap description", "[trap][get][set]")
     REQUIRE (t.getDescription() == "does nothing at all");
     t.setDescription("");
     REQUIRE (t.getDescription() == "");
+}
+
+TEST_CASE("get and set trap damage", "[trap][get][set]")
+{
+    Trap t;
+    REQUIRE (t.getDamage() == 6);
+    t.setDamage(3);
+    REQUIRE (t.getDamage() == 3);
+    t.setDamage(0);
+    REQUIRE (t.getDamage() == 0);
 }
