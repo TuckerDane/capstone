@@ -31,6 +31,16 @@ TEST_CASE("w key makes player position go from (x,y) to (x,y-1)", "[movement][UP
 
 
 // Test if a || A || KEY_LEFT, player moves left (3 SEPERATE TESTS PER KEY)
+TEST_CASE("a key makes player position go from (x,y) to (x-1,y)", "[movement][LEFT]")
+{
+    Player p;
+    int originalX = p.getXPos();
+    int originalY = p.getYPos();
+
+    p.move('a');
+    REQUIRE( p.getXPos() == (originalX - 1) );
+    REQUIRE( p.getYPos() == (originalY) );
+}
 
     // unless there is a locked door
     // unless there is a wall
@@ -39,6 +49,16 @@ TEST_CASE("w key makes player position go from (x,y) to (x,y-1)", "[movement][UP
 
 
 // Test if s || S || KEY_DOWN, player moves down (3 SEPERATE TESTS PER KEY)
+TEST_CASE("s key makes player position go from (x,y) to (x,y+1)", "[movement][DOWN]")
+{
+    Player p;
+    int originalX = p.getXPos();
+    int originalY = p.getYPos();
+
+    p.move('s');
+    REQUIRE( p.getXPos() == originalX );
+    REQUIRE( p.getYPos() == (originalY + 1) );
+}
 
     // unless there is a locked door
     // unless there is a wall
@@ -47,6 +67,16 @@ TEST_CASE("w key makes player position go from (x,y) to (x,y-1)", "[movement][UP
 
 
 // Test if d || D || KEY_RIGHT, player moves right (3 SEPERATE TESTS PER KEY)
+TEST_CASE("d key makes player position go from (x,y) to (x+1,y)", "[movement][RIGHT]")
+{
+    Player p;
+    int originalX = p.getXPos();
+    int originalY = p.getYPos();
+
+    p.move('d');
+    REQUIRE( p.getXPos() == (originalX + 1) );
+    REQUIRE( p.getYPos() == (originalY) );
+}
 
     // unless there is a locked door
     // unless there is a wall
