@@ -1,14 +1,9 @@
-#define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 #include "Key.hpp"
-#include "Item.hpp"
-#include "Object.hpp"
-#include "../../src/game_objects/Key.cpp"
-#include "../../src/game_objects/Item.cpp"
-#include "../../src/game_objects/Object.cpp"
-#include "../../src/game_objects/Door.cpp"
+#include "Door.hpp"
+#include "Colors.hpp"
 
-TEST_CASE("default constructor sets Key Class variables", "[Key]")
+TEST_CASE("default constructor sets Key Class variables", "[key][constructor]")
 {
     Key k;
     REQUIRE( k.getType() == "key" );
@@ -16,16 +11,18 @@ TEST_CASE("default constructor sets Key Class variables", "[Key]")
     REQUIRE( k.getPassword() == -1);
     REQUIRE( k.getWeight() == 1);
     REQUIRE( k.getDescription() == "used to unlock doors");
+    REQUIRE( k.getColor() == COLOR_BLACK);
 }
 
-TEST_CASE("overload constructor sets Key Class variables", "[Key]")
+TEST_CASE("overload constructor sets Key Class variables", "[key][constructor]")
 {
-    Key k("keyname", 1, 0);
+    Key k("keyname", 1, COLOR_BLUE);
     REQUIRE( k.getType() == "key" );
     REQUIRE( k.getName() == "keyname");
     REQUIRE( k.getPassword() == 1);
     REQUIRE( k.getWeight() == 1);
     REQUIRE( k.getDescription() == "used to unlock doors");   
+    REQUIRE( k.getColor() == COLOR_BLUE);
 }
 
 TEST_CASE("set Key password", "[key][set]")

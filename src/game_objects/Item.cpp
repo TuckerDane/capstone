@@ -37,6 +37,11 @@ void Item::setDamage(int damage)
   this->damage = damage;
 }
 
+void Item::setHealing(int healing)
+{
+  this->healing = healing;
+}
+
 /* ..............................................
   GETTERS 
   

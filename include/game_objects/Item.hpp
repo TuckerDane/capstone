@@ -33,11 +33,13 @@ public:
   // SETTERS
   void setWeight(int weight);
   void setDamage(int damage);
+  void setHealing(int healing);
 
   // GETTERS
   int getWeight();
   int getHealing();
   int getDamage();
+
   // Actions
   virtual bool use(); // returns true if use() is successful, false if unsuccessful
   virtual bool use(Door *door);
