@@ -41,7 +41,7 @@ TEST_CASE("isMoveAllowed at y-1 is false when there is an immovable object", "[m
 } 
 
 
-    // unless there is a wall
+    // TODO: unless there is a wall '-' '|' '\\' '/' '+'
 
 
 TEST_CASE("player.move('a') makes player position go from (x,y) to (x-1,y)", "[movement][LEFT]")
@@ -82,7 +82,7 @@ TEST_CASE("isMoveAllowed at x-1 is false when there is an immovable object", "[m
 } 
 
 
-    // unless there is a wall
+    // TODO: unless there is a wall '-' '|' '\\' '/' '+'
 
 
 TEST_CASE("player.move('s') makes player position go from (x,y) to (x,y+1)", "[movement][DOWN]")
@@ -122,7 +122,7 @@ TEST_CASE("isMoveAllowed at y+1 is false when there is an immovable object", "[m
     REQUIRE(g.isMoveAllowed(p.getYPos()+1, p.getXPos()) == false);
 } 
 
-    // unless there is a wall
+    // TODO: unless there is a wall '-' '|' '\\' '/' '+'
 
 
 TEST_CASE("player.move('d') makes player position go from (x,y) to (x+1,y)", "[movement][RIGHT]")
@@ -162,9 +162,7 @@ TEST_CASE("isMoveAllowed at x+1 is false when there is an immovable object", "[m
     REQUIRE(g.isMoveAllowed(p.getYPos(), p.getXPos()+1) == false);
 } 
 
-// allow when moveable
-
-    // unless there is a wall
+    // TODO: unless there is a wall '-' '|' '\\' '/' '+'
 
 
 
