@@ -17,11 +17,21 @@ TEST_CASE("isMoveAllowed at y-1 is false when there is a locked door", "[movemen
 {
     Player p;
     Game g;
-    Door(p.getYPos() - 1, p.getXPos(), -1, -1, -1, -1, true, COLOR_BLUE);
+    Immovable(p.getYPos() - 1, p.getXPos());
     REQUIRE(g.isMoveAllowed(p.getYPos() - 1, p.getXPos()) == false);
 }   
+
+TEST_CASE("isMoveAllowed at y-1 is false when there is an immovable object", "[movement][UP]")
+{
+    Player p;
+    Game g;
+    Door(p.getYPos() - 1, p.getXPos(), -1, -1, -1, -1, true, COLOR_BLUE);
+    REQUIRE(g.isMoveAllowed(p.getYPos() - 1, p.getXPos()) == false);
+} 
+
+
     // unless there is a wall
-    // unless there is an immovable object
+
 
 TEST_CASE("player.move('a') makes player position go from (x,y) to (x-1,y)", "[movement][LEFT]")
 {
@@ -41,8 +51,17 @@ TEST_CASE("isMoveAllowed at x-1 does not allow player to move left when there is
     REQUIRE(g.isMoveAllowed(p.getYPos(), p.getXPos()-1) == false);
 }  
 
+TEST_CASE("isMoveAllowed at x-1 is false when there is an immovable object", "[movement][LEFT]")
+{
+    Player p;
+    Game g;
+    Door(p.getYPos(), p.getXPos() - 1, -1, -1, -1, -1, true, COLOR_BLUE);
+    REQUIRE(g.isMoveAllowed(p.getYPos(), p.getXPos()-1) == false);
+} 
+
+
     // unless there is a wall
-    // unless there is an immovable object
+
 
 TEST_CASE("player.move('s') makes player position go from (x,y) to (x,y+1)", "[movement][DOWN]")
 {
@@ -61,9 +80,17 @@ TEST_CASE("isMoveAllowed at y+1 is false when there is a locked door", "[movemen
     Door(p.getYPos() + 1, p.getXPos(), -1, -1, -1, -1, true, COLOR_BLUE);
     REQUIRE(g.isMoveAllowed(p.getYPos() + 1, p.getXPos()) == false);
 } 
-    
+
+TEST_CASE("isMoveAllowed at y+1 is false when there is an immovable object", "[movement][DOWN]")
+{
+    Player p;
+    Game g;
+    Door(p.getYPos() + 1, p.getXPos(), -1, -1, -1, -1, true, COLOR_BLUE);
+    REQUIRE(g.isMoveAllowed(p.getYPos()+1, p.getXPos()) == false);
+} 
+
     // unless there is a wall
-    // unless there is an immovable object
+
 
 TEST_CASE("player.move('d') makes player position go from (x,y) to (x+1,y)", "[movement][RIGHT]")
 {
@@ -83,9 +110,16 @@ TEST_CASE("isMoveAllowed at x+1 does not allow player to move left when there is
     REQUIRE(g.isMoveAllowed(p.getYPos(), p.getXPos()+1) == false);
 }  
 
-    // unless there is a locked door
+TEST_CASE("isMoveAllowed at x+1 is false when there is an immovable object", "[movement][RIGHT]")
+{
+    Player p;
+    Game g;
+    Door(p.getYPos(), p.getXPos() + 1, -1, -1, -1, -1, true, COLOR_BLUE);
+    REQUIRE(g.isMoveAllowed(p.getYPos(), p.getXPos()+1) == false);
+} 
+
     // unless there is a wall
-    // unless there is an immovable object
+
 
 
 
