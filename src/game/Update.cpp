@@ -519,7 +519,7 @@ void Game::pickUpItem() //player walks on a potion
         {
             if(player.getSymbol() == '^')
 	    {
-		if(isMoveAllowed(player.getYPos() - 1, player.getXPos()))
+		if(isMoveAllowed(player.getYPos() - 1, player.getXPos()) || !isNotAWall(player.getYPos() - 1, player.getXPos()))
 		{
 		     isASpace = true;
 		}
@@ -532,7 +532,7 @@ void Game::pickUpItem() //player walks on a potion
 
 	    else if(player.getSymbol() == 'v')   
 	    {
-		if(isMoveAllowed(player.getYPos() + 1, player.getXPos()))
+		if(isMoveAllowed(player.getYPos() + 1, player.getXPos()) || !isNotAWall(player.getYPos() + 1, player.getXPos()))
 		{
 		     isASpace = true;
 		}
@@ -545,7 +545,7 @@ void Game::pickUpItem() //player walks on a potion
 
 	    else if(player.getSymbol() == '<')   
 	    {
-		if(isMoveAllowed(player.getYPos(), player.getXPos() - 1))
+		if(isMoveAllowed(player.getYPos(), player.getXPos() - 1) || !isNotAWall(player.getYPos(), player.getXPos() - 1))
 		{
 		     isASpace = true;
 		}
@@ -556,9 +556,9 @@ void Game::pickUpItem() //player walks on a potion
 		} 
 	    }
 
-	    else
+	    else  // player.getSymbol() == '>'
 	    {
-		if(isMoveAllowed(player.getYPos(), player.getXPos() + 1))
+		if(isMoveAllowed(player.getYPos(), player.getXPos() + 1) || !isNotAWall(player.getYPos(), player.getXPos() + 1))
 		{
 		     isASpace = true;
 		}
