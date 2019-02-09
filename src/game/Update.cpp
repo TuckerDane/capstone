@@ -331,7 +331,7 @@ void Game::useKeyOnOppositeDoor(Door* firstDoor)
 {
     // go through all of the doors in the room the player's in
     Door **doors = rooms[firstDoor->getNextRoom()]->getDoors();
-//    for(int i = 0; i < rooms[firstDoor->getNextRoom()]->getMaxDoors(); i++) cout << "Door " << i << " is " << doors[i];
+	
     for(int i = 0; i < rooms[firstDoor->getNextRoom()]->getMaxDoors(); i++) 
     {
 	if(doors[i] != NULL)
