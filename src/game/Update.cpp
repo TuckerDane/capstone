@@ -331,7 +331,7 @@ void Game::useKeyOnOppositeDoor(Door* firstDoor)
 {
     // go through all of the doors in the room the player's in
     Door **doors = rooms[firstDoor->getNextRoom()]->getDoors();
-	
+//    for(int i = 0; i < rooms[firstDoor->getNextRoom()]->getMaxDoors(); i++) cout << "Door " << i << " is " << doors[i];
     for(int i = 0; i < rooms[firstDoor->getNextRoom()]->getMaxDoors(); i++) 
     {
 	if(doors[i] != NULL)
@@ -588,43 +588,38 @@ void Game::pickUpItem() //player walks on a potion
 
 void Game::dropItem()
 {
-	Item* droppedItem = player.drop(player.getSelectedItemIndex());  //get the item that has been dropped
+	Item* droppedItem;	
 	Item** items = rooms[player.getCurrentRoom()]->getItems();		//get the items in the room
 	int itemIndex = 0;							//index for item array
 	bool itemHasBeenDropped = false;
-	bool itemIsNull = false;
-	if (droppedItem == NULL) //dropping a null
+	while ((itemHasBeenDropped == false)) 
 	{
-		itemIsNull = true;
-		setNarrative("You are unable to drop an empty slot in your bag.");
+		if(items[itemIndex] != NULL) //if there is an item 
+		{
+			if(items[itemIndex]->getYPos() == player.getYPos() && items[itemIndex]->getXPos() == player.getXPos()) //make sure it is not under the player
+			{
+				setNarrative("Item is already here. You cannot drop another here");
+				break;
+			}
+		}
+		else //items[i] == NULL and can be dropped
+		{
+			droppedItem = player.drop(player.getSelectedItemIndex());  //get the item that has been dropped
+			if (droppedItem == NULL) //dropping a null
+			{
+				setNarrative("You are unable to drop an empty slot in your bag.");
+				break;
+			}
+			droppedItem->setXPos(player.getXPos());
+			droppedItem->setYPos(player.getYPos());
+			items[itemIndex] = droppedItem;
+			itemHasBeenDropped = true;
+		}
+		itemIndex++;
 	}
-	if(itemIsNull == false)
-	{	
-		while ((itemHasBeenDropped == false)) 
-		{
-			if(items[itemIndex] != NULL) 
-			{
-				if(items[itemIndex]->getYPos() == player.getYPos() && items[itemIndex]->getXPos() == player.getXPos())
-				{
-					setNarrative("Item is already here. You cannot drop another here");
-					break;
-				}
-			}
-			else //items[i] == NULL
-			{
-				droppedItem->setXPos(player.getXPos());
-				droppedItem->setYPos(player.getYPos());
-				items[itemIndex] = droppedItem;
-				itemHasBeenDropped = true;
-			}
-			itemIndex++;
-		}
-		if(itemHasBeenDropped == true)
-		{
-			setNarrative("You have dropped " + droppedItem->getName());
-		}
-		else
-			setNarrative("You are unable to drop the item here");
+	if(itemHasBeenDropped == true)
+	{
+		setNarrative("You have dropped " + droppedItem->getName());
 	}
 }
 
