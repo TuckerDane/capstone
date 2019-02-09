@@ -12,6 +12,7 @@
 
 Movable::Movable()
 {
+	weight = 1000;
 	name = "boulder";
 	type = "movable";
 	symbol = 'M';
@@ -23,6 +24,7 @@ Movable::Movable(int yPos, int xPos)
 {
 	this->yPos = yPos;
 	this->xPos = xPos;
+	weight = 1000;
 	name = "boulder";
 	type = "movable";
 	symbol = 'M';
