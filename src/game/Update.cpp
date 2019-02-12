@@ -527,6 +527,10 @@ void Game::pickUpItem() //player walks on a potion
 		{
 		     theItem = items[i];
 		     pickedUpItem = player.pickUp(theItem);
+		     if(pickedUpItem)
+		     {
+			items[i] = NULL;
+		     }
 		} 
 	    }
 
@@ -540,6 +544,10 @@ void Game::pickUpItem() //player walks on a potion
 		{
 		     theItem = items[i];
 		     pickedUpItem = player.pickUp(theItem);
+		     if(pickedUpItem)
+		     {
+			items[i] = NULL;
+		     }
 		} 
 	    }
 
@@ -553,6 +561,10 @@ void Game::pickUpItem() //player walks on a potion
 		{
 		     theItem = items[i];
 		     pickedUpItem = player.pickUp(theItem);
+		     if(pickedUpItem)
+		     {
+			items[i] = NULL;
+		     }
 		} 
 	    }
 
@@ -566,6 +578,10 @@ void Game::pickUpItem() //player walks on a potion
 		{
 		     theItem = items[i];
 		     pickedUpItem = player.pickUp(theItem);
+		     if(pickedUpItem)
+		     {
+			items[i] = NULL;
+		     }
 		} 
 	    }
 	}
@@ -574,7 +590,7 @@ void Game::pickUpItem() //player walks on a potion
    {
 	setNarrative("You picked up the " + theItem->getName());
 	theItem->setXPos(-1);
-	theItem->setYPos(-1);	   
+	theItem->setYPos(-1);
    }
    else if(isASpace)
    {
