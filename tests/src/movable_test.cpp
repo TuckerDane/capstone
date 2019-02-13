@@ -26,7 +26,7 @@ TEST_CASE("overload constructor 1 sets Movable Class variables", "[movable][cons
 
 TEST_CASE("overload constructor 2 sets Movable Class variables test with healing choice", "[movable][constructor]")
 {
-    Movable m(5, 15, COLOR_BLUE, 15, 1);
+    Movable m(5, 15, COLOR_BLUE, 1, 15);
     REQUIRE( m.getYPos() == 5);
     REQUIRE( m.getXPos() == 15);
     REQUIRE( m.getName() == "boulder" );
@@ -39,7 +39,7 @@ TEST_CASE("overload constructor 2 sets Movable Class variables test with healing
 
 TEST_CASE("overload constructor 2 sets Movable Class variables test with damage choice", "[movable][constructor]")
 {
-    Movable m(5, 15, COLOR_BLUE, 15, 0);
+    Movable m(5, 15, COLOR_BLUE, 0, 15);
     REQUIRE( m.getYPos() == 5);
     REQUIRE( m.getXPos() == 15);
     REQUIRE( m.getName() == "boulder" );
@@ -78,10 +78,10 @@ TEST_CASE("set movable description", "[movable][get][set]")
     REQUIRE (m.getDescription() == "");
 }
 
-TEST_CASE("get and set movable object damage", "[movable][get][set]")
+TEST_CASE("get and set trap damage", "[movable][get][set]")
 {
     Movable m;
-    REQUIRE (m.getDamage() == 0);
+    REQUIRE (m.getDamage() == 6);
     m.setDamage(3);
     REQUIRE (m.getDamage() == 3);
     m.setDamage(0);
@@ -91,9 +91,9 @@ TEST_CASE("get and set movable object damage", "[movable][get][set]")
 TEST_CASE("get and set movable object healing", "[movable][get][set]")
 {
     Movable m;
-    REQUIRE (m.getHealing() == 0);
+    REQUIRE (m.getHealing() == 6);
     m.setHealing(3);
     REQUIRE (m.getHealing() == 3);
-    m.setHealing(0);
+    m.setDamage(0);
     REQUIRE (m.getHealing() == 0);
 }
