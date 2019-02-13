@@ -180,6 +180,11 @@ int Player::getEquippedItemIndex()
 	return equippedItemIndex;
 }
 
+Item *Player::getEquippedItem()
+{
+	return inventory[equippedItemIndex];
+}
+
 bool Player::getIsMoved()
 {
 	return isMoved;
@@ -265,11 +270,11 @@ Item *Player::drop(int itemSlot)
 {
 	while (0 <= itemSlot && itemSlot < MAX_INVENTORY) // if the player inputs a valid inventory item slot
 	{
-		if (inventory[itemSlot] == NULL) // if itemSlot is an empty room in the inventory
+		if (inventory[itemSlot] == NULL) // if itemSlot is an empty slot in the inventory
 		{
 			return NULL; // return NULL
 		}
-		else // else
+		else //dropping an item
 		{
 			Item *temp = inventory[itemSlot]; // set the Item in the inventory to a temporary variable
 			inventory[itemSlot] = NULL;		  // set the inventory itemSlot to empty

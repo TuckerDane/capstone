@@ -62,6 +62,7 @@ public:
 	int getCurrentRoom();
 	int getSelectedItemIndex();
 	int getEquippedItemIndex();
+	Item *getEquippedItem();
 	Item *getSelectedItem();
 	Item **getInventory();								// returns the entire player inventory
 	Item *getInventoryItem(int itemSlot); // returns a specific inventory item

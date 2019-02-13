@@ -97,6 +97,7 @@ public:
   // ACTIONS
   void update();
   void resolveDoorMovement();
+  void useKeyOnOppositeDoor(Door* door);
   void useKey();
   void resolveHealing();                  //user takes healing
   void usePotion(Item* item);
