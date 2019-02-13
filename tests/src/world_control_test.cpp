@@ -1,6 +1,5 @@
 #include "catch.hpp"
 #include "Player.hpp"
-#include "../../src/game_objects/Player.cpp"
 
 // Test if w || W || KEY_UP, player moves up
 TEST_CASE("w key makes player position go from (x,y) to (x,y-1)", "[movement][UP]")
