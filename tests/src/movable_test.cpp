@@ -78,7 +78,7 @@ TEST_CASE("set movable description", "[movable][get][set]")
     REQUIRE (m.getDescription() == "");
 }
 
-TEST_CASE("get and set trap damage", "[movable][get][set]")
+TEST_CASE("get and set damage", "[movable][get][set]")
 {
     Movable m;
     REQUIRE (m.getDamage() == 6);
