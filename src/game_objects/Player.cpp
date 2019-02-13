@@ -51,7 +51,7 @@ void Player::setMaxCarryWeight(int maxCarryWeight)
 	this->maxCarryWeight = maxCarryWeight;
 }
 
-void Player::setCurrentCarryWeight(int carryCurrentCarryWeight)
+void Player::setCurrentCarryWeight(int currentCarryWeight)
 {
 	this->currentCarryWeight = currentCarryWeight;
 }
