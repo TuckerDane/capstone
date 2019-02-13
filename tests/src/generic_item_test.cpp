@@ -1,7 +1,5 @@
 #include "catch.hpp"
 #include "Item.hpp"
-#include "Object.hpp"
-#include "Door.hpp"
 
 TEST_CASE( "default constructor sets Generic Item Class variables", "[item][constructor]")
 {
