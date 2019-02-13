@@ -29,10 +29,10 @@ TEST_CASE("set/get currentCarryWeight", "[player][get][set]")
 {
 	Player p;
 	REQUIRE(p.getCurrentCarryWeight() == 0);
-//	p.setCurrentCarryWeight(15);					
-//	REQUIRE(p.getCurrentCarryWeight() == 15);	//returns 0 == 15
-//	p.setCurrentCarryWeight(100);
-//	REQUIRE(p.getCurrentCarryWeight() == 100);  //returns 0 == 100
+	p.setCurrentCarryWeight(15);					
+	REQUIRE(p.getCurrentCarryWeight() == 15);
+	p.setCurrentCarryWeight(100);
+	REQUIRE(p.getCurrentCarryWeight() == 100);
 }
 
 TEST_CASE("set/get numItems", "[player][get][set]")
