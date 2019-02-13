@@ -2,17 +2,6 @@
 #include "Player.hpp"
 #include "../../src/game_objects/Player.cpp"
 
-//SKELETON
-// TEST_CASE("TEST CASE DESCRIPTION HERE", "[KEYWORD]")
-// {
-    //Key k;
-    // REQUIRE( k.getType() == "key" );
-    // REQUIRE( k.getName() == "normal key");
-    // REQUIRE( k.getPassword() == -1);
-    // REQUIRE( k.getWeight() == 1);
-    // REQUIRE( k.getDescription() == "used to unlock doors");
-// }
-
 // Test if w || W || KEY_UP, player moves up
 TEST_CASE("w key makes player position go from (x,y) to (x,y-1)", "[movement][UP]")
 {
