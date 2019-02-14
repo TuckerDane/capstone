@@ -6,7 +6,7 @@
   
   
 .............................................. */
-#include "Object.h"
+#include "Object.hpp"
 
 /* ..............................................
   CONSTRUCTORS / DESTRUCTORS
@@ -15,15 +15,16 @@
 
 Object::Object()
 {
-  this->xPos = 0;
-  this->yPos = 0;
-  this->color = COLOR_BLACK;
-  this->symbol = '?';
-  this->type = "generic_object";
-  this->name = "unnamed";
+  xPos = 0;
+  yPos = 0;
+  color = COLOR_BLACK;
+  symbol = '?';
+  type = "generic_object";
+  name = "unnamed";
+  description = "none";
 }
 
-Object::Object(int xPos, int yPos, int color, char symbol, string type, string name)
+Object::Object(int xPos, int yPos, int color, char symbol, string type, string name, string description)
 {
   this->xPos = xPos;
   this->yPos = yPos;
@@ -31,6 +32,7 @@ Object::Object(int xPos, int yPos, int color, char symbol, string type, string n
   this->symbol = symbol;
   this->type = type;
   this->name = name;
+  this->description = description;
 }
 
 Object::~Object()
@@ -72,6 +74,11 @@ void Object::setName(string name)
   this->name = name;
 }
 
+void Object::setDescription(string description)
+{
+  this->description = description;
+}
+
 /* ..............................................
   GETTERS
   
@@ -79,30 +86,111 @@ void Object::setName(string name)
 
 int Object::getXPos()
 {
-  return this->xPos;
+  return xPos;
 }
 
 int Object::getYPos()
 {
-  return this->yPos;
+  return yPos;
 }
 
 int Object::getColor()
 {
-  return this->color;
+  return color;
 }
 
 char Object::getSymbol()
 {
-  return this->symbol;
+  return symbol;
 }
 
 string Object::getType()
 {
-  return this->type;
+  return type;
 }
 
 string Object::getName()
 {
-  return this->name;
+  return name;
+}
+
+string Object::getDescription()
+{
+  return description;
+}
+
+/* ..............................................
+  ACTIONS
+  
+.............................................. */
+
+int Object::setColorPair(int objectColor, int backgroundColor)
+{
+  if (objectColor == COLOR_RED)
+  {
+    if (backgroundColor == COLOR_BLACK)
+      return RED_ON_BLACK;
+    else if(backgroundColor == COLOR_BLUE)
+      return RED_ON_BLUE;
+    else
+      return 0;    
+  }
+  else if (objectColor == COLOR_GREEN)
+  {
+    if (backgroundColor == COLOR_BLACK)
+      return GREEN_ON_BLACK;
+    else if(backgroundColor == COLOR_BLUE)
+      return GREEN_ON_BLUE;
+    else
+      return 0;
+  }
+  else if (objectColor == COLOR_YELLOW)
+  {
+    if (backgroundColor == COLOR_BLACK)
+      return YELLOW_ON_BLACK;
+    else if(backgroundColor == COLOR_BLUE)
+      return YELLOW_ON_BLUE;
+    else
+      return 0;
+  }
+  else if (objectColor == COLOR_BLUE)
+  {
+    if (backgroundColor == COLOR_BLACK)
+      return BLUE_ON_BLACK;
+    else if(backgroundColor == COLOR_BLUE)  // TODO: Figure out what to do in this case
+      return BLUE_ON_BLACK;
+    else
+      return 0;
+  }
+  else if (objectColor == COLOR_MAGENTA)
+  {
+    if (backgroundColor == COLOR_BLACK)
+      return MAGENTA_ON_BLACK;
+    else if(backgroundColor == COLOR_BLUE)
+      return MAGENTA_ON_BLUE;
+    else
+      return 0;
+  }
+  else if (objectColor == COLOR_CYAN)
+  {
+    if (backgroundColor == COLOR_BLACK)
+      return CYAN_ON_BLACK;
+    else if(backgroundColor == COLOR_BLUE)
+      return CYAN_ON_BLUE;
+    else
+      return 0;
+  }
+  else if (objectColor == COLOR_WHITE)
+  {
+    if (backgroundColor == COLOR_BLACK)
+      return WHITE_ON_BLACK;
+    else if(backgroundColor == COLOR_BLUE)
+      return WHITE_ON_BLUE;
+    else
+      return 0;
+  }
+  else
+  {
+    return 0;
+  }
 }

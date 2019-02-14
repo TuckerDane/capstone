@@ -5,7 +5,7 @@
   @date 2018-12-26
   
 .............................................. */
-#include "Game.h"
+#include "Game.hpp"
 
 /* ..............................................
   CONSTRUCTORS / DESTRUCTORS
@@ -25,41 +25,57 @@ Game::Game()
   curs_set(0);
 
   /* initialize windows */
-  this->statusWindow = newwin(STATUS_WINDOW_HEIGHT, WINDOW_WIDTH, 0, 0);
-  this->worldWindow = newwin(WORLD_WINDOW_HEIGHT, WINDOW_WIDTH, STATUS_WINDOW_HEIGHT, 0);
-  this->inventoryWindow = newwin(WORLD_WINDOW_HEIGHT, WINDOW_WIDTH, STATUS_WINDOW_HEIGHT, 0);
-  this->developerWindow = newwin(WORLD_WINDOW_HEIGHT, WINDOW_WIDTH, STATUS_WINDOW_HEIGHT, 0);
-  this->narrativeWindow = newwin(NARRATIVE_WINDOW_HEIGHT, WINDOW_WIDTH, STATUS_WINDOW_HEIGHT+WORLD_WINDOW_HEIGHT, 0);
+  statusWindow = newwin(STATUS_WINDOW_HEIGHT, WINDOW_WIDTH, 0, 0);
+  worldWindow = newwin(WORLD_WINDOW_HEIGHT, WINDOW_WIDTH, STATUS_WINDOW_HEIGHT, 0);
+  inventoryWindow = newwin(WORLD_WINDOW_HEIGHT, WINDOW_WIDTH, STATUS_WINDOW_HEIGHT, 0);
+  developerWindow = newwin(WORLD_WINDOW_HEIGHT, WINDOW_WIDTH, STATUS_WINDOW_HEIGHT, 0);
+  narrativeWindow = newwin(NARRATIVE_WINDOW_HEIGHT, WINDOW_WIDTH, STATUS_WINDOW_HEIGHT + WORLD_WINDOW_HEIGHT, 0);
+  currentWindow = worldWindow;
   refresh();
 
   /* initialize colors */
   start_color();
-
-  init_pair(GRASS_PAIR, COLOR_BLACK, COLOR_GREEN);
-  init_pair(EMPTY_PAIR, COLOR_WHITE, COLOR_BLACK);
-  init_pair(MENU_PAIR, COLOR_BLACK, COLOR_BLUE);
-  init_pair(DUNGEON_PAIR, COLOR_WHITE, COLOR_BLACK);
-  init_pair(PLAYER_PAIR, COLOR_CYAN, COLOR_BLACK);
+  initColorPairs();
 
   /* clear the screen */
   clear();
 
   /* initialize Game class variables */
-  this->isComplete = false;
-  this->player.setXPos(5);
-  this->player.setYPos(5);
-  // TODO: init spaces
-  this->narrative = "default narrative";
-  this->currentWindow = this->worldWindow;
+  isComplete = false;
+  player.setCurrentRoom(0);
+  player.setXPos(5);
+  player.setYPos(5);
+  player.setInventoryItem(new Key("Yellow Key", 1, COLOR_YELLOW), 0);
+  player.setInventoryItem(new Key("Blue Key", 2, COLOR_BLUE), 1);
+  player.setInventoryItem(new Key("Green Key", 3, COLOR_GREEN), 2);
+  player.setNumItems(2);
+
+  /* initialize Rooms */
+
+  // room 0
+  rooms[0] = new Room("rooms/generic.room");                                // init room
+  rooms[0]->setDoor(new Door(5, 23, -1, -1, -1, 1, true, COLOR_YELLOW), 0); // doors
+  rooms[0]->setDoor(new Door(15, 23, -1, -1, -1, 2, true, COLOR_BLUE), 1);
+  rooms[0]->setDoor(new Door(10, 35, 1, 5, 2, 3, true, COLOR_GREEN), 2);
+  rooms[0]->setItem(new Potion(6, 8), 0);      // potions
+  rooms[0]->setItem(new Trap(6, 12), 1);       // traps
+  rooms[0]->setItem(new Movable(15, 4), 2);    // movable
+  rooms[0]->setItem(new Immovable(15, 12), 3); // immovable
+
+  // room 1
+  rooms[1] = new Room("rooms/round.room");                               // init room
+  rooms[1]->setDoor(new Door(5, 1, 0, 10, 34, 3, true, COLOR_GREEN), 2); // doors
+  rooms[1]->setItem(new Movable(5, 5, COLOR_GREEN, 1, 1), 0);            // movable
+  rooms[1]->setItem(new Movable(7, 7, COLOR_RED, 1, 2), 1);
+
+  /* init narrative */
+  narrative = "default narrative";
 }
 
 Game::~Game()
 {
   /* Destroy ncurses */
   endwin();
-
-  /* Destroy player */
-  player.~Player();
 }
 
 /* ..............................................

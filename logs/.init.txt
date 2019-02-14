@@ -1,0 +1,1 @@
+this file is here to init the log folder

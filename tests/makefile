@@ -17,18 +17,17 @@ CXX      := g++
 CXXFLAGS := -pedantic-errors -Wall -std=c++11 -g
 LDFLAGS  := -lncurses
 BUILD    := ./build
-LOG_DIR  := ./logs
 OBJ_DIR  := $(BUILD)/objects
-APP_DIR  := $(BUILD)/apps
-TARGET   := adventure
-INCLUDE  := -Iinclude/game_objects/
-INCLUDE	 += -Iinclude/room_objects/
-INCLUDE	 += -Iinclude/game/
-SRC      :=								\
-	$(wildcard src/game_objects/*.cpp)	\
-	$(wildcard src/room_objects/*.cpp)	\
-	$(wildcard src/game/*.cpp)			\
-	$(wildcard src/*.cpp)				\
+APP_DIR  := ./
+TARGET   := adventure_tests
+INCLUDE  := -Iinclude/
+INCLUDE	 += -I../include/game_objects
+INCLUDE	 += -I../include/room_objects
+INCLUDE	 += -I../include/game
+SRC      :=	$(wildcard src/*.cpp)			\
+	$(wildcard ../src/game_objects/*.cpp)	\
+	$(wildcard ../src/room_objects/*.cpp)	\
+	$(wildcard ../src/game/*.cpp)			\
 
 OBJECTS := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
@@ -55,6 +54,5 @@ release: CXXFLAGS += -O2
 release: all
 
 clean:
-	-@rm -rvf $(OBJ_DIR)/*
-	-@rm -rvf $(APP_DIR)/*
-	-@rm -rvf $(LOG_DIR)/*
+	-@rm -rvf $(BUILD)/*
+	-rm ./adventure_tests

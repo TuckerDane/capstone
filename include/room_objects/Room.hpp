@@ -1,66 +1,75 @@
 /* ..............................................
-  @file Space.h
+  @file Room.hpp
   @author Tucker Walker (tuckerdwalker@gmail.com)
   @brief 
   @date 2019-01-20
   
   
 .............................................. */
-
-#ifndef SPACE_HPP
-#define SPACE_HPP
+#ifndef ROOM_HPP
+#define ROOM_HPP
 
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "Item.h"
+#include "Item.hpp"
+#include "Door.hpp"
+#include "Trap.hpp"
+#include "Potion.hpp"
+#include "Colors.hpp"
 
 using std::fstream;
 using std::string;
 
 /* ..............................................
-  GLOBALS
-  
-.............................................. */
-
-/* ..............................................
   @brief 
   
 .............................................. */
-class Space
+class Room
 {
 protected:
+  static const int MAX_DOORS = 4;
   static const int MAX_HEIGHT = 28;
   static const int MAX_WIDTH = 148;
   static const int MAX_ITEMS = MAX_WIDTH * MAX_HEIGHT;
   char walls[MAX_HEIGHT][MAX_WIDTH];
   Item *items[MAX_ITEMS];
+  Door *doors[MAX_DOORS];
   string type;
   string name;
   string description;
+  int tileColor;
 
 public:
   // CONSTRUCTOR/DESTRUCTORS
-  Space();
-  ~Space();
+  Room();
+  Room(string roomFile);
+  ~Room();
 
   // SETTERS
-  void setWalls(string spaceFile);
+  void setWalls(string roomFile);
   void setItems();
-  void setItem();
+  void setItem(Item *item, int itemIndex);
   void setType(string type);
   void setName(string name);
   void setDescription(string description);
+  void setDoor(Door *door, int doorIndex);
+  void setTileColor(int color);
 
   // GETTERS
   int getMaxHeight();
   int getMaxWidth();
   int getMaxItems();
+  int getMaxDoors();
   char getWall(int height, int width);
   Item **getItems();
+  Item *getItem(int itemIndex);
   string getType();
   string getName();
   string getDescription();
+  Door *getDoor(int doorIndex);
+  Door **getDoors();
+  int getTileColor();
 };
 
 #endif
