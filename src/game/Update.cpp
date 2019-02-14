@@ -304,13 +304,43 @@ void Game::useKey()
         Door* door = doors[i];
         if (door != NULL)
         {
-            // and if the player is next to the door
-            if (abs(door->getYPos() - player.getYPos()) + abs(door->getXPos() - player.getXPos()) == 1)
-            {
-                // use the key on the door
-                keyIsUsed = player.getEquippedItem()->use(door);
-		firstDoor = door;
-            }
+            // and if the player is facing to the door
+            if(player.getSymbol() == '^')
+	    {          //door location  ==  modified player location
+	        if(((doors[i]->getYPos()) == player.getYPos() - 1) && doors[i]->getXPos() == player.getXPos())
+	        {
+                    // use the key on the door
+                    keyIsUsed = player.getEquippedItem()->use(door);
+		    firstDoor = door;
+		}   
+	    }
+	    else if(player.getSymbol() == 'v')
+	    {
+	        if(((doors[i]->getYPos()) == player.getYPos() + 1) && doors[i]->getXPos() == player.getXPos())
+	        {
+                    // use the key on the door
+                    keyIsUsed = player.getEquippedItem()->use(door);
+		    firstDoor = door;
+		}   
+	    }
+ 	    else if(player.getSymbol() == '<')
+	    {
+	        if(((doors[i]->getYPos()) == player.getYPos()) && doors[i]->getXPos() == player.getXPos() - 1)
+	        {
+                    // use the key on the door
+                    keyIsUsed = player.getEquippedItem()->use(door);
+		    firstDoor = door;
+		}   
+	    }
+	    else   //player.getSymbol() == '>'
+	    {
+	        if(((doors[i]->getYPos()) == player.getYPos()) && doors[i]->getXPos() == player.getXPos() + 1)
+	        {
+                    // use the key on the door
+                    keyIsUsed = player.getEquippedItem()->use(door);
+		    firstDoor = door;
+		}   
+	    }
         }
     }
 
@@ -331,7 +361,6 @@ void Game::useKeyOnOppositeDoor(Door* firstDoor)
 {
     // go through all of the doors in the room the player's in
     Door **doors = rooms[firstDoor->getNextRoom()]->getDoors();
-//    for(int i = 0; i < rooms[firstDoor->getNextRoom()]->getMaxDoors(); i++) cout << "Door " << i << " is " << doors[i];
     for(int i = 0; i < rooms[firstDoor->getNextRoom()]->getMaxDoors(); i++) 
     {
 	if(doors[i] != NULL)
