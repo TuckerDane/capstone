@@ -15,7 +15,7 @@
 
 CXX      := g++
 CXXFLAGS := -pedantic-errors -Wall -std=c++11 -g
-LDFLAGS  := -lncurses
+LDFLAGS  := -lncursesw
 BUILD    := ./build
 LOG_DIR  := ./logs
 OBJ_DIR  := $(BUILD)/objects

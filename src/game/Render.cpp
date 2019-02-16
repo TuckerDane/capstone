@@ -47,7 +47,7 @@ void Game::colorWindow(WINDOW *window, int colorPair)
 
 void Game::renderStatus()
 {
-  colorWindow(statusWindow, BLACK_ON_BLUE);
+  colorWindow(statusWindow, WHITE_ON_BLACK);
 
   // render player's selected item
   mvwprintw(statusWindow, 1, 2, "Item");
@@ -62,12 +62,15 @@ void Game::renderStatus()
   }
 
   // render player's HP
-  string hp;
-  hp = std::to_string(player.getHP());
+  int hp = player.getHP();
   mvwprintw(statusWindow, 1, 22, "HP");
   mvwprintw(statusWindow, 2, 20, "------");
-  mvwprintw(statusWindow, 3, 22, hp.c_str());
-
+  wattron(statusWindow, COLOR_PAIR(RED_ON_BLACK));
+  for(int i = 0; i < hp; i++)
+  {
+    mvwprintw(statusWindow, 3, 20+(2*i), "♥");
+  }
+  wattroff(statusWindow, COLOR_PAIR(RED_ON_BLACK));
   wrefresh(statusWindow);
 }
 
