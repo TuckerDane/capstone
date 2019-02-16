@@ -18,13 +18,13 @@ Object::Object()
   xPos = 0;
   yPos = 0;
   color = COLOR_BLACK;
-  symbol = '?';
+  symbol = "?";
   type = "generic_object";
   name = "unnamed";
   description = "none";
 }
 
-Object::Object(int xPos, int yPos, int color, char symbol, string type, string name, string description)
+Object::Object(int xPos, int yPos, int color, string symbol, string type, string name, string description)
 {
   this->xPos = xPos;
   this->yPos = yPos;
@@ -59,7 +59,7 @@ void Object::setColor(int color)
   this->color = color;
 }
 
-void Object::setSymbol(char symbol)
+void Object::setSymbol(string symbol)
 {
   this->symbol = symbol;
 }
@@ -99,7 +99,7 @@ int Object::getColor()
   return color;
 }
 
-char Object::getSymbol()
+string Object::getSymbol()
 {
   return symbol;
 }

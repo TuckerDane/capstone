@@ -16,7 +16,7 @@ Trap::Trap()
 	type = "trap_item";
 	weight = 2;
 	damage = 6;
-	symbol = 'T';
+	symbol = "☼";
 	color = COLOR_RED;
 	description = "Damages the player for 6 HP";
 }
@@ -29,7 +29,7 @@ Trap::Trap(int yPos, int xPos)
 	type = "trap_item";
 	weight = 2;
 	damage = 6;
-	symbol = 'T';
+	symbol = "☼";
 	color = COLOR_RED;
 	description = "Damages the player for 6 HP";
 }
