@@ -10,6 +10,7 @@
 #define GAME_HPP
 #include <ncurses.h>
 #include <string>
+#include <locale.h>
 #include "Console.hpp"
 #include "Room.hpp"
 #include "Player.hpp"
