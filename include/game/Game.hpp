@@ -127,7 +127,7 @@ public:
   void renderDoors();
   void renderItems();
   void renderPlayer();
-  void mvwaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR);
+  void mvwaddchWithColor(int yPos, int xPos, string TILE_SYMBOL, char TILE_PAIR);
 };
 
 #endif

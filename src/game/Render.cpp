@@ -195,7 +195,7 @@ void Game::renderWalls()
       char c = rooms[player.getCurrentRoom()]->getWall(height, width);
       if (c == '+' || c == '-' || c == '|' || c == ' ' || c == '\\' || c == '/')
       {
-        mvwaddchWithColor(height + 1, width + 1, c, WHITE_ON_BLACK);
+        mvwaddchWithColor(height + 1, width + 1, string(1, c), WHITE_ON_BLACK);
       }
     }
   }
@@ -235,9 +235,9 @@ void Game::renderPlayer()
   mvwaddchWithColor(player.getYPos(), player.getXPos(), player.getSymbol(), CYAN_ON_BLACK); // render the player
 }
 
-void Game::mvwaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR)
+void Game::mvwaddchWithColor(int yPos, int xPos, string TILE_SYMBOL, char TILE_PAIR)
 {
   wattron(worldWindow, COLOR_PAIR(TILE_PAIR));
-  mvwaddch(worldWindow, yPos, xPos, TILE_SYMBOL);
+  mvwprintw(worldWindow, yPos, xPos, TILE_SYMBOL.c_str());
   wattroff(worldWindow, COLOR_PAIR(TILE_PAIR));
 }

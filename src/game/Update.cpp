@@ -118,7 +118,7 @@ void Game::update()
         }
         else //--------------------------- Player movement in worldWindow
         {
-            player.setSymbol('^');
+            player.setSymbol("^");
             if (player.getYPos() > 0)
             {
                 if (isMoveAllowed(player.getYPos() - 1, player.getXPos())) //empty space
@@ -154,7 +154,7 @@ void Game::update()
         }
         else //-------------------------Player Movement in worldWindow
         {
-            player.setSymbol('v');
+            player.setSymbol("v");
             if (player.getYPos() < LINES - 1)
             {
                 if (isMoveAllowed(player.getYPos() + 1, player.getXPos())) //empty space
@@ -173,7 +173,7 @@ void Game::update()
     case KEY_LEFT:
     case 'a':
     case 'A':
-        player.setSymbol('<');
+        player.setSymbol("<");
         if (player.getXPos() > 0)
         {
             if (isMoveAllowed(player.getYPos(), player.getXPos() - 1)) //empty space
@@ -191,7 +191,7 @@ void Game::update()
     case KEY_RIGHT:
     case 'd':
     case 'D':
-        player.setSymbol('>');
+        player.setSymbol(">");
         if (player.getXPos() < COLS - 1)
         {
             if (isMoveAllowed(player.getYPos(), player.getXPos() + 1)) //empty space
@@ -305,7 +305,7 @@ void Game::useKey()
         if (door != NULL)
         {
             // and if the player is facing to the door
-            if(player.getSymbol() == '^')
+            if(player.getSymbol() == "^")
 	    {          //door location  ==  modified player location
 	        if(((doors[i]->getYPos()) == player.getYPos() - 1) && doors[i]->getXPos() == player.getXPos())
 	        {
@@ -314,7 +314,7 @@ void Game::useKey()
 		    firstDoor = door;
 		}   
 	    }
-	    else if(player.getSymbol() == 'v')
+	    else if(player.getSymbol() == "v")
 	    {
 	        if(((doors[i]->getYPos()) == player.getYPos() + 1) && doors[i]->getXPos() == player.getXPos())
 	        {
@@ -323,7 +323,7 @@ void Game::useKey()
 		    firstDoor = door;
 		}   
 	    }
- 	    else if(player.getSymbol() == '<')
+ 	    else if(player.getSymbol() == "<")
 	    {
 	        if(((doors[i]->getYPos()) == player.getYPos()) && doors[i]->getXPos() == player.getXPos() - 1)
 	        {
@@ -332,7 +332,7 @@ void Game::useKey()
 		    firstDoor = door;
 		}   
 	    }
-	    else   //player.getSymbol() == '>'
+	    else   //player.getSymbol() == ">"
 	    {
 	        if(((doors[i]->getYPos()) == player.getYPos()) && doors[i]->getXPos() == player.getXPos() + 1)
 	        {
@@ -365,22 +365,22 @@ void Game::useKeyOnOppositeDoor(Door* firstDoor)
     {
 	if(doors[i] != NULL)
 	{
-		if(player.getSymbol() == '^')
+		if(player.getSymbol() == "^")
 		{          //new door location		where player is
 	             if(((doors[i]->getYPos() - 1) == firstDoor->getNextYPos()) && doors[i]->getXPos() == firstDoor->getNextXPos())
 	                player.getEquippedItem()->use(doors[i]);
 		}
-		else if(player.getSymbol() == 'v')
+		else if(player.getSymbol() == "v")
 		{
         	     if(((doors[i]->getYPos() + 1) == firstDoor->getNextYPos()) && doors[i]->getXPos() == firstDoor->getNextXPos())
 			player.getEquippedItem()->use(doors[i]);
 		}
-		else if(player.getSymbol() == '<')
+		else if(player.getSymbol() == "<")
 		{
 		     if(((doors[i]->getXPos() - 1) == firstDoor->getNextXPos()) && doors[i]->getYPos() == firstDoor->getNextYPos())
 			player.getEquippedItem()->use(doors[i]);
 		}
-		else   //player.getSymbol() == '>'
+		else   //player.getSymbol() == ">"
 		{
 
 		     if(((doors[i]->getXPos() + 1) == firstDoor->getNextXPos()) && doors[i]->getYPos() == firstDoor->getNextYPos())
@@ -429,6 +429,7 @@ void Game::resolveDamage() //player walks on a trap
     {
         if (items[i] != NULL)
         {
+            devConsole.log("SUCCESS: player on an item");
             if (player.getXPos() == items[i]->getXPos() && player.getYPos() == items[i]->getYPos()) //if x and y value match
             {
                 player.damageHP(items[i]->getDamage());
@@ -478,12 +479,18 @@ void Game::resolveItemAction(char direction)
             if (player.getXPos() == items[i]->getXPos() && player.getYPos() == items[i]->getYPos()) //if x and y value match
             {
                 //get the symbol, then resolve the action of the corresponding symbol
-                if (items[i]->getSymbol() == 'P')
-                    resolveHealing();
-                else if (items[i]->getSymbol() == 'T')
-                    resolveDamage();
-                else if (items[i]->getSymbol() == 'M')
+                if (items[i]->getSymbol() =="ῦ")
                 {
+                    resolveHealing();
+                }
+                else if (items[i]->getSymbol() =="☼")
+                {
+                    devConsole.log("applying damage");
+                    resolveDamage();
+                }
+                else if (items[i]->getSymbol() == "●")
+                {
+                    devConsole.log("SUCCESS: applying move");
                     if (direction == 'w')
                     {
                         if (isMoveAllowed(player.getYPos() - 1, player.getXPos())) //item can be moved
@@ -529,7 +536,7 @@ void Game::resolveItemAction(char direction)
                             player.setXPos(player.getXPos() - 1); //item cannot be move, move the player back
                     }
                 }
-                else if (items[i]->getSymbol() == 'O')
+                else if (items[i]->getSymbol() == "■")
                     break;
             }
         }
@@ -546,7 +553,7 @@ void Game::pickUpItem() //player walks on a potion
     {
         if (items[i] != NULL)
         {
-            if(player.getSymbol() == '^')
+            if(player.getSymbol() == "^")
 	    {
 		if(isMoveAllowed(player.getYPos() - 1, player.getXPos()) || !isNotAWall(player.getYPos() - 1, player.getXPos()))
 		{
@@ -563,7 +570,7 @@ void Game::pickUpItem() //player walks on a potion
 		} 
 	    }
 
-	    else if(player.getSymbol() == 'v')   
+	    else if(player.getSymbol() == "v")   
 	    {
 		if(isMoveAllowed(player.getYPos() + 1, player.getXPos()) || !isNotAWall(player.getYPos() + 1, player.getXPos()))
 		{
@@ -580,7 +587,7 @@ void Game::pickUpItem() //player walks on a potion
 		} 
 	    }
 
-	    else if(player.getSymbol() == '<')   
+	    else if(player.getSymbol() == "<")   
 	    {
 		if(isMoveAllowed(player.getYPos(), player.getXPos() - 1) || !isNotAWall(player.getYPos(), player.getXPos() - 1))
 		{
@@ -597,7 +604,7 @@ void Game::pickUpItem() //player walks on a potion
 		} 
 	    }
 
-	    else  // player.getSymbol() == '>'
+	    else  // player.getSymbol() == ">"
 	    {
 		if(isMoveAllowed(player.getYPos(), player.getXPos() + 1) || !isNotAWall(player.getYPos(), player.getXPos() + 1))
 		{
@@ -667,13 +674,3 @@ void Game::dropItem()
 		setNarrative("You have dropped " + droppedItem->getName());
 	}
 }
-
-
-
-
-
-
-
-
-
-

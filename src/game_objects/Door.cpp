@@ -13,14 +13,14 @@
   
 .............................................. */
 
-Door::Door() : Object(-1, -1, COLOR_BLACK, '#', "door_object", "door", "Door: an opening between adjacent rooms")
+Door::Door() : Object(-1, -1, COLOR_BLACK, "#", "door_object", "door", "Door: an opening between adjacent rooms")
 {
     nextRoom = -1;
     nextYPos = -1;
     nextXPos = -1;
     password = -1;
     locked = false;
-}
+} 
 
 Door::Door(int yPos, int xPos, int nextRoom, int nextYPos, int nextXPos, int password, bool locked, int color) : Object()
 {
@@ -34,11 +34,11 @@ Door::Door(int yPos, int xPos, int nextRoom, int nextYPos, int nextXPos, int pas
     this->color = color;
     if (locked)
     {
-        this->symbol = '#';
+        this->symbol = "#";
     }
     else
     {
-        this->symbol = ' ';
+        this->symbol = " ";
     }
 }
 

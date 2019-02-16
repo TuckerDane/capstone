@@ -13,7 +13,7 @@
   
 .............................................. */
 
-Player::Player() : Object(-1, -1, COLOR_BLACK, '^', "player_object", "adventurer", "none")
+Player::Player() : Object(-1, -1, COLOR_BLACK, "^", "player_object", "adventurer", "none")
 {
 	numItems = 0;
 	currentRoom = 0;
@@ -28,7 +28,7 @@ Player::Player() : Object(-1, -1, COLOR_BLACK, '^', "player_object", "adventurer
 	maxHP = 10;
 	currentCarryWeight = 0;
 	maxCarryWeight = 10;
-}
+} 
 
 Player::~Player()
 {

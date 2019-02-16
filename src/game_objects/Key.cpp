@@ -21,6 +21,7 @@ Key::Key() : Item()
   password = -1;
   description = "used to unlock doors";
   color = 0;
+  symbol = "⚷";
 }
 
 Key::Key(string name, int password, int color) : Item()
@@ -31,6 +32,7 @@ Key::Key(string name, int password, int color) : Item()
   this->password = password;
   description = "used to unlock doors";
   this->color =  color;
+  symbol = "⚷";
 }
 
 Key::~Key()
@@ -69,13 +71,13 @@ bool Key::use(Door *door)
     {
       // unlock the door
       door->setLocked(false);
-      door->setSymbol(' ');
+      door->setSymbol(" ");
     }
     else
     {
       // otherwise lock the door
       door->setLocked(true);
-      door->setSymbol('#');
+      door->setSymbol("#");
     }
     return true;
   }

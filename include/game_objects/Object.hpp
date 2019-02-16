@@ -24,7 +24,7 @@ class Object
   protected:
 	int xPos, yPos;		// the coordinate positions
 	int color;			// ncurses colors
-	char symbol;		// holds the symbol of the object
+	string symbol;		// holds the symbol of the object
 	string type;		// holds the type name of the object
 	string name;		// holds the name of the object
 	string description; // holds description of the object
@@ -32,14 +32,14 @@ class Object
   public:
 	// CONSTRUCTOR/DESTRUCTORS
 	Object();
-	Object(int xPos, int yPos, int color, char symbol, string type, string name, string description);
+	Object(int xPos, int yPos, int color, string symbol, string type, string name, string description);
 	virtual ~Object();
 
 	// SETTERS
 	virtual void setXPos(int xPos);
 	virtual void setYPos(int yPos);
 	virtual void setColor(int color);
-	virtual void setSymbol(char symbol);
+	virtual void setSymbol(string symbol);
 	virtual void setType(string type);
 	virtual void setName(string name);
 	virtual void setDescription(string description);
@@ -48,7 +48,7 @@ class Object
 	virtual int getXPos();
 	virtual int getYPos();
 	virtual int getColor();
-	virtual char getSymbol();
+	virtual string getSymbol();
 	virtual string getType();
 	virtual string getName();
 	virtual string getDescription();
