@@ -17,7 +17,7 @@ Potion::Potion()
 	type = "potion";
 	weight = 2;
 	healing = 4;
-	symbol = 'P';
+	symbol = "ῦ"; 
 	color = COLOR_GREEN;
 	description = "Heals the player for 4 HP";
 }
@@ -30,7 +30,7 @@ Potion::Potion(int yPos, int xPos)
 	type = "potion";
 	weight = 2;
 	healing = 4;
-	symbol = 'P';
+	symbol = "ῦ";
 	color = COLOR_GREEN;
 	description = "Heals the player for 4 HP";
 }

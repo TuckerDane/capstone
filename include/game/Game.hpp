@@ -10,6 +10,7 @@
 #define GAME_HPP
 #include <ncurses.h>
 #include <string>
+#include <locale.h>
 #include "Console.hpp"
 #include "Room.hpp"
 #include "Player.hpp"
@@ -30,7 +31,7 @@
 #define WALL3 '\\'
 #define WALL4 '/'
 #define WALL5 '+'
-#define DOOR '#'
+#define DOOR '░'
 
 #define WINDOW_WIDTH 150
 #define WORLD_WINDOW_HEIGHT 30
@@ -88,7 +89,6 @@ public:
   // GETTERS
   bool getIsComplete();
   bool isMoveAllowed(int y, int x);
-  bool isNotAWall(int y, int x);
   unsigned int getUserInput();
   Room *getRoom(int roomIndex);
   string getNarrative();
@@ -126,7 +126,7 @@ public:
   void renderDoors();
   void renderItems();
   void renderPlayer();
-  void mvwaddchWithColor(int yPos, int xPos, char TILE_SYMBOL, char TILE_PAIR);
+  void mvwaddchWithColor(int yPos, int xPos, string TILE_SYMBOL, char TILE_PAIR);
 };
 
 #endif

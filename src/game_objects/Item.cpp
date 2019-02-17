@@ -13,10 +13,10 @@
   
 .............................................. */
 
-Item::Item() : Object(-1, -1, COLOR_BLACK, '?', "item_object", "item", "item_decription")
+Item::Item() : Object(-1, -1, COLOR_BLACK, "?", "item_object", "item", "item_decription")
 {
   weight = 0;
-}
+} 
 
 Item::~Item()
 {

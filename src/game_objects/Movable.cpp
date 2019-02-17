@@ -15,7 +15,7 @@ Movable::Movable()
 	weight = 1000;
 	name = "boulder";
 	type = "movable";
-	symbol = 'M';
+	symbol = "●";
 	color = COLOR_CYAN;
 	description = "This boulder is round-ish, maybe you can push it";
 }
@@ -27,7 +27,7 @@ Movable::Movable(int yPos, int xPos)
 	weight = 1000;
 	name = "boulder";
 	type = "movable";
-	symbol = 'M';
+	symbol = "●";
 	color = COLOR_CYAN;
 	description = "This boulder is round-ish, maybe you can push it";
 }
@@ -38,7 +38,7 @@ Movable::Movable(int yPos, int xPos, int color, int number, int choice)
 	this->xPos = xPos;
 	name = "boulder";
 	type = "movable";
-	symbol = 'M';
+	symbol = "●"; 
 	this->color = color;
 	description = "This boulder is round-ish, maybe you can push it";
 

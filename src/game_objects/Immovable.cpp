@@ -14,10 +14,10 @@ Immovable::Immovable()
 {
 	name = "pillar";
 	type = "immovable";
-	symbol = 'O';
+	symbol = "■";
 	color = COLOR_WHITE;
 	description = "This is a pillar, looks like those used in important buildings.";
-}
+} 
 
 Immovable::Immovable(int yPos, int xPos)
 {
@@ -25,7 +25,7 @@ Immovable::Immovable(int yPos, int xPos)
 	this->xPos = xPos;
 	name = "pillar";
 	type = "immovable";
-	symbol = 'O';
+	symbol = "■";
 	color = COLOR_WHITE;
 	description = "This is a pillar, looks like those used in important buildings.";
 }
