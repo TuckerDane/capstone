@@ -56,14 +56,14 @@ Game::Game()
   rooms[0]->setItem(new Immovable(6, 3), 1);
   rooms[0]->setItem(new Immovable(5, 4), 2);
   rooms[0]->setItem(new Immovable(5, 5), 3);
-  rooms[0]->setItem(new Movable(3, 6), 4);
+  rooms[0]->setItem(new Movable(3, 6, "■"), 4);
   rooms[0]->setItem(new Immovable(4, 5), 5);
-  rooms[0]->setItem(new Movable(5, 6), 6);
+  rooms[0]->setItem(new Movable(5, 6, "■"), 6);
   rooms[0]->setItem(new Immovable(4, 7), 7);
-  rooms[0]->setItem(new Movable(6, 7), 8);
+  rooms[0]->setItem(new Movable(6, 7, "■"), 8);
   rooms[0]->setItem(new Immovable(4, 8), 9);
   rooms[0]->setItem(new Immovable(5, 8), 10);
-  rooms[0]->setItem(new Movable(6, 8), 11);
+  rooms[0]->setItem(new Movable(6, 8, "■"), 11);
   rooms[0]->setItem(new Immovable(5, 9), 12);
   rooms[0]->setItem(new Immovable(6, 10), 13);
   rooms[0]->setItem(new Immovable(7, 11), 14);

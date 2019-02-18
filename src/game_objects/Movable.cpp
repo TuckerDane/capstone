@@ -32,6 +32,18 @@ Movable::Movable(int yPos, int xPos)
 	description = "This boulder is round-ish, maybe you can push it";
 }
 
+Movable::Movable(int yPos, int xPos, string symbol)
+{
+	this->yPos = yPos;
+	this->xPos = xPos;
+	weight = 1000;
+	name = "block";
+	type = "movable";
+	this->symbol = symbol;
+	color= COLOR_CYAN;
+	description = "Seems lighter than most blocks";
+}
+
 Movable::Movable(int yPos, int xPos, int color, int number, int choice)
 {
 	this->yPos = yPos;
