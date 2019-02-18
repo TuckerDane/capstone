@@ -1,6 +1,6 @@
 #include "InitRooms.hpp"
 
-Room* Game::initRoomZero(){
+Room* Game::initPuzzleRoom2(){
     Room* roomZero = new Room("rooms/puzzle_2.room");
     roomZero->setDoor(new Door(7, 17, 0, 2, 2, 1, true, COLOR_YELLOW), 0);
     roomZero->setDoor(new Door(2, 1, 0, 7, 16, 1, true, COLOR_YELLOW), 1);

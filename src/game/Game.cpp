@@ -49,7 +49,7 @@ Game::Game()
   /* initialize Rooms */
 
   // room 0
-  rooms[0] = initRoomZero();
+  rooms[0] = initPuzzleRoom2();
   
   // room 1
 
