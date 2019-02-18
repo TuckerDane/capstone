@@ -474,16 +474,16 @@ void Game::resolveItemAction(char direction)
             if (player.getXPos() == items[i]->getXPos() && player.getYPos() == items[i]->getYPos()) //if x and y value match
             {
                 //get the symbol, then resolve the action of the corresponding symbol
-                if (items[i]->getSymbol() == "ῦ")
+                if (items[i]->getType() == "potion")
                 {
                     resolveHealing();
                 }
-                else if (items[i]->getSymbol() == "☼")
+                else if (items[i]->getType() == "trap")
                 {
                     devConsole.log("applying damage");
                     resolveDamage();
                 }
-                else if (items[i]->getSymbol() == "●")
+                else if (items[i]->getType() == "movable")
                 {
                     devConsole.log("SUCCESS: applying move");
                     if (direction == 'w')
@@ -531,7 +531,7 @@ void Game::resolveItemAction(char direction)
                             player.setXPos(player.getXPos() - 1); //item cannot be move, move the player back
                     }
                 }
-                else if (items[i]->getSymbol() == "■")
+                else if (items[i]->getType() == "immovable")
                     break;
             }
         }

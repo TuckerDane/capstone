@@ -19,6 +19,7 @@ class Movable : public Item
 	//CONSTRUCTOR/DESTRUCTOR
 	Movable();
 	Movable(int yPos, int xPos);
+	Movable(int yPos, int xPos, string symbol);
 	Movable(int yPos, int xPos, int color, int number, int choice); //y position, x position, color, healing or damage  value, healing (1) or damage (else)
 	~Movable();
 

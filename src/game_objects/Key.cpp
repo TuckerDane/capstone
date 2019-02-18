@@ -35,6 +35,19 @@ Key::Key(string name, int password, int color) : Item()
   symbol = "ŧ";
 }
 
+Key::Key(int yPos, int xPos, string name, int password, int color)
+{
+  type = "key";
+  this->yPos = yPos;
+  this->xPos = xPos;
+  this->name = name;
+  weight = 1;
+  this->password = password;
+  description = "used to unlock doors";
+  this->color =  color;
+  symbol = "ŧ";
+}
+
 Key::~Key()
 {
 }

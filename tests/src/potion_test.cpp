@@ -9,7 +9,7 @@ TEST_CASE("default constructor sets Potion Class variables", "[potion][construct
     REQUIRE( p.getType() == "potion");
     REQUIRE( p.getWeight() == 2);
     REQUIRE( p.getHealing() == 4);
-    REQUIRE( p.getSymbol() == 'P');
+    REQUIRE( p.getSymbol() == "ῦ");
     REQUIRE( p.getColor() == COLOR_GREEN);
     REQUIRE( p.getDescription() == "Heals the player for 4 HP");
 }
@@ -23,7 +23,7 @@ TEST_CASE("overload constructor sets potion Class variables", "[potion][construc
     REQUIRE( p.getType() == "potion");
     REQUIRE( p.getWeight() == 2);
     REQUIRE( p.getHealing() == 4);
-    REQUIRE( p.getSymbol() == 'P');
+    REQUIRE( p.getSymbol() == "ῦ");
     REQUIRE( p.getColor() == COLOR_GREEN);
     REQUIRE( p.getDescription() == "Heals the player for 4 HP");
 }

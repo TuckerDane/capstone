@@ -13,7 +13,7 @@ CONSTRUCTOR/DESTRUCTORS
 Trap::Trap()
 {
 	name = "Trap";
-	type = "trap_item";
+	type = "trap";
 	weight = 2;
 	damage = 6;
 	symbol = "☼";
@@ -26,7 +26,7 @@ Trap::Trap(int yPos, int xPos)
 	this->yPos = yPos;
 	this->xPos = xPos;
 	name = "Trap";
-	type = "trap_item";
+	type = "trap";
 	weight = 2;
 	damage = 6;
 	symbol = "☼";
