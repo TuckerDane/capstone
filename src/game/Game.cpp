@@ -43,30 +43,32 @@ Game::Game()
   /* initialize Game class variables */
   isComplete = false;
   player.setCurrentRoom(0);
-  player.setXPos(5);
-  player.setYPos(5);
-  player.setInventoryItem(new Key("Yellow Key", 1, COLOR_YELLOW), 0);
-  player.setInventoryItem(new Key("Blue Key", 2, COLOR_BLUE), 1);
-  player.setInventoryItem(new Key("Green Key", 3, COLOR_GREEN), 2);
-  player.setNumItems(2);
+  player.setXPos(2);
+  player.setYPos(2);
 
   /* initialize Rooms */
 
   // room 0
-  rooms[0] = new Room("rooms/generic.room");                                // init room
-  rooms[0]->setDoor(new Door(5, 23, -1, -1, -1, 1, true, COLOR_YELLOW), 0); // doors
-  rooms[0]->setDoor(new Door(15, 23, -1, -1, -1, 2, true, COLOR_BLUE), 1);
-  rooms[0]->setDoor(new Door(10, 35, 1, 5, 2, 3, true, COLOR_GREEN), 2);
-  rooms[0]->setItem(new Potion(6, 8), 0);      // potions
-  rooms[0]->setItem(new Trap(6, 12), 1);       // traps
-  rooms[0]->setItem(new Movable(15, 4), 2);    // movable
-  rooms[0]->setItem(new Immovable(15, 12), 3); // immovable
-
+  rooms[0] = new Room("rooms/puzzle_2.room");
+  rooms[0]->setDoor(new Door(7, 17, 0, 2, 2, 1, true, COLOR_YELLOW), 0);
+  rooms[0]->setDoor(new Door(2, 1, 0, 7, 16, 1, true, COLOR_YELLOW), 1);
+  rooms[0]->setItem(new Immovable(7, 2), 0);
+  rooms[0]->setItem(new Immovable(6, 3), 1);
+  rooms[0]->setItem(new Immovable(5, 4), 2);
+  rooms[0]->setItem(new Immovable(5, 5), 3);
+  rooms[0]->setItem(new Movable(3, 6), 4);
+  rooms[0]->setItem(new Immovable(4, 5), 5);
+  rooms[0]->setItem(new Movable(5, 6), 6);
+  rooms[0]->setItem(new Immovable(4, 7), 7);
+  rooms[0]->setItem(new Movable(6, 7), 8);
+  rooms[0]->setItem(new Immovable(4, 8), 9);
+  rooms[0]->setItem(new Immovable(5, 8), 10);
+  rooms[0]->setItem(new Movable(6, 8), 11);
+  rooms[0]->setItem(new Immovable(5, 9), 12);
+  rooms[0]->setItem(new Immovable(6, 10), 13);
+  rooms[0]->setItem(new Immovable(7, 11), 14);
+  rooms[0]->setItem(new Key(7, 10, "Yellow Key", 1, COLOR_YELLOW), 15);
   // room 1
-  rooms[1] = new Room("rooms/round.room");                               // init room
-  rooms[1]->setDoor(new Door(5, 1, 0, 10, 34, 3, true, COLOR_GREEN), 2); // doors
-  rooms[1]->setItem(new Movable(5, 5, COLOR_GREEN, 1, 1), 0);            // movable
-  rooms[1]->setItem(new Movable(7, 7, COLOR_RED, 1, 2), 1);
 
   /* init narrative */
   narrative = "default narrative";
