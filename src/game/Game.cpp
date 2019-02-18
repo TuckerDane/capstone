@@ -49,25 +49,8 @@ Game::Game()
   /* initialize Rooms */
 
   // room 0
-  rooms[0] = new Room("rooms/puzzle_2.room");
-  rooms[0]->setDoor(new Door(7, 17, 0, 2, 2, 1, true, COLOR_YELLOW), 0);
-  rooms[0]->setDoor(new Door(2, 1, 0, 7, 16, 1, true, COLOR_YELLOW), 1);
-  rooms[0]->setItem(new Immovable(7, 2), 0);
-  rooms[0]->setItem(new Immovable(6, 3), 1);
-  rooms[0]->setItem(new Immovable(5, 4), 2);
-  rooms[0]->setItem(new Immovable(5, 5), 3);
-  rooms[0]->setItem(new Movable(3, 6, "■"), 4);
-  rooms[0]->setItem(new Immovable(4, 5), 5);
-  rooms[0]->setItem(new Movable(5, 6, "■"), 6);
-  rooms[0]->setItem(new Immovable(4, 7), 7);
-  rooms[0]->setItem(new Movable(6, 7, "■"), 8);
-  rooms[0]->setItem(new Immovable(4, 8), 9);
-  rooms[0]->setItem(new Immovable(5, 8), 10);
-  rooms[0]->setItem(new Movable(6, 8, "■"), 11);
-  rooms[0]->setItem(new Immovable(5, 9), 12);
-  rooms[0]->setItem(new Immovable(6, 10), 13);
-  rooms[0]->setItem(new Immovable(7, 11), 14);
-  rooms[0]->setItem(new Key(7, 10, "Yellow Key", 1, COLOR_YELLOW), 15);
+  rooms[0] = initRoomZero();
+  
   // room 1
 
   /* init narrative */

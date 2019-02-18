@@ -63,6 +63,7 @@ public:
   // CONSTRUCTORS/DESTRUCTORS
   Game();
   ~Game();
+  Room* initRoomZero();
 
   // ACTIONS
   void run();

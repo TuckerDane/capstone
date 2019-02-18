@@ -7,7 +7,7 @@ TEST_CASE("default constructor sets Immovable Class variables", "[immovable][con
     Immovable im;
     REQUIRE( im.getName() == "pillar" );
     REQUIRE( im.getType() == "immovable");
-    REQUIRE( im.getSymbol() == 'O');
+    REQUIRE( im.getSymbol() == "■");
     REQUIRE( im.getColor() == COLOR_WHITE);
     REQUIRE( im.getDescription() == "This is a pillar, looks like those used in important buildings.");
 }
@@ -19,7 +19,7 @@ TEST_CASE("overload constructor sets Immovable Class variables", "[immovable][co
     REQUIRE( im.getXPos() == 15);
     REQUIRE( im.getName() == "pillar" );
     REQUIRE( im.getType() == "immovable");
-    REQUIRE( im.getSymbol() == 'O');
+    REQUIRE( im.getSymbol() == "■");
     REQUIRE( im.getColor() == COLOR_WHITE);
     REQUIRE( im.getDescription() == "This is a pillar, looks like those used in important buildings.");
 }

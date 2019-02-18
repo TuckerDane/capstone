@@ -7,7 +7,7 @@ TEST_CASE("default constructor sets Movable Class variables", "[movable][constru
     Movable m;
     REQUIRE( m.getName() == "boulder" );
     REQUIRE( m.getType() == "movable");
-    REQUIRE( m.getSymbol() == 'M');
+    REQUIRE( m.getSymbol() == "●");
     REQUIRE( m.getColor() == COLOR_CYAN);
     REQUIRE( m.getDescription() == "This boulder is round-ish, maybe you can push it");
 }
@@ -19,7 +19,7 @@ TEST_CASE("overload constructor 1 sets Movable Class variables", "[movable][cons
     REQUIRE( m.getXPos() == 15);
     REQUIRE( m.getName() == "boulder" );
     REQUIRE( m.getType() == "movable");
-    REQUIRE( m.getSymbol() == 'M');
+    REQUIRE( m.getSymbol() == "●");
     REQUIRE( m.getColor() == COLOR_CYAN);
     REQUIRE( m.getDescription() == "This boulder is round-ish, maybe you can push it");
 }
@@ -31,7 +31,7 @@ TEST_CASE("overload constructor 2 sets Movable Class variables test with healing
     REQUIRE( m.getXPos() == 15);
     REQUIRE( m.getName() == "boulder" );
     REQUIRE( m.getType() == "movable");
-    REQUIRE( m.getSymbol() == 'M');
+    REQUIRE( m.getSymbol() == "●");
     REQUIRE( m.getColor() == COLOR_BLUE);
     REQUIRE( m.getDescription() == "This boulder is round-ish, maybe you can push it");
     REQUIRE( m.getHealing() == 15);
@@ -44,7 +44,7 @@ TEST_CASE("overload constructor 2 sets Movable Class variables test with damage 
     REQUIRE( m.getXPos() == 15);
     REQUIRE( m.getName() == "boulder" );
     REQUIRE( m.getType() == "movable");
-    REQUIRE( m.getSymbol() == 'M');
+    REQUIRE( m.getSymbol() == "●");
     REQUIRE( m.getColor() == COLOR_BLUE);
     REQUIRE( m.getDescription() == "This boulder is round-ish, maybe you can push it");
     REQUIRE( m.getDamage() == 15);
