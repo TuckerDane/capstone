@@ -18,9 +18,14 @@
 #include "Key.hpp"
 #include "Trap.hpp"
 #include "Potion.hpp"
+#include "Bomb.hpp"
+#include "Softblock.hpp"
 #include "Movable.hpp"
 #include "Movable2.hpp"
 #include "Immovable.hpp"
+#include "Snorlax.hpp"
+#include "Pokeflute.hpp"
+#include "Pokeball.hpp"
 #include "Colors.hpp"
 
 #define MAX_ROOMS 10
@@ -69,8 +74,10 @@ public:
   Room* initStartRoom();
   Room* initPuzzleRoom1();
   Room* initPuzzleRoom2();
+  Room* initPuzzleRoom3();
   Room* initPuzzleRoom4();
   Room* initPuzzleRoom5();
+  Room* initPuzzleRoom6();
   Room* initPuzzleRoom8();
   Room* initPuzzleRoom9();
   Room* initPuzzleRoomX();
@@ -119,6 +126,7 @@ public:
   void resolveItemAction(char direction);
   void pickUpItem();
   void dropItem();
+  void displayItemDescriptionToNarrativeWindow(Item *item);
 
   /* ..............................................
     RENDER.CPP
