@@ -27,6 +27,7 @@ Room::Room()
     type = "Room";
     name = "Generic Room";
     description = "A generic room";
+    itemsArrayIndex = 0;
     tileColor = 0;
 }
 
@@ -44,6 +45,8 @@ Room::Room(string roomFile)
     type = "Room";
     name = "Generic Room";
     description = "A generic room";
+    itemsArrayIndex = 0;
+    tileColor = 0;
 }
 
 Room::~Room()
@@ -105,6 +108,7 @@ void Room::setItems()
 void Room::setItem(Item *item, int itemIndex)
 {
     items[itemIndex] = item;
+    this->itemsArrayIndex++;
 }
 
 void Room::setType(string type)
@@ -195,6 +199,11 @@ Door *Room::getDoor(int doorIndex)
 Door **Room::getDoors()
 {
     return doors;
+}
+
+int Room::getItemsSize()
+{
+    return itemsArrayIndex;
 }
 
 int Room::getTileColor()

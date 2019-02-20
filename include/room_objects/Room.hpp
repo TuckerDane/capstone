@@ -38,6 +38,7 @@ protected:
   string type;
   string name;
   string description;
+  int itemsArrayIndex;
   int tileColor;
 
 public:
@@ -69,6 +70,7 @@ public:
   string getDescription();
   Door *getDoor(int doorIndex);
   Door **getDoors();
+  int getItemsSize();
   int getTileColor();
 };
 
