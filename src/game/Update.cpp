@@ -51,7 +51,7 @@ bool Game::isMoveAllowed(int y, int x)
     /* return true if the oom is okay to move into */
     testch = mvwinch(this->worldWindow, y, x);
     // if the space is empty
-    if (((testch & A_CHARTEXT) == GRASS) || ((testch & A_CHARTEXT) == EMPTY))
+    if (((testch & A_CHARTEXT) == GRASS) || ((testch & A_CHARTEXT) == EMPTY) || ((testch & A_CHARTEXT) == TELEPORTER))
     {
         return true;
     }
@@ -129,6 +129,7 @@ void Game::update()
                     player.move('w');
                     resolveDoorMovement();
                     resolveItemAction('w');
+		    resolveTeleporterMovement();
                 }
             }
         }
@@ -161,6 +162,7 @@ void Game::update()
                     player.move('s');
                     resolveDoorMovement();
                     resolveItemAction('s');
+		    resolveTeleporterMovement();
                 }
             }
         }
@@ -176,6 +178,7 @@ void Game::update()
                 player.move('a');
                 resolveDoorMovement();
                 resolveItemAction('a');
+		resolveTeleporterMovement();
             }
         }
         break;
@@ -190,7 +193,8 @@ void Game::update()
                 player.move('d');
                 resolveDoorMovement();
                 resolveItemAction('d');
-            }
+		resolveTeleporterMovement();
+            } 
         }
         break;
     case 'i':
