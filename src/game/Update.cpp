@@ -58,10 +58,10 @@ bool Game::isMoveAllowed(int y, int x)
     else // if the space contains an item that you can walk on
     {
         Item **items = rooms[player.getCurrentRoom()]->getItems();
-        if (items[0] != NULL)
+        int itemsSize = rooms[player.getCurrentRoom()]->getItemArraySize();
+        for (int i = 0; i < itemsSize; i++)
         {
-           int itemsSize = rooms[player.getCurrentRoom()]->getItemArraySize();
-            for (int i = 0; i < itemsSize; i++)
+            if (items[i] != NULL)
             {
                 if (items[i]->getYPos() == y && items[i]->getXPos() == x && items[i]->getType() != "immovable")
                 {
