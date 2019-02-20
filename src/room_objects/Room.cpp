@@ -131,6 +131,11 @@ void Room::setDoor(Door *door, int doorIndex)
     doors[doorIndex] = door;
 }
 
+void Room::setItemArraySize(int itemsArrayIndex)
+{
+    this->itemsArrayIndex = itemsArrayIndex;
+}
+
 void Room::setTileColor(int tileColor)
 {
     this->tileColor = tileColor;
@@ -201,7 +206,7 @@ Door **Room::getDoors()
     return doors;
 }
 
-int Room::getItemsSize()
+int Room::getItemArraySize()
 {
     return itemsArrayIndex;
 }

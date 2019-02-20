@@ -60,7 +60,7 @@ bool Game::isMoveAllowed(int y, int x)
         Item **items = rooms[player.getCurrentRoom()]->getItems();
         if (items[0] != NULL)
         {
-            int itemsSize = rooms[player.getCurrentRoom()]->getItemsSize();
+           int itemsSize = rooms[player.getCurrentRoom()]->getItemArraySize();
             for (int i = 0; i < itemsSize; i++)
             {
                 if (items[i]->getYPos() == y && items[i]->getXPos() == x && items[i]->getType() != "immovable")
@@ -556,6 +556,7 @@ void Game::pickUpItem()
                     isAnItem = true;
                     theItem = items[i];
                     pickedUpItem = player.pickUp(theItem);
+                    rooms[player.getCurrentRoom()]->setItemArraySize(rooms[player.getCurrentRoom()]->getItemArraySize() - 1);	// decrease the current room's item array size
                     if (pickedUpItem)
                     {
                         items[i] = NULL;
@@ -569,6 +570,7 @@ void Game::pickUpItem()
                     isAnItem = true;
                     theItem = items[i];
                     pickedUpItem = player.pickUp(theItem);
+                    rooms[player.getCurrentRoom()]->setItemArraySize(rooms[player.getCurrentRoom()]->getItemArraySize() - 1);	// decrease the current room's item array size
                     if (pickedUpItem)
                     {
                         items[i] = NULL;
@@ -583,6 +585,7 @@ void Game::pickUpItem()
                     isAnItem = true;
                     theItem = items[i];
                     pickedUpItem = player.pickUp(theItem);
+                    rooms[player.getCurrentRoom()]->setItemArraySize(rooms[player.getCurrentRoom()]->getItemArraySize() - 1);	// decrease the current room's item array size
                     if (pickedUpItem)
                     {
                         items[i] = NULL;
@@ -596,6 +599,7 @@ void Game::pickUpItem()
                     isAnItem = true;
                     theItem = items[i];
                     pickedUpItem = player.pickUp(theItem);
+                    rooms[player.getCurrentRoom()]->setItemArraySize(rooms[player.getCurrentRoom()]->getItemArraySize() - 1);	// decrease the current room's item array size
                     if (pickedUpItem)
                     {
                         items[i] = NULL;
@@ -639,6 +643,7 @@ void Game::dropItem()
         else //items[i] == NULL and can be dropped
         {
             droppedItem = player.drop(player.getSelectedItemIndex()); //get the item that has been dropped
+            rooms[player.getCurrentRoom()]->setItemArraySize(rooms[player.getCurrentRoom()]->getItemArraySize() + 1);	// increase the current room's item array size
             if (droppedItem == NULL)                                  //dropping a null
             {
                 setNarrative("You are unable to drop an empty slot in your bag.");

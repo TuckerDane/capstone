@@ -55,6 +55,7 @@ public:
   void setName(string name);
   void setDescription(string description);
   void setDoor(Door *door, int doorIndex);
+  void setItemArraySize(int itemsArrayIndex);
   void setTileColor(int color);
 
   // GETTERS
@@ -70,7 +71,7 @@ public:
   string getDescription();
   Door *getDoor(int doorIndex);
   Door **getDoors();
-  int getItemsSize();
+  int getItemArraySize();
   int getTileColor();
 };
 
