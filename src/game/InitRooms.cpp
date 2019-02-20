@@ -1,5 +1,13 @@
 #include "InitRooms.hpp"
 
+Room* Game::initPuzzleRoom1(){
+  Room* roomOne = new Room("rooms/puzzle_1.room");
+  roomOne->setTeleporter(new Teleporter(4, 3, 0, 5, 15, COLOR_BLUE), 0);   
+  roomOne->setTeleporter(new Teleporter(4, 16, 0, 5, 3, COLOR_BLUE), 1);   
+
+  return roomOne; 
+}
+
 Room* Game::initPuzzleRoom2(){
     Room* roomZero = new Room("rooms/puzzle_2.room");
     roomZero->setDoor(new Door(7, 17, 0, 2, 2, 1, true, COLOR_YELLOW), 0);
