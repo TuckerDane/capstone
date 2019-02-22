@@ -281,6 +281,7 @@ void Game::update()
             unsigned int confirm = getch();
             if (confirm == 'y' || confirm == 'Y')
             {
+                setNarrative("You Quit the Game");
                 setIsComplete(true);
             }
             else
