@@ -40,8 +40,8 @@ Room* Game::initPuzzleRoom2(){
 
 Room* Game::initPuzzleRoom5(){
     Room* room = new Room("rooms/puzzle_5.room");
-    room->setDoor(new Door(10, 19, 1, 7, 16, 1, true, COLOR_YELLOW), 0);
-    room->setDoor(new Door(14, 93, 1, 7, 16, 2, true, COLOR_RED), 1);
+    room->setDoor(new Door(10, 19, 0, 7, 16, 1, true, COLOR_YELLOW), 0);
+    room->setDoor(new Door(14, 93, -1, 7, 16, 2, true, COLOR_RED), 1);
     room->setDoor(new Door(10, 23, -1, -1, -1, 3, true, COLOR_MAGENTA), 2);
     room->setDoor(new Door(6, 41, -1, -1, -1, 4, true, COLOR_CYAN), 3);
     room->setItem(new Movable(7, 23, "■"), 0);

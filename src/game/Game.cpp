@@ -78,6 +78,6 @@ void Game::run()
     update();  // update the game state
   } while (getIsComplete() != true);
   renderEndScreen();
-  sleep(3); // display end screen for 3 seconds
+  sleep(1); // display end screen for 3 seconds
   getchar();
 }
