@@ -50,24 +50,51 @@ bool Game::isMoveAllowed(int y, int x)
 
     /* return true if the oom is okay to move into */
     testch = mvwinch(this->worldWindow, y, x);
+    // if the space contains an item that you can walk on
+    Item **items = rooms[player.getCurrentRoom()]->getItems();
+    for (int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
+    {
+        if (items[i] != NULL)
+        {
+            if (items[i]->getYPos() == y && items[i]->getXPos() == x && items[i]->getType() != "immovable")
+            {
+                devConsole.log("SUCCESS: item here");
+                return true;
+            }
+        }
+    }
     // if the space is empty
     if (((testch & A_CHARTEXT) == GRASS) || ((testch & A_CHARTEXT) == EMPTY))
     {
+        devConsole.log("ERROR: space is empty");
         return true;
     }
-    else // if the space contains an item that you can walk on
+    return false;
+}
+
+bool Game::isItemMoveAllowed(int y, int x)
+{
+    int testch;
+
+    /* return true if the oom is okay to move into */
+    testch = mvwinch(this->worldWindow, y, x);
+    // if the space contains an item that you can walk on
+    Item **items = rooms[player.getCurrentRoom()]->getItems();
+    for (int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
     {
-        Item **items = rooms[player.getCurrentRoom()]->getItems();
-        for (int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
+        if (items[i] != NULL)
         {
-            if (items[i] != NULL)
+            if (items[i]->getYPos() == y && items[i]->getXPos() == x)
             {
-                if (items[i]->getYPos() == y && items[i]->getXPos() == x && items[i]->getType() != "immovable")
-                {
-                    return true;
-                }
+                return false;
             }
         }
+    }
+    // if the space is empty
+    if (((testch & A_CHARTEXT) == GRASS) || ((testch & A_CHARTEXT) == EMPTY))
+    {
+        devConsole.log("ERROR: space is empty");
+        return true;
     }
     return false;
 }
@@ -424,7 +451,6 @@ void Game::resolveDamage() //player walks on a trap
     {
         if (items[i] != NULL)
         {
-            devConsole.log("SUCCESS: player on an item");
             if (player.getXPos() == items[i]->getXPos() && player.getYPos() == items[i]->getYPos()) //if x and y value match
             {
                 player.damageHP(items[i]->getDamage());
@@ -433,34 +459,27 @@ void Game::resolveDamage() //player walks on a trap
     }
 }
 
-void Game::resolveMovingItem(char direction) //moving an item
+void Game::resolveMovingItem(char direction, Item* item) //moving an item
 {
-    Item **items = rooms[player.getCurrentRoom()]->getItems();
-    for (int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
+    if (direction == 'w')
     {
-        if (items[i] != NULL)
-        {
-            if (direction == 'w')
-            {
-                if ((player.getYPos() == items[i]->getYPos()) && (player.getXPos() == items[i]->getXPos()))
-                    items[i]->triggerItemActions('w');
-            }
-            if (direction == 's')
-            {
-                if ((player.getYPos() == items[i]->getYPos()) && (player.getXPos() == items[i]->getXPos()))
-                    items[i]->triggerItemActions('s');
-            }
-            if (direction == 'a')
-            {
-                if ((player.getXPos() == items[i]->getXPos()) && (player.getYPos() == items[i]->getYPos()))
-                    items[i]->triggerItemActions('a');
-            }
-            if (direction == 'd')
-            {
-                if ((player.getXPos() == items[i]->getXPos()) && (player.getYPos() == items[i]->getYPos()))
-                    items[i]->triggerItemActions('d');
-            }
-        }
+        if ((player.getYPos() == item->getYPos()) && (player.getXPos() == item->getXPos()))
+            item->triggerItemActions('w');
+    }
+    if (direction == 's')
+    {
+        if ((player.getYPos() == item->getYPos()) && (player.getXPos() == item->getXPos()))
+            item->triggerItemActions('s');
+    }
+    if (direction == 'a')
+    {
+        if ((player.getXPos() == item->getXPos()) && (player.getYPos() == item->getYPos()))
+            item->triggerItemActions('a');
+    }
+    if (direction == 'd')
+    {
+        if ((player.getXPos() == item->getXPos()) && (player.getYPos() == item->getYPos()))
+            item->triggerItemActions('d');
     }
 }
 
@@ -485,47 +504,51 @@ void Game::resolveItemAction(char direction)
                 }
                 else if (items[i]->getType() == "movable")
                 {
-                    devConsole.log("SUCCESS: applying move");
+                    devConsole.log("SUCCESS: checking move");
                     if (direction == 'w')
                     {
-                        if (isMoveAllowed(player.getYPos() - 1, player.getXPos())) //item can be moved
+                        if (isItemMoveAllowed(items[i]->getYPos() - 1, items[i]->getXPos())) //item can be moved
                         {
+                            devConsole.log("INFO: move is allowed");
                             resolveDamage();
                             resolveHealing(); //TODO: resolutionStep() or leave it?
-                            resolveMovingItem(direction);
+                            resolveMovingItem(direction, items[i]);
                         }
                         else
                             player.setYPos(player.getYPos() + 1); //item cannot be move, move the player back
                     }
                     if (direction == 's')
                     {
-                        if (isMoveAllowed(player.getYPos() + 1, player.getXPos())) //item can be moved
+                        if (isItemMoveAllowed(items[i]->getYPos() + 1, items[i]->getXPos())) //item can be moved
                         {
+                            devConsole.log("INFO: move is allowed");
                             resolveDamage();
                             resolveHealing();
-                            resolveMovingItem(direction);
+                            resolveMovingItem(direction, items[i]);
                         }
                         else
                             player.setYPos(player.getYPos() - 1); //item cannot be move, move the player back
                     }
                     if (direction == 'a')
                     {
-                        if (isMoveAllowed(player.getYPos(), player.getXPos() - 1)) //item can be moved
+                        if (isItemMoveAllowed(items[i]->getYPos(), items[i]->getXPos() - 1)) //item can be moved
                         {
+                            devConsole.log("INFO: move is allowed");
                             resolveDamage();
                             resolveHealing();
-                            resolveMovingItem(direction);
+                            resolveMovingItem(direction, items[i]);
                         }
                         else
                             player.setXPos(player.getXPos() + 1); //item cannot be move, move the player back
                     }
                     if (direction == 'd')
                     {
-                        if (isMoveAllowed(player.getYPos(), player.getXPos() + 1)) //item can be moved
+                        if (isItemMoveAllowed(items[i]->getYPos(), items[i]->getXPos() + 1)) //item can be moved
                         {
+                            devConsole.log("INFO: move is allowed");
                             resolveDamage();
                             resolveHealing();
-                            resolveMovingItem(direction);
+                            resolveMovingItem(direction, items[i]);
                         }
                         else
                             player.setXPos(player.getXPos() - 1); //item cannot be move, move the player back
