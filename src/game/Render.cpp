@@ -27,7 +27,7 @@ void Game::renderEndScreen()
   refresh();
   renderStatus();
   colorWindow(developerWindow, RED_ON_BLACK);
-  string narrative = getNarrative();
+  string narrative = getNarrative() + " press any key to continue...";
   mvwprintw(developerWindow, 3, 2, narrative.c_str());
   wrefresh(developerWindow);
 }
