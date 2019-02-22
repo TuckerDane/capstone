@@ -160,6 +160,10 @@ void Game::renderDev()
     {
       textColor = GREEN_ON_BLACK;
     }
+    else if (logLine.find("INFO") != std::string::npos)
+    {
+      textColor = YELLOW_ON_BLACK;
+    }
     else
     {
       textColor = WHITE_ON_BLACK;

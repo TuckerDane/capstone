@@ -90,6 +90,7 @@ public:
   // GETTERS
   bool getIsComplete();
   bool isMoveAllowed(int y, int x);
+  bool isItemMoveAllowed(int y, int x);
   unsigned int getUserInput();
   Room *getRoom(int roomIndex);
   string getNarrative();
@@ -103,7 +104,7 @@ public:
   void resolveHealing();                  //user takes healing
   void usePotion(Item* item);
   void resolveDamage();                   //user takes damage
-  void resolveMovingItem(char direction); //user pushes an item forward in the direction they are trying to go
+  void resolveMovingItem(char direction, Item* item); //user pushes an item forward in the direction they are trying to go
   void resolveItemAction(char direction);
   void pickUpItem();
   void dropItem();
