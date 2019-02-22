@@ -22,6 +22,16 @@ void Game::render()
   renderNarrative();
 }
 
+void Game::renderEndScreen()
+{
+  refresh();
+  renderStatus();
+  colorWindow(developerWindow, RED_ON_BLACK);
+  string narrative = getNarrative();
+  mvwprintw(developerWindow, 3, 2, narrative.c_str());
+  wrefresh(developerWindow);
+}
+
 void Game::renderCurrentWindow()
 {
   if (getCurrentWindow() == inventoryWindow)

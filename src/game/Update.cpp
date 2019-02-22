@@ -58,7 +58,6 @@ bool Game::isMoveAllowed(int y, int x)
         {
             if (items[i]->getYPos() == y && items[i]->getXPos() == x && items[i]->getType() != "immovable")
             {
-                devConsole.log("SUCCESS: item here");
                 return true;
             }
         }
@@ -66,7 +65,6 @@ bool Game::isMoveAllowed(int y, int x)
     // if the space is empty
     if (((testch & A_CHARTEXT) == GRASS) || ((testch & A_CHARTEXT) == EMPTY))
     {
-        devConsole.log("ERROR: space is empty");
         return true;
     }
     return false;
@@ -93,7 +91,6 @@ bool Game::isItemMoveAllowed(int y, int x)
     // if the space is empty
     if (((testch & A_CHARTEXT) == GRASS) || ((testch & A_CHARTEXT) == EMPTY))
     {
-        devConsole.log("ERROR: space is empty");
         return true;
     }
     return false;
@@ -128,173 +125,175 @@ void Game::update()
     player.setIsMoved(false);
     switch (this->userInput)
     {
-    case KEY_UP:
-    case 'w':
-    case 'W':
-        if (this->getCurrentWindow() == this->inventoryWindow) //Inventory Management
-        {
-            if (player.getSelectedItemIndex() != 0)
+        case KEY_UP:
+        case 'w':
+        case 'W':
+            if (this->getCurrentWindow() == this->inventoryWindow) //Inventory Management
             {
-                player.setSelectedItemIndex(player.getSelectedItemIndex() - 1);
+                if (player.getSelectedItemIndex() != 0)
+                {
+                    player.setSelectedItemIndex(player.getSelectedItemIndex() - 1);
+                }
+                if (player.getInventoryItem(player.getSelectedItemIndex()) != NULL)
+                {
+                    narrative = player.getInventoryItem(player.getSelectedItemIndex())->getDescription();
+                }
+                else
+                {
+                    narrative = "an empty item slot";
+                }
             }
-            if (player.getInventoryItem(player.getSelectedItemIndex()) != NULL)
+            else //--------------------------- Player movement in worldWindow
             {
-                narrative = player.getInventoryItem(player.getSelectedItemIndex())->getDescription();
+                player.setSymbol("^");
+                if (player.getYPos() > 0)
+                {
+                    if (isMoveAllowed(player.getYPos() - 1, player.getXPos())) //empty space
+                    {
+                        player.move('w');
+                        resolveDoorMovement();
+                        resolveItemAction('w');
+                    }
+                }
+            }
+            break;
+        case KEY_DOWN:
+        case 's':
+        case 'S':
+            if (this->getCurrentWindow() == this->inventoryWindow) //inventory management
+            {
+                if (player.getSelectedItemIndex() != player.getMaxInventory() - 1)
+                {
+                    player.setSelectedItemIndex(player.getSelectedItemIndex() + 1);
+                }
+                if (player.getInventoryItem(player.getSelectedItemIndex()) != NULL)
+                {
+                    narrative = player.getInventoryItem(player.getSelectedItemIndex())->getDescription();
+                }
+                else
+                {
+                    narrative = "an empty item slot";
+                }
+            }
+            else //-------------------------Player Movement in worldWindow
+            {
+                player.setSymbol("v");
+                if (player.getYPos() < LINES - 1)
+                {
+                    if (isMoveAllowed(player.getYPos() + 1, player.getXPos())) //empty space
+                    {
+                        player.move('s');
+                        resolveDoorMovement();
+                        resolveItemAction('s');
+                    }
+                }
+            }
+            break;
+        case KEY_LEFT:
+        case 'a':
+        case 'A':
+            player.setSymbol("<");
+            if (player.getXPos() > 0)
+            {
+                if (isMoveAllowed(player.getYPos(), player.getXPos() - 1)) //empty space
+                {
+                    player.move('a');
+                    resolveDoorMovement();
+                    resolveItemAction('a');
+                }
+            }
+            break;
+        case KEY_RIGHT:
+        case 'd':
+        case 'D':
+            player.setSymbol(">");
+            if (player.getXPos() < COLS - 1)
+            {
+                if (isMoveAllowed(player.getYPos(), player.getXPos() + 1)) //empty space
+                {
+                    player.move('d');
+                    resolveDoorMovement();
+                    resolveItemAction('d');
+                }
+            }
+            break;
+        case 'i':
+        case 'I':
+            if (getCurrentWindow() == worldWindow)
+            {
+                setCurrentWindow(inventoryWindow);
+            }
+            else if (getCurrentWindow() == inventoryWindow)
+            {
+                setCurrentWindow(worldWindow);
+            }
+            break;
+        case '`':
+        case '~':
+            if (getCurrentWindow() != developerWindow)
+            {
+                setCurrentWindow(developerWindow);
             }
             else
             {
-                narrative = "an empty item slot";
+                setCurrentWindow(worldWindow);
             }
-        }
-        else //--------------------------- Player movement in worldWindow
-        {
-            player.setSymbol("^");
-            if (player.getYPos() > 0)
+            break;
+        case 'e':
+        case 'E':
+            if (currentWindow == worldWindow)
             {
-                if (isMoveAllowed(player.getYPos() - 1, player.getXPos())) //empty space
+                if (player.getEquippedItem() == NULL)
                 {
-                    player.move('w');
-                    resolveDoorMovement();
-                    resolveItemAction('w');
+                    setNarrative("you do not have an item selected to use");
+                }
+                else if (player.getEquippedItem()->getType() == "key")
+                {
+                    useKey();
+                }
+                else if (player.getEquippedItem()->getType() == "potion")
+                {
+                    usePotion(player.getEquippedItem());
                 }
             }
-        }
-        break;
-    case KEY_DOWN:
-    case 's':
-    case 'S':
-        if (this->getCurrentWindow() == this->inventoryWindow) //inventory management
-        {
-            if (player.getSelectedItemIndex() != player.getMaxInventory() - 1)
+            else if (currentWindow == inventoryWindow)
             {
-                player.setSelectedItemIndex(player.getSelectedItemIndex() + 1);
+                if (player.getSelectedItemIndex() > -1)
+                {
+                    player.setEquippedItemIndex(player.getSelectedItemIndex());
+                }
             }
-            if (player.getInventoryItem(player.getSelectedItemIndex()) != NULL)
+            break;
+        case 'p':
+        case 'P':
+            pickUpItem();
+            break;
+        case ';':
+        case ':':
+            dropItem();
+            break;
+        case 'q':
+        case 'Q':
+        {
+            string temp = getNarrative();
+            setNarrative("Would you like to quit? Press Y to confirm or any other key to return to <Adventure Game>.");
+            renderNarrative();
+            unsigned int confirm = getch();
+            if (confirm == 'y' || confirm == 'Y')
             {
-                narrative = player.getInventoryItem(player.getSelectedItemIndex())->getDescription();
+                setIsComplete(true);
             }
             else
             {
-                narrative = "an empty item slot";
+                setNarrative(temp);
             }
+            break;
         }
-        else //-------------------------Player Movement in worldWindow
-        {
-            player.setSymbol("v");
-            if (player.getYPos() < LINES - 1)
-            {
-                if (isMoveAllowed(player.getYPos() + 1, player.getXPos())) //empty space
-                {
-                    player.move('s');
-                    resolveDoorMovement();
-                    resolveItemAction('s');
-                }
-            }
-        }
-        break;
-    case KEY_LEFT:
-    case 'a':
-    case 'A':
-        player.setSymbol("<");
-        if (player.getXPos() > 0)
-        {
-            if (isMoveAllowed(player.getYPos(), player.getXPos() - 1)) //empty space
-            {
-                player.move('a');
-                resolveDoorMovement();
-                resolveItemAction('a');
-            }
-        }
-        break;
-    case KEY_RIGHT:
-    case 'd':
-    case 'D':
-        player.setSymbol(">");
-        if (player.getXPos() < COLS - 1)
-        {
-            if (isMoveAllowed(player.getYPos(), player.getXPos() + 1)) //empty space
-            {
-                player.move('d');
-                resolveDoorMovement();
-                resolveItemAction('d');
-            }
-        }
-        break;
-    case 'i':
-    case 'I':
-        if (getCurrentWindow() == worldWindow)
-        {
-            setCurrentWindow(inventoryWindow);
-            setNarrative("switched to inventory window!");
-        }
-        else if (getCurrentWindow() == inventoryWindow)
-        {
-            setCurrentWindow(worldWindow);
-            setNarrative("switched to world window!");
-        }
-        break;
-    case '`':
-    case '~':
-        if (getCurrentWindow() != developerWindow)
-        {
-            setCurrentWindow(developerWindow);
-            setNarrative("switched to developer window!");
-        }
-        else
-        {
-            setCurrentWindow(worldWindow);
-        }
-        break;
-    case 'e':
-    case 'E':
-        if (currentWindow == worldWindow)
-        {
-            if (player.getEquippedItem() == NULL)
-            {
-                setNarrative("you do not have an item selected to use");
-            }
-            else if (player.getEquippedItem()->getType() == "key")
-            {
-                useKey();
-            }
-            else if (player.getEquippedItem()->getType() == "potion")
-            {
-                usePotion(player.getEquippedItem());
-            }
-        }
-        else if (currentWindow == inventoryWindow)
-        {
-            if (player.getSelectedItemIndex() > -1)
-            {
-                player.setEquippedItemIndex(player.getSelectedItemIndex());
-            }
-        }
-        break;
-    case 'p':
-    case 'P':
-        pickUpItem();
-        break;
-    case ';':
-    case ':':
-        dropItem();
-        break;
-    case 'q':
-    case 'Q':
-    {
-        string temp = getNarrative();
-        setNarrative("Would you like to quit? Press Y to confirm or any other key to return to <Adventure Game>.");
-        renderNarrative();
-        unsigned int confirm = getch();
-        if (confirm == 'y' || confirm == 'Y')
-        {
-            setIsComplete(true);
-        }
-        else
-        {
-            setNarrative(temp);
-        }
-        break;
     }
+    if (player.getHP() < 1)
+    {
+        setNarrative("GAME OVER: You Died");
+        isComplete = true;
     }
 }
 
@@ -499,17 +498,14 @@ void Game::resolveItemAction(char direction)
                 }
                 else if (items[i]->getType() == "trap")
                 {
-                    devConsole.log("applying damage");
                     resolveDamage();
                 }
                 else if (items[i]->getType() == "movable")
                 {
-                    devConsole.log("SUCCESS: checking move");
                     if (direction == 'w')
                     {
                         if (isItemMoveAllowed(items[i]->getYPos() - 1, items[i]->getXPos())) //item can be moved
                         {
-                            devConsole.log("INFO: move is allowed");
                             resolveDamage();
                             resolveHealing(); //TODO: resolutionStep() or leave it?
                             resolveMovingItem(direction, items[i]);
@@ -521,7 +517,6 @@ void Game::resolveItemAction(char direction)
                     {
                         if (isItemMoveAllowed(items[i]->getYPos() + 1, items[i]->getXPos())) //item can be moved
                         {
-                            devConsole.log("INFO: move is allowed");
                             resolveDamage();
                             resolveHealing();
                             resolveMovingItem(direction, items[i]);
@@ -533,7 +528,6 @@ void Game::resolveItemAction(char direction)
                     {
                         if (isItemMoveAllowed(items[i]->getYPos(), items[i]->getXPos() - 1)) //item can be moved
                         {
-                            devConsole.log("INFO: move is allowed");
                             resolveDamage();
                             resolveHealing();
                             resolveMovingItem(direction, items[i]);
@@ -545,7 +539,6 @@ void Game::resolveItemAction(char direction)
                     {
                         if (isItemMoveAllowed(items[i]->getYPos(), items[i]->getXPos() + 1)) //item can be moved
                         {
-                            devConsole.log("INFO: move is allowed");
                             resolveDamage();
                             resolveHealing();
                             resolveMovingItem(direction, items[i]);
