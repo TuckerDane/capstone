@@ -22,6 +22,16 @@ void Game::render()
   renderNarrative();
 }
 
+void Game::renderEndScreen()
+{
+  refresh();
+  renderStatus();
+  colorWindow(developerWindow, RED_ON_BLACK);
+  string narrative = getNarrative() + " press any key to continue...";
+  mvwprintw(developerWindow, 3, 2, narrative.c_str());
+  wrefresh(developerWindow);
+}
+
 void Game::renderCurrentWindow()
 {
   if (getCurrentWindow() == inventoryWindow)
@@ -58,7 +68,36 @@ void Game::renderStatus()
   }
   else
   {
-    mvwprintw(statusWindow, 3, 2, player.getInventoryItem(player.getEquippedItemIndex())->getName().c_str());
+    int color = WHITE_ON_BLACK;
+    if (player.getInventoryItem(player.getEquippedItemIndex())->getColor() == COLOR_RED)
+    {
+      color = RED_ON_BLACK;
+    }
+    else if (player.getInventoryItem(player.getEquippedItemIndex())->getColor() == COLOR_GREEN)
+    {
+      color = GREEN_ON_BLACK;
+    }
+    else if (player.getInventoryItem(player.getEquippedItemIndex())->getColor() == COLOR_YELLOW)
+    {
+      color = YELLOW_ON_BLACK;
+    }
+    else if (player.getInventoryItem(player.getEquippedItemIndex())->getColor() == COLOR_BLUE)
+    {
+      color = BLUE_ON_BLACK;
+    }
+    else if (player.getInventoryItem(player.getEquippedItemIndex())->getColor() == COLOR_MAGENTA)
+    {
+      color = MAGENTA_ON_BLACK;
+    }
+    else if (player.getInventoryItem(player.getEquippedItemIndex())->getColor() == COLOR_CYAN)
+    {
+      color = CYAN_ON_BLACK;
+    }
+
+    wattron(statusWindow, COLOR_PAIR(color));
+    mvwprintw(statusWindow, 3, 2, player.getInventoryItem(player.getEquippedItemIndex())->getSymbol().c_str());
+    mvwprintw(statusWindow, 3, 4, player.getInventoryItem(player.getEquippedItemIndex())->getName().c_str());
+    wattroff(statusWindow, COLOR_PAIR(color));
   }
 
   // render player's HP
@@ -66,9 +105,9 @@ void Game::renderStatus()
   mvwprintw(statusWindow, 1, 22, "HP");
   mvwprintw(statusWindow, 2, 20, "------");
   wattron(statusWindow, COLOR_PAIR(RED_ON_BLACK));
-  for(int i = 0; i < hp; i++)
+  for (int i = 0; i < hp; i++)
   {
-    mvwprintw(statusWindow, 3, 20+(2*i), "♥");
+    mvwprintw(statusWindow, 3, 20 + (2 * i), "♥");
   }
   wattroff(statusWindow, COLOR_PAIR(RED_ON_BLACK));
   wrefresh(statusWindow);
@@ -113,13 +152,13 @@ void Game::renderInventory()
     {
       line = std::to_string(i + 1);
       mvwprintw(inventoryWindow, i + 5, 2, line.c_str());
-      if(i == player.getEquippedItemIndex())
+      if (i == player.getEquippedItemIndex())
       {
-	line = inventory[i]->getName() + "*";
+        line = inventory[i]->getSymbol() + " " + inventory[i]->getName() + "*";
       }
       else
       {
-	line = inventory[i]->getName();
+        line = inventory[i]->getSymbol() + " " + inventory[i]->getName();
       }
       mvwprintw(inventoryWindow, i + 5, 8, line.c_str());
       line = std::to_string(inventory[i]->getWeight());
@@ -130,7 +169,7 @@ void Game::renderInventory()
       line = std::to_string(i + 1) + "\tempty slot";
       mvwprintw(inventoryWindow, i + 5, 2, line.c_str());
     }
-    wattroff(inventoryWindow, COLOR_PAIR(highlightColor)); 
+    wattroff(inventoryWindow, COLOR_PAIR(highlightColor));
   }
 
   wrefresh(inventoryWindow);

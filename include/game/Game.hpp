@@ -64,6 +64,7 @@ public:
   Game();
   ~Game();
   Room* initPuzzleRoom2();
+  Room* initPuzzleRoom5();
 
   // ACTIONS
   void run();
@@ -117,6 +118,7 @@ public:
   // ACTIONS
   void render();
   void colorWindow(WINDOW *window, int colorPair);
+  void renderEndScreen();
   void renderCurrentWindow();
   void renderStatus();
   void renderWorld();
