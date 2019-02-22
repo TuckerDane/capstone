@@ -66,7 +66,8 @@ public:
   Game();
   ~Game();
   Room* initPuzzleRoom2();
-  Room* initPuzzleRoom1();
+  Room* initPuzzleRoom1(); //Saffron Gyn
+  Room* initPuzzleRoom4(); //Pac-Man
 
   // ACTIONS
   void run();

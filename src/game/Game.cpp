@@ -42,16 +42,18 @@ Game::Game()
 
   /* initialize Game class variables */
   isComplete = false;
-  player.setCurrentRoom(0);
+  player.setCurrentRoom(1);
   player.setXPos(2);
   player.setYPos(2);
 
   /* initialize Rooms */
 
   // room 0
-//  rooms[0] = initPuzzleRoom2();
-  rooms[0] = initPuzzleRoom1();  
-  // room 1
+  rooms[0] = initPuzzleRoom2();
+  rooms[1] = initPuzzleRoom1();  
+  rooms[2] = initPuzzleRoom2();
+  rooms[3] = initPuzzleRoom2();
+  rooms[4] = initPuzzleRoom4();
 
   /* init narrative */
   narrative = "default narrative";
