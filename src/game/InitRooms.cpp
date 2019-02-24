@@ -56,12 +56,12 @@ Room* Game::initPuzzleRoom4(){
   roomFour->setTeleporter(new Teleporter(11, 49, 1, 3, 6, COLOR_BLUE), 0); //logo return   
   roomFour->setTeleporter(new Teleporter(9, 117, 1, 17, 6, COLOR_BLUE), 1); //preventing user from getting trapped in pac man region
   roomFour->setTeleporter(new Teleporter(14, 126, 1, 3, 6, COLOR_BLUE), 2); //pac man - return after getting item
-  roomFour->setTeleporter(new Teleporter(13, 103, 4, 13, 144, COLOR_BLUE), 3); //pac man tele: left
-  roomFour->setTeleporter(new Teleporter(14, 103, 4, 13, 144, COLOR_BLUE), 4); //pac man tele: left
-  roomFour->setTeleporter(new Teleporter(15, 103, 4, 13, 144, COLOR_BLUE), 5); //pac man tele: left
-  roomFour->setTeleporter(new Teleporter(13, 147, 4, 13, 105, COLOR_BLUE), 6); //pac man tele: right
-  roomFour->setTeleporter(new Teleporter(14, 147, 4, 13, 105, COLOR_BLUE), 7); //pac man tele: right
-  roomFour->setTeleporter(new Teleporter(15, 147, 4, 13, 105, COLOR_BLUE), 8); //pac man tele: right
+  roomFour->setTeleporter(new Teleporter(13, 103, 4, 13, 146, COLOR_BLUE), 3); //pac man tele: left
+  roomFour->setTeleporter(new Teleporter(14, 103, 4, 14, 146, COLOR_BLUE), 4); //pac man tele: left
+  roomFour->setTeleporter(new Teleporter(15, 103, 4, 15, 146, COLOR_BLUE), 5); //pac man tele: left
+  roomFour->setTeleporter(new Teleporter(13, 147, 4, 13, 104, COLOR_BLUE), 6); //pac man tele: right
+  roomFour->setTeleporter(new Teleporter(14, 147, 4, 14, 104, COLOR_BLUE), 7); //pac man tele: right
+  roomFour->setTeleporter(new Teleporter(15, 147, 4, 15, 104, COLOR_BLUE), 8); //pac man tele: right
   //door for pac man region
   roomFour->setDoor(new Door(14, 120, -1, -1, -1, 101, true, COLOR_CYAN), 0);
   //key for logo region
