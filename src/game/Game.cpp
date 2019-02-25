@@ -50,6 +50,7 @@ Game::Game()
 
   // room 0
   rooms[0] = initPuzzleRoom2();
+  rooms[1] = initPuzzleRoom5();
   
   // room 1
 
@@ -76,4 +77,7 @@ void Game::run()
     process(); // process player input
     update();  // update the game state
   } while (getIsComplete() != true);
+  renderEndScreen();
+  sleep(1); // display end screen for 3 seconds
+  getchar();
 }
