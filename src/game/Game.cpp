@@ -43,14 +43,16 @@ Game::Game()
   /* initialize Game class variables */
   isComplete = false;
   player.setCurrentRoom(0);
-  player.setXPos(2);
-  player.setYPos(2);
+  player.setXPos(12);
+  player.setYPos(12);
 
   /* initialize Rooms */
 
   // room 0
-  rooms[0] = initPuzzleRoom2();
-  rooms[1] = initPuzzleRoom5();
+  // rooms[0] = initPuzzleRoom2();
+  // rooms[1] = initPuzzleRoom5();
+
+  rooms[0] = initPuzzleRoom9();
   
   // room 1
 

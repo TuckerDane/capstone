@@ -53,3 +53,28 @@ Room* Game::initPuzzleRoom5(){
     room->setItem(new Key(10, 33, "Cyan Key", 4, COLOR_CYAN), 2);
     return room;
 }
+
+Room* Game::initPuzzleRoom9(){
+    Room* room = new Room("rooms/puzzle_9.room");
+    int blockCounter = 0;
+    // for loop to fill with soft blocks
+    for(int i= 0; i < 15; i++){
+        for(int j= 0; j < 15; j++){
+            if (i == 7){
+                if (j != 7)
+               {
+                room->setItem(new Movable(i+5, j+5, "■"), blockCounter);
+                room->getItem(blockCounter++)->setColor(COLOR_GREEN);
+                }
+            }
+            else
+            {
+                room->setItem(new Movable(i+5, j+5, "■"), blockCounter);
+                room->getItem(blockCounter++)->setColor(COLOR_GREEN);
+            }
+            
+        }
+    }
+    
+    return room;
+}

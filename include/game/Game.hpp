@@ -65,6 +65,7 @@ public:
   ~Game();
   Room* initPuzzleRoom2();
   Room* initPuzzleRoom5();
+  Room* initPuzzleRoom9();
 
   // ACTIONS
   void run();
