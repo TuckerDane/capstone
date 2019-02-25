@@ -11,7 +11,7 @@ TEST_CASE("default constructor sets Object Class variables", "[object][construct
     REQUIRE( o.getType() == "generic_object");
     REQUIRE( o.getSymbol() == "?");
     REQUIRE( o.getColor() == COLOR_BLACK);
-    //REQUIRE( o.getDescription() == "none");
+    REQUIRE( o.getDescription() == "none");
 }
 
 TEST_CASE("overload constructor sets Object Class variables test", "[object][constructor]")
