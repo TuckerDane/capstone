@@ -220,7 +220,7 @@ void Player::move(char direction)
 	}
 	else
 	{
-		cerr << "ERROR: Player.move failed; invalid direction!";
+		devConsole.log("ERROR: Player.move failed; invalid direction!");
 	}
 	setIsMoved(true);
 }

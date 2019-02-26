@@ -13,6 +13,7 @@
 #include <iostream>
 #include "Object.hpp"
 #include "Door.hpp"
+#include "Console.hpp"
 
 /* ..............................................
   @brief 
@@ -24,6 +25,7 @@ protected:
   int weight; // how much the object weights
   int healing = 0;
   int damage = 0;
+  Console devConsole;
 
 public:
   // CONSTRUCTORS/DECONSTRUCTORS
