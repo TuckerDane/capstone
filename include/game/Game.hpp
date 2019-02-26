@@ -19,6 +19,7 @@
 #include "Trap.hpp"
 #include "Potion.hpp"
 #include "Movable.hpp"
+#include "Movable2.hpp"
 #include "Immovable.hpp"
 #include "Colors.hpp"
 
@@ -63,8 +64,10 @@ public:
   // CONSTRUCTORS/DESTRUCTORS
   Game();
   ~Game();
+  Room* initStartRoom();
   Room* initPuzzleRoom2();
   Room* initPuzzleRoom5();
+  Room* initPuzzleRoom8();
 
   // ACTIONS
   void run();
@@ -91,7 +94,7 @@ public:
   // GETTERS
   bool getIsComplete();
   bool isMoveAllowed(int y, int x);
-  bool isItemMoveAllowed(int y, int x);
+  bool isItemMoveAllowed(int y, int x, char direction, Object* object);
   unsigned int getUserInput();
   Room *getRoom(int roomIndex);
   string getNarrative();
@@ -105,7 +108,7 @@ public:
   void resolveHealing();                  //user takes healing
   void usePotion(Item* item);
   void resolveDamage();                   //user takes damage
-  void resolveMovingItem(char direction, Item* item); //user pushes an item forward in the direction they are trying to go
+  void resolveMovingItem(char direction, Item* item, Object* object); //user pushes an item forward in the direction they are trying to go
   void resolveItemAction(char direction);
   void pickUpItem();
   void dropItem();

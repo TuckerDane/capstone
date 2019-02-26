@@ -1,8 +1,15 @@
 #include "InitRooms.hpp"
 
+Room* Game::initStartRoom(){
+    Room* room = new Room("rooms/start.room");
+    room->setDoor(new Door(5, 1, 2, 3, 3, -1, false, COLOR_WHITE), 0);
+    room->setDoor(new Door(15, 1, 8, 3, 3, -1, false, COLOR_WHITE), 1);
+    return room;
+}
+
 Room* Game::initPuzzleRoom2(){
     Room* room = new Room("rooms/puzzle_2.room");
-    room->setDoor(new Door(7, 17, 1, 10, 20, 1, true, COLOR_YELLOW), 0);
+    room->setDoor(new Door(7, 17, 5, 10, 20, 1, true, COLOR_YELLOW), 0);
     room->setItem(new Immovable(7, 2), 0);
     room->getItem(0)->setWeight(1000);
     room->setItem(new Immovable(6, 3), 1);
@@ -40,7 +47,7 @@ Room* Game::initPuzzleRoom2(){
 
 Room* Game::initPuzzleRoom5(){
     Room* room = new Room("rooms/puzzle_5.room");
-    room->setDoor(new Door(10, 19, 0, 7, 16, 1, true, COLOR_YELLOW), 0);
+    room->setDoor(new Door(10, 19, 2, 7, 16, 1, true, COLOR_YELLOW), 0);
     room->setDoor(new Door(14, 93, -1, 7, 16, 2, true, COLOR_RED), 1);
     room->setDoor(new Door(10, 23, -1, -1, -1, 3, true, COLOR_MAGENTA), 2);
     room->setDoor(new Door(6, 41, -1, -1, -1, 4, true, COLOR_CYAN), 3);
@@ -51,5 +58,20 @@ Room* Game::initPuzzleRoom5(){
     room->getItem(1)->setColor(COLOR_RED);
     room->getItem(1)->setDamage(1);
     room->setItem(new Key(10, 33, "Cyan Key", 4, COLOR_CYAN), 2);
+    return room;
+}
+
+Room* Game::initPuzzleRoom8() {
+    Room* room = new Room("rooms/puzzle_8.room");
+    room->setItem(new Movable2(4, 6, "o"), 0);
+    room->setItem(new Movable2(4, 8, "o"), 1);
+    room->setItem(new Movable2(4, 10, "o"), 2);
+    room->setItem(new Movable2(4, 12, "o"), 3);
+    room->setItem(new Movable2(4, 14, "o"), 4);
+    room->setItem(new Movable(6, 5, "●"), 5);
+    room->setItem(new Movable(6, 7, "●"), 6);
+    room->setItem(new Movable(6, 9, "●"), 7);
+    room->setItem(new Movable(6, 11, "●"), 8);
+    room->setItem(new Movable(6, 13, "●"), 9);
     return room;
 }

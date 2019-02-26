@@ -13,10 +13,7 @@
 #include "Object.hpp"
 #include "Item.hpp"
 #include "Key.hpp"
-using std::cerr;
-using std::cin;
-using std::cout;
-using std::endl;
+#include "Console.hpp"
 
 /* ..............................................
   @brief 
@@ -36,6 +33,7 @@ private:
 	int equippedItemIndex;
 	int hp; //health points for the player, maxHP prevents the player from going higher than starting hp
 	int maxHP;
+	Console devConsole;
 
 public:
 	// CONSTRUCTOR/DESTRUCTORS
