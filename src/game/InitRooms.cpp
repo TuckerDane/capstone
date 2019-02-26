@@ -85,15 +85,16 @@ Room* Game::initPuzzleRoom9(){
             if (i == 7){
                 if (j != 7)
                {
-                room->setItem(new Movable2(i+5, j+5, "■"), blockCounter);
+                room->setItem(new Movable2(i+5, j+5, "█"), blockCounter);
                 room->getItem(blockCounter++)->setColor(COLOR_GREEN);
                 }
             }
             else
             {
-                room->setItem(new Movable2(i+5, j+5, "■"), blockCounter);
+                room->setItem(new Movable2(i+5, j+5, "█"), blockCounter);
                 room->getItem(blockCounter++)->setColor(COLOR_GREEN);
-            }
-            
+            }  
         }
     }
+    return room;
+}
