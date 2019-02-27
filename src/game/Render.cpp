@@ -227,6 +227,7 @@ void Game::renderRoom()
   renderWalls();
   renderDoors();
   renderItems();
+  renderTeleporters();
 }
 
 void Game::renderWalls()
@@ -257,6 +258,21 @@ void Game::renderDoors()
     }
   }
 }
+
+void Game::renderTeleporters()
+{
+  Teleporter **teleporters = rooms[player.getCurrentRoom()]->getTeleporters();
+
+  for (int i = 0; i < rooms[player.getCurrentRoom()]->getMaxTeleporters(); i++)
+  {
+    if (teleporters[i] != NULL)
+    {
+      int teleporterColor = teleporters[i]->setColorPair(teleporters[i]->getColor(), COLOR_BLACK);
+      mvwaddchWithColor(teleporters[i]->getYPos(), teleporters[i]->getXPos(), teleporters[i]->getSymbol(), teleporterColor);
+    }
+  }
+}
+
 
 void Game::renderItems()
 {

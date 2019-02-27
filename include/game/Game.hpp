@@ -33,6 +33,8 @@
 #define WALL4 '/'
 #define WALL5 '+'
 #define DOOR '░'
+#define TELEPORTER 'H'
+
 
 #define WINDOW_WIDTH 150
 #define WORLD_WINDOW_HEIGHT 30
@@ -65,10 +67,13 @@ public:
   Game();
   ~Game();
   Room* initStartRoom();
+  Room* initPuzzleRoom1();
   Room* initPuzzleRoom2();
+  Room* initPuzzleRoom4();
   Room* initPuzzleRoom5();
   Room* initPuzzleRoom8();
   Room* initPuzzleRoom9();
+  Room* initPuzzleRoomX();
 
   // ACTIONS
   void run();
@@ -104,6 +109,7 @@ public:
   // ACTIONS
   void update();
   void resolveDoorMovement();
+  void resolveTeleporterMovement();
   void useKeyOnOppositeDoor(Door* door);
   void useKey();
   void resolveHealing();                  //user takes healing
@@ -132,6 +138,7 @@ public:
   void renderRoom();
   void renderWalls();
   void renderDoors();
+  void renderTeleporters();
   void renderItems();
   void renderPlayer();
   void mvwaddchWithColor(int yPos, int xPos, string TILE_SYMBOL, char TILE_PAIR);

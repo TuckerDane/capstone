@@ -63,7 +63,7 @@ bool Game::isMoveAllowed(int y, int x)
         }
     }
     // if the space is empty
-    if (((testch & A_CHARTEXT) == GRASS) || ((testch & A_CHARTEXT) == EMPTY))
+    if (((testch & A_CHARTEXT) == GRASS) || ((testch & A_CHARTEXT) == EMPTY) || ((testch & A_CHARTEXT) == TELEPORTER))
     {
         return true;
     }
@@ -196,6 +196,7 @@ void Game::update()
                         player.move('w');
                         resolveDoorMovement();
                         resolveItemAction('w');
+          		resolveTeleporterMovement();
                     }
                 }
             }
@@ -228,6 +229,7 @@ void Game::update()
                         player.move('s');
                         resolveDoorMovement();
                         resolveItemAction('s');
+                        resolveTeleporterMovement();
                     }
                 }
             }
@@ -243,6 +245,7 @@ void Game::update()
                     player.move('a');
                     resolveDoorMovement();
                     resolveItemAction('a');
+                    resolveTeleporterMovement();
                 }
             }
             break;
@@ -257,82 +260,83 @@ void Game::update()
                     player.move('d');
                     resolveDoorMovement();
                     resolveItemAction('d');
+		    resolveTeleporterMovement();
                 }
             }
             break;
-        case 'i':
-        case 'I':
-            if (getCurrentWindow() == worldWindow)
-            {
-                setCurrentWindow(inventoryWindow);
-            }
-            else if (getCurrentWindow() == inventoryWindow)
-            {
-                setCurrentWindow(worldWindow);
-            }
-            break;
-        case '`':
-        case '~':
-            if (getCurrentWindow() != developerWindow)
-            {
-                setCurrentWindow(developerWindow);
-            }
-            else
-            {
-                setCurrentWindow(worldWindow);
-            }
-            break;
-        case 'e':
-        case 'E':
-            if (currentWindow == worldWindow)
-            {
-                if (player.getEquippedItem() == NULL)
-                {
-                    setNarrative("you do not have an item selected to use");
-                }
-                else if (player.getEquippedItem()->getType() == "key")
-                {
-                    useKey();
-                }
-                else if (player.getEquippedItem()->getType() == "potion")
-                {
-                    usePotion(player.getEquippedItem());
-                }
-            }
-            else if (currentWindow == inventoryWindow)
-            {
-                if (player.getSelectedItemIndex() > -1)
-                {
-                    player.setEquippedItemIndex(player.getSelectedItemIndex());
-                }
-            }
-            break;
-        case 'p':
-        case 'P':
-            pickUpItem();
-            break;
-        case ';':
-        case ':':
-            dropItem();
-            break;
-        case 'q':
-        case 'Q':
+    case 'i':
+    case 'I':
+        if (getCurrentWindow() == worldWindow)
         {
-            string temp = getNarrative();
-            setNarrative("Would you like to quit? Press Y to confirm or any other key to return to <Adventure Game>.");
-            renderNarrative();
-            unsigned int confirm = getch();
-            if (confirm == 'y' || confirm == 'Y')
-            {
-                setNarrative("You Quit the Game");
-                setIsComplete(true);
-            }
-            else
-            {
-                setNarrative(temp);
-            }
-            break;
+            setCurrentWindow(inventoryWindow);
         }
+        else if (getCurrentWindow() == inventoryWindow)
+        {
+            setCurrentWindow(worldWindow);
+        }
+        break;
+    case '`':
+    case '~':
+        if (getCurrentWindow() != developerWindow)
+        {
+            setCurrentWindow(developerWindow);
+        }
+        else
+        {
+            setCurrentWindow(worldWindow);
+        }
+        break;
+    case 'e':
+    case 'E':
+        if (currentWindow == worldWindow)
+        {
+            if (player.getEquippedItem() == NULL)
+            {
+                setNarrative("you do not have an item selected to use");
+            }
+            else if (player.getEquippedItem()->getType() == "key")
+            {
+                useKey();
+            }
+            else if (player.getEquippedItem()->getType() == "potion")
+            {
+                usePotion(player.getEquippedItem());
+            }
+        }
+        else if (currentWindow == inventoryWindow)
+        {
+            if (player.getSelectedItemIndex() > -1)
+            {
+                player.setEquippedItemIndex(player.getSelectedItemIndex());
+            }
+        }
+        break;
+    case 'p':
+    case 'P':
+        pickUpItem();
+        break;
+    case ';':
+    case ':':
+        dropItem();
+        break;
+    case 'q':
+    case 'Q':
+    {
+        string temp = getNarrative();
+        setNarrative("Would you like to quit? Press Y to confirm or any other key to return to <Adventure Game>.");
+        renderNarrative();
+        unsigned int confirm = getch();
+        if (confirm == 'y' || confirm == 'Y')
+        {
+            setNarrative("You Quit the Game");
+            setIsComplete(true);
+        }
+        else
+        {
+            setNarrative(temp);
+        }
+        break;
+    }
     }
     if (player.getHP() < 1)
     {
@@ -356,6 +360,23 @@ void Game::resolveDoorMovement()
                 player.setXPos(doors[i]->getNextXPos());
             }
         }
+    }
+}
+
+void Game::resolveTeleporterMovement()
+{  
+    Teleporter **teleporters = rooms[player.getCurrentRoom()]->getTeleporters();
+    for (int i = 0; i < 64; i++)
+    {
+	if (teleporters[i] != NULL)
+	{
+	    if(player.getXPos() == teleporters[i]->getXPos() && player.getYPos() == teleporters[i]->getYPos() && teleporters[i]->getNextRoom() != -1)
+	    {
+		player.setCurrentRoom(teleporters[i]->getNextRoom());
+		player.setYPos(teleporters[i]->getNextYPos());
+		player.setXPos(teleporters[i]->getNextXPos());
+	    }
+	}
     }
 }
 
