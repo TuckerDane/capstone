@@ -51,6 +51,7 @@ Game::Game()
   rooms[0] = initStartRoom();
   rooms[1] = initPuzzleRoom1();
   rooms[2] = initPuzzleRoom2();
+  rooms[4] = initPuzzleRoom4();
   rooms[5] = initPuzzleRoom5();
   rooms[8] = initPuzzleRoom8();
   rooms[9] = initPuzzleRoom9();
