@@ -2,8 +2,8 @@
 
 Room* Game::initStartRoom(){
     Room* room = new Room("rooms/start.room");
-    room->setDoor(new Door(5, 1, 2, 3, 3, -1, false, COLOR_WHITE), 0);
-    room->setDoor(new Door(15, 1, 8, 3, 3, -1, false, COLOR_WHITE), 1);
+    room->setDoor(new Door(5, 1, 9, 12, 12, -1, false, COLOR_WHITE), 0);
+    room->setDoor(new Door(15, 1, 9, 12, 12, -1, false, COLOR_WHITE), 1);
     return room;
 }
 
@@ -78,8 +78,9 @@ Room* Game::initPuzzleRoom8() {
 
 Room* Game::initPuzzleRoom9(){
     Room* room = new Room("rooms/puzzle_9.room");
+    room->setDoor(new Door(4, 1, 9, 12, 12, 0, false, COLOR_WHITE), 0);     // DOOR LOCKED CAN BE CHANGED FOR MAPPING PURPOSES
+
     int blockCounter = 0;
-    // for loop to fill with soft blocks
     for(int i= 0; i < 15; i++){
         for(int j= 0; j < 15; j++){
             if (i == 7){
