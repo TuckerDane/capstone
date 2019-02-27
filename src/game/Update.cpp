@@ -63,7 +63,7 @@ bool Game::isMoveAllowed(int y, int x)
         }
     }
     // if the space is empty
-    if (((testch & A_CHARTEXT) == GRASS) || ((testch & A_CHARTEXT) == EMPTY))
+    if (((testch & A_CHARTEXT) == GRASS) || ((testch & A_CHARTEXT) == EMPTY) || ((testch & A_CHARTEXT) == TELEPORTER))
     {
         return true;
     }
@@ -196,6 +196,7 @@ void Game::update()
                         player.move('w');
                         resolveDoorMovement();
                         resolveItemAction('w');
+          		resolveTeleporterMovement();
                     }
                 }
             }
@@ -257,23 +258,37 @@ void Game::update()
                     player.move('d');
                     resolveDoorMovement();
                     resolveItemAction('d');
+		    resolveTeleporterMovement();
                 }
             }
             break;
-        case 'i':
-        case 'I':
-            if (getCurrentWindow() == worldWindow)
-            {
-                setCurrentWindow(inventoryWindow);
-            }
-            else if (getCurrentWindow() == inventoryWindow)
-            {
-                setCurrentWindow(worldWindow);
-            }
-            break;
-        case '`':
-        case '~':
-            if (getCurrentWindow() != developerWindow)
+    case 'i':
+    case 'I':
+        if (getCurrentWindow() == worldWindow)
+        {
+            setCurrentWindow(inventoryWindow);
+        }
+        else if (getCurrentWindow() == inventoryWindow)
+        {
+            setCurrentWindow(worldWindow);
+        }
+        break;
+    case '`':
+    case '~':
+        if (getCurrentWindow() != developerWindow)
+        {
+            setCurrentWindow(developerWindow);
+        }
+        else
+        {
+            setCurrentWindow(worldWindow);
+        }
+        break;
+    case 'e':
+    case 'E':
+        if (currentWindow == worldWindow)
+        {
+            if (player.getEquippedItem() == NULL)
             {
                 setCurrentWindow(developerWindow);
             }

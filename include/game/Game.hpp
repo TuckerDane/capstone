@@ -33,6 +33,7 @@
 #define WALL4 '/'
 #define WALL5 '+'
 #define DOOR '░'
+#define TELEPORTER 'H'
 
 
 #define WINDOW_WIDTH 150
