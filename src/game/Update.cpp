@@ -229,6 +229,7 @@ void Game::update()
                         player.move('s');
                         resolveDoorMovement();
                         resolveItemAction('s');
+                        resolveTeleporterMovement();
                     }
                 }
             }
@@ -244,6 +245,7 @@ void Game::update()
                     player.move('a');
                     resolveDoorMovement();
                     resolveItemAction('a');
+                    resolveTeleporterMovement();
                 }
             }
             break;
@@ -290,64 +292,51 @@ void Game::update()
         {
             if (player.getEquippedItem() == NULL)
             {
-                setCurrentWindow(developerWindow);
+                setNarrative("you do not have an item selected to use");
             }
-            else
+            else if (player.getEquippedItem()->getType() == "key")
             {
-                setCurrentWindow(worldWindow);
+                useKey();
             }
-            break;
-        case 'e':
-        case 'E':
-            if (currentWindow == worldWindow)
+            else if (player.getEquippedItem()->getType() == "potion")
             {
-                if (player.getEquippedItem() == NULL)
-                {
-                    setNarrative("you do not have an item selected to use");
-                }
-                else if (player.getEquippedItem()->getType() == "key")
-                {
-                    useKey();
-                }
-                else if (player.getEquippedItem()->getType() == "potion")
-                {
-                    usePotion(player.getEquippedItem());
-                }
+                usePotion(player.getEquippedItem());
             }
-            else if (currentWindow == inventoryWindow)
-            {
-                if (player.getSelectedItemIndex() > -1)
-                {
-                    player.setEquippedItemIndex(player.getSelectedItemIndex());
-                }
-            }
-            break;
-        case 'p':
-        case 'P':
-            pickUpItem();
-            break;
-        case ';':
-        case ':':
-            dropItem();
-            break;
-        case 'q':
-        case 'Q':
-        {
-            string temp = getNarrative();
-            setNarrative("Would you like to quit? Press Y to confirm or any other key to return to <Adventure Game>.");
-            renderNarrative();
-            unsigned int confirm = getch();
-            if (confirm == 'y' || confirm == 'Y')
-            {
-                setNarrative("You Quit the Game");
-                setIsComplete(true);
-            }
-            else
-            {
-                setNarrative(temp);
-            }
-            break;
         }
+        else if (currentWindow == inventoryWindow)
+        {
+            if (player.getSelectedItemIndex() > -1)
+            {
+                player.setEquippedItemIndex(player.getSelectedItemIndex());
+            }
+        }
+        break;
+    case 'p':
+    case 'P':
+        pickUpItem();
+        break;
+    case ';':
+    case ':':
+        dropItem();
+        break;
+    case 'q':
+    case 'Q':
+    {
+        string temp = getNarrative();
+        setNarrative("Would you like to quit? Press Y to confirm or any other key to return to <Adventure Game>.");
+        renderNarrative();
+        unsigned int confirm = getch();
+        if (confirm == 'y' || confirm == 'Y')
+        {
+            setNarrative("You Quit the Game");
+            setIsComplete(true);
+        }
+        else
+        {
+            setNarrative(temp);
+        }
+        break;
+    }
     }
     if (player.getHP() < 1)
     {
