@@ -65,8 +65,9 @@ public:
   // CONSTRUCTORS/DESTRUCTORS
   Game();
   ~Game();
+  Room* initPuzzleRoomX();
   Room* initPuzzleRoom2();
-  Room* initPuzzleRoom1(); //Saffron Gyn
+  Room* initPuzzleRoom1(); //Saffron Gym
   Room* initPuzzleRoom4(); //Pac-Man
 
   // ACTIONS
