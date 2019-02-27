@@ -126,7 +126,14 @@ string Object::getDescription()
 
 int Object::setColorPair(int objectColor, int backgroundColor)
 {
-  if (objectColor == COLOR_RED)
+  if (objectColor == COLOR_BLACK)
+  {
+    if (backgroundColor == COLOR_BLACK)
+      return BLACK_ON_BLACK;
+    else
+      return 0;    
+  }
+  else if (objectColor == COLOR_RED)
   {
     if (backgroundColor == COLOR_BLACK)
       return RED_ON_BLACK;

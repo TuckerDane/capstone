@@ -42,7 +42,7 @@ Game::Game()
 
   /* initialize Game class variables */
   isComplete = false;
-  player.setCurrentRoom(1);
+  player.setCurrentRoom(0);
   player.setXPos(2);
   player.setYPos(2);
 
