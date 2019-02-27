@@ -2,8 +2,9 @@
 
 Room* Game::initStartRoom(){
     Room* room = new Room("rooms/start.room");
-    room->setDoor(new Door(5, 1, 9, 12, 12, -1, false, COLOR_WHITE), 0);
-    room->setDoor(new Door(15, 1, 9, 12, 12, -1, false, COLOR_WHITE), 1);
+    room->setDoor(new Door(5, 1, 2, 3, 3, -1, false, COLOR_WHITE), 0);
+    room->setDoor(new Door(15, 1, 8, 3, 3, -1, false, COLOR_WHITE), 1);
+    room->setDoor(new Door(3, 1, 9, 12, 12, -1, false, COLOR_WHITE), 2);
     return room;
 }
 
