@@ -68,6 +68,7 @@ public:
   Room* initPuzzleRoom2();
   Room* initPuzzleRoom5();
   Room* initPuzzleRoom8();
+  Room* initPuzzleRoom9();
 
   // ACTIONS
   void run();

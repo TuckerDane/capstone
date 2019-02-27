@@ -4,6 +4,7 @@ Room* Game::initStartRoom(){
     Room* room = new Room("rooms/start.room");
     room->setDoor(new Door(5, 1, 2, 3, 3, -1, false, COLOR_WHITE), 0);
     room->setDoor(new Door(15, 1, 8, 3, 3, -1, false, COLOR_WHITE), 1);
+    room->setDoor(new Door(3, 1, 9, 12, 12, -1, false, COLOR_WHITE), 2);
     return room;
 }
 
@@ -73,5 +74,29 @@ Room* Game::initPuzzleRoom8() {
     room->setItem(new Movable(6, 9, "●"), 7);
     room->setItem(new Movable(6, 11, "●"), 8);
     room->setItem(new Movable(6, 13, "●"), 9);
+    return room;
+}
+
+Room* Game::initPuzzleRoom9(){
+    Room* room = new Room("rooms/puzzle_9.room");
+    room->setDoor(new Door(4, 1, 9, 12, 12, 0, false, COLOR_WHITE), 0);     // DOOR LOCKED CAN BE CHANGED FOR MAPPING PURPOSES
+
+    int blockCounter = 0;
+    for(int i= 0; i < 15; i++){
+        for(int j= 0; j < 15; j++){
+            if (i == 7){
+                if (j != 7)
+               {
+                room->setItem(new Movable2(i+5, j+5, "█"), blockCounter);
+                room->getItem(blockCounter++)->setColor(COLOR_GREEN);
+                }
+            }
+            else
+            {
+                room->setItem(new Movable2(i+5, j+5, "█"), blockCounter);
+                room->getItem(blockCounter++)->setColor(COLOR_GREEN);
+            }  
+        }
+    }
     return room;
 }
