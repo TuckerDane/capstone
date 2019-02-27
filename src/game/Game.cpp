@@ -48,14 +48,12 @@ Game::Game()
 
   /* initialize Rooms */
 
-
   rooms[0] = initStartRoom();
+  rooms[1] = initPuzzleRoom1();
   rooms[2] = initPuzzleRoom2();
   rooms[5] = initPuzzleRoom5();
   rooms[8] = initPuzzleRoom8();
   rooms[9] = initPuzzleRoom9();
-  
-  // room 1
 
   /* init narrative */
   narrative = "default narrative";

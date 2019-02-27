@@ -99,4 +99,11 @@ Room* Game::initPuzzleRoom9(){
         }
     }
     return room;
+  }
+Room* Game::initPuzzleRoom1(){
+  Room* roomOne = new Room("rooms/puzzle_1.room");
+  roomOne->setTeleporter(new Teleporter(4, 3, 0, 5, 15, COLOR_BLUE), 0);   
+  roomOne->setTeleporter(new Teleporter(4, 16, 0, 5, 3, COLOR_BLUE), 1);   
+
+  return roomOne; 
 }

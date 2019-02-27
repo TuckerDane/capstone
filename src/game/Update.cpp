@@ -359,6 +359,23 @@ void Game::resolveDoorMovement()
     }
 }
 
+void Game::resolveTeleporterMovement()
+{  
+    Teleporter **teleporters = rooms[player.getCurrentRoom()]->getTeleporters();
+    for (int i = 0; i < 64; i++)
+    {
+	if (teleporters[i] != NULL)
+	{
+	    if(player.getXPos() == teleporters[i]->getXPos() && player.getYPos() == teleporters[i]->getYPos() && teleporters[i]->getNextRoom() != -1)
+	    {
+		player.setCurrentRoom(teleporters[i]->getNextRoom());
+		player.setYPos(teleporters[i]->getNextYPos());
+		player.setXPos(teleporters[i]->getNextXPos());
+	    }
+	}
+    }
+}
+
 void Game::useKey()
 {
     bool keyIsUsed = false;

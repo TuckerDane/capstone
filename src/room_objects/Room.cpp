@@ -24,6 +24,10 @@ Room::Room()
     {
         doors[i] = NULL;
     }
+    for (int i = 0; i < MAX_TELEPORTERS; i++)
+    {
+	teleporters[i] = NULL;
+    }
     type = "Room";
     name = "Generic Room";
     description = "A generic room";
@@ -40,6 +44,10 @@ Room::Room(string roomFile)
     for (int i = 0; i < MAX_DOORS; i++)
     {
         doors[i] = NULL;
+    }
+    for (int i = 0; i < MAX_TELEPORTERS; i++)
+    {
+	teleporters[i] = NULL;
     }
     type = "Room";
     name = "Generic Room";
@@ -61,6 +69,13 @@ Room::~Room()
         {
             delete items[i];
         }
+    }
+    for (int i = 0; i < MAX_TELEPORTERS; i++)
+    {
+	if (teleporters[i] != NULL)
+	{
+	    delete teleporters[i];
+	}
     }
 }
 
@@ -127,6 +142,11 @@ void Room::setDoor(Door *door, int doorIndex)
     doors[doorIndex] = door;
 }
 
+void Room::setTeleporter(Teleporter *teleporter, int teleporterIndex)
+{
+    teleporters[teleporterIndex] = teleporter;
+}
+
 void Room::setTileColor(int tileColor)
 {
     this->tileColor = tileColor;
@@ -157,6 +177,10 @@ int Room::getMaxDoors()
     return MAX_DOORS;
 }
 
+int Room::getMaxTeleporters()
+{
+    return MAX_TELEPORTERS;
+}
 char Room::getWall(int height, int width)
 {
     return walls[height][width];
@@ -195,6 +219,16 @@ Door *Room::getDoor(int doorIndex)
 Door **Room::getDoors()
 {
     return doors;
+}
+
+Teleporter *Room::getTeleporter(int teleporterIndex)
+{
+    return teleporters[teleporterIndex];
+}
+
+Teleporter **Room::getTeleporters()
+{
+    return teleporters;
 }
 
 int Room::getTileColor()
