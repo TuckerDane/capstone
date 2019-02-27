@@ -67,7 +67,9 @@ public:
   Game();
   ~Game();
   Room* initStartRoom();
+  Room* initPuzzleRoom1();
   Room* initPuzzleRoom2();
+  Room* initPuzzleRoom4();
   Room* initPuzzleRoom5();
   Room* initPuzzleRoom8();
   Room* initPuzzleRoom9();
