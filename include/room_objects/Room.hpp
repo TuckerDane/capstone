@@ -41,6 +41,7 @@ protected:
   string type;
   string name;
   string description;
+  int itemsArrayIndex;
   int tileColor;
 
 public:
@@ -76,6 +77,7 @@ public:
   Door **getDoors();
   Teleporter *getTeleporter(int teleporterIndex);
   Teleporter **getTeleporters();
+  int getItemsSize();
   int getTileColor();
 };
 

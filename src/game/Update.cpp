@@ -56,9 +56,13 @@ bool Game::isMoveAllowed(int y, int x)
     {
         if (items[i] != NULL)
         {
-            if (items[i]->getYPos() == y && items[i]->getXPos() == x && items[i]->getType() != "immovable")
+            if (items[i]->getYPos() == y && items[i]->getXPos() == x && items[i]->getType() != "immovable" && items[i]->getType() != "softblock" && items[i]->getType() != "snorlax")
             {
                 return true;
+            }
+            else if (items[i]->getYPos() == y && items[i]->getXPos() == x && (items[i]->getType() == "immovable" || items[i]->getType() == "softblock" || items[i]->getType() == "snorlax") )
+            {
+                displayItemDescriptionToNarrativeWindow(items[i]);
             }
         }
     }
@@ -86,7 +90,7 @@ bool Game::isItemMoveAllowed(int y, int x, char direction, Object* object)
             // if an item is in the expected position
             if (items[i]->getYPos() == y && items[i]->getXPos() == x)
             {
-                // ant it is of type moveable 2
+                // and it is of type moveable 2
                 if(items[i]->getType() == "movable2")
                 {
                     // recurse
@@ -129,7 +133,7 @@ bool Game::isItemMoveAllowed(int y, int x, char direction, Object* object)
                 }
                 
             }
-        }
+        }       
     }
     // if the space is empty
     if (((testch & A_CHARTEXT) == GRASS) || ((testch & A_CHARTEXT) == EMPTY))
@@ -616,6 +620,10 @@ void Game::resolveItemAction(char direction)
                         }
                     }
                 }
+                else if (items[i]->getType() == "softblock")
+                {
+                    break;
+                }
                 else if (items[i]->getType() == "immovable")
                     break;
             }
@@ -738,5 +746,15 @@ void Game::dropItem()
     if (itemHasBeenDropped == true)
     {
         setNarrative("You have dropped " + droppedItem->getName());
+    }
+}
+
+void Game::displayItemDescriptionToNarrativeWindow(Item *item){
+    string previousNarrative = getNarrative();
+    int lineLength = previousNarrative.size();
+    if (lineLength <= 83)
+    {
+        setNarrative(item->getDescription() + " " + previousNarrative);
+        renderNarrative();
     }
 }
