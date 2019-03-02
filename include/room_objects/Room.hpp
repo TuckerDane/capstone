@@ -18,6 +18,7 @@
 #include "Potion.hpp"
 #include "Colors.hpp"
 #include "Teleporter.hpp"
+#include "Enemy.hpp"
 
 using std::fstream;
 using std::string;
@@ -34,9 +35,11 @@ protected:
   static const int MAX_HEIGHT = 28;
   static const int MAX_WIDTH = 148;
   static const int MAX_ITEMS = MAX_WIDTH * MAX_HEIGHT;
+  static const int MAX_ENEMIES = 20;
   char walls[MAX_HEIGHT][MAX_WIDTH];
   Item *items[MAX_ITEMS];
   Door *doors[MAX_DOORS];
+  Enemy *enemies[MAX_ENEMIES];
   Teleporter *teleporters[MAX_TELEPORTERS];
   string type;
   string name;
@@ -58,6 +61,7 @@ public:
   void setName(string name);
   void setDescription(string description);
   void setDoor(Door *door, int doorIndex);
+  void setEnemy(Enemy *enemy, int enemyIndex);
   void setTeleporter(Teleporter *teleporter, int teleporterIndex);
   void setTileColor(int color);
 
@@ -67,6 +71,7 @@ public:
   int getMaxItems();
   int getMaxDoors();
   int getMaxTeleporters();
+  int getMaxEnemies();
   char getWall(int height, int width);
   Item **getItems();
   Item *getItem(int itemIndex);
@@ -75,6 +80,7 @@ public:
   string getDescription();
   Door *getDoor(int doorIndex);
   Door **getDoors();
+  Enemy **getEnemies();
   Teleporter *getTeleporter(int teleporterIndex);
   Teleporter **getTeleporters();
   int getItemsSize();

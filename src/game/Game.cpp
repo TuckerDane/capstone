@@ -22,6 +22,7 @@ Game::Game()
   nonl();
   intrflush(stdscr, FALSE);
   keypad(stdscr, TRUE);
+  nodelay(stdscr, TRUE);
   curs_set(0);
 
   /* initialize windows */
@@ -45,7 +46,7 @@ Game::Game()
   player.setCurrentRoom(0);
   player.setXPos(9);
   player.setYPos(2);
-
+  
   /* initialize Rooms */
 
   rooms[0] = initStartRoom();

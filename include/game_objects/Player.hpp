@@ -33,6 +33,7 @@ private:
 	int equippedItemIndex;
 	int hp; //health points for the player, maxHP prevents the player from going higher than starting hp
 	int maxHP;
+	unsigned int playerInput;
 	Console devConsole;
 
 public:
@@ -41,6 +42,7 @@ public:
 	~Player();
 
 	// SETTERS
+	void setPlayerInput(unsigned int playerInput);
 	void setMaxCarryWeight(int maxCarryWeight);
 	void setCurrentCarryWeight(int currentCarryWeight);
 	void setNumItems(int numItems);
@@ -54,6 +56,7 @@ public:
 	void setMaxHP(int newMaxHP);
 
 	// GETTERS
+	unsigned int getPlayerInput();
 	int getMaxCarryWeight();
 	int getCurrentCarryWeight();
 	int getNumItems();

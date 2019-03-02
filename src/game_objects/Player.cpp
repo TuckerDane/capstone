@@ -46,6 +46,11 @@ Player::~Player()
   
 .............................................. */
 
+void Player::setPlayerInput(unsigned int playerInput)
+{
+	this->playerInput = playerInput;
+}
+
 void Player::setMaxCarryWeight(int maxCarryWeight)
 {
 	this->maxCarryWeight = maxCarryWeight;
@@ -108,6 +113,11 @@ void Player::setMaxHP(int newMaxHP)
   GETTERS
   
 .............................................. */
+
+unsigned int Player::getPlayerInput()
+{
+	return playerInput;
+}
 
 int Player::getMaxCarryWeight()
 {

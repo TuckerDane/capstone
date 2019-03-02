@@ -15,5 +15,5 @@
 
 void Game::process()
 {
-  this->userInput = getch();
+  player.setPlayerInput(getch());
 }

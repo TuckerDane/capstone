@@ -118,6 +118,7 @@ void Game::renderWorld()
   colorWindow(worldWindow, BLACK_ON_GREEN);
   renderRoom();
   renderPlayer();
+  renderEnemies();
   wrefresh(worldWindow);
 }
 
@@ -299,4 +300,17 @@ void Game::mvwaddchWithColor(int yPos, int xPos, string TILE_SYMBOL, char TILE_P
   wattron(worldWindow, COLOR_PAIR(TILE_PAIR));
   mvwprintw(worldWindow, yPos, xPos, TILE_SYMBOL.c_str());
   wattroff(worldWindow, COLOR_PAIR(TILE_PAIR));
+}
+
+void Game::renderEnemies()
+{
+  Enemy **enemies = rooms[player.getCurrentRoom()]->getEnemies();
+
+  for (int i = 0; i < rooms[player.getCurrentRoom()]->getMaxEnemies(); i++)
+  {
+    if (enemies[i] != NULL)
+    {
+      mvwaddchWithColor(enemies[i]->getYPos(), enemies[i]->getXPos(), enemies[i]->getSymbol(), RED_ON_BLACK); // render the player
+    }
+  }
 }
