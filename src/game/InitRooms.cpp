@@ -8,14 +8,29 @@ Room* Game::initPuzzleRoomX()
 Room* Game::initStartRoom()
 {
     Room* room = new Room("rooms/start.room");
-    room->setDoor(new Door(3, 1, 2, 3, 3, -1, false, COLOR_WHITE), 0);
-    room->setDoor(new Door(5, 1, 8, 3, 3, -1, false, COLOR_WHITE), 1);
-    room->setDoor(new Door(7, 1, 9, 12, 12, -1, false, COLOR_WHITE), 2);
-    room->setDoor(new Door(9, 3, 1, 2, 2, -1, false, COLOR_WHITE), 3);
-    room->setDoor(new Door(9, 5, 4, 2, 2, -1, false, COLOR_WHITE), 4); 
-    room->setDoor(new Door(9, 9, 3, 2, 9, -1, false, COLOR_WHITE), 5); 
-    room->setDoor(new Door(9, 7, 6, 2, 2, -1, false, COLOR_WHITE), 6); 
+    room->setTeleporter(new Teleporter(5, 4, 0, 5, 9, COLOR_BLUE), 0);
+    room->setTeleporter(new Teleporter(18, 15, 0, 18, 7, COLOR_BLUE), 1);
+    room->setTeleporter(new Teleporter(18, 11, 0, 18, 17, COLOR_BLUE), 2);
 
+    //teleporting to other rooms, area will go away when map layout has beenn completed	
+    room->setTeleporter(new Teleporter(6, 39, 2, 3, 3, COLOR_BLUE), 3); //room 2
+    room->setTeleporter(new Teleporter(6, 43, 8, 3, 3, COLOR_BLUE), 4); //room 8
+    room->setTeleporter(new Teleporter(6, 47, 9, 12, 12, COLOR_BLUE), 5); //room 9
+    room->setTeleporter(new Teleporter(8, 40, 1, 2, 2, COLOR_BLUE), 6); //room 1
+    room->setTeleporter(new Teleporter(8, 44, 4, 2, 2, COLOR_BLUE), 7); //room 4
+
+    //doors in the starting/tutorial room
+    room->setDoor(new Door(5, 23, -1, -1, -1, 789, true, COLOR_BLUE), 0);
+    room->setDoor(new Door(10, 35, -1, -1, -1, 678, true, COLOR_GREEN), 1);
+    room->setItem(new Key(4, 14, "Blue Key", 789, COLOR_BLUE), 0);
+    room->setItem(new Key(18, 4, "Green Key", 678, COLOR_GREEN), 1);
+
+    //various items
+    room->setItem(new Trap(5, 28), 2);
+    room->setItem(new Potion(17, 19), 3);
+    room->setItem(new Movable(14, 5), 4);
+    room->setItem(new Movable2(13, 11), 5);
+    room->setItem(new Movable2(13, 12), 6);
     return room;
 }
 
