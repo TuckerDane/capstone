@@ -248,6 +248,11 @@ void Game::updatePlayer()
                 if (isMoveAllowed(player.getYPos(), player.getXPos() - 1)) //empty space
                 {
                     player.move('a');
+		    if(player.getCurrentRoom() == 7 || player.getCurrentRoom() == 10) //gravity. Move sideways then down if possible
+		    {
+			if(isMoveAllowed(player.getYPos() + 1, player.getXPos()))
+			   player.move('s');
+		    }
                     resolveDoorMovement();
                     resolveItemAction('a');
                     resolveTeleporterMovement();
@@ -263,6 +268,11 @@ void Game::updatePlayer()
                 if (isMoveAllowed(player.getYPos(), player.getXPos() + 1)) //empty space
                 {
                     player.move('d');
+		    if(player.getCurrentRoom() == 7 || player.getCurrentRoom() == 10) //gravity. Move sideways then down if possible
+		    {
+			if(isMoveAllowed(player.getYPos() + 1, player.getXPos()))
+			   player.move('s');
+		    }
                     resolveDoorMovement();
                     resolveItemAction('d');
 		    resolveTeleporterMovement();

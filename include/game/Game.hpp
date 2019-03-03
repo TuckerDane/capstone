@@ -31,7 +31,7 @@
 #include "Pokeball.hpp"
 #include "Colors.hpp"
 
-#define MAX_ROOMS 10
+#define MAX_ROOMS 20
 
 #define GRASS ' '
 #define EMPTY ' '
@@ -80,8 +80,10 @@ public:
   Room* initPuzzleRoom4();
   Room* initPuzzleRoom5();
   Room* initPuzzleRoom6();
+  Room* initPuzzleRoom7();
   Room* initPuzzleRoom8();
   Room* initPuzzleRoom9();
+  Room* initPuzzleRoom10();
   Room* initPuzzleRoomX();
 
   // ACTIONS
