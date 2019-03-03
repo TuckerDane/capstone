@@ -20,6 +20,11 @@ Room* Game::initStartRoom()
     room->setTeleporter(new Teleporter(8, 44, 4, 2, 2, COLOR_BLUE), 7); //room 4
     room->setTeleporter(new Teleporter(8, 48, 11, 3, 3, COLOR_BLUE), 8); //EndRoom
 
+    //marisa lazy testing portals
+    room->setTeleporter(new Teleporter(8, 10, 3, 2, 10, COLOR_BLUE), 9); //room 3
+    room->setTeleporter(new Teleporter(8, 12, 6, 2, 2, COLOR_BLUE), 10); //room 6
+    room->setTeleporter(new Teleporter(8, 14, 9, 12, 12, COLOR_BLUE), 11); //room 9
+
     //doors in the starting/tutorial room
     room->setDoor(new Door(5, 23, -1, -1, -1, 789, true, COLOR_BLUE), 0);
     room->setDoor(new Door(10, 35, -1, -1, -1, 678, true, COLOR_GREEN), 1);
@@ -171,8 +176,8 @@ Room* Game::initPuzzleRoom5(){
 
 Room* Game::initPuzzleRoom6(){
     Room* room = new Room("rooms/puzzle_6.room");
-    room->setDoor(new Door(1, 2, 0, 2, 2, -1, false, COLOR_WHITE), 0);
-    room->setItem(new Bomb(3, 2), 0);
+    room->setTeleporter(new Teleporter(12, 16, 0, 5, 5, COLOR_YELLOW), 0); //logo return  
+    room->setItem(new Bomb(2, 4), 0);
 
     int blockCounter = 0;
     for(int i= 0; i < 15; i++)
@@ -185,12 +190,12 @@ Room* Game::initPuzzleRoom6(){
           }
           else if (j == 2)  // if 1st row
           {
-            if (i >= 1 )
+            if (i >= 3)
             {
               room->setItem(new Softblock(j, i+2), blockCounter++);  
             }
           }
-          else if (j == 3)  // if 2nd row
+          else if (j == 2 || j == 3)  // if 2nd row
           {
             if (i == 2 || i == 4 || i == 6 || i == 8 || i == 10 || i == 12 || i == 14)
             {
