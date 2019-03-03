@@ -297,9 +297,17 @@ Room* Game::initPuzzleRoom8() {
 
 Room* Game::initPuzzleRoom9(){
     Room* room = new Room("rooms/puzzle_9.room");
-    room->setDoor(new Door(4, 23, 9, 12, 12, 0, false, COLOR_WHITE), 0);     // DOOR LOCKED CAN BE CHANGED FOR MAPPING PURPOSES
-    room->setDoor(new Door(22, 11, 8, 2, 13, 0, false, COLOR_WHITE), 1);
-
+    room->setDoor(new Door(7, 1, 9, 12, 12, 0, false, COLOR_WHITE), 0);     // TODO: update one door to lead to Room 8
+    room->setDoor(new Door(7, 23, 9, 12, 12, 0, false, COLOR_WHITE), 1);     
+    room->setDoor(new Door(16, 1, 9, 12, 12, 0, false, COLOR_WHITE), 2);     
+    room->setDoor(new Door(16, 23, 9, 12, 12, 0, false, COLOR_WHITE), 3);
+    room->setDoor(new Door(1, 11, 9, 12, 12, 0, false, COLOR_WHITE), 4);
+    room->setDoor(new Door(22, 11, 8, 2, 13, 0, false, COLOR_WHITE), 5);     
+    room->setEnemy(new Enemy(2, 2), 0); //top left
+    room->setEnemy(new Enemy(20, 16), 1); //bottom right
+    room->setEnemy(new Enemy(18, 2), 2);  //bottom left
+    room->setEnemy(new Enemy(2, 20), 3); //top right
+    
     int blockCounter = 0;
     for(int i= 0; i < 15; i++)
     {
@@ -424,7 +432,7 @@ Room* Game::initPuzzleRoom11()
 {
   Room* room = new Room("rooms/end.room");
   room->setTeleporter(new Teleporter(4, 58, 14, 8, 11, COLOR_BLUE), 0);
-  room->setItem(new Statue(9, 58, "Smeels like pancakes on the other side. Time to go eat! (You have beat the game)"), 0);
+  room->setItem(new Statue(9, 58, "Smells like pancakes on the other side. Time to go eat! (You have beat the game)"), 0);
 
   return room;
 }
@@ -540,6 +548,18 @@ Room* Game::initPuzzleRoom13()
 }
 
 Room* Game::initPuzzleRoom14()
+{
+    Room* room = new Room("rooms/trophy.room");
+    room->setItem(new Statue(5, 5, "Pokemon, Snorlax Encounter"), 0);
+    room->setItem(new Statue(5, 7, "Legend of Zelda: Link to the Past, Block Puzzle"), 1);
+    room->setItem(new Statue(5, 9, "Pokemon, Saffron Gym"), 2);
+    room->setItem(new Statue(5, 11, "Pac-Man"), 3);
+    room->setItem(new Statue(5, 13, "Rodent's Revenge"), 4);
+
+    return room;
+}
+
+Room* Game::initEndRoom()
 {
     Room* room = new Room("rooms/trophy.room");
     room->setItem(new Statue(5, 5, "Pokemon, Snorlax Encounter"), 0);
