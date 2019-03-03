@@ -143,11 +143,6 @@ bool Game::isItemMoveAllowed(int y, int x, char direction, Object* object)
     return false;
 }
 
-unsigned int Game::getUserInput()
-{
-    return this->userInput;
-}
-
 Room *Game::getRoom(int roomIndex)
 {
     return this->rooms[roomIndex];
@@ -169,8 +164,14 @@ WINDOW *Game::getCurrentWindow()
 .............................................. */
 void Game::update()
 {
+    updatePlayer();
+    updateEnemies();
+}
+
+void Game::updatePlayer()
+{
     player.setIsMoved(false);
-    switch (this->userInput)
+    switch (player.getPlayerInput())
     {
         case KEY_UP:
         case 'w':
@@ -268,79 +269,79 @@ void Game::update()
                 }
             }
             break;
-    case 'i':
-    case 'I':
-        if (getCurrentWindow() == worldWindow)
-        {
-            setCurrentWindow(inventoryWindow);
-        }
-        else if (getCurrentWindow() == inventoryWindow)
-        {
-            setCurrentWindow(worldWindow);
-        }
-        break;
-    case '`':
-    case '~':
-        if (getCurrentWindow() != developerWindow)
-        {
-            setCurrentWindow(developerWindow);
-        }
-        else
-        {
-            setCurrentWindow(worldWindow);
-        }
-        break;
-    case 'e':
-    case 'E':
-        if (currentWindow == worldWindow)
-        {
-            if (player.getEquippedItem() == NULL)
+        case 'i':
+        case 'I':
+            if (getCurrentWindow() == worldWindow)
             {
-                setNarrative("you do not have an item selected to use");
+                setCurrentWindow(inventoryWindow);
             }
-            else if (player.getEquippedItem()->getType() == "key")
+            else if (getCurrentWindow() == inventoryWindow)
             {
-                useKey();
+                setCurrentWindow(worldWindow);
             }
-            else if (player.getEquippedItem()->getType() == "potion")
+            break;
+        case '`':
+        case '~':
+            if (getCurrentWindow() != developerWindow)
             {
-                usePotion(player.getEquippedItem());
+                setCurrentWindow(developerWindow);
             }
-        }
-        else if (currentWindow == inventoryWindow)
-        {
-            if (player.getSelectedItemIndex() > -1)
+            else
             {
-                player.setEquippedItemIndex(player.getSelectedItemIndex());
+                setCurrentWindow(worldWindow);
             }
-        }
-        break;
-    case 'p':
-    case 'P':
-        pickUpItem();
-        break;
-    case ';':
-    case ':':
-        dropItem();
-        break;
-    case 'q':
-    case 'Q':
-    {
-        string temp = getNarrative();
-        setNarrative("Would you like to quit? Press Y to confirm or any other key to return to <Adventure Game>.");
-        renderNarrative();
-        unsigned int confirm = getch();
-        if (confirm == 'y' || confirm == 'Y')
+            break;
+        case 'e':
+        case 'E':
+            if (currentWindow == worldWindow)
+            {
+                if (player.getEquippedItem() == NULL)
+                {
+                    setNarrative("you do not have an item selected to use");
+                }
+                else if (player.getEquippedItem()->getType() == "key")
+                {
+                    useKey();
+                }
+                else if (player.getEquippedItem()->getType() == "potion")
+                {
+                    usePotion(player.getEquippedItem());
+                }
+            }
+            else if (currentWindow == inventoryWindow)
+            {
+                if (player.getSelectedItemIndex() > -1)
+                {
+                    player.setEquippedItemIndex(player.getSelectedItemIndex());
+                }
+            }
+            break;
+        case 'p':
+        case 'P':
+            pickUpItem();
+            break;
+        case ';':
+        case ':':
+            dropItem();
+            break;
+        case 'q':
+        case 'Q':
         {
-            setNarrative("You Quit the Game");
-            setIsComplete(true);
+            string temp = getNarrative();
+            setNarrative("Would you like to quit? Press Y to confirm or N to return to <Adventure Game>.");
+            renderNarrative();
+            unsigned int confirm = 'a';
+            while (confirm != 'y' && confirm != 'Y' && confirm != 'n' && confirm != 'N')
+            {
+                confirm = getch();
+                if (confirm == 'y' || confirm == 'Y')
+                {
+                    setNarrative("You Quit the Game");
+                    setIsComplete(true);
+                }
+            }
+            break;
         }
-        else
-        {
-            setNarrative(temp);
-        }
-        break;
-    }
     }
     if (player.getHP() < 1)
     {
@@ -349,11 +350,62 @@ void Game::update()
     }
 }
 
+void Game::updateEnemies()
+{
+    Enemy **enemies = rooms[player.getCurrentRoom()]->getEnemies();
+    for (int i = 0; i < rooms[player.getCurrentRoom()]->getMaxEnemies(); i++)
+    {
+        if (enemies[i] != NULL)
+        {
+            enemies[i]->setIsMoved(false);
+            switch (enemies[i]->processMove())
+            {
+            case KEY_UP:
+            case 'w':
+            case 'W':
+                enemies[i]->setSymbol("^");
+                if ((enemies[i]->getYPos() > 0) && isMoveAllowed(enemies[i]->getYPos() - 1, enemies[i]->getXPos()))
+                {
+                    enemies[i]->move('w');
+                }
+                break;
+            case KEY_DOWN:
+            case 's':
+            case 'S':
+                enemies[i]->setSymbol("v");
+                if ((enemies[i]->getYPos() < LINES - 1) && isMoveAllowed(enemies[i]->getYPos() + 1, enemies[i]->getXPos()))
+                {
+                    enemies[i]->move('s');
+                }
+                break;
+            case KEY_LEFT:
+            case 'a':
+            case 'A':
+                enemies[i]->setSymbol("<");
+                if ((enemies[i]->getXPos() > 0) && isMoveAllowed(enemies[i]->getYPos(), enemies[i]->getXPos() - 1))
+                {
+                    enemies[i]->move('a');
+                }
+                break;
+            case KEY_RIGHT:
+            case 'd':
+            case 'D':
+                enemies[i]->setSymbol(">");
+                if ((enemies[i]->getXPos() < COLS - 1) && isMoveAllowed(enemies[i]->getYPos(), enemies[i]->getXPos() + 1))
+                {
+                    enemies[i]->move('d');
+                }
+                break;
+            }
+        }
+    }
+}
+
 void Game::resolveDoorMovement()
 {
     // for possible doors in room
     Door **doors = rooms[player.getCurrentRoom()]->getDoors();
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < rooms[player.getCurrentRoom()]->getMaxDoors(); i++)
     {
         if (doors[i] != NULL)
         {

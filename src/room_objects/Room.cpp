@@ -75,10 +75,17 @@ Room::~Room()
     }
     for (int i = 0; i < MAX_TELEPORTERS; i++)
     {
-	if (teleporters[i] != NULL)
-	{
-	    delete teleporters[i];
-	}
+        if (teleporters[i] != NULL)
+        {
+            delete teleporters[i];
+        }
+    }
+    for (int i = 0; i < MAX_ENEMIES; i++)
+    {
+        if (enemies[i] != NULL)
+        {
+            delete enemies[i];
+        }
     }
 }
 
@@ -146,6 +153,11 @@ void Room::setDoor(Door *door, int doorIndex)
     doors[doorIndex] = door;
 }
 
+void Room::setEnemy(Enemy *enemy, int enemyIndex)
+{
+    enemies[enemyIndex] = enemy;
+}
+
 void Room::setTeleporter(Teleporter *teleporter, int teleporterIndex)
 {
     teleporters[teleporterIndex] = teleporter;
@@ -185,6 +197,12 @@ int Room::getMaxTeleporters()
 {
     return MAX_TELEPORTERS;
 }
+
+int Room::getMaxEnemies()
+{
+    return MAX_ENEMIES;
+}
+
 char Room::getWall(int height, int width)
 {
     return walls[height][width];
@@ -223,6 +241,11 @@ Door *Room::getDoor(int doorIndex)
 Door **Room::getDoors()
 {
     return doors;
+}
+
+Enemy **Room::getEnemies()
+{
+    return enemies;
 }
 
 Teleporter *Room::getTeleporter(int teleporterIndex)

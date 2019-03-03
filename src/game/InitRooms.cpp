@@ -31,6 +31,11 @@ Room* Game::initStartRoom()
     room->setItem(new Movable(14, 5), 4);
     room->setItem(new Movable2(13, 11), 5);
     room->setItem(new Movable2(13, 12), 6);
+
+    //enemies
+    room->setEnemy(new Enemy(5, 5), 0);
+    room->setEnemy(new Enemy(15, 10), 1);
+
     return room;
 }
 
@@ -147,6 +152,15 @@ Room* Game::initPuzzleRoom5(){
     room->getItem(1)->setColor(COLOR_RED);
     room->getItem(1)->setDamage(1);
     room->setItem(new Key(10, 33, "Cyan Key", 4, COLOR_CYAN), 2);
+
+    room->setEnemy(new Enemy(10, 35), 0);
+    room->setEnemy(new Enemy(11, 36), 1);
+    room->setEnemy(new Enemy(11, 37), 2);
+    room->setEnemy(new Enemy(9, 38), 3);
+    room->setEnemy(new Enemy(11, 39), 4);
+    room->setEnemy(new Enemy(10, 40), 5);
+    room->setEnemy(new Enemy(9, 41), 6);
+
     return room;
 }
 

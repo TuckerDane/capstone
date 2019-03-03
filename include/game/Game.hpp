@@ -8,9 +8,12 @@
 .............................................. */
 #ifndef GAME_HPP
 #define GAME_HPP
+#include <stdlib.h>
 #include <ncurses.h>
 #include <string>
 #include <locale.h>
+#include <sys/time.h>
+#include "Enemy.hpp"
 #include "Console.hpp"
 #include "Room.hpp"
 #include "Player.hpp"
@@ -39,7 +42,6 @@
 #define WALL5 '+'
 #define DOOR '░'
 #define TELEPORTER 'H'
-
 
 #define WINDOW_WIDTH 150
 #define WORLD_WINDOW_HEIGHT 30
@@ -108,13 +110,14 @@ public:
   bool getIsComplete();
   bool isMoveAllowed(int y, int x);
   bool isItemMoveAllowed(int y, int x, char direction, Object* object);
-  unsigned int getUserInput();
   Room *getRoom(int roomIndex);
   string getNarrative();
   WINDOW *getCurrentWindow();
 
   // ACTIONS
   void update();
+  void updatePlayer();
+  void updateEnemies();
   void resolveDoorMovement();
   void resolveTeleporterMovement();
   void useKeyOnOppositeDoor(Door* door);
@@ -149,6 +152,7 @@ public:
   void renderTeleporters();
   void renderItems();
   void renderPlayer();
+  void renderEnemies();
   void mvwaddchWithColor(int yPos, int xPos, string TILE_SYMBOL, char TILE_PAIR);
 };
 
