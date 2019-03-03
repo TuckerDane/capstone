@@ -342,56 +342,56 @@ Room* Game::initPuzzleRoom10()
     room->setTeleporter(new Teleporter(25, 2, 7, 2, 147, COLOR_BLUE), 23); 
 
     //flag teleporters to finish the room
-    room->setTeleporter(new Teleporter(24, 143, 0, 9, 2, COLOR_BLUE), 24); 
-    room->setTeleporter(new Teleporter(23, 143, 0, 9, 2, COLOR_BLUE), 25); 
-    room->setTeleporter(new Teleporter(22, 143, 0, 9, 2, COLOR_BLUE), 26); 
-    room->setTeleporter(new Teleporter(21, 143, 0, 9, 2, COLOR_BLUE), 27); 
-    room->setTeleporter(new Teleporter(20, 143, 0, 9, 2, COLOR_BLUE), 28); 
-    room->setTeleporter(new Teleporter(19, 143, 0, 9, 2, COLOR_BLUE), 29); 
-    room->setTeleporter(new Teleporter(18, 143, 0, 9, 2, COLOR_BLUE), 31); 
-    room->setTeleporter(new Teleporter(17, 143, 0, 9, 2, COLOR_BLUE), 32); 
-    room->setTeleporter(new Teleporter(16, 143, 0, 9, 2, COLOR_BLUE), 33); 
-    room->setTeleporter(new Teleporter(15, 143, 0, 9, 2, COLOR_BLUE), 34); 
+    room->setTeleporter(new Teleporter(24, 143, 0, 2, 9, COLOR_BLUE), 24); 
+    room->setTeleporter(new Teleporter(23, 143, 0, 2, 9, COLOR_BLUE), 25); 
+    room->setTeleporter(new Teleporter(22, 143, 0, 2, 9, COLOR_BLUE), 26); 
+    room->setTeleporter(new Teleporter(21, 143, 0, 2, 9, COLOR_BLUE), 27); 
+    room->setTeleporter(new Teleporter(20, 143, 0, 2, 9, COLOR_BLUE), 28); 
+    room->setTeleporter(new Teleporter(19, 143, 0, 2, 9, COLOR_BLUE), 29); 
+    room->setTeleporter(new Teleporter(18, 143, 0, 2, 9, COLOR_BLUE), 31); 
+    room->setTeleporter(new Teleporter(17, 143, 0, 2, 9, COLOR_BLUE), 32); 
+    room->setTeleporter(new Teleporter(16, 143, 0, 2, 9, COLOR_BLUE), 33); 
+    room->setTeleporter(new Teleporter(15, 143, 0, 2, 9, COLOR_BLUE), 34); 
 
-    room->setTeleporter(new Teleporter(14, 143, 0, 9, 2, COLOR_BLUE), 35); 
-    room->setTeleporter(new Teleporter(13, 143, 0, 9, 2, COLOR_BLUE), 36); 
-    room->setTeleporter(new Teleporter(12, 143, 0, 9, 2, COLOR_BLUE), 37); 
-    room->setTeleporter(new Teleporter(11, 143, 0, 9, 2, COLOR_BLUE), 38); 
-    room->setTeleporter(new Teleporter(24, 145, 0, 9, 2, COLOR_BLUE), 39); 
-    room->setTeleporter(new Teleporter(23, 145, 0, 9, 2, COLOR_BLUE), 40); 
-    room->setTeleporter(new Teleporter(22, 145, 0, 9, 2, COLOR_BLUE), 41); 
-    room->setTeleporter(new Teleporter(21, 145, 0, 9, 2, COLOR_BLUE), 42); 
-    room->setTeleporter(new Teleporter(20, 145, 0, 9, 2, COLOR_BLUE), 43); 
-    room->setTeleporter(new Teleporter(19, 145, 0, 9, 2, COLOR_BLUE), 44); 
+    room->setTeleporter(new Teleporter(14, 143, 0, 2, 9, COLOR_BLUE), 35); 
+    room->setTeleporter(new Teleporter(13, 143, 0, 2, 9, COLOR_BLUE), 36); 
+    room->setTeleporter(new Teleporter(12, 143, 0, 2, 9, COLOR_BLUE), 37); 
+    room->setTeleporter(new Teleporter(11, 143, 0, 2, 9, COLOR_BLUE), 38); 
+    room->setTeleporter(new Teleporter(24, 145, 0, 2, 9, COLOR_BLUE), 39); 
+    room->setTeleporter(new Teleporter(23, 145, 0, 2, 9, COLOR_BLUE), 40); 
+    room->setTeleporter(new Teleporter(22, 145, 0, 2, 9, COLOR_BLUE), 41); 
+    room->setTeleporter(new Teleporter(21, 145, 0, 2, 9, COLOR_BLUE), 42); 
+    room->setTeleporter(new Teleporter(20, 145, 0, 2, 9, COLOR_BLUE), 43); 
+    room->setTeleporter(new Teleporter(19, 145, 0, 2, 9, COLOR_BLUE), 44); 
 
-    room->setTeleporter(new Teleporter(18, 145, 0, 9, 2, COLOR_BLUE), 45); 
-    room->setTeleporter(new Teleporter(17, 145, 0, 9, 2, COLOR_BLUE), 46); 
-    room->setTeleporter(new Teleporter(16, 145, 0, 9, 2, COLOR_BLUE), 47); 
-    room->setTeleporter(new Teleporter(15, 145, 0, 9, 2, COLOR_BLUE), 48); 
-    room->setTeleporter(new Teleporter(14, 145, 0, 9, 2, COLOR_BLUE), 49); 
-    room->setTeleporter(new Teleporter(13, 145, 0, 9, 2, COLOR_BLUE), 50); 
-    room->setTeleporter(new Teleporter(12, 145, 0, 9, 2, COLOR_BLUE), 51); 
-    room->setTeleporter(new Teleporter(11, 145, 0, 9, 2, COLOR_BLUE), 52); 
-    room->setTeleporter(new Teleporter(10, 145, 0, 9, 2, COLOR_BLUE), 53); 
-    room->setTeleporter(new Teleporter(9, 145, 0, 9, 2, COLOR_BLUE), 54); 
+    room->setTeleporter(new Teleporter(18, 145, 0, 2, 9, COLOR_BLUE), 45); 
+    room->setTeleporter(new Teleporter(17, 145, 0, 2, 9, COLOR_BLUE), 46); 
+    room->setTeleporter(new Teleporter(16, 145, 0, 2, 9, COLOR_BLUE), 47); 
+    room->setTeleporter(new Teleporter(15, 145, 0, 2, 9, COLOR_BLUE), 48); 
+    room->setTeleporter(new Teleporter(14, 145, 0, 2, 9, COLOR_BLUE), 49); 
+    room->setTeleporter(new Teleporter(13, 145, 0, 2, 9, COLOR_BLUE), 50); 
+    room->setTeleporter(new Teleporter(12, 145, 0, 2, 9, COLOR_BLUE), 51); 
+    room->setTeleporter(new Teleporter(11, 145, 0, 2, 9, COLOR_BLUE), 52); 
+    room->setTeleporter(new Teleporter(10, 145, 0, 2, 9, COLOR_BLUE), 53); 
+    room->setTeleporter(new Teleporter(9, 145, 0, 2, 9, COLOR_BLUE), 54); 
 
-    room->setTeleporter(new Teleporter(8, 145, 0, 9, 2, COLOR_BLUE), 55); 
-    room->setTeleporter(new Teleporter(7, 145, 0, 9, 2, COLOR_BLUE), 56); 
-    room->setTeleporter(new Teleporter(6, 145, 0, 9, 2, COLOR_BLUE), 57); 
-    room->setTeleporter(new Teleporter(5, 145, 0, 9, 2, COLOR_BLUE), 58); 
-    room->setTeleporter(new Teleporter(10, 142, 0, 9, 2, COLOR_BLUE), 59); 
-    room->setTeleporter(new Teleporter(9, 141, 0, 9, 2, COLOR_BLUE), 60); 
-    room->setTeleporter(new Teleporter(8, 140, 0, 9, 2, COLOR_BLUE), 61); 
-    room->setTeleporter(new Teleporter(7, 139, 0, 9, 2, COLOR_BLUE), 62); 
-    room->setTeleporter(new Teleporter(6, 138, 0, 9, 2, COLOR_BLUE), 63); 
-    room->setTeleporter(new Teleporter(5, 138, 0, 9, 2, COLOR_BLUE), 64); 
+    room->setTeleporter(new Teleporter(8, 145, 0, 2, 9, COLOR_BLUE), 55); 
+    room->setTeleporter(new Teleporter(7, 145, 0, 2, 9, COLOR_BLUE), 56); 
+    room->setTeleporter(new Teleporter(6, 145, 0, 2, 9, COLOR_BLUE), 57); 
+    room->setTeleporter(new Teleporter(5, 145, 0, 2, 9, COLOR_BLUE), 58); 
+    room->setTeleporter(new Teleporter(10, 142, 0, 2, 9, COLOR_BLUE), 59); 
+    room->setTeleporter(new Teleporter(9, 141, 0, 2, 9, COLOR_BLUE), 60); 
+    room->setTeleporter(new Teleporter(8, 140, 0, 2, 9, COLOR_BLUE), 61); 
+    room->setTeleporter(new Teleporter(7, 139, 0, 2, 9, COLOR_BLUE), 62); 
+    room->setTeleporter(new Teleporter(6, 138, 0, 2, 9, COLOR_BLUE), 63); 
+    room->setTeleporter(new Teleporter(5, 138, 0, 2, 9, COLOR_BLUE), 64); 
 
-    room->setTeleporter(new Teleporter(5, 139, 0, 9, 2, COLOR_BLUE), 65); 
-    room->setTeleporter(new Teleporter(5, 140, 0, 9, 2, COLOR_BLUE), 66); 
-    room->setTeleporter(new Teleporter(5, 141, 0, 9, 2, COLOR_BLUE), 67); 
-    room->setTeleporter(new Teleporter(5, 142, 0, 9, 2, COLOR_BLUE), 68); 
-    room->setTeleporter(new Teleporter(5, 143, 0, 9, 2, COLOR_BLUE), 69); 
-    room->setTeleporter(new Teleporter(5, 144, 0, 9, 2, COLOR_BLUE), 70); 
+    room->setTeleporter(new Teleporter(5, 139, 0, 2, 9, COLOR_BLUE), 65); 
+    room->setTeleporter(new Teleporter(5, 140, 0, 2, 9, COLOR_BLUE), 66); 
+    room->setTeleporter(new Teleporter(5, 141, 0, 2, 9, COLOR_BLUE), 67); 
+    room->setTeleporter(new Teleporter(5, 142, 0, 2, 9, COLOR_BLUE), 68); 
+    room->setTeleporter(new Teleporter(5, 143, 0, 2, 9, COLOR_BLUE), 69); 
+    room->setTeleporter(new Teleporter(5, 144, 0, 2, 9, COLOR_BLUE), 70); 
   
 Room* Game::initEndRoom()
 {
