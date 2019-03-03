@@ -330,6 +330,10 @@ void Game::updatePlayer()
         case 'P':
             pickUpItem();
             break;
+	case 'r':
+	case 'R':
+	    readItem();
+	    break;
         case ';':
         case ':':
             dropItem();
@@ -818,5 +822,46 @@ void Game::displayItemDescriptionToNarrativeWindow(Item *item){
     {
         setNarrative(item->getDescription() + " " + previousNarrative);
         renderNarrative();
+    }
+}
+
+void Game::readItem()
+{
+    Item** items = rooms[player.getCurrentRoom()]->getItems();
+
+    for (int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
+    {
+        if (items[i] != NULL)
+        {
+            if (player.getSymbol() == "^")
+            {
+                if (((player.getYPos() - 1) == items[i]->getYPos()) && player.getXPos() == items[i]->getXPos() && items[i]->getType() == "statue")
+                {
+		    setNarrative(items[i]->getDescription());
+                }
+            }
+            else if (player.getSymbol() == "v")
+            {
+                if (((player.getYPos() + 1) == items[i]->getYPos()) && player.getXPos() == items[i]->getXPos() && items[i]->getType() == "statue")
+                {
+		    setNarrative(items[i]->getDescription());
+                }
+            }
+
+            else if (player.getSymbol() == "<")
+            {
+                if (((player.getXPos() - 1) == items[i]->getXPos()) && player.getYPos() == items[i]->getYPos() && items[i]->getType() == "statue")
+                {
+		    setNarrative(items[i]->getDescription());
+                }
+            }
+            else // player.getSymbol() == ">"
+            {
+                if (((player.getXPos() + 1) == items[i]->getXPos()) && player.getYPos() == items[i]->getYPos() && items[i]->getType() == "statue")
+                {
+		    setNarrative(items[i]->getDescription());
+                }
+            }
+        }
     }
 }

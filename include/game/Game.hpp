@@ -30,6 +30,7 @@
 #include "Pokeflute.hpp"
 #include "Pokeball.hpp"
 #include "Colors.hpp"
+#include "Statue.hpp"
 
 #define MAX_ROOMS 20
 
@@ -80,10 +81,11 @@ public:
   Room* initPuzzleRoom4();
   Room* initPuzzleRoom5();
   Room* initPuzzleRoom6();
-  Room* initPuzzleRoom7();
+  Room* initPuzzleRoom7(); //Super Mario Bros part 1
   Room* initPuzzleRoom8();
   Room* initPuzzleRoom9();
-  Room* initPuzzleRoom10();
+  Room* initPuzzleRoom10(); //Super Mario Bros part 2
+  Room* initEndRoom();
   Room* initPuzzleRoomX();
 
   // ACTIONS
@@ -132,6 +134,7 @@ public:
   void pickUpItem();
   void dropItem();
   void displayItemDescriptionToNarrativeWindow(Item *item);
+  void readItem();
 
   /* ..............................................
     RENDER.CPP

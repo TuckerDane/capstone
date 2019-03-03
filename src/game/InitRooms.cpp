@@ -20,19 +20,24 @@ Room* Game::initStartRoom()
     room->setTeleporter(new Teleporter(8, 44, 4, 2, 2, COLOR_BLUE), 7); //room 4
     room->setTeleporter(new Teleporter(10, 39, 7, 3, 3, COLOR_BLUE), 8); //room 7
     room->setTeleporter(new Teleporter(10, 43, 10, 3, 3, COLOR_BLUE), 9); //room 10
+    room->setTeleporter(new Teleporter(8, 48, 11, 3, 3, COLOR_BLUE), 10); //EndRoom
 
     //doors in the starting/tutorial room
     room->setDoor(new Door(5, 23, -1, -1, -1, 789, true, COLOR_BLUE), 0);
     room->setDoor(new Door(10, 35, -1, -1, -1, 678, true, COLOR_GREEN), 1);
+
+    //items
     room->setItem(new Key(4, 14, "Blue Key", 789, COLOR_BLUE), 0);
     room->setItem(new Key(18, 4, "Green Key", 678, COLOR_GREEN), 1);
-
-    //various items
     room->setItem(new Trap(5, 28), 2);
     room->setItem(new Potion(17, 19), 3);
     room->setItem(new Movable(14, 5), 4);
     room->setItem(new Movable2(13, 11), 5);
     room->setItem(new Movable2(13, 12), 6);
+    room->setItem(new Statue(3, 13, "Hint: Keys can be used to open specific locked doors."), 7);
+    room->setItem(new Statue(2, 4, "Hint: Teleporters can teleport you places. "), 8);
+    room->setItem(new Statue(7, 19, "Hint: Watch out for traps. They cause damage. Potions heal."), 9);
+    room->setItem(new Statue(13, 21, "Some objects block movement, some can be moved."), 10);
 
     //enemies
     room->setEnemy(new Enemy(5, 5), 0);
@@ -387,6 +392,15 @@ Room* Game::initPuzzleRoom10()
     room->setTeleporter(new Teleporter(5, 142, 0, 9, 2, COLOR_BLUE), 68); 
     room->setTeleporter(new Teleporter(5, 143, 0, 9, 2, COLOR_BLUE), 69); 
     room->setTeleporter(new Teleporter(5, 144, 0, 9, 2, COLOR_BLUE), 70); 
+  
+Room* Game::initEndRoom()
+{
+    Room* room = new Room("rooms/trophy.room");
+    room->setItem(new Statue(5, 5, "Pokemon, Snorlax Encounter"), 0);
+    room->setItem(new Statue(5, 7, "Legend of Zelda: Link to the Past, Block Puzzle"), 1);
+    room->setItem(new Statue(5, 9, "Pokemon, Saffron Gym"), 2);
+    room->setItem(new Statue(5, 11, "Pac-Man"), 3);
+    room->setItem(new Statue(5, 13, "Rodent's Revenge"), 4);
 
     return room;
 }
