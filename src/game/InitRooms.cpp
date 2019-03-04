@@ -178,7 +178,7 @@ Room* Game::initPuzzleRoom5(){
 
 Room* Game::initPuzzleRoom6(){
     Room* room = new Room("rooms/puzzle_6.room");
-    room->setTeleporter(new Teleporter(12, 16, 0, 5, 5, COLOR_YELLOW), 0); //logo return  
+    room->setTeleporter(new Teleporter(12, 16, 0, 5, 5, COLOR_YELLOW), 0);
     room->setItem(new Bomb(2, 4), 0);
 
     int blockCounter = 0;

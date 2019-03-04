@@ -629,8 +629,31 @@ void Game::resolveDamage() //player walks on a trap
 
 void Game::resolveBomb(int y, int x)
 {
-    Item *item = getItemByCoord(4,5);
-    devConsole.log(item->getType());
+    Item **items = rooms[player.getCurrentRoom()]->getItems();
+    for (int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
+    {
+        if (items[i] != NULL)
+        { 
+            if ( ((y - 1) == items[i]->getYPos()) && (x == items[i]->getXPos()) && (items[i]->getType() == "softblock") ) // if softblock is above
+            {
+               items[i] = NULL;
+            }
+            else if ( ((y + 1) == items[i]->getYPos()) && (x == items[i]->getXPos()) && (items[i]->getType() == "softblock") ) // if softblock is below
+            {
+              items[i] = NULL;
+            }
+            else if ( (y == items[i]->getYPos()) && ((x-1) == items[i]->getXPos()) && (items[i]->getType() == "softblock") ) // if softblock is to left
+            {
+               items[i] = NULL;
+            }
+            else if ( (y == items[i]->getYPos()) && ((x+1) == items[i]->getXPos()) && (items[i]->getType() == "softblock") ) // if softblock is to right
+            {
+               items[i] = NULL;
+            }
+        }
+    }
+
+
 }
 
 void Game::resolveMovingItem(char direction, Item* item, Object* object) //moving an item
