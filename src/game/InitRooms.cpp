@@ -22,11 +22,6 @@ Room* Game::initStartRoom()
     room->setTeleporter(new Teleporter(10, 43, 10, 3, 3, COLOR_BLUE), 9); //room 10
     room->setTeleporter(new Teleporter(8, 48, 11, 3, 3, COLOR_BLUE), 10); //EndRoom
 
-    //marisa lazy testing portals
-    room->setTeleporter(new Teleporter(8, 10, 3, 2, 10, COLOR_BLUE), 9); //room 3
-    room->setTeleporter(new Teleporter(8, 12, 6, 2, 2, COLOR_BLUE), 10); //room 6
-    room->setTeleporter(new Teleporter(8, 14, 9, 12, 12, COLOR_BLUE), 11); //room 9
-
     //doors in the starting/tutorial room
     room->setDoor(new Door(5, 23, -1, -1, -1, 789, true, COLOR_BLUE), 0);
     room->setDoor(new Door(10, 35, -1, -1, -1, 678, true, COLOR_GREEN), 1);
@@ -178,7 +173,7 @@ Room* Game::initPuzzleRoom5(){
 
 Room* Game::initPuzzleRoom6(){
     Room* room = new Room("rooms/puzzle_6.room");
-    room->setTeleporter(new Teleporter(12, 16, 0, 5, 5, COLOR_YELLOW), 0);
+    room->setTeleporter(new Teleporter(12, 16, 0, 2, 9, COLOR_YELLOW), 0);
     room->setItem(new Bomb(2, 4), 0);
 
     int blockCounter = 0;
