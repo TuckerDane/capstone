@@ -275,7 +275,7 @@ void Game::updatePlayer()
 		    }
                     resolveDoorMovement();
                     resolveItemAction('d');
-		    resolveTeleporterMovement();
+		            resolveTeleporterMovement();
                 }
             }
             break;

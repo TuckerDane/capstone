@@ -119,9 +119,6 @@ void Game::renderWorld()
   renderRoom();
   renderPlayer();
   renderEnemies();
-
-  
-
   wrefresh(worldWindow);
 }
 
