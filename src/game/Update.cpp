@@ -201,7 +201,7 @@ void Game::updatePlayer()
                         player.move('w');
                         resolveDoorMovement();
                         resolveItemAction('w');
-          		resolveTeleporterMovement();
+          		        resolveTeleporterMovement();
                     }
                 }
             }
@@ -275,7 +275,7 @@ void Game::updatePlayer()
 		    }
                     resolveDoorMovement();
                     resolveItemAction('d');
-		    resolveTeleporterMovement();
+		            resolveTeleporterMovement();
                 }
             }
             break;
@@ -284,6 +284,10 @@ void Game::updatePlayer()
             if (getCurrentWindow() == worldWindow)
             {
                 setCurrentWindow(inventoryWindow);
+                if (player.getNumItems() != 0)
+                {
+                    narrative = player.getInventoryItem(player.getSelectedItemIndex())->getDescription();
+                }
             }
             else if (getCurrentWindow() == inventoryWindow)
             {
@@ -859,7 +863,7 @@ void Game::readItem()
             {
                 if (((player.getXPos() + 1) == items[i]->getXPos()) && player.getYPos() == items[i]->getYPos() && items[i]->getType() == "statue")
                 {
-		            setNarrative(items[i]->());
+		            setNarrative(items[i]->getDescription());
                 }
             }
         }

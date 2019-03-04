@@ -48,28 +48,28 @@ Room* Game::initStartRoom()
 
 Room* Game::initPuzzleRoom1()
 {
-  Room* roomOne = new Room("rooms/puzzle_1.room");
+  Room* room = new Room("rooms/puzzle_1.room");
   //row one of teleporters
-  roomOne->setTeleporter(new Teleporter(4, 4, 1, 4, 18, COLOR_BLUE), 0);   
-  roomOne->setTeleporter(new Teleporter(4, 9, 1, 18, 7, COLOR_BLUE), 1);   
-  roomOne->setTeleporter(new Teleporter(4, 15, 1, 18, 30, COLOR_BLUE), 2);   
-  roomOne->setTeleporter(new Teleporter(4, 21, 1, 18, 18, COLOR_BLUE), 3);   
-  roomOne->setTeleporter(new Teleporter(4, 27, 1, 18, 18, COLOR_BLUE), 4);   
-  roomOne->setTeleporter(new Teleporter(4, 32, 1, 18, 30, COLOR_BLUE), 5);   
+  room->setTeleporter(new Teleporter(4, 4, 1, 4, 18, COLOR_BLUE), 0);   
+  room->setTeleporter(new Teleporter(4, 9, 1, 18, 7, COLOR_BLUE), 1);   
+  room->setTeleporter(new Teleporter(4, 15, 1, 18, 30, COLOR_BLUE), 2);   
+  room->setTeleporter(new Teleporter(4, 21, 1, 18, 18, COLOR_BLUE), 3);   
+  room->setTeleporter(new Teleporter(4, 27, 1, 18, 18, COLOR_BLUE), 4);   
+  room->setTeleporter(new Teleporter(4, 32, 1, 18, 30, COLOR_BLUE), 5);   
   //row two
-  roomOne->setTeleporter(new Teleporter(11, 4, 1, 4, 7, COLOR_BLUE), 6);   
-  roomOne->setTeleporter(new Teleporter(11, 9, 1, 5, 30, COLOR_BLUE), 7);   
-  roomOne->setTeleporter(new Teleporter(11, 15, 4, 4, 40, COLOR_GREEN), 8);   
-  roomOne->setTeleporter(new Teleporter(11, 21, 4, 14, 104, COLOR_GREEN), 9);   
-  roomOne->setTeleporter(new Teleporter(11, 27, 1, 11, 7, COLOR_BLUE), 10);   
-  roomOne->setTeleporter(new Teleporter(11, 32, 1, 4, 18, COLOR_BLUE), 11);   
+  room->setTeleporter(new Teleporter(11, 4, 1, 4, 7, COLOR_BLUE), 6);   
+  room->setTeleporter(new Teleporter(11, 9, 1, 5, 30, COLOR_BLUE), 7);   
+  room->setTeleporter(new Teleporter(11, 15, 4, 4, 40, COLOR_GREEN), 8);   
+  room->setTeleporter(new Teleporter(11, 21, 4, 14, 104, COLOR_GREEN), 9);   
+  room->setTeleporter(new Teleporter(11, 27, 1, 11, 7, COLOR_BLUE), 10);   
+  room->setTeleporter(new Teleporter(11, 32, 1, 4, 18, COLOR_BLUE), 11);   
   //row three
-  roomOne->setTeleporter(new Teleporter(18, 4, 1, 4, 30, COLOR_BLUE), 12);   
-  roomOne->setTeleporter(new Teleporter(18, 9, 1, 11, 30, COLOR_BLUE), 13);   
-  roomOne->setTeleporter(new Teleporter(18, 15, 1, 11, 30, COLOR_BLUE), 14);   
-  roomOne->setTeleporter(new Teleporter(18, 21, 1, 18, 7, COLOR_BLUE), 15);   
-  roomOne->setTeleporter(new Teleporter(18, 27, 1, 11, 18, COLOR_BLUE), 16);   
-  roomOne->setTeleporter(new Teleporter(18, 32, 1, 4, 7, COLOR_BLUE), 17);   
+  room->setTeleporter(new Teleporter(18, 4, 1, 4, 30, COLOR_BLUE), 12);   
+  room->setTeleporter(new Teleporter(18, 9, 1, 11, 30, COLOR_BLUE), 13);   
+  room->setTeleporter(new Teleporter(18, 15, 1, 11, 30, COLOR_BLUE), 14);   
+  room->setTeleporter(new Teleporter(18, 21, 1, 18, 7, COLOR_BLUE), 15);   
+  room->setTeleporter(new Teleporter(18, 27, 1, 11, 18, COLOR_BLUE), 16);   
+  room->setTeleporter(new Teleporter(18, 32, 1, 4, 7, COLOR_BLUE), 17);   
 
   return roomOne; 
 }
@@ -115,35 +115,35 @@ Room* Game::initPuzzleRoom2()
 
 Room* Game::initPuzzleRoom3()
 {
-    Room* roomPuzzle3 = new Room("rooms/puzzle_3.room");
-    roomPuzzle3->setDoor(new Door(6, 1, 0, 2, 2, 0, false, COLOR_YELLOW), 0);   // TODO: update door destination
-    roomPuzzle3->setDoor(new Door(1, 9, 0, 2, 2, 0, false, COLOR_YELLOW), 1); // TODO: update door destination
-    roomPuzzle3->setDoor(new Door(13, 9, 0, 2, 2, 0, false, COLOR_YELLOW), 2); // TODO: update door destination
-    roomPuzzle3->setItem(new Snorlax(6, 6), 0);
-    roomPuzzle3->setItem(new Pokeball(4, 20), 2);
+    Room* room = new Room("rooms/puzzle_3.room");
+    room->setDoor(new Door(6, 1, 0, 2, 2, 0, false, COLOR_YELLOW), 0);   // TODO: update door destination
+    room->setDoor(new Door(1, 9, 0, 2, 2, 0, false, COLOR_YELLOW), 1); // TODO: update door destination
+    room->setDoor(new Door(13, 9, 0, 2, 2, 0, false, COLOR_YELLOW), 2); // TODO: update door destination
+    room->setItem(new Snorlax(6, 6), 0);
+    room->setItem(new Pokeball(4, 20), 1);
     
     //Door(int yPos, int xPos, int nextRoom, int nextYPos, int nextXPos, int password, bool locked, int color);
     return roomPuzzle3;
 }
 
 Room* Game::initPuzzleRoom4(){
-  Room* roomFour = new Room("rooms/puzzle_4.room");
+  Room* room = new Room("rooms/puzzle_4.room");
   //teleporters
-  roomFour->setTeleporter(new Teleporter(11, 49, 1, 3, 6, COLOR_BLUE), 0); //logo return   
-  roomFour->setTeleporter(new Teleporter(9, 117, 1, 17, 6, COLOR_BLUE), 1); //preventing user from getting trapped in pac man region
-  roomFour->setTeleporter(new Teleporter(14, 126, 1, 3, 6, COLOR_BLUE), 2); //pac man - return after getting item
-  roomFour->setTeleporter(new Teleporter(13, 103, 4, 13, 146, COLOR_BLACK), 3); //pac man tele: left
-  roomFour->setTeleporter(new Teleporter(14, 103, 4, 14, 146, COLOR_BLACK), 4); //pac man tele: left
-  roomFour->setTeleporter(new Teleporter(15, 103, 4, 15, 146, COLOR_BLACK), 5); //pac man tele: left
-  roomFour->setTeleporter(new Teleporter(13, 147, 4, 13, 104, COLOR_BLACK), 6); //pac man tele: right
-  roomFour->setTeleporter(new Teleporter(14, 147, 4, 14, 104, COLOR_BLACK), 7); //pac man tele: right
-  roomFour->setTeleporter(new Teleporter(15, 147, 4, 15, 104, COLOR_BLACK), 8); //pac man tele: right
+  room->setTeleporter(new Teleporter(11, 49, 1, 3, 6, COLOR_BLUE), 0); //logo return   
+  room->setTeleporter(new Teleporter(9, 117, 1, 17, 6, COLOR_BLUE), 1); //preventing user from getting trapped in pac man region
+  room->setTeleporter(new Teleporter(14, 126, 1, 3, 6, COLOR_BLUE), 2); //pac man - return after getting item
+  room->setTeleporter(new Teleporter(13, 103, 4, 13, 146, COLOR_BLACK), 3); //pac man tele: left
+  room->setTeleporter(new Teleporter(14, 103, 4, 14, 146, COLOR_BLACK), 4); //pac man tele: left
+  room->setTeleporter(new Teleporter(15, 103, 4, 15, 146, COLOR_BLACK), 5); //pac man tele: left
+  room->setTeleporter(new Teleporter(13, 147, 4, 13, 104, COLOR_BLACK), 6); //pac man tele: right
+  room->setTeleporter(new Teleporter(14, 147, 4, 14, 104, COLOR_BLACK), 7); //pac man tele: right
+  room->setTeleporter(new Teleporter(15, 147, 4, 15, 104, COLOR_BLACK), 8); //pac man tele: right
   //door for pac man region
-  roomFour->setDoor(new Door(14, 120, -1, -1, -1, 101, true, COLOR_CYAN), 0);
+  room->setDoor(new Door(14, 120, -1, -1, -1, 101, true, COLOR_CYAN), 0);
   //key for logo region
-  roomFour->setItem(new Key(13, 36, "Inky's Key", 101, COLOR_CYAN), 0);
+  room->setItem(new Key(13, 36, "Inky's Key", 101, COLOR_CYAN), 0);
 
-  return roomFour;
+  return room;
 }
 
 Room* Game::initPuzzleRoom5(){
