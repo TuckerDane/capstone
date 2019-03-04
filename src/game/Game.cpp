@@ -56,8 +56,10 @@ Game::Game()
   rooms[4] = initPuzzleRoom4();
   rooms[5] = initPuzzleRoom5();
   rooms[6] = initPuzzleRoom6();
+  rooms[7] = initPuzzleRoom7();
   rooms[8] = initPuzzleRoom8();
   rooms[9] = initPuzzleRoom9();
+  rooms[10] = initPuzzleRoom10();
   rooms[11] = initEndRoom(); //can be moved down the array and given a later spot
 
   /* init narrative */
