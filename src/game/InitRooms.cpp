@@ -392,6 +392,8 @@ Room* Game::initPuzzleRoom10()
     room->setTeleporter(new Teleporter(5, 142, 0, 2, 9, COLOR_BLUE), 68); 
     room->setTeleporter(new Teleporter(5, 143, 0, 2, 9, COLOR_BLUE), 69); 
     room->setTeleporter(new Teleporter(5, 144, 0, 2, 9, COLOR_BLUE), 70); 
+    return room;
+}
   
 Room* Game::initEndRoom()
 {
