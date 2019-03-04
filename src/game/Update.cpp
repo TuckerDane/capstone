@@ -547,6 +547,40 @@ void Game::useKeyOnOppositeDoor(Door *firstDoor)
     }
 }
 
+Item *Game::getItemByCoord(int y, int x)
+{
+    Item **items = rooms[player.getCurrentRoom()]->getItems();
+    for (int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
+    {
+        if (items[i] != NULL)
+        {
+            if (items[i]->getYPos() == y && items[i]->getXPos() == x)
+            {
+                return items[i];
+            }
+            else
+            {
+                return NULL;
+            }
+        }
+    }
+}
+
+void Game::removeRoomItemByCoord(int y, int x)
+{
+    Item **items = rooms[player.getCurrentRoom()]->getItems();
+    for (int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
+    {
+        if (items[i] != NULL)
+        {
+            if (items[i]->getYPos() == y && items[i]->getXPos() == x)
+            {
+                items[i] = NULL;
+            }
+        }
+    }
+}
+
 void Game::resolveHealing() //player walks on a potion
 {
     Item **items = rooms[player.getCurrentRoom()]->getItems();
@@ -589,6 +623,146 @@ void Game::resolveDamage() //player walks on a trap
             {
                 player.damageHP(items[i]->getDamage());
             }
+        }
+    }
+}
+
+void Game::resolveBomb(int y, int x)
+{
+    // bool skipUp, skipLeft, skipDown, skipRight
+    bool skipUp = false, skipDown = false, skipLeft = false, skipRight = false;
+    // items for each direction
+    Item *itemUp, *itemDown, *itemLeft, *itemRight;
+    
+    // test if tile is player
+    int playerY = player.getYPos();
+    int playerX = player.getXPos();
+
+    //see if player is in blast range, if yes, apply damage and mark player direction
+    if ( (y-1) == playerY && x == playerX ) //if player is above bomb
+    {
+        skipUp = true;
+        player.damageHP(2);
+    }
+    else if ( (y+1) == playerY && x == playerX ) //if player is below bomb
+    {
+        skipDown = true;
+        player.damageHP(2);
+    }
+    else if ( y == playerY && (x-1) == playerX ) //if player is left of bomb
+    {
+        skipLeft = true;
+        player.damageHP(2);
+    }
+    else if ( y == playerY && (x+1) == playerX ) //if player is right of bomb
+    {
+        skipRight = true;
+        player.damageHP(2);
+    }
+    else if ( y == playerY && x == playerX ) //if player is on bomb
+    {
+        player.damageHP(2);
+    }
+    
+    // set item for each direction
+    if (skipUp == true)
+    {
+        itemDown = getItemByCoord(y+1, x);
+        itemLeft = getItemByCoord(y, x-1);
+        itemRight = getItemByCoord(y, x+1);
+
+        if (itemDown->getType() == "softblock")
+        {
+            removeRoomItemByCoord(y+1, x);
+        }
+        else if (itemLeft->getType() == "softblock")
+        {
+            removeRoomItemByCoord(y, x-1);
+        }
+        else if (itemRight->getType() == "softblock")
+        {
+            removeRoomItemByCoord(y, x+1);
+        }
+    }
+    else if (skipDown == true)
+    {
+        itemUp = getItemByCoord(y-1, x);
+        itemLeft = getItemByCoord(y, x-1);
+        itemRight = getItemByCoord(y, x+1);
+
+        if (itemUp->getType() == "softblock")
+        {
+            removeRoomItemByCoord(y-1, x);
+        }
+        else if (itemLeft->getType() == "softblock")
+        {
+            removeRoomItemByCoord(y, x-1);
+        }
+        else if (itemRight->getType() == "softblock")
+        {
+            removeRoomItemByCoord(y, x+1);
+        }
+    }
+    else if (skipLeft == true)
+    {
+        itemUp = getItemByCoord(y-1, x);
+        itemDown = getItemByCoord(y+1, x);
+        itemRight = getItemByCoord(y, x+1);
+        
+        if (itemUp->getType() == "softblock")
+        {
+            removeRoomItemByCoord(y-1, x);
+        }
+        else if (itemDown->getType() == "softblock")
+        {
+            removeRoomItemByCoord(y+1, x);
+        }
+        else if (itemRight->getType() == "softblock")
+        {
+            removeRoomItemByCoord(y, x+1);
+        }
+    }
+    else if (skipRight == true)
+    {
+        itemUp = getItemByCoord(y-1, x);
+        itemDown = getItemByCoord(y+1, x);
+        itemLeft = getItemByCoord(y, x-1);
+                
+        if (itemUp->getType() == "softblock")
+        {
+            removeRoomItemByCoord(y-1, x);
+        }
+        else if (itemDown->getType() == "softblock")
+        {
+            removeRoomItemByCoord(y+1, x);
+        }
+        else if (itemLeft->getType() == "softblock")
+        {
+            removeRoomItemByCoord(y, x-1);
+        }
+    }
+    else
+    {
+        itemUp = getItemByCoord(y-1, x);
+        itemDown = getItemByCoord(y+1, x);
+        itemLeft = getItemByCoord(y, x-1);
+        itemRight = getItemByCoord(y, x+1);
+                
+        if (itemUp->getType() == "softblock")
+        {
+            removeRoomItemByCoord(y-1, x);
+        }
+        else if (itemDown->getType() == "softblock")
+        {
+            removeRoomItemByCoord(y+1, x);
+        }
+        else if (itemLeft->getType() == "softblock")
+        {
+            removeRoomItemByCoord(y, x-1);
+        }
+        else if (itemRight->getType() == "softblock")
+        {
+            removeRoomItemByCoord(y, x+1);
         }
     }
 }

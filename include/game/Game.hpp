@@ -125,10 +125,13 @@ public:
   void resolveDoorMovement();
   void resolveTeleporterMovement();
   void useKeyOnOppositeDoor(Door* door);
+  Item *getItemByCoord(int y, int x);
+  void removeRoomItemByCoord(int y, int x);
   void useKey();
   void resolveHealing();                  //user takes healing
   void usePotion(Item* item);
   void resolveDamage();                   //user takes damage
+  void resolveBomb(int y, int x);
   void resolveMovingItem(char direction, Item* item, Object* object); //user pushes an item forward in the direction they are trying to go
   void resolveItemAction(char direction);
   void pickUpItem();
