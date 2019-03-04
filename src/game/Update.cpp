@@ -201,7 +201,7 @@ void Game::updatePlayer()
                         player.move('w');
                         resolveDoorMovement();
                         resolveItemAction('w');
-          		resolveTeleporterMovement();
+          		        resolveTeleporterMovement();
                     }
                 }
             }
@@ -319,7 +319,8 @@ void Game::updatePlayer()
                 }
                 else if(player.getEquippedItem()->getType() == "bomb")
                 {
-                    resolveBomb(player.getYPos(), player.getXPos());
+                    player.getEquippedItem()->renderBombAnimation(player.getYPos(), player.getXPos(), this->worldWindow);     // display bomb animation
+                    //resolveBomb(player.getYPos(), player.getXPos());
                 }
             }
             else if (currentWindow == inventoryWindow)
@@ -637,6 +638,8 @@ void Game::resolveBomb(int y, int x)
     bool skipUp = false, skipDown = false, skipLeft = false, skipRight = false;
     // items for each direction
     Item *itemUp, *itemDown, *itemLeft, *itemRight;
+
+    int testch = mvwinch(this->worldWindow, y, x); // 0 false otherwise true
     
     // test if tile is player
     int playerY = player.getYPos();
@@ -648,22 +651,22 @@ void Game::resolveBomb(int y, int x)
         skipUp = true;
         player.damageHP(2);
     }
-    else if ( (y+1) == playerY && x == playerX ) //if player is below bomb
+    if ( (y+1) == playerY && x == playerX ) //if player is below bomb
     {
         skipDown = true;
         player.damageHP(2);
     }
-    else if ( y == playerY && (x-1) == playerX ) //if player is left of bomb
+    if ( y == playerY && (x-1) == playerX ) //if player is left of bomb
     {
         skipLeft = true;
         player.damageHP(2);
     }
-    else if ( y == playerY && (x+1) == playerX ) //if player is right of bomb
+    if ( y == playerY && (x+1) == playerX ) //if player is right of bomb
     {
         skipRight = true;
         player.damageHP(2);
     }
-    else if ( y == playerY && x == playerX ) //if player is on bomb
+    if ( y == playerY && x == playerX ) //if player is on bomb
     {
         player.damageHP(2);
     }
@@ -671,101 +674,113 @@ void Game::resolveBomb(int y, int x)
     // set item for each direction
     if (skipUp == true)
     {
-        itemDown = getItemByCoord(y+1, x);
-        itemLeft = getItemByCoord(y, x-1);
-        itemRight = getItemByCoord(y, x+1);
+        testch = mvwinch(this->worldWindow, y+1, x);
+        if (testch != 0)
+            itemDown = getItemByCoord(y+1, x);
+        testch = mvwinch(this->worldWindow, y, x-1);
+        if (testch != 0)
+            itemLeft = getItemByCoord(y, x-1);
+        testch = mvwinch(this->worldWindow, y, x+1);
+        if (testch != 0)
+            itemRight = getItemByCoord(y, x+1);
 
         if (itemDown->getType() == "softblock")
         {
             removeRoomItemByCoord(y+1, x);
         }
-        else if (itemLeft->getType() == "softblock")
+        if (itemLeft->getType() == "softblock")
         {
             removeRoomItemByCoord(y, x-1);
         }
-        else if (itemRight->getType() == "softblock")
+        if (itemRight->getType() == "softblock")
         {
             removeRoomItemByCoord(y, x+1);
         }
     }
-    else if (skipDown == true)
-    {
-        itemUp = getItemByCoord(y-1, x);
-        itemLeft = getItemByCoord(y, x-1);
-        itemRight = getItemByCoord(y, x+1);
+    // else if (skipDown == true)
+    // {
+    //     itemUp = getItemByCoord(y-1, x);
+    //     itemLeft = getItemByCoord(y, x-1);
+    //     itemRight = getItemByCoord(y, x+1);
 
-        if (itemUp->getType() == "softblock")
-        {
-            removeRoomItemByCoord(y-1, x);
-        }
-        else if (itemLeft->getType() == "softblock")
-        {
-            removeRoomItemByCoord(y, x-1);
-        }
-        else if (itemRight->getType() == "softblock")
-        {
-            removeRoomItemByCoord(y, x+1);
-        }
-    }
-    else if (skipLeft == true)
-    {
-        itemUp = getItemByCoord(y-1, x);
-        itemDown = getItemByCoord(y+1, x);
-        itemRight = getItemByCoord(y, x+1);
+    //     if (itemUp->getType() == "softblock")
+    //     {
+    //         removeRoomItemByCoord(y-1, x);
+    //     }
+    //     else if (itemLeft->getType() == "softblock")
+    //     {
+    //         removeRoomItemByCoord(y, x-1);
+    //     }
+    //     else if (itemRight->getType() == "softblock")
+    //     {
+    //         removeRoomItemByCoord(y, x+1);
+    //     }
+    // }
+    // else if (skipLeft == true)
+    // {
+    //     itemUp = getItemByCoord(y-1, x);
+    //     itemDown = getItemByCoord(y+1, x);
+    //     itemRight = getItemByCoord(y, x+1);
         
-        if (itemUp->getType() == "softblock")
-        {
-            removeRoomItemByCoord(y-1, x);
-        }
-        else if (itemDown->getType() == "softblock")
-        {
-            removeRoomItemByCoord(y+1, x);
-        }
-        else if (itemRight->getType() == "softblock")
-        {
-            removeRoomItemByCoord(y, x+1);
-        }
-    }
-    else if (skipRight == true)
-    {
-        itemUp = getItemByCoord(y-1, x);
-        itemDown = getItemByCoord(y+1, x);
-        itemLeft = getItemByCoord(y, x-1);
+    //     if (itemUp->getType() == "softblock")
+    //     {
+    //         removeRoomItemByCoord(y-1, x);
+    //     }
+    //     else if (itemDown->getType() == "softblock")
+    //     {
+    //         removeRoomItemByCoord(y+1, x);
+    //     }
+    //     else if (itemRight->getType() == "softblock")
+    //     {
+    //         removeRoomItemByCoord(y, x+1);
+    //     }
+    // }
+    // else if (skipRight == true)
+    // {
+    //     itemUp = getItemByCoord(y-1, x);
+    //     itemDown = getItemByCoord(y+1, x);
+    //     itemLeft = getItemByCoord(y, x-1);
                 
-        if (itemUp->getType() == "softblock")
-        {
-            removeRoomItemByCoord(y-1, x);
-        }
-        else if (itemDown->getType() == "softblock")
-        {
-            removeRoomItemByCoord(y+1, x);
-        }
-        else if (itemLeft->getType() == "softblock")
-        {
-            removeRoomItemByCoord(y, x-1);
-        }
-    }
+    //     if (itemUp->getType() == "softblock")
+    //     {
+    //         removeRoomItemByCoord(y-1, x);
+    //     }
+    //     else if (itemDown->getType() == "softblock")
+    //     {
+    //         removeRoomItemByCoord(y+1, x);
+    //     }
+    //     else if (itemLeft->getType() == "softblock")
+    //     {
+    //         removeRoomItemByCoord(y, x-1);
+    //     }
+    // }
     else
     {
-        itemUp = getItemByCoord(y-1, x);
-        itemDown = getItemByCoord(y+1, x);
-        itemLeft = getItemByCoord(y, x-1);
-        itemRight = getItemByCoord(y, x+1);
-                
-        if (itemUp->getType() == "softblock")
+        testch = mvwinch(this->worldWindow, y-1, x);
+        string temp = std::to_string(testch);
+        devConsole.log(temp);
+        if (testch == 13088)
         {
+            itemUp = getItemByCoord(y-1, x);
             removeRoomItemByCoord(y-1, x);
+            devConsole.log("told to remove");
         }
-        else if (itemDown->getType() == "softblock")
+        testch = mvwinch(this->worldWindow, y+1, x);
+        if (testch == 13088)
         {
+            itemDown = getItemByCoord(y+1, x);
             removeRoomItemByCoord(y+1, x);
         }
-        else if (itemLeft->getType() == "softblock")
+        testch = mvwinch(this->worldWindow, y, x-1);
+        if (testch == 13088)
         {
+            itemLeft = getItemByCoord(y, x-1);
             removeRoomItemByCoord(y, x-1);
         }
-        else if (itemRight->getType() == "softblock")
+        testch = (this->worldWindow, y, x+1);
+        if (testch == 13088)
         {
+            itemRight = getItemByCoord(y, x+1);
             removeRoomItemByCoord(y, x+1);
         }
     }
