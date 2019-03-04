@@ -81,9 +81,9 @@ public:
   Door *getDoor(int doorIndex);
   Door **getDoors();
   Enemy **getEnemies();
+  int getItemsSize();
   Teleporter *getTeleporter(int teleporterIndex);
   Teleporter **getTeleporters();
-  int getItemsSize();
   int getTileColor();
 };
 
