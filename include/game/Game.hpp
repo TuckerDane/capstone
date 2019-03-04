@@ -161,7 +161,6 @@ public:
   void renderItems();
   void renderPlayer();
   void renderEnemies();
-  void renderBombAnimation(int y, int x)
   void mvwaddchWithColor(int yPos, int xPos, string TILE_SYMBOL, char TILE_PAIR);
 };
 

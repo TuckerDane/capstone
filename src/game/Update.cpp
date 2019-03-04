@@ -319,7 +319,6 @@ void Game::updatePlayer()
                 }
                 else if(player.getEquippedItem()->getType() == "bomb")
                 {
-                    player.getEquippedItem()->renderBombAnimation(player.getYPos(), player.getXPos(), this->worldWindow);     // display bomb animation
                     //resolveBomb(player.getYPos(), player.getXPos());
                 }
             }
