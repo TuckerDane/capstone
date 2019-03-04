@@ -122,11 +122,6 @@ void Room::setWalls(string roomFile)
     file.close();
 }
 
-void Room::setItems()
-{
-    //TODO: setItems()
-}
-
 void Room::setItem(Item *item, int itemIndex)
 {
     items[itemIndex] = item;
