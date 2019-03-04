@@ -284,10 +284,6 @@ void Game::updatePlayer()
             if (getCurrentWindow() == worldWindow)
             {
                 setCurrentWindow(inventoryWindow);
-                if (player.getNumItems() != 0)
-                {
-                    narrative = player.getInventoryItem(player.getSelectedItemIndex())->getDescription();
-                }
             }
             else if (getCurrentWindow() == inventoryWindow)
             {

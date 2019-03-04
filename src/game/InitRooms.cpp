@@ -38,6 +38,7 @@ Room* Game::initStartRoom()
     room->setItem(new Statue(2, 4, "Hint: Teleporters can teleport you places. "), 8);
     room->setItem(new Statue(7, 19, "Hint: Watch out for traps. They cause damage. Potions heal."), 9);
     room->setItem(new Statue(13, 21, "Some objects block movement, some can be moved."), 10);
+    room->setItem(new Pokeball(6, 8), 11);
 
     //enemies
     room->setEnemy(new Enemy(5, 5), 0);
@@ -71,7 +72,7 @@ Room* Game::initPuzzleRoom1()
   room->setTeleporter(new Teleporter(18, 27, 1, 11, 18, COLOR_BLUE), 16);   
   room->setTeleporter(new Teleporter(18, 32, 1, 4, 7, COLOR_BLUE), 17);   
 
-  return roomOne; 
+  return room; 
 }
 
 Room* Game::initPuzzleRoom2()
@@ -122,8 +123,7 @@ Room* Game::initPuzzleRoom3()
     room->setItem(new Snorlax(6, 6), 0);
     room->setItem(new Pokeball(4, 20), 1);
     
-    //Door(int yPos, int xPos, int nextRoom, int nextYPos, int nextXPos, int password, bool locked, int color);
-    return roomPuzzle3;
+    return room;
 }
 
 Room* Game::initPuzzleRoom4(){
