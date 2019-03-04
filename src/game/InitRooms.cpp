@@ -38,7 +38,6 @@ Room* Game::initStartRoom()
     room->setItem(new Statue(2, 4, "Hint: Teleporters can teleport you places. "), 8);
     room->setItem(new Statue(7, 19, "Hint: Watch out for traps. They cause damage. Potions heal."), 9);
     room->setItem(new Statue(13, 21, "Some objects block movement, some can be moved."), 10);
-    room->setItem(new Pokeball(6, 8), 11);
 
     //enemies
     room->setEnemy(new Enemy(5, 5), 0);
