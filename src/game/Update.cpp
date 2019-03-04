@@ -551,36 +551,6 @@ void Game::useKeyOnOppositeDoor(Door *firstDoor)
     }
 }
 
-Item *Game::getItemByCoord(int y, int x)
-{
-   Item **items = rooms[player.getCurrentRoom()]->getItems();
-    for (int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
-    {
-        if (items[i] != NULL)
-        {
-            if (items[i]->getYPos() == y && items[i]->getXPos() == x)
-            {
-                return items[i];
-            }
-        }
-    }
-}
-
-void Game::removeRoomItemByCoord(int y, int x)
-{
-    Item **items = rooms[player.getCurrentRoom()]->getItems();
-    for (int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
-    {
-        if (items[i] != NULL)
-        {
-            if (items[i]->getYPos() == y && items[i]->getXPos() == x)
-            {
-                items[i] = NULL;
-            }
-        }
-    }
-}
-
 void Game::resolveHealing() //player walks on a potion
 {
     Item **items = rooms[player.getCurrentRoom()]->getItems();
