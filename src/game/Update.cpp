@@ -201,7 +201,7 @@ void Game::updatePlayer()
                         player.move('w');
                         resolveDoorMovement();
                         resolveItemAction('w');
-          		resolveTeleporterMovement();
+          		        resolveTeleporterMovement();
                     }
                 }
             }
@@ -275,7 +275,7 @@ void Game::updatePlayer()
 		    }
                     resolveDoorMovement();
                     resolveItemAction('d');
-		    resolveTeleporterMovement();
+		            resolveTeleporterMovement();
                 }
             }
             break;
@@ -837,14 +837,14 @@ void Game::readItem()
             {
                 if (((player.getYPos() - 1) == items[i]->getYPos()) && player.getXPos() == items[i]->getXPos() && items[i]->getType() == "statue")
                 {
-		    setNarrative(items[i]->getDescription());
+		            setNarrative(items[i]->getDescription());
                 }
             }
             else if (player.getSymbol() == "v")
             {
                 if (((player.getYPos() + 1) == items[i]->getYPos()) && player.getXPos() == items[i]->getXPos() && items[i]->getType() == "statue")
                 {
-		    setNarrative(items[i]->getDescription());
+		            setNarrative(items[i]->getDescription());
                 }
             }
 
@@ -852,14 +852,14 @@ void Game::readItem()
             {
                 if (((player.getXPos() - 1) == items[i]->getXPos()) && player.getYPos() == items[i]->getYPos() && items[i]->getType() == "statue")
                 {
-		    setNarrative(items[i]->getDescription());
+		            setNarrative(items[i]->getDescription());
                 }
             }
             else // player.getSymbol() == ">"
             {
                 if (((player.getXPos() + 1) == items[i]->getXPos()) && player.getYPos() == items[i]->getYPos() && items[i]->getType() == "statue")
                 {
-		    setNarrative(items[i]->getDescription());
+		            setNarrative(items[i]->getDescription());
                 }
             }
         }
