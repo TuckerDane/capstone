@@ -319,7 +319,7 @@ void Game::updatePlayer()
                 }
                 else if(player.getEquippedItem()->getType() == "bomb")
                 {
-                    //resolveBomb(player.getYPos(), player.getXPos());
+                    resolveBomb(player.getYPos(), player.getXPos());
                 }
             }
             else if (currentWindow == inventoryWindow)
@@ -553,7 +553,7 @@ void Game::useKeyOnOppositeDoor(Door *firstDoor)
 
 Item *Game::getItemByCoord(int y, int x)
 {
-    Item **items = rooms[player.getCurrentRoom()]->getItems();
+   Item **items = rooms[player.getCurrentRoom()]->getItems();
     for (int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
     {
         if (items[i] != NULL)
@@ -561,10 +561,6 @@ Item *Game::getItemByCoord(int y, int x)
             if (items[i]->getYPos() == y && items[i]->getXPos() == x)
             {
                 return items[i];
-            }
-            else
-            {
-                return NULL;
             }
         }
     }
@@ -633,7 +629,8 @@ void Game::resolveDamage() //player walks on a trap
 
 void Game::resolveBomb(int y, int x)
 {
-
+    Item *item = getItemByCoord(4,5);
+    devConsole.log(item->getType());
 }
 
 void Game::resolveMovingItem(char direction, Item* item, Object* object) //moving an item
