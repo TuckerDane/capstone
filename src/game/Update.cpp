@@ -317,6 +317,10 @@ void Game::updatePlayer()
                 {
                     usePotion(player.getEquippedItem());
                 }
+                else if(player.getEquippedItem()->getType() == "bomb")
+                {
+                    resolveBomb(player.getYPos(), player.getXPos());
+                }
             }
             else if (currentWindow == inventoryWindow)
             {
