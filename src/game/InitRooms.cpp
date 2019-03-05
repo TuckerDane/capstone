@@ -129,7 +129,7 @@ Room* Game::initPuzzleRoom4(){
   Room* room = new Room("rooms/puzzle_4.room");
   //teleporters
   room->setTeleporter(new Teleporter(11, 49, 1, 3, 6, COLOR_BLUE), 0); //logo return   
-  room->setTeleporter(new Teleporter(9, 117, 1, 17, 6, COLOR_BLUE), 1); //preventing user from getting trapped in pac man region
+  room->setTeleporter(new Teleporter(9, 117, 12, 5, 2, COLOR_BLUE), 1); //invisible maze
   room->setTeleporter(new Teleporter(14, 126, 1, 3, 6, COLOR_BLUE), 2); //pac man - return after getting item
   room->setTeleporter(new Teleporter(13, 103, 4, 13, 146, COLOR_BLACK), 3); //pac man tele: left
   room->setTeleporter(new Teleporter(14, 103, 4, 14, 146, COLOR_BLACK), 4); //pac man tele: left
@@ -399,7 +399,108 @@ Room* Game::initPuzzleRoom10()
     room->setTeleporter(new Teleporter(5, 144, 0, 2, 9, COLOR_BLUE), 70); 
     return room;
 }
+
+Room* Game::initPuzzleRoom12()
+{
+  Room* room = new Room("rooms/puzzle_12.room");
+  room->setDoor(new Door(5, 28, 1, 2, 2, 0, false, COLOR_WHITE), 0); // to room1
   
+  //set maze "walls"
+
+  //row1
+  room->setItem(new Immovable(2, 3), 0);
+  room->setItem(new Immovable(2, 7), 1);
+  room->setItem(new Immovable(2, 8), 2);
+  room->setItem(new Immovable(2, 9), 3);
+  room->setItem(new Immovable(2, 10), 4);
+  room->setItem(new Immovable(2, 11), 5);
+
+  //row2
+  room->setItem(new Immovable(3, 3), 6);
+  room->setItem(new Immovable(3, 5), 7);
+  room->setItem(new Immovable(3, 11), 8);
+  room->setItem(new Immovable(3, 17), 9);
+  room->setItem(new Immovable(3, 18), 10);
+  room->setItem(new Immovable(3, 19), 11);
+  room->setItem(new Immovable(3, 23), 12);
+  room->setItem(new Immovable(3, 24), 13);
+  room->setItem(new Immovable(3, 25), 14);
+  room->setItem(new Immovable(3, 26), 15);
+  room->setItem(new Immovable(3, 27), 16);
+
+  //row3
+  room->setItem(new Immovable(4, 2), 17);
+  room->setItem(new Immovable(4, 3), 18);
+  room->setItem(new Immovable(4, 5), 19);
+  room->setItem(new Immovable(4, 5), 20);
+  room->setItem(new Immovable(4, 6), 21);
+  room->setItem(new Immovable(4, 7), 22);
+  room->setItem(new Immovable(4, 8), 23);
+  room->setItem(new Immovable(4, 9), 24);
+  room->setItem(new Immovable(4, 11), 25);
+  room->setItem(new Immovable(4, 17), 26);
+  room->setItem(new Immovable(4, 19), 27);
+  room->setItem(new Immovable(4, 23), 28);
+
+  //row4
+  room->setItem(new Immovable(5, 5), 29);
+  room->setItem(new Immovable(5, 9), 30);
+  room->setItem(new Immovable(5, 11), 31);
+  room->setItem(new Immovable(5, 12), 32);
+  room->setItem(new Immovable(5, 13), 33);
+  room->setItem(new Immovable(5, 14), 34);
+  room->setItem(new Immovable(5, 15), 35);
+  room->setItem(new Immovable(5, 16), 36);
+  room->setItem(new Immovable(5, 17), 37);
+  room->setItem(new Immovable(5, 19), 38);
+  room->setItem(new Immovable(5, 23), 39);
+  room->setItem(new Immovable(5, 25), 40);
+
+  //row5
+  room->setItem(new Immovable(6, 2), 41);
+  room->setItem(new Immovable(6, 3), 42);
+  room->setItem(new Immovable(6, 5), 43);
+  room->setItem(new Immovable(6, 9), 44);
+  room->setItem(new Immovable(6, 19), 45);
+  room->setItem(new Immovable(6, 23), 46);
+  room->setItem(new Immovable(6, 19), 47);
+  room->setItem(new Immovable(6, 25), 48);
+  room->setItem(new Immovable(6, 26), 49);
+  room->setItem(new Immovable(6, 27), 50);
+
+  //row6
+  room->setItem(new Immovable(7, 3), 51);
+  room->setItem(new Immovable(7, 5), 52);
+  room->setItem(new Immovable(7, 9), 53);
+  room->setItem(new Immovable(7, 10), 54);
+  room->setItem(new Immovable(7, 11), 55);
+  room->setItem(new Immovable(7, 12), 56);
+  room->setItem(new Immovable(7, 13), 57);
+  room->setItem(new Immovable(7, 14), 58);
+  room->setItem(new Immovable(7, 15), 59);
+  room->setItem(new Immovable(7, 16), 60);
+  room->setItem(new Immovable(7, 17), 61);
+  room->setItem(new Immovable(7, 19), 62);
+  room->setItem(new Immovable(7, 20), 63);
+  room->setItem(new Immovable(7, 21), 64);
+  room->setItem(new Immovable(7, 22), 65);
+  room->setItem(new Immovable(7, 23), 66);
+  room->setItem(new Immovable(7, 25), 67);
+
+  //row7
+  room->setItem(new Immovable(8, 3), 68);
+  room->setItem(new Immovable(8, 5), 69);
+  room->setItem(new Immovable(8, 17), 70);
+  
+  // for loop for attributes
+  for(int i=0; i <= 70; i++)
+  {
+    room->getItem(i)->setWeight(1000);
+    room->getItem(i)->setColor(COLOR_BLACK);
+  }
+
+  return room;
+}
 
 Room* Game::initEndRoom()
 {
