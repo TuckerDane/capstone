@@ -77,14 +77,15 @@ public:
   Room* initStartRoom();
   Room* initPuzzleRoom1();
   Room* initPuzzleRoom2();
-  Room* initPuzzleRoom3();
+  Room* initPuzzleRoom3(); //Snorlax
   Room* initPuzzleRoom4();
   Room* initPuzzleRoom5();
-  Room* initPuzzleRoom6();
+  Room* initPuzzleRoom6(); //Bomberman
   Room* initPuzzleRoom7(); //Super Mario Bros part 1
   Room* initPuzzleRoom8();
-  Room* initPuzzleRoom9();
+  Room* initPuzzleRoom9(); //Rodent's Revenge
   Room* initPuzzleRoom10(); //Super Mario Bros part 2
+  Room* initPuzzleRoom12(); //Invisible Maze
   Room* initEndRoom();
   Room* initPuzzleRoomX();
 

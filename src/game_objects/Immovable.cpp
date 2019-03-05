@@ -30,6 +30,17 @@ Immovable::Immovable(int yPos, int xPos)
 	description = "This is a pillar, looks like those used in important buildings.";
 }
 
+Immovable::Immovable(int yPos, int xPos, int color)
+{
+	this->yPos = yPos;
+	this->xPos = xPos;
+	name = "pillar";
+	type = "immovable";
+	symbol = "█";
+	color = (this->color);
+	description = "This is a pillar, looks like those used in important buildings.";
+}
+
 Immovable::~Immovable()
 {
 }

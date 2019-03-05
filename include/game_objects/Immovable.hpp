@@ -20,6 +20,7 @@ class Immovable : public Item
 	//CONSTRUCTOR/DESTRUCTOR
 	Immovable();
 	Immovable(int yPos, int xPos);
+	Immovable(int yPos, int xPos, int color);
 	~Immovable();
 
 	//SETTERS
