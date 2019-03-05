@@ -29,8 +29,8 @@
 #include "Snorlax.hpp"
 #include "Pokeflute.hpp"
 #include "Pokeball.hpp"
-#include "Colors.hpp"
 #include "Statue.hpp"
+#include "Colors.hpp"
 
 #define MAX_ROOMS 20
 
@@ -123,18 +123,21 @@ public:
   void updatePlayer();
   void updateEnemies();
   void resolveDoorMovement();
-  void resolveTeleporterMovement();
   void useKeyOnOppositeDoor(Door* door);
   void useKey();
   void resolveHealing();                  //user takes healing
   void usePotion(Item* item);
   void resolveDamage();                   //user takes damage
+  void resolveMovingItem(char direction); //user pushes an item forward in the direction they are trying to go
+  void resolveSnorlax();
+  void usePokeball();
   void resolveMovingItem(char direction, Item* item, Object* object); //user pushes an item forward in the direction they are trying to go
   void resolveItemAction(char direction);
+  void resolveTeleporterMovement();
+  void readItem();
   void pickUpItem();
   void dropItem();
   void displayItemDescriptionToNarrativeWindow(Item *item);
-  void readItem();
 
   /* ..............................................
     RENDER.CPP
@@ -144,7 +147,6 @@ public:
   // ACTIONS
   void render();
   void colorWindow(WINDOW *window, int colorPair);
-  void renderEndScreen();
   void renderCurrentWindow();
   void renderStatus();
   void renderWorld();
@@ -154,10 +156,11 @@ public:
   void renderRoom();
   void renderWalls();
   void renderDoors();
-  void renderTeleporters();
   void renderItems();
   void renderPlayer();
   void renderEnemies();
+  void renderTeleporters();
+  void renderEndScreen();
   void mvwaddchWithColor(int yPos, int xPos, string TILE_SYMBOL, char TILE_PAIR);
 };
 

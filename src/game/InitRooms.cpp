@@ -142,6 +142,9 @@ Room* Game::initPuzzleRoom4(){
   //key for logo region
   room->setItem(new Key(13, 36, "Inky's Key", 101, COLOR_CYAN), 0);
 
+  //pokeflute for room3 solution
+  room->setItem(new Pokeflute(14, 123), 1);
+
   return room;
 }
 
@@ -174,6 +177,9 @@ Room* Game::initPuzzleRoom6(){
     Room* room = new Room("rooms/puzzle_6.room");
     room->setDoor(new Door(1, 2, 0, 2, 2, -1, false, COLOR_WHITE), 0);
     room->setItem(new Bomb(3, 2), 0);
+    room->setTeleporter(new Teleporter(12, 16, 0, 5, 5, COLOR_YELLOW), 0);
+    room->setTeleporter(new Teleporter(12, 16, 0, 2, 9, COLOR_YELLOW), 0);
+    room->setItem(new Bomb(2, 4), 0);
 
     int blockCounter = 0;
     for(int i= 0; i < 15; i++)
@@ -394,8 +400,6 @@ Room* Game::initPuzzleRoom10()
     return room;
 }
   
-    return room;
-}
 
 Room* Game::initEndRoom()
 {

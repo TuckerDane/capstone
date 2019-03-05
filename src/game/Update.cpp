@@ -317,6 +317,14 @@ void Game::updatePlayer()
                 {
                     usePotion(player.getEquippedItem());
                 }
+                else if (player.getEquippedItem()->getType() == "poke_flute")
+                {
+                    resolveSnorlax();
+                }
+                else if (player.getEquippedItem()->getType() == "poke_ball")
+                {
+                    usePokeball();
+                }
             }
             else if (currentWindow == inventoryWindow)
             {
@@ -588,6 +596,42 @@ void Game::resolveDamage() //player walks on a trap
             if (player.getXPos() == items[i]->getXPos() && player.getYPos() == items[i]->getYPos()) //if x and y value match
             {
                 player.damageHP(items[i]->getDamage());
+            }
+        }
+    }
+}
+
+void Game::resolveSnorlax()
+{
+    Item **items = rooms[player.getCurrentRoom()]->getItems();
+    for (int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
+    {
+        if (items[i] != NULL)
+        {
+            if (items[i]->getYPos() == 6 && items[i]->getXPos() == 6 && (items[i]->getType() == "snorlax") ) // if Snorlax is in starting position
+            {
+                items[i]->setYPos(5);
+                items[i]->setXPos(7);
+            }
+        }
+    }
+}
+
+void Game::usePokeball()
+{
+    Item **items = rooms[player.getCurrentRoom()]->getItems();
+    for (int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
+    {
+        if (items[i] != NULL)
+        {
+            if (items[i]->getYPos() == 5 && items[i]->getXPos() == 7 && (items[i]->getType() == "snorlax") ) // if Snorlax is in second position
+            {
+                items[i]->setWeight(1);
+                bool pickedUp = player.pickUp(items[i]);
+                if (pickedUp)
+                {
+                    items[i] = NULL;
+                }
             }
         }
     }
