@@ -114,6 +114,7 @@ public:
   // GETTERS
   bool getIsComplete();
   bool isMoveAllowed(int y, int x);
+  bool isEnemyMoveAllowed(int y, int x);
   bool isItemMoveAllowed(int y, int x, char direction, Object* object);
   Room *getRoom(int roomIndex);
   string getNarrative();
