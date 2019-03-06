@@ -17,6 +17,7 @@ Enemy::Enemy() : Player()
 {
 	setIsMoved(false);
     gettimeofday(&lastTimeMoved, NULL);
+    setDamage(2);
 }
 
 Enemy::Enemy(int yPos, int xPos) : Player()
@@ -25,6 +26,7 @@ Enemy::Enemy(int yPos, int xPos) : Player()
     gettimeofday(&lastTimeMoved, NULL);
     setYPos(yPos);
     setXPos(xPos);
+    setDamage(2);
 }
 
 Enemy::~Enemy()
@@ -33,6 +35,26 @@ Enemy::~Enemy()
 
 /* ..............................................
   SETTERS
+  
+.............................................. */
+
+void Enemy::setDamage(int damage)
+{
+    this->damage = damage;
+}
+
+/* ..............................................
+  GETTERS
+  
+.............................................. */
+
+int Enemy::getDamage()
+{
+    return damage;
+}
+
+/* ..............................................
+  ACTIONS
   
 .............................................. */
 

@@ -25,12 +25,19 @@ class Enemy : public Player
   private:
   struct timeval lastTimeMoved;
   Console devConsole;
+  int damage;
 
    public:
 	// CONSTRUCTOR/DESTRUCTORS
 	Enemy();
   Enemy(int yPos, int xPos);
 	~Enemy();
+
+  // SETTERS
+  void setDamage(int damage);
+
+  // GETTERS
+  int getDamage();
 
  	// ACTIONS
   unsigned int processMove();
