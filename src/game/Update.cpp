@@ -403,7 +403,7 @@ void Game::updateEnemies()
                 // if the enemy moves into the player, deal damage
                 if (enemies[i]->getYPos() - 1 == player.getYPos() && enemies[i]->getXPos() == player.getXPos())
                 {
-                    player.damageHP(2);
+                    player.damageHP(enemies[i]->getDamage());
                 }
                 // move the enemy
                 if ((enemies[i]->getYPos() > 0) && isEnemyMoveAllowed(enemies[i]->getYPos() - 1, enemies[i]->getXPos()))
@@ -418,7 +418,7 @@ void Game::updateEnemies()
                 // if the enemy moves into the player, deal damage
                 if (enemies[i]->getYPos() + 1 == player.getYPos() && enemies[i]->getXPos() == player.getXPos())
                 {
-                    player.damageHP(2);
+                    player.damageHP(enemies[i]->getDamage());
                 }
                 // move the enemy
                 if ((enemies[i]->getYPos() < LINES - 1) && isEnemyMoveAllowed(enemies[i]->getYPos() + 1, enemies[i]->getXPos()))
@@ -433,7 +433,7 @@ void Game::updateEnemies()
                 // if the enemy moves into the player, deal damage
                 if (enemies[i]->getYPos() == player.getYPos() && enemies[i]->getXPos() - 1 == player.getXPos())
                 {
-                    player.damageHP(2);
+                    player.damageHP(enemies[i]->getDamage());
                 }
                 // move the enemy
                 if ((enemies[i]->getXPos() > 0) && isEnemyMoveAllowed(enemies[i]->getYPos(), enemies[i]->getXPos() - 1))
@@ -448,7 +448,7 @@ void Game::updateEnemies()
                 // if the enemy moves into the player, deal damage
                 if (enemies[i]->getYPos() == player.getYPos() && enemies[i]->getXPos() + 1 == player.getXPos())
                 {
-                    player.damageHP(2);
+                    player.damageHP(enemies[i]->getDamage());
                 }
                 // move the enemy
                 if ((enemies[i]->getXPos() < COLS - 1) && isEnemyMoveAllowed(enemies[i]->getYPos(), enemies[i]->getXPos() + 1))
