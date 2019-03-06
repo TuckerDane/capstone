@@ -44,6 +44,20 @@ bool Game::getIsComplete()
     return this->isComplete;
 }
 
+bool Game::isEnemyMoveAllowed(int y, int x)
+{
+   int testch;
+
+    /* return true if the oom is okay to move into */
+    testch = mvwinch(this->worldWindow, y, x);
+    
+    if (((testch & A_CHARTEXT) == GRASS) || ((testch & A_CHARTEXT) == EMPTY))
+    {
+        return true;
+    }
+    return false;  
+}
+
 bool Game::isMoveAllowed(int y, int x)
 {
     int testch;
@@ -386,7 +400,7 @@ void Game::updateEnemies()
             case 'w':
             case 'W':
                 enemies[i]->setSymbol("^");
-                if ((enemies[i]->getYPos() > 0) && isMoveAllowed(enemies[i]->getYPos() - 1, enemies[i]->getXPos()))
+                if ((enemies[i]->getYPos() > 0) && isEnemyMoveAllowed(enemies[i]->getYPos() - 1, enemies[i]->getXPos()))
                 {
                     enemies[i]->move('w');
                 }
@@ -395,7 +409,7 @@ void Game::updateEnemies()
             case 's':
             case 'S':
                 enemies[i]->setSymbol("v");
-                if ((enemies[i]->getYPos() < LINES - 1) && isMoveAllowed(enemies[i]->getYPos() + 1, enemies[i]->getXPos()))
+                if ((enemies[i]->getYPos() < LINES - 1) && isEnemyMoveAllowed(enemies[i]->getYPos() + 1, enemies[i]->getXPos()))
                 {
                     enemies[i]->move('s');
                 }
@@ -404,7 +418,7 @@ void Game::updateEnemies()
             case 'a':
             case 'A':
                 enemies[i]->setSymbol("<");
-                if ((enemies[i]->getXPos() > 0) && isMoveAllowed(enemies[i]->getYPos(), enemies[i]->getXPos() - 1))
+                if ((enemies[i]->getXPos() > 0) && isEnemyMoveAllowed(enemies[i]->getYPos(), enemies[i]->getXPos() - 1))
                 {
                     enemies[i]->move('a');
                 }
@@ -413,7 +427,7 @@ void Game::updateEnemies()
             case 'd':
             case 'D':
                 enemies[i]->setSymbol(">");
-                if ((enemies[i]->getXPos() < COLS - 1) && isMoveAllowed(enemies[i]->getYPos(), enemies[i]->getXPos() + 1))
+                if ((enemies[i]->getXPos() < COLS - 1) && isEnemyMoveAllowed(enemies[i]->getYPos(), enemies[i]->getXPos() + 1))
                 {
                     enemies[i]->move('d');
                 }
