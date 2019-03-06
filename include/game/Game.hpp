@@ -85,8 +85,10 @@ public:
   Room* initPuzzleRoom8();
   Room* initPuzzleRoom9(); //Rodent's Revenge
   Room* initPuzzleRoom10(); //Super Mario Bros part 2
+  Room* initPuzzleRoom11(); //end room
   Room* initPuzzleRoom12(); //Invisible Maze
-  Room* initEndRoom();
+  Room* initPuzzleRoom13(); //repair room
+  Room* initPuzzleRoom14(); //trophy/statue room
   Room* initPuzzleRoomX();
 
   // ACTIONS
