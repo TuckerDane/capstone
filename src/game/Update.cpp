@@ -400,6 +400,12 @@ void Game::updateEnemies()
             case 'w':
             case 'W':
                 enemies[i]->setSymbol("^");
+                // if the enemy moves into the player, deal damage
+                if (enemies[i]->getYPos() - 1 == player.getYPos() && enemies[i]->getXPos() == player.getXPos())
+                {
+                    player.damageHP(2);
+                }
+                // move the enemy
                 if ((enemies[i]->getYPos() > 0) && isEnemyMoveAllowed(enemies[i]->getYPos() - 1, enemies[i]->getXPos()))
                 {
                     enemies[i]->move('w');
@@ -409,6 +415,12 @@ void Game::updateEnemies()
             case 's':
             case 'S':
                 enemies[i]->setSymbol("v");
+                // if the enemy moves into the player, deal damage
+                if (enemies[i]->getYPos() + 1 == player.getYPos() && enemies[i]->getXPos() == player.getXPos())
+                {
+                    player.damageHP(2);
+                }
+                // move the enemy
                 if ((enemies[i]->getYPos() < LINES - 1) && isEnemyMoveAllowed(enemies[i]->getYPos() + 1, enemies[i]->getXPos()))
                 {
                     enemies[i]->move('s');
@@ -418,6 +430,12 @@ void Game::updateEnemies()
             case 'a':
             case 'A':
                 enemies[i]->setSymbol("<");
+                // if the enemy moves into the player, deal damage
+                if (enemies[i]->getYPos() == player.getYPos() && enemies[i]->getXPos() - 1 == player.getXPos())
+                {
+                    player.damageHP(2);
+                }
+                // move the enemy
                 if ((enemies[i]->getXPos() > 0) && isEnemyMoveAllowed(enemies[i]->getYPos(), enemies[i]->getXPos() - 1))
                 {
                     enemies[i]->move('a');
@@ -427,6 +445,12 @@ void Game::updateEnemies()
             case 'd':
             case 'D':
                 enemies[i]->setSymbol(">");
+                // if the enemy moves into the player, deal damage
+                if (enemies[i]->getYPos() == player.getYPos() && enemies[i]->getXPos() + 1 == player.getXPos())
+                {
+                    player.damageHP(2);
+                }
+                // move the enemy
                 if ((enemies[i]->getXPos() < COLS - 1) && isEnemyMoveAllowed(enemies[i]->getYPos(), enemies[i]->getXPos() + 1))
                 {
                     enemies[i]->move('d');
