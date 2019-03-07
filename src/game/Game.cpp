@@ -44,9 +44,10 @@ Game::Game()
   /* initialize Game class variables */
   isComplete = false;
   player.setCurrentRoom(0);
-  player.setXPos(9);
-  player.setYPos(2);
-  
+  player.setXPos(40);
+  player.setYPos(15);
+ 
+  player.setInventoryItem(new Potion(), 0); 
   /* initialize Rooms */
 
   rooms[0] = initStartRoom();
@@ -60,8 +61,10 @@ Game::Game()
   rooms[8] = initPuzzleRoom8();
   rooms[9] = initPuzzleRoom9();
   rooms[10] = initPuzzleRoom10();
+  rooms[11] = initPuzzleRoom11(); 
   rooms[12] = initPuzzleRoom12();
-  rooms[13] = initEndRoom(); //can be moved down the array and given a later spot
+  rooms[13] = initPuzzleRoom13();
+  rooms[14] = initPuzzleRoom14();
 
   /* init narrative */
   narrative = "default narrative";
