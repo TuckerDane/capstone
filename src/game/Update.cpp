@@ -18,6 +18,11 @@ void Game::setIsComplete(bool isComplete)
     this->isComplete = isComplete;
 }
 
+void Game::setPlanted(bool planted)
+{
+    this->planted = planted;
+}
+
 void Game::setRoom(Room *room, int roomIndex)
 {
     this->rooms[roomIndex] = room;
@@ -34,6 +39,16 @@ void Game::setCurrentWindow(WINDOW *window)
     this->currentWindow = window;
 }
 
+void Game::setBombY(int bombY)
+{
+    this->bombY = bombY;
+}
+
+void Game::setBombX(int bombX)
+{
+    this->bombX = bombX;
+}
+
 /* ..............................................
   GETTERS
   
@@ -42,6 +57,21 @@ void Game::setCurrentWindow(WINDOW *window)
 bool Game::getIsComplete()
 {
     return this->isComplete;
+}
+
+bool Game::getPlanted()
+{
+    return this->planted;
+}
+
+int Game::getBombY()
+{
+    return this->bombY;
+}
+
+int Game::getBombX()
+{
+    return this->bombX;
 }
 
 bool Game::isEnemyMoveAllowed(int y, int x)
@@ -185,6 +215,8 @@ void Game::update()
 void Game::updatePlayer()
 {
     player.setIsMoved(false);
+    if (getPlanted() == true)
+        animateBomb();
     switch (player.getPlayerInput())
     {
         case KEY_UP:
@@ -341,7 +373,7 @@ void Game::updatePlayer()
                 }
                 else if (player.getEquippedItem()->getType() == "bomb")
                 {
-                    resolveBomb(player.getYPos(), player.getXPos());
+                    plantBomb(player.getYPos(), player.getXPos());
                 }
                 else if (player.getEquippedItem()->getType() == "snorlax")
                 {
@@ -1070,29 +1102,30 @@ void Game::readItem()
     }
 }
 
-void Game::resolveBomb(int y, int x)
+void Game::resolveBomb()
 {
     Item** items = rooms[player.getCurrentRoom()]->getItems();
     for(int i=0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
     {
         if (items[i] != NULL)
         {
-            if ( ((y-1) == items[i]->getYPos()) && (x == items[i]->getXPos()) && (items[i]->getType() == "softblock") ) // if softblock is above
+            // delete softblocks surrounding bomb
+            if ( ((getBombY()-1) == items[i]->getYPos()) && (getBombX() == items[i]->getXPos()) && (items[i]->getType() == "softblock") ) // if softblock is above
             {
                 delete items[i];
                 items[i] = NULL;
             }
-            else if ( ((y+1) == items[i]->getYPos()) && (x == items[i]->getXPos()) && (items[i]->getType() == "softblock") ) // if softblock is below
+            else if ( ((getBombY()+1) == items[i]->getYPos()) && (getBombX() == items[i]->getXPos()) && (items[i]->getType() == "softblock") ) // if softblock is below
             {
                 delete items[i];
                 items[i] = NULL;
             }
-            else if ( (y == items[i]->getYPos()) && ((x-1) == items[i]->getXPos()) && (items[i]->getType() == "softblock") ) // if softblock is to left
+            else if ( (getBombY() == items[i]->getYPos()) && ((getBombX()-1) == items[i]->getXPos()) && (items[i]->getType() == "softblock") ) // if softblock is to left
             {
                 delete items[i];
                 items[i] = NULL;
             }
-            else if ( (y == items[i]->getYPos()) && ((x+1) == items[i]->getXPos()) && (items[i]->getType() == "softblock") ) // if softblock is to right
+            else if ( (getBombY() == items[i]->getYPos()) && ((getBombX()+1) == items[i]->getXPos()) && (items[i]->getType() == "softblock") ) // if softblock is to right
             {
                 delete items[i];
                 items[i] = NULL;
@@ -1176,5 +1209,87 @@ void Game::giveProfOakSnorlax()
                 }
             }
         }
+void Game::plantBomb(int y, int x)
+{
+    if (getPlanted() == true)
+    {
+        setNarrative("There is already a bomb waiting to explode!");
+    }
+    else
+    {    
+        Item **items = rooms[player.getCurrentRoom()]->getItems(); //get the items in the room
+        int itemIndex = rooms[player.getCurrentRoom()]->getItemsSize(); //index for item array
+        bool bombHasBeenDropped = false;
+        while ((bombHasBeenDropped == false))
+        {
+            if (items[itemIndex] != NULL) //if there is an item
+            {
+                if (items[itemIndex]->getYPos() == y && items[itemIndex]->getXPos() == x) //make sure it is not under the player
+                {
+                    setNarrative("Item is already here. You cannot drop another here");
+                    break;
+                }
+                itemIndex++;
+            }
+            else //items[i] == NULL and can be planted
+            {
+                rooms[player.getCurrentRoom()]->setItem(new Bomb(y, x), ++itemIndex);
+                bombHasBeenDropped = true;
+            }
+        }
+        if (bombHasBeenDropped == true)
+        {
+            setPlanted(true);
+            setBombY(y);
+            setBombX(x);
+            setNarrative("You have planted a bomb. Run!");
+            begin_time = clock();
+        }
+    }
+}
+
+void Game::animateBomb()
+{
+    int bombIndex;  // figure out which item is bomb
+    Item **items = rooms[player.getCurrentRoom()]->getItems();
+    for (int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
+    {
+        if (items[i] != NULL)
+        {
+            if(items[i]->getType() == "bomb")
+            {
+                bombIndex = i;
+            }
+        }
+    }
+
+    elapsedSeconds = (clock () - begin_time ) /  CLOCKS_PER_SEC;
+    if (elapsedSeconds <= 0.25)
+    {
+        items[bombIndex]->setSymbol("❸");
+    }
+    else if (elapsedSeconds > 0.25 && elapsedSeconds <= 1)
+    {
+        items[bombIndex]->setSymbol("❷");
+    }
+    else if (elapsedSeconds > 1 && elapsedSeconds <= 2)
+    {
+        items[bombIndex]->setSymbol("❶");
+    }
+    else if (elapsedSeconds > 2 && elapsedSeconds <= 3)
+    {
+        items[bombIndex]->setSymbol("✶");
+        resolveBomb();
+    }
+    else if (elapsedSeconds > 3)
+    {
+        // if player is within range of bomb, apply 3 damage
+        if (player.getYPos() == getBombY() || player.getYPos()-1 == getBombY()-1 || player.getYPos()+1 == getBombY()+1 || player.getXPos() == getBombX() || player.getXPos()-1 == getBombX()-1 || player.getXPos()+1 == getBombX()+1)
+        {
+            player.damageHP(3);
+        }
+        setPlanted(false);
+        delete items[bombIndex];
+        items[bombIndex] = NULL;
     }
 }
