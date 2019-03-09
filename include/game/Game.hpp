@@ -143,6 +143,7 @@ public:
   void pickUpItem();
   void dropItem();
   void displayItemDescriptionToNarrativeWindow(Item *item);
+  void resolveBomb(int y, int x);
 
   /* ..............................................
     RENDER.CPP

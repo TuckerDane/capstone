@@ -339,6 +339,10 @@ void Game::updatePlayer()
                 {
                     usePokeball();
                 }
+                else if (player.getEquippedItem()->getType() == "bomb")
+                {
+                    resolveBomb(player.getYPos(), player.getXPos());
+                }
             }
             else if (currentWindow == inventoryWindow)
             {
@@ -943,6 +947,37 @@ void Game::readItem()
                 {
 		            setNarrative(items[i]->getDescription());
                 }
+            }
+        }
+    }
+}
+
+void Game::resolveBomb(int y, int x)
+{
+    Item** items = rooms[player.getCurrentRoom()]->getItems();
+    for(int i=0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
+    {
+        if (items[i] != NULL)
+        {
+            if ( ((y-1) == items[i]->getYPos()) && (x == items[i]->getXPos()) && (items[i]->getType() == "softblock") ) // if softblock is above
+            {
+                delete items[i];
+                items[i] = NULL;
+            }
+            else if ( ((y+1) == items[i]->getYPos()) && (x == items[i]->getXPos()) && (items[i]->getType() == "softblock") ) // if softblock is below
+            {
+                delete items[i];
+                items[i] = NULL;
+            }
+            else if ( (y == items[i]->getYPos()) && ((x-1) == items[i]->getXPos()) && (items[i]->getType() == "softblock") ) // if softblock is to left
+            {
+                delete items[i];
+                items[i] = NULL;
+            }
+            else if ( (y == items[i]->getYPos()) && ((x+1) == items[i]->getXPos()) && (items[i]->getType() == "softblock") ) // if softblock is to right
+            {
+                delete items[i];
+                items[i] = NULL;
             }
         }
     }
