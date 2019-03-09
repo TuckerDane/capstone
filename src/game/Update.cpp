@@ -215,8 +215,10 @@ void Game::update()
 void Game::updatePlayer()
 {
     player.setIsMoved(false);
+    Door **doors = rooms[player.getCurrentRoom()]->getDoors();
+    Teleporter **teleporters =  rooms[player.getCurrentRoom()]->getTeleporters();
     if (getPlanted() == true)
-        animateBomb();
+        animateBomb(doors, teleporters);
     switch (player.getPlayerInput())
     {
         case KEY_UP:
@@ -373,7 +375,7 @@ void Game::updatePlayer()
                 }
                 else if (player.getEquippedItem()->getType() == "bomb")
                 {
-                    plantBomb(player.getYPos(), player.getXPos());
+                    plantBomb(player.getYPos(), player.getXPos(), doors, teleporters);
                 }
             }
             else if (currentWindow == inventoryWindow)
@@ -1016,7 +1018,7 @@ void Game::resolveBomb()
     }
 }
 
-void Game::plantBomb(int y, int x)
+void Game::plantBomb(int y, int x, Door **doors, Teleporter **teleporters)
 {
     if (getPlanted() == true)
     {
@@ -1046,6 +1048,25 @@ void Game::plantBomb(int y, int x)
         }
         if (bombHasBeenDropped == true)
         {
+            // lock doors and keep teleports from letting player leave room
+            for(int i=0; i < rooms[player.getCurrentRoom()]->getMaxDoors(); i++)
+            {
+                if (doors[i] != NULL)
+                {
+                    doors[i]->setNextRoom(6);
+                    doors[i]->setNextYPos(2);
+                    doors[i]->setNextXPos(16);
+                }
+            }
+            for(int i=0; i < rooms[player.getCurrentRoom()]->getMaxTeleporters(); i++)
+            {
+                if(teleporters[i] != NULL)
+                {
+                    teleporters[i]->setNextRoom(6);
+                    teleporters[i]->setNextYPos(2);
+                    teleporters[i]->setNextXPos(16);
+                }
+            }
             setPlanted(true);
             setBombY(y);
             setBombX(x);
@@ -1055,7 +1076,7 @@ void Game::plantBomb(int y, int x)
     }
 }
 
-void Game::animateBomb()
+void Game::animateBomb(Door **doors, Teleporter **teleporters)
 {
     int bombIndex;  // figure out which item is bomb
     Item **items = rooms[player.getCurrentRoom()]->getItems();
@@ -1095,8 +1116,28 @@ void Game::animateBomb()
         {
             player.damageHP(3);
         }
-        setPlanted(false);
+        setPlanted(false);        
         delete items[bombIndex];
         items[bombIndex] = NULL;
+
+        // reset doors and teleporters
+        for(int i=0; i < rooms[player.getCurrentRoom()]->getMaxDoors(); i++)
+        {
+            if (doors[i] != NULL)
+            {
+                doors[i]->setNextRoom(3);
+                doors[i]->setNextYPos(6);
+                doors[i]->setNextXPos(2);
+            }
+        }
+        for(int i=0; i < rooms[player.getCurrentRoom()]->getMaxTeleporters(); i++)
+        {
+            if(teleporters[i] != NULL)
+            {
+                teleporters[i]->setNextRoom(13);
+                teleporters[i]->setNextYPos(9);
+                teleporters[i]->setNextXPos(71);
+            }
+        }
     }
 }
