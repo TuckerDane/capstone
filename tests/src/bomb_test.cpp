@@ -51,13 +51,3 @@ TEST_CASE("set bomb description", "[bomb][get][set]")
     m.setDescription("");
     REQUIRE (m.getDescription() == "");
 }
-
-TEST_CASE("get and set bomb damage", "[bomb][get][set]")
-{
-    Bomb m;
-    REQUIRE (m.getDamage() == 2);
-    m.setDamage(3);
-    REQUIRE (m.getDamage() == 3);
-    m.setDamage(6);
-    REQUIRE (m.getDamage() == 6);
-}

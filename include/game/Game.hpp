@@ -53,7 +53,11 @@ class Game
 {
 private:
   bool isComplete;
+  bool planted;
   unsigned int userInput;
+  clock_t begin_time;
+  double elapsedSeconds;
+  int bombX, bombY;
   Player player;
   Console devConsole;
   Room *rooms[MAX_ROOMS];
@@ -110,18 +114,24 @@ public:
 
   // SETTERS
   void setIsComplete(bool isComplete);
+  void setPlanted(bool planted);
   void setRoom(Room *room, int roomIndex);
   void setNarrative(string narrative);
   void setCurrentWindow(WINDOW *window);
+  void setBombY(int bombY);
+  void setBombX(int bombX);
 
   // GETTERS
   bool getIsComplete();
+  bool getPlanted();
   bool isMoveAllowed(int y, int x);
   bool isEnemyMoveAllowed(int y, int x);
   bool isItemMoveAllowed(int y, int x, char direction, Object* object);
   Room *getRoom(int roomIndex);
   string getNarrative();
   WINDOW *getCurrentWindow();
+  int getBombY();
+  int getBombX();
 
   // ACTIONS
   void update();
@@ -143,7 +153,9 @@ public:
   void pickUpItem();
   void dropItem();
   void displayItemDescriptionToNarrativeWindow(Item *item);
-  void resolveBomb(int y, int x);
+  void resolveBomb();
+  void plantBomb(int y, int x);
+  void animateBomb();
 
   /* ..............................................
     RENDER.CPP
