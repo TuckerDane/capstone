@@ -654,9 +654,11 @@ void Game::resolveSnorlax()
             {
                 items[i]->setYPos(5);
                 items[i]->setXPos(7);
+                items[i]->setDescription("The Pokédex says: Very lazy. Just eats and sleeps. As its rotund bulk builds, it becomes steadily more slothful.");
             }
         }
     }
+    setNarrative("You played the Poké Flute. SNORLAX woke up!");
 }
 
 void Game::usePokeball()
@@ -674,9 +676,11 @@ void Game::usePokeball()
                 {
                     items[i] = NULL;
                 }
+                dropItem();
             }
         }
     }
+    setNarrative("You threw a Pokéball...    You caught SNORLAX!     SNORLAX was added to you inventory.");
 }
 
 void Game::resolveMovingItem(char direction, Item* item, Object* object) //moving an item
@@ -902,12 +906,12 @@ void Game::dropItem()
 }
 
 void Game::displayItemDescriptionToNarrativeWindow(Item *item){
-    string previousNarrative = getNarrative();
-    int lineLength = previousNarrative.size();
+    string narr = item->getDescription();
+    int lineLength = narr.size();
     if (lineLength <= 83)
     {
-        setNarrative(item->getDescription() + " " + previousNarrative);
-        renderNarrative();
+        setNarrative(narr);
+        //renderNarrative();
     }
 }
 
