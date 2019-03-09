@@ -90,6 +90,7 @@ public:
   Room* initPuzzleRoom13(); //repair room
   Room* initPuzzleRoom14(); //trophy/statue room
   Room* initPuzzleRoomX();
+  Room* initEndRoom();
 
   // ACTIONS
   void run();
