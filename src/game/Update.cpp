@@ -1095,19 +1095,3 @@ void Game::animateBomb()
         items[bombIndex] = NULL;
     }
 }
-
-//void Game::roomNarrative()
-//{
-    //get current room
-    //if narrative1 trigger is present
-        //set narrative
-    //elif narrative2 trigger is present
-        //set narrative
-    //elif narrative3 trigger is present
-        //set narrative
-    //elif narrative4 trigger is present
-        //set narrative
-    
-
-
-//}
