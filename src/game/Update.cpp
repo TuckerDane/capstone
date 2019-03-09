@@ -1209,6 +1209,9 @@ void Game::giveProfOakSnorlax()
                 }
             }
         }
+    }
+}
+
 void Game::plantBomb(int y, int x)
 {
     if (getPlanted() == true)
