@@ -934,13 +934,8 @@ void Game::dropItem()
 }
 
 void Game::displayItemDescriptionToNarrativeWindow(Item *item){
-    string previousNarrative = getNarrative();
-    int lineLength = previousNarrative.size();
-    if (lineLength <= 83)
-    {
-        setNarrative(item->getDescription() + " " + previousNarrative);
-        renderNarrative();
-    }
+    string narr = item->getDescription();
+    setNarrative(narr);
 }
 
 void Game::readItem()
@@ -1100,3 +1095,19 @@ void Game::animateBomb()
         items[bombIndex] = NULL;
     }
 }
+
+//void Game::roomNarrative()
+//{
+    //get current room
+    //if narrative1 trigger is present
+        //set narrative
+    //elif narrative2 trigger is present
+        //set narrative
+    //elif narrative3 trigger is present
+        //set narrative
+    //elif narrative4 trigger is present
+        //set narrative
+    
+
+
+//}
