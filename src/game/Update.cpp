@@ -1054,11 +1054,7 @@ void Game::dropItem()
 
 void Game::displayItemDescriptionToNarrativeWindow(Item *item){
     string narr = item->getDescription();
-    int lineLength = narr.size();
-    if (lineLength <= 83)
-    {
-        setNarrative(narr);
-    }
+    setNarrative(narr);
 }
 
 void Game::readItem()
