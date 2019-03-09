@@ -30,6 +30,7 @@
 #include "Pokeflute.hpp"
 #include "Pokeball.hpp"
 #include "Statue.hpp"
+#include "Profoak.hpp"
 #include "Colors.hpp"
 
 #define MAX_ROOMS 20
@@ -144,6 +145,7 @@ public:
   void dropItem();
   void displayItemDescriptionToNarrativeWindow(Item *item);
   void resolveBomb(int y, int x);
+  void giveProfOakSnorlax();
 
   /* ..............................................
     RENDER.CPP
