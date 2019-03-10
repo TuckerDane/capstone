@@ -100,11 +100,11 @@ bool Game::isMoveAllowed(int y, int x)
     {
         if (items[i] != NULL)
         {
-            if (items[i]->getYPos() == y && items[i]->getXPos() == x && items[i]->getType() != "immovable" && items[i]->getType() != "softblock" && items[i]->getType() != "snorlax")
+            if (items[i]->getYPos() == y && items[i]->getXPos() == x && items[i]->getType() != "immovable" && items[i]->getType() != "softblock" && items[i]->getType() != "snorlax" && items[i]->getType() != "profoak")
             {
                 return true;
             }
-            else if (items[i]->getYPos() == y && items[i]->getXPos() == x && (items[i]->getType() == "immovable" || items[i]->getType() == "softblock" || items[i]->getType() == "snorlax") )
+            else if (items[i]->getYPos() == y && items[i]->getXPos() == x && (items[i]->getType() == "immovable" || items[i]->getType() == "softblock" || items[i]->getType() == "snorlax" || items[i]->getType() == "profoak") )
             {
                 displayItemDescriptionToNarrativeWindow(items[i]);
             }
@@ -374,6 +374,10 @@ void Game::updatePlayer()
                 else if (player.getEquippedItem()->getType() == "bomb")
                 {
                     plantBomb(player.getYPos(), player.getXPos());
+                }
+                else if (player.getEquippedItem()->getType() == "snorlax")
+                {
+                    giveProfOakSnorlax();
                 }
             }
             else if (currentWindow == inventoryWindow)
@@ -682,32 +686,147 @@ void Game::resolveSnorlax()
     {
         if (items[i] != NULL)
         {
-            if (items[i]->getYPos() == 6 && items[i]->getXPos() == 6 && (items[i]->getType() == "snorlax") ) // if Snorlax is in starting position
+            if (player.getSymbol() == "^")
             {
-                items[i]->setYPos(5);
-                items[i]->setXPos(7);
-            }
+                if (((player.getYPos() - 1) == items[i]->getYPos()) && player.getXPos() == items[i]->getXPos())
+                {
+				    if (items[i]->getYPos() == 6 && items[i]->getXPos() == 6 && (items[i]->getType() == "snorlax") ) // if Snorlax is in starting position
+                    {
+                        items[i]->setYPos(5);
+                        items[i]->setXPos(7);
+                        items[i]->setDescription("The Pokédex says: Very lazy. Just eats and sleeps.");
+                        setNarrative("You played the Poké Flute. SNORLAX woke up!");
+                    }
+				}
+			}
+            else if (player.getSymbol() == "v")
+            {
+                if (((player.getYPos() + 1) == items[i]->getYPos()) && player.getXPos() == items[i]->getXPos())
+                {
+		            if (items[i]->getYPos() == 6 && items[i]->getXPos() == 6 && (items[i]->getType() == "snorlax") ) // if Snorlax is in starting position
+                    {
+                        items[i]->setYPos(5);
+                        items[i]->setXPos(7);
+                        items[i]->setDescription("The Pokédex says: Very lazy. Just eats and sleeps.");
+                        setNarrative("You played the Poké Flute. SNORLAX woke up!");
+                    }
+				}
+			}
+			else if (player.getSymbol() == "<")
+            {
+                if (((player.getXPos() - 1) == items[i]->getXPos()) && player.getYPos() == items[i]->getYPos())
+                {
+                    if (items[i]->getYPos() == 6 && items[i]->getXPos() == 6 && (items[i]->getType() == "snorlax") ) // if Snorlax is in starting position
+                    {
+                        items[i]->setYPos(5);
+                        items[i]->setXPos(7);
+                        items[i]->setDescription("The Pokédex says: Very lazy. Just eats and sleeps.");
+                        setNarrative("You played the Poké Flute. SNORLAX woke up!");
+                    }
+				}
+			}
+			else // player.getSymbol() == ">"
+            {
+                if (((player.getXPos() + 1) == items[i]->getXPos()) && player.getYPos() == items[i]->getYPos())
+                {
+                    if (items[i]->getYPos() == 6 && items[i]->getXPos() == 6 && (items[i]->getType() == "snorlax") ) // if Snorlax is in starting position
+                    {
+                        items[i]->setYPos(5);
+                        items[i]->setXPos(7);
+                        items[i]->setDescription("The Pokédex says: Very lazy. Just eats and sleeps.");
+                        setNarrative("You played the Poké Flute. SNORLAX woke up!");
+                    }
+				}
+			}
         }
     }
 }
 
 void Game::usePokeball()
 {
+    bool snorlaxMoved = false;
     Item **items = rooms[player.getCurrentRoom()]->getItems();
     for (int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
     {
         if (items[i] != NULL)
         {
-            if (items[i]->getYPos() == 5 && items[i]->getXPos() == 7 && (items[i]->getType() == "snorlax") ) // if Snorlax is in second position
+            if (player.getSymbol() == "^")
             {
-                items[i]->setWeight(1);
-                bool pickedUp = player.pickUp(items[i]);
-                if (pickedUp)
+                if (((player.getYPos() - 1) == items[i]->getYPos()) && player.getXPos() == items[i]->getXPos())
                 {
-                    items[i] = NULL;
+                    if (items[i]->getYPos() == 5 && items[i]->getXPos() == 7 && (items[i]->getType() == "snorlax") ) // if Snorlax is in second position
+                    {
+                        snorlaxMoved = true;
+                        items[i]->setWeight(1);
+                        bool pickedUp = player.pickUp(items[i]);
+                        if (pickedUp)
+                        {
+                            items[i] = NULL;
+                        }
+                        dropItem();
+                        setNarrative("You threw a Pokéball...    You caught SNORLAX!     SNORLAX was added to you inventory.");
+                    }
                 }
             }
+            else if (player.getSymbol() == "v")
+            {
+                if (((player.getYPos() + 1) == items[i]->getYPos()) && player.getXPos() == items[i]->getXPos())
+                {
+				    if (items[i]->getYPos() == 5 && items[i]->getXPos() == 7 && (items[i]->getType() == "snorlax") ) // if Snorlax is in second position
+                    {
+                        snorlaxMoved = true;
+                        items[i]->setWeight(1);
+                        bool pickedUp = player.pickUp(items[i]);
+                        if (pickedUp)
+                        {
+                            items[i] = NULL;
+                        }
+                        dropItem();
+                        setNarrative("You threw a Pokéball...    You caught SNORLAX!     SNORLAX was added to you inventory.");
+                    }
+				}
+			}
+			else if (player.getSymbol() == "<")
+            {
+                if (((player.getXPos() - 1) == items[i]->getXPos()) && player.getYPos() == items[i]->getYPos())
+                {
+				    if (items[i]->getYPos() == 5 && items[i]->getXPos() == 7 && (items[i]->getType() == "snorlax") ) // if Snorlax is in second position
+                    {
+                        snorlaxMoved = true;
+                        items[i]->setWeight(1);
+                        bool pickedUp = player.pickUp(items[i]);
+                        if (pickedUp)
+                        {
+                            items[i] = NULL;
+                        }
+                        dropItem();
+                        setNarrative("You threw a Pokéball...    You caught SNORLAX!     SNORLAX was added to you inventory.");
+                    }
+				}
+			}
+			else // player.getSymbol() == ">"
+            {
+                if (((player.getXPos() + 1) == items[i]->getXPos()) && player.getYPos() == items[i]->getYPos())
+                {
+				    if (items[i]->getYPos() == 5 && items[i]->getXPos() == 7 && (items[i]->getType() == "snorlax") ) // if Snorlax is in second position
+                    {
+                        snorlaxMoved = true;
+                        items[i]->setWeight(1);
+                        bool pickedUp = player.pickUp(items[i]);
+                        if (pickedUp)
+                        {
+                            items[i] = NULL;
+                        }
+                        dropItem();
+                        setNarrative("You threw a Pokéball...    You caught SNORLAX!     SNORLAX was added to you inventory.");
+                    }
+				}
+			}
         }
+    }
+    if (snorlaxMoved == false)
+    {
+        setNarrative("That wasn't a good throw.");
     }
 }
 
@@ -934,13 +1053,8 @@ void Game::dropItem()
 }
 
 void Game::displayItemDescriptionToNarrativeWindow(Item *item){
-    string previousNarrative = getNarrative();
-    int lineLength = previousNarrative.size();
-    if (lineLength <= 83)
-    {
-        setNarrative(item->getDescription() + " " + previousNarrative);
-        renderNarrative();
-    }
+    string narr = item->getDescription();
+    setNarrative(narr);
 }
 
 void Game::readItem()
@@ -953,14 +1067,14 @@ void Game::readItem()
         {
             if (player.getSymbol() == "^")
             {
-                if (((player.getYPos() - 1) == items[i]->getYPos()) && player.getXPos() == items[i]->getXPos() && items[i]->getType() == "statue")
+                if (((player.getYPos() - 1) == items[i]->getYPos()) && player.getXPos() == items[i]->getXPos() && (items[i]->getType() == "statue" || items[i]->getType() == "profoak"))
                 {
 		            setNarrative(items[i]->getDescription());
                 }
             }
             else if (player.getSymbol() == "v")
             {
-                if (((player.getYPos() + 1) == items[i]->getYPos()) && player.getXPos() == items[i]->getXPos() && items[i]->getType() == "statue")
+                if (((player.getYPos() + 1) == items[i]->getYPos()) && player.getXPos() == items[i]->getXPos() && (items[i]->getType() == "statue" || items[i]->getType() == "profoak"))
                 {
 		            setNarrative(items[i]->getDescription());
                 }
@@ -968,14 +1082,14 @@ void Game::readItem()
 
             else if (player.getSymbol() == "<")
             {
-                if (((player.getXPos() - 1) == items[i]->getXPos()) && player.getYPos() == items[i]->getYPos() && items[i]->getType() == "statue")
+                if (((player.getXPos() - 1) == items[i]->getXPos()) && player.getYPos() == items[i]->getYPos() && (items[i]->getType() == "statue" || items[i]->getType() == "profoak"))
                 {
 		            setNarrative(items[i]->getDescription());
                 }
             }
             else // player.getSymbol() == ">"
             {
-                if (((player.getXPos() + 1) == items[i]->getXPos()) && player.getYPos() == items[i]->getYPos() && items[i]->getType() == "statue")
+                if (((player.getXPos() + 1) == items[i]->getXPos()) && player.getYPos() == items[i]->getYPos() && (items[i]->getType() == "statue" || items[i]->getType() == "profoak"))
                 {
 		            setNarrative(items[i]->getDescription());
                 }
@@ -1011,6 +1125,84 @@ void Game::resolveBomb()
             {
                 delete items[i];
                 items[i] = NULL;
+            }
+        }
+    }
+}
+
+void Game::giveProfOakSnorlax()
+{
+    Item **inventory = player.getInventory();
+    Item **items = rooms[player.getCurrentRoom()]->getItems();
+    bool hasSnorlax = false;
+    for (int i = 0; i < player.getMaxInventory(); i++)
+    {
+        if (inventory[i] != NULL)
+        {
+            if (inventory[i]->getType() == "snorlax")
+            {
+                hasSnorlax = true;
+                inventory[i]->setName("Magikarp");
+                inventory[i]->setDescription("Famous for being very unreliable. Thanks a lot Professor Oak.");
+                inventory[i]->setSymbol("ᶬ");
+            }
+        }
+    }
+
+    for (int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
+    {
+        if (items[i] != NULL && hasSnorlax == true)
+        {
+            if (player.getSymbol() == "^")
+            {
+                if (((player.getYPos() - 1) == items[i]->getYPos()) && player.getXPos() == items[i]->getXPos() && items[i]->getType() == "profoak")
+                {
+                    items[i]->setDescription("How is my old Pokémon? Well, it seems to like you a lot.");
+                    setNarrative("Professor Oak gave you a Magikarp...laaame.");
+                    
+				}
+			}
+            else if (player.getSymbol() == "v")
+            {
+                if (((player.getYPos() + 1) == items[i]->getYPos()) && player.getXPos() == items[i]->getXPos() && items[i]->getType() == "profoak")
+                {
+                    items[i]->setDescription("How is my old Pokémon? Well, it seems to like you a lot.");
+                    setNarrative("Professor Oak gave you a Magikarp...laaame.");
+                    
+				}
+			}
+			else if (player.getSymbol() == "<")
+            {
+                if (((player.getXPos() - 1) == items[i]->getXPos()) && player.getYPos() == items[i]->getYPos() && items[i]->getType() == "profoak")
+                {
+                    items[i]->setDescription("How is my old Pokémon? Well, it seems to like you a lot.");
+                    setNarrative("Professor Oak gave you a Magikarp...laaame.");
+                    
+				}
+			}
+			else // player.getSymbol() == ">"
+            {
+                if (((player.getXPos() + 1) == items[i]->getXPos()) && player.getYPos() == items[i]->getYPos() && items[i]->getType() == "profoak")
+                {
+                    items[i]->setDescription("How is my old Pokémon? Well, it seems to like you a lot.");
+                    setNarrative("Professor Oak gave you a Magikarp...laaame.");
+				}
+			}
+        }
+    }
+    
+    if (hasSnorlax == true)
+    {
+        for (int i = 0; i < player.getMaxInventory(); i++)
+        {
+            if (inventory[i] != NULL)
+            {
+                if (inventory[i]->getType() == "snorlax")
+                {
+                    inventory[i]->setName("Magikarp");
+                    inventory[i]->setDescription("Famous for being very unreliable. Thanks a lot Professor Oak.");
+                    inventory[i]->setSymbol("ᶬ");
+                }
             }
         }
     }
