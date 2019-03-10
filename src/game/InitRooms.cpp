@@ -21,7 +21,7 @@ Room* Game::initStartRoom()
     room->setTeleporter(new Teleporter(8, 39, 4, 2, 2, COLOR_GREEN), 8); //room 4: pac man left side
     room->setTeleporter(new Teleporter(8, 42, 4, 14, 107, COLOR_GREEN), 9); //room 4: pac man right side
     room->setTeleporter(new Teleporter(8, 45, 5, 10, 21, COLOR_BLUE), 10); //room 5: life or death blocks
-    room->setTeleporter(new Teleporter(8, 48, 6, 2, 16, COLOR_RED), 11); //room 6: bomber man (still in dev)
+    room->setTeleporter(new Teleporter(8, 48, 6, 2, 12, COLOR_RED), 11); //room 6: bomber man (still in dev)
     room->setTeleporter(new Teleporter(10, 39, 7, 3, 3, COLOR_BLUE), 12); //room 7: Mario part 1
     room->setTeleporter(new Teleporter(10, 42, 8, 3, 3, COLOR_YELLOW), 13); //room 8: TBD
     room->setTeleporter(new Teleporter(10, 45, 9, 12, 12, COLOR_BLUE), 14); //room 9: Rodent's Revenge
@@ -133,7 +133,7 @@ Room* Game::initPuzzleRoom2()
 Room* Game::initPuzzleRoom3()
 {
     Room* room = new Room("rooms/puzzle_3.room");
-    room->setDoor(new Door(6, 1, 6, 2, 16, 0, false, COLOR_YELLOW), 0);   // bomberman room
+    room->setDoor(new Door(6, 1, 6, 2, 12, 0, false, COLOR_YELLOW), 0);   // bomberman room
     room->setDoor(new Door(1, 9, 5, 13, 93, 0, false, COLOR_RED), 1); // life or death blocks
     room->setDoor(new Door(13, 9, 1, 2, 5, 0, false, COLOR_YELLOW), 2); // teleport room
     room->setItem(new Snorlax(6, 6), 0);
@@ -192,45 +192,45 @@ Room* Game::initPuzzleRoom5(){
 
 Room* Game::initPuzzleRoom6(){
     Room* room = new Room("rooms/puzzle_6.room");    
-    room->setDoor(new Door(2, 17, 3, 6, 2, -1, false, COLOR_WHITE), 0);
-    room->setItem(new Bomb(2, 14), 0);
-    room->setTeleporter(new Teleporter(12, 2, 13, 9, 71, COLOR_YELLOW), 0); //room 13: repair room
+    room->setDoor(new Door(2, 13, 3, 6, 2, -1, false, COLOR_WHITE), 0);
+    room->setItem(new Bomb(2, 10), 0);
+    room->setTeleporter(new Teleporter(8, 2, 13, 9, 59, COLOR_YELLOW), 0); //room 13: repair room
 
     int blockCounter = 1;
-    for(int i= 0; i < 15; i++)
+    for(int i= 0; i < 11; i++)
     {
-        for(int j= 0; j < 13; j++)
+        for(int j= 0; j < 9; j++)
         {
-          if ( (j == 0 && i == 14) || (j == 0 && i == 12) ) // if tile is where player starts or where bomb starts
+          if ( (j == 0 && i == 10) || (j == 0 && i == 8) ) // if tile is where player starts or where bomb starts
           {
             blockCounter++; 
           }
           else if (j == 2)  // if 1st row
           {
-            if (i <= 11)
+            if (i < 8)
             {
               room->setItem(new Softblock(j, i+2), blockCounter++);  
             }
           }
           else if (j == 3)  // if 2nd row
           {
-            if (i == 0 || i == 2 || i == 4 || i == 6 || i == 8 || i == 10 || i == 12)
+            if (i == 0 || i == 2 || i == 4 || i == 6 || i == 8)
             {
               room->setItem(new Softblock(j, i+2), blockCounter++);  
             }
           }
-          else if (j == 4 || j == 6 || j == 8 || j == 10)  // if open row
+          else if (j == 4 || j == 6)  // if open row
           {
             room->setItem(new Softblock(j, i+2), blockCounter++);
           }
-          else if (j == 5 || j == 7 || j == 9 || j == 11) // if row with walls
+          else if (j == 5 || j == 7) // if row with walls
           {
-            if (i == 0 || i == 2 || i == 4 || i == 6 || i == 8 || i == 10 || i == 12 || i == 14)
+            if (i == 0 || i == 2 || i == 4 || i == 6 || i == 8 || i == 10)
             {
               room->setItem(new Softblock(j, i+2), blockCounter++);  
             }
           }
-          else if (j == 12) // else if last row
+          else if (j == 8) // else if last row
           {
             if ( (i+2) != 2)
             {
@@ -548,7 +548,7 @@ Room* Game::initPuzzleRoom13()
 {
     Room* room = new Room("rooms/repair_13.room");
     room->setTeleporter(new Teleporter(9, 50, 9, 12, 12, COLOR_BLUE), 0); // room9 rodent's revenge
-    room->setTeleporter(new Teleporter(9, 66, 6, 2, 16, COLOR_BLUE), 1); // room6 bomberman
+    room->setTeleporter(new Teleporter(9, 66, 6, 2, 12, COLOR_BLUE), 1); // room6 bomberman
     return room;
 }
 
