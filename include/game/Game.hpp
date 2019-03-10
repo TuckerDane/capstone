@@ -155,8 +155,8 @@ public:
   void dropItem();
   void displayItemDescriptionToNarrativeWindow(Item *item);
   void resolveBomb();
-  void plantBomb(int y, int x);
-  void animateBomb();
+  void plantBomb(int y, int x, Door **doors, Teleporter **teleporters);
+  void animateBomb(Door **doors, Teleporter **teleporters);
 
   /* ..............................................
     RENDER.CPP
