@@ -68,7 +68,7 @@ Game::Game()
   rooms[14] = initPuzzleRoom14();
 
   /* init narrative */
-  narrative = "default narrative";
+  narrative = "<Adventure Game>";
 }
 
 Game::~Game()
