@@ -44,6 +44,7 @@ Game::Game()
   /* initialize Game class variables */
   isComplete = false;
   planted = false;
+  hasBeenDamaged = false;
   player.setCurrentRoom(0);
   player.setXPos(40);
   player.setYPos(15);

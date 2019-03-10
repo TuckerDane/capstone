@@ -1090,13 +1090,47 @@ void Game::animateBomb()
     }
     else if (elapsedSeconds > 3)
     {
-        // if player is within range of bomb, apply 3 damage
-        if (player.getYPos() == getBombY() || player.getYPos()-1 == getBombY()-1 || player.getYPos()+1 == getBombY()+1 || player.getXPos() == getBombX() || player.getXPos()-1 == getBombX()-1 || player.getXPos()+1 == getBombX()+1)
-        {
-            player.damageHP(3);
-        }
         setPlanted(false);
         delete items[bombIndex];
         items[bombIndex] = NULL;
     }
+
+    if (hasBeenDamaged == false && (elapsedSeconds > 2 && elapsedSeconds <= 3))
+    {
+        // if player is within range of bomb, apply 3 damage
+        if (player.getYPos() == getBombY() && player.getXPos() == getBombX())   // player is on bomb
+        {
+            player.damageHP(3);
+            hasBeenDamaged = true;
+            setNarrative("Ouch, better be more careful.");
+        }
+        else if (player.getYPos() == getBombY() && player.getXPos() == getBombX()-1)  // player is on immediate left of bomb
+        {
+            player.damageHP(3);
+            hasBeenDamaged = true;
+            setNarrative("Ouch, better be more careful.");
+        }
+        else if (player.getYPos() == getBombY() && player.getXPos() == getBombX()+1)  // player is on immediate right of bomb
+        {
+            player.damageHP(3);
+            hasBeenDamaged = true;
+            setNarrative("Ouch, better be more careful.");
+        }
+        else if (player.getYPos() == getBombY()-1 && player.getXPos() == getBombX())  // player is immediately above bomb
+        {
+            player.damageHP(3);
+            hasBeenDamaged = true;
+            setNarrative("Ouch, better be more careful.");
+        }
+        else if (player.getYPos() == getBombY()+1 && player.getXPos() == getBombX())  // player is immediately below bomb
+        {
+            player.damageHP(3);
+            hasBeenDamaged = true;
+            setNarrative("Ouch, better be more careful.");
+        }
+    }
+    else if (hasBeenDamaged == true && (elapsedSeconds < 2 || elapsedSeconds > 3))
+    {
+        hasBeenDamaged = false;
+    } 
 }

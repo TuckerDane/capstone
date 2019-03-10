@@ -54,6 +54,7 @@ class Game
 private:
   bool isComplete;
   bool planted;
+  bool hasBeenDamaged;
   unsigned int userInput;
   clock_t begin_time;
   double elapsedSeconds;
