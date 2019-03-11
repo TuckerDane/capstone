@@ -375,7 +375,10 @@ void Game::updatePlayer()
                 }
                 else if (player.getEquippedItem()->getType() == "bomb")
                 {
-                    plantBomb(player.getYPos(), player.getXPos(), doors, teleporters);
+                    if (player.getCurrentRoom() == 6)
+                       plantBomb(player.getYPos(), player.getXPos(), doors, teleporters);
+                    else
+                        setNarrative("This isn't safe to use here.");                    
                 }
                 else if (player.getEquippedItem()->getType() == "snorlax")
                 {
