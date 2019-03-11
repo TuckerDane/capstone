@@ -549,6 +549,7 @@ Room* Game::initPuzzleRoom13()
     Room* room = new Room("rooms/repair_13.room");
     room->setTeleporter(new Teleporter(9, 50, 9, 12, 12, COLOR_BLUE), 0); // room9 rodent's revenge
     room->setTeleporter(new Teleporter(9, 66, 6, 2, 12, COLOR_BLUE), 1); // room6 bomberman
+    room->setItem(new Profoak(4, 58), 0);
     return room;
 }
 

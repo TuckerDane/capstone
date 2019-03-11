@@ -219,7 +219,28 @@ void Game::renderDev()
 void Game::renderNarrative()
 {
   colorWindow(narrativeWindow, BLACK_ON_BLUE);
-  mvwprintw(narrativeWindow, 2, 2, this->getNarrative().c_str());
+  string temp = this->getNarrative();
+  string firstHalf, secondHalf;
+  int lineLength = temp.size();
+  if (lineLength > 146 && lineLength <= 292)  // needs two lines
+  {
+    int cutOff = temp.length() - 146;
+    firstHalf = temp.substr(0, 146);
+    secondHalf = temp.substr(146, cutOff);
+    mvwprintw(narrativeWindow, 2, 2, firstHalf.c_str());
+    mvwprintw(narrativeWindow, 3, 2, secondHalf.c_str());
+  }
+  else if (lineLength > 292) // needs more space than available so the line will be cut off
+  {
+    firstHalf = temp.substr(0, 146);
+    secondHalf = temp.substr(146, 146);
+    mvwprintw(narrativeWindow, 2, 2, firstHalf.c_str());
+    mvwprintw(narrativeWindow, 3, 2, secondHalf.c_str());
+  }
+  else  // needs one line
+  {
+    mvwprintw(narrativeWindow, 2, 2, temp.c_str());
+  }
   wrefresh(narrativeWindow);
 }
 
