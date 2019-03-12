@@ -215,8 +215,10 @@ void Game::update()
 void Game::updatePlayer()
 {
     player.setIsMoved(false);
+    Door **doors = rooms[player.getCurrentRoom()]->getDoors();
+    Teleporter **teleporters =  rooms[player.getCurrentRoom()]->getTeleporters();
     if (getPlanted() == true)
-        animateBomb();
+        animateBomb(doors, teleporters);
     switch (player.getPlayerInput())
     {
         case KEY_UP:
@@ -373,7 +375,10 @@ void Game::updatePlayer()
                 }
                 else if (player.getEquippedItem()->getType() == "bomb")
                 {
-                    plantBomb(player.getYPos(), player.getXPos());
+                    if (player.getCurrentRoom() == 6)
+                       plantBomb(player.getYPos(), player.getXPos(), doors, teleporters);
+                    else
+                        setNarrative("This isn't safe to use here.");                    
                 }
                 else if (player.getEquippedItem()->getType() == "snorlax")
                 {
@@ -1208,7 +1213,7 @@ void Game::giveProfOakSnorlax()
     }
 }
 
-void Game::plantBomb(int y, int x)
+void Game::plantBomb(int y, int x, Door **doors, Teleporter **teleporters)
 {
     if (getPlanted() == true)
     {
@@ -1238,6 +1243,25 @@ void Game::plantBomb(int y, int x)
         }
         if (bombHasBeenDropped == true)
         {
+            // lock doors and keep teleports from letting player leave room
+            for(int i=0; i < rooms[player.getCurrentRoom()]->getMaxDoors(); i++)
+            {
+                if (doors[i] != NULL)
+                {
+                    doors[i]->setNextRoom(6);
+                    doors[i]->setNextYPos(2);
+                    doors[i]->setNextXPos(12);
+                }
+            }
+            for(int i=0; i < rooms[player.getCurrentRoom()]->getMaxTeleporters(); i++)
+            {
+                if(teleporters[i] != NULL)
+                {
+                    teleporters[i]->setNextRoom(6);
+                    teleporters[i]->setNextYPos(2);
+                    teleporters[i]->setNextXPos(12);
+                }
+            }
             setPlanted(true);
             setBombY(y);
             setBombX(x);
@@ -1247,7 +1271,7 @@ void Game::plantBomb(int y, int x)
     }
 }
 
-void Game::animateBomb()
+void Game::animateBomb(Door **doors, Teleporter **teleporters)
 {
     int bombIndex;  // figure out which item is bomb
     Item **items = rooms[player.getCurrentRoom()]->getItems();
@@ -1262,33 +1286,86 @@ void Game::animateBomb()
         }
     }
 
-    elapsedSeconds = (clock () - begin_time ) /  CLOCKS_PER_SEC;
-    if (elapsedSeconds <= 0.25)
+    elapsedSeconds = ((double)(clock () - begin_time)) /  CLOCKS_PER_SEC;
+    if (elapsedSeconds <= 0.75)
     {
         items[bombIndex]->setSymbol("❸");
     }
-    else if (elapsedSeconds > 0.25 && elapsedSeconds <= 1)
+    else if (elapsedSeconds > 0.75 && elapsedSeconds <= 1.5)
     {
         items[bombIndex]->setSymbol("❷");
     }
-    else if (elapsedSeconds > 1 && elapsedSeconds <= 2)
+    else if (elapsedSeconds > 1.5 && elapsedSeconds <= 2.25)
     {
         items[bombIndex]->setSymbol("❶");
     }
-    else if (elapsedSeconds > 2 && elapsedSeconds <= 3)
+    else if (elapsedSeconds > 2.25)
     {
-        items[bombIndex]->setSymbol("✶");
         resolveBomb();
-    }
-    else if (elapsedSeconds > 3)
-    {
-        // if player is within range of bomb, apply 3 damage
-        if (player.getYPos() == getBombY() || player.getYPos()-1 == getBombY()-1 || player.getYPos()+1 == getBombY()+1 || player.getXPos() == getBombX() || player.getXPos()-1 == getBombX()-1 || player.getXPos()+1 == getBombX()+1)
-        {
-            player.damageHP(3);
-        }
         setPlanted(false);
         delete items[bombIndex];
         items[bombIndex] = NULL;
     }
+
+    if (hasBeenDamaged == false && (elapsedSeconds > 2.25 && elapsedSeconds <= 3))
+    {
+        // if player is within range of bomb, apply 3 damage
+        if (player.getYPos() == getBombY() && player.getXPos() == getBombX())   // player is on bomb
+        {
+            player.damageHP(3);
+            hasBeenDamaged = true;
+            setNarrative("Ouch, better be more careful.");
+        }
+        else if (player.getYPos() == getBombY() && player.getXPos() == getBombX()-1)  // player is on immediate left of bomb
+        {
+            player.damageHP(3);
+            hasBeenDamaged = true;
+            setNarrative("Ouch, better be more careful.");
+        }
+        else if (player.getYPos() == getBombY() && player.getXPos() == getBombX()+1)  // player is on immediate right of bomb
+        {
+            player.damageHP(3);
+            hasBeenDamaged = true;
+            setNarrative("Ouch, better be more careful.");
+        }
+        else if (player.getYPos() == getBombY()-1 && player.getXPos() == getBombX())  // player is immediately above bomb
+        {
+            player.damageHP(3);
+            hasBeenDamaged = true;
+            setNarrative("Ouch, better be more careful.");
+        }
+        else if (player.getYPos() == getBombY()+1 && player.getXPos() == getBombX())  // player is immediately below bomb
+        {
+            player.damageHP(3);
+            hasBeenDamaged = true;
+            setNarrative("Ouch, better be more careful.");
+        }
+        setPlanted(false);        
+        delete items[bombIndex];
+        items[bombIndex] = NULL;
+
+        // reset doors and teleporters
+        for(int i=0; i < rooms[player.getCurrentRoom()]->getMaxDoors(); i++)
+        {
+            if (doors[i] != NULL)
+            {
+                doors[i]->setNextRoom(3);
+                doors[i]->setNextYPos(6);
+                doors[i]->setNextXPos(2);
+            }
+        }
+        for(int i=0; i < rooms[player.getCurrentRoom()]->getMaxTeleporters(); i++)
+        {
+            if(teleporters[i] != NULL)
+            {
+                teleporters[i]->setNextRoom(13);
+                teleporters[i]->setNextYPos(9);
+                teleporters[i]->setNextXPos(59);
+            }
+        }
+    }
+    else if (hasBeenDamaged == true && (elapsedSeconds < 2.25 || elapsedSeconds > 3))
+    {
+        hasBeenDamaged = false;
+    } 
 }

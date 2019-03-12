@@ -55,6 +55,7 @@ class Game
 private:
   bool isComplete;
   bool planted;
+  bool hasBeenDamaged;
   unsigned int userInput;
   clock_t begin_time;
   double elapsedSeconds;
@@ -156,8 +157,8 @@ public:
   void displayItemDescriptionToNarrativeWindow(Item *item);
   void giveProfOakSnorlax();
   void resolveBomb();
-  void plantBomb(int y, int x);
-  void animateBomb();
+  void plantBomb(int y, int x, Door **doors, Teleporter **teleporters);
+  void animateBomb(Door **doors, Teleporter **teleporters);
 
   /* ..............................................
     RENDER.CPP
