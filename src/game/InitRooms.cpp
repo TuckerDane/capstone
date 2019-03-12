@@ -203,7 +203,7 @@ Room* Game::initPuzzleRoom6(){
     Room* room = new Room("rooms/puzzle_6.room");    
     room->setDoor(new Door(2, 13, 3, 6, 2, -1, false, COLOR_WHITE), 0);
     room->setItem(new Bomb(2, 10), 0);
-    room->setTeleporter(new Teleporter(8, 2, 11, 13, 78, COLOR_YELLOW), 0); //room 11
+    room->setTeleporter(new Teleporter(8, 2, 13, 13, 78, COLOR_YELLOW), 0); //room 11
 
     int blockCounter = 1;
     for(int i= 0; i < 11; i++)
@@ -293,7 +293,7 @@ Room* Game::initPuzzleRoom7()
 }
 
 Room* Game::initPuzzleRoom8() {
-//    Room* room = new Room("rooms/puzzle_8.room");
+    Room* room = new Room("rooms/puzzle_8.room");
 //    room->setItem(new Movable2(4, 6, "o"), 0);
 //    room->setItem(new Movable2(4, 8, "o"), 1);
 //    room->setItem(new Movable2(4, 10, "o"), 2);
@@ -306,7 +306,7 @@ Room* Game::initPuzzleRoom8() {
 //    room->setItem(new Movable(6, 13, "●"), 9);
 //    room->setDoor(new Door(1, 13, 9, 21, 11, 0, false, COLOR_WHITE), 0);
 //    room->setDoor(new Door(6, 30, 7, 25, 2, 0, false, COLOR_WHITE), 1);
-//    return room;
+    return room;
 }
 
 Room* Game::initPuzzleRoom9(){
@@ -448,7 +448,7 @@ Room* Game::initPuzzleRoom11()
 {
   Room* room = new Room("rooms/puzzle_11.room");
   room->setTeleporter(new Teleporter(12, 78, 6, 2, 12, COLOR_WHITE), 0);
-  room->setDoor(new Door(14, 60, 9, 2, 23 9121998, true, COLOR_WHITE), 0); //to rodents/locked and needs key from rodents to open
+  room->setDoor(new Door(14, 60, 9, 2, 23, 9121998, true, COLOR_WHITE), 0); //to rodents/locked and needs key from rodents to open
   room->setTeleporter(new Teleporter(15, 61, 9, 12, 12, COLOR_BLUE), 1); //if aabovee door is used tele to middle of RRevenge
 
   //Trap COLUMN 1 (reading from left to right)
@@ -664,7 +664,7 @@ Room* Game::initPuzzleRoom12()
 Room* Game::initPuzzleRoom13()
 {
     Room* room = new Room("rooms/repair_13.room");
-    room->setTeleporter(new Teleporter(9, 50, 13, 8, 11, COLOR_BLUE), 0); // trophy room
+    room->setTeleporter(new Teleporter(9, 71, 14, 8, 11, COLOR_BLUE), 0); // trophy room
     room->setItem(new Profoak(4, 58), 0);
     room->setItem(new Statue(9, 58, "Repair Station: Used to repair the Pandora's Cube."), 1);
 
