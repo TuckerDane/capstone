@@ -22,7 +22,7 @@
 class Player : public Object
 {
 private:
-	static const int MAX_INVENTORY = 10;
+	static const int MAX_INVENTORY = 20;
 	int maxCarryWeight;							// the maximum weight the player can carry
 	int currentCarryWeight;					// the current amount of weight the player is carrying
 	int numItems;										// the number of items in the player's inventory
@@ -35,6 +35,7 @@ private:
 	int maxHP;
 	unsigned int playerInput;
 	Console devConsole;
+	int numCubeParts;
 
 public:
 	// CONSTRUCTOR/DESTRUCTORS
@@ -54,6 +55,7 @@ public:
 	void setIsMoved(bool isMoved);
 	void setHP(int newHP);
 	void setMaxHP(int newMaxHP);
+	void setNumCubeParts(int newNum);
 
 	// GETTERS
 	unsigned int getPlayerInput();
@@ -71,6 +73,7 @@ public:
 	int getMaxInventory();
 	int getHP();
 	int getMaxHP();
+	int getNumCubeParts();
 
 	// ACTIONS
 	void move(char direction); // moves the Player x/y position by one room
@@ -78,6 +81,8 @@ public:
 	Item *drop(int itemSlot);	// drops an Object from the player's inventory
 	void damageHP(int);
 	void healHP(int);
+	void increaseNumCubeParts();
+	void decreaseNumCubeParts();
 };
 
 #endif
