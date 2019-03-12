@@ -203,7 +203,7 @@ Room* Game::initPuzzleRoom6(){
     Room* room = new Room("rooms/puzzle_6.room");    
     room->setDoor(new Door(2, 13, 3, 6, 2, -1, false, COLOR_WHITE), 0);
     room->setItem(new Bomb(2, 10), 0);
-    room->setTeleporter(new Teleporter(8, 2, 13, 9, 59, COLOR_YELLOW), 0); //room 13: repair room
+    room->setTeleporter(new Teleporter(8, 2, 12, 13, 78, COLOR_YELLOW), 0); //room 11
 
     int blockCounter = 1;
     for(int i= 0; i < 11; i++)
@@ -447,7 +447,7 @@ Room* Game::initPuzzleRoom10()
 Room* Game::initPuzzleRoom11()
 {
   Room* room = new Room("rooms/puzzle_11.room");
-  room->setTeleporter(new Teleporter(12, 78, 6, 1, 16, COLOR_WHITE), 0);
+  room->setTeleporter(new Teleporter(12, 78, 6, 1, 12, COLOR_WHITE), 0);
   room->setDoor(new Door(14, 60, 9, 1, 1, 9121998, true, COLOR_WHITE), 0); //to rodents/locked and needs key from rodents to open
   room->setTeleporter(new Teleporter(15, 61, 9, 12, 12, COLOR_BLUE), 1); //if aabovee door is used tele to middle of RRevenge
 
