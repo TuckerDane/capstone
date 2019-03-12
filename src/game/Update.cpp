@@ -332,6 +332,14 @@ void Game::updatePlayer()
             if (getCurrentWindow() == worldWindow)
             {
                 setCurrentWindow(inventoryWindow);
+                if (player.getSelectedItem() == NULL)
+                {
+                    setNarrative("This is an empty slot!");
+                }
+                else
+                {
+                    setNarrative(player.getSelectedItem()->getDescription());
+                }
             }
             else if (getCurrentWindow() == inventoryWindow)
             {
