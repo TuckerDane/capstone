@@ -68,7 +68,8 @@ private:
   WINDOW *worldWindow;
   WINDOW *inventoryWindow;
   WINDOW *narrativeWindow;
-  string narrative;
+  string itemNarrative;
+  string worldNarrative;
   WINDOW *developerWindow;
   WINDOW *currentWindow;
 
@@ -121,7 +122,8 @@ public:
   void setIsComplete(bool isComplete);
   void setPlanted(bool planted);
   void setRoom(Room *room, int roomIndex);
-  void setNarrative(string narrative);
+  void setItemNarrative(string narrative);
+  void setWorldNarrative(string narrative);
   void setCurrentWindow(WINDOW *window);
   void setBombY(int bombY);
   void setBombX(int bombX);
@@ -133,7 +135,8 @@ public:
   bool isEnemyMoveAllowed(int y, int x);
   bool isItemMoveAllowed(int y, int x, char direction, Object* object);
   Room *getRoom(int roomIndex);
-  string getNarrative();
+  string getItemNarrative();
+  string getWorldNarrative();
   WINDOW *getCurrentWindow();
   int getBombY();
   int getBombX();
@@ -178,6 +181,8 @@ public:
   void renderInventory();
   void renderDev();
   void renderNarrative();
+  void renderItemNarrative();
+  void renderWorldNarrative();
   void renderRoom();
   void renderWalls();
   void renderDoors();

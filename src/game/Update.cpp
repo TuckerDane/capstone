@@ -28,10 +28,16 @@ void Game::setRoom(Room *room, int roomIndex)
     this->rooms[roomIndex] = room;
 }
 
-void Game::setNarrative(string narrative)
+void Game::setItemNarrative(string narrative)
 {
-    this->narrative = narrative;
-    devConsole.log(narrative);
+    this->itemNarrative = narrative;
+    devConsole.log(itemNarrative);
+}
+
+void Game::setWorldNarrative(string narrative)
+{
+    this->worldNarrative = narrative;
+    devConsole.log(worldNarrative);
 }
 
 void Game::setCurrentWindow(WINDOW *window)
@@ -194,9 +200,14 @@ Room *Game::getRoom(int roomIndex)
     return this->rooms[roomIndex];
 }
 
-string Game::getNarrative()
+string Game::getItemNarrative()
 {
-    return this->narrative;
+    return this->itemNarrative;
+}
+
+string Game::getWorldNarrative()
+{
+    return this->worldNarrative;
 }
 
 WINDOW *Game::getCurrentWindow()
@@ -234,11 +245,11 @@ void Game::updatePlayer()
                 }
                 if (player.getInventoryItem(player.getSelectedItemIndex()) != NULL)
                 {
-                    narrative = player.getInventoryItem(player.getSelectedItemIndex())->getDescription();
+                    setItemNarrative(player.getInventoryItem(player.getSelectedItemIndex())->getDescription());
                 }
                 else
                 {
-                    narrative = "an empty item slot";
+                    setItemNarrative("an empty item slot");
                 }
             }
             else //--------------------------- Player movement in worldWindow
@@ -267,11 +278,11 @@ void Game::updatePlayer()
                 }
                 if (player.getInventoryItem(player.getSelectedItemIndex()) != NULL)
                 {
-                    narrative = player.getInventoryItem(player.getSelectedItemIndex())->getDescription();
+                    setItemNarrative(player.getInventoryItem(player.getSelectedItemIndex())->getDescription());
                 }
                 else
                 {
-                    narrative = "an empty item slot";
+                    setItemNarrative("an empty item slot");
                 }
             }
             else //-------------------------Player Movement in worldWindow
@@ -336,11 +347,11 @@ void Game::updatePlayer()
                 setCurrentWindow(inventoryWindow);
                 if (player.getSelectedItem() == NULL)
                 {
-                    setNarrative("This is an empty slot!");
+                    setItemNarrative("This is an empty slot!");
                 }
                 else
                 {
-                    setNarrative(player.getSelectedItem()->getDescription());
+                    setItemNarrative(player.getSelectedItem()->getDescription());
                 }
             }
             else if (getCurrentWindow() == inventoryWindow)
@@ -365,7 +376,7 @@ void Game::updatePlayer()
             {
                 if (player.getEquippedItem() == NULL)
                 {
-                    setNarrative("you do not have an item selected to use");
+                    setItemNarrative("you do not have an item selected to use");
                 }
                 else if (player.getEquippedItem()->getType() == "key")
                 {
@@ -388,7 +399,7 @@ void Game::updatePlayer()
                     if (player.getCurrentRoom() == 6)
                        plantBomb(player.getYPos(), player.getXPos(), doors, teleporters);
                     else
-                        setNarrative("This isn't safe to use here.");                    
+                        setItemNarrative("This isn't safe to use here.");                    
                 }
                 else if (player.getEquippedItem()->getType() == "snorlax")
                 {
@@ -422,8 +433,7 @@ void Game::updatePlayer()
         case 'q':
         case 'Q':
         {
-            string temp = getNarrative();
-            setNarrative("Would you like to quit? Press Y to confirm or N to return to <Adventure Game>.");
+            setWorldNarrative("Would you like to quit? Press Y to confirm or N to return to <Adventure Game>.");
             renderNarrative();
             unsigned int confirm = 'a';
             while (confirm != 'y' && confirm != 'Y' && confirm != 'n' && confirm != 'N')
@@ -431,7 +441,7 @@ void Game::updatePlayer()
                 confirm = getch();
                 if (confirm == 'y' || confirm == 'Y')
                 {
-                    setNarrative("You Quit the Game");
+                    setWorldNarrative("You Quit the Game");
                     setIsComplete(true);
                 }
             }
@@ -440,7 +450,7 @@ void Game::updatePlayer()
     }
     if (player.getHP() < 1)
     {
-        setNarrative("GAME OVER: You Died");
+        setWorldNarrative("GAME OVER: You Died");
         isComplete = true;
     }
 }
@@ -609,13 +619,13 @@ void Game::useKey()
 
     if (keyIsUsed)
     {
-        setNarrative("you used the " + player.getEquippedItem()->getName());
+        setItemNarrative("you used the " + player.getEquippedItem()->getName());
         if (firstDoor->getNextRoom() != -1)
             useKeyOnOppositeDoor(firstDoor);
     }
     else
     {
-        setNarrative("the " + player.getEquippedItem()->getName() + " does not work here...");
+        setItemNarrative("the " + player.getEquippedItem()->getName() + " does not work here...");
     }
 }
 
@@ -677,10 +687,10 @@ void Game::usePotion(Item *item)
     if (player.getHP() < player.getMaxHP())
     {
         player.healHP(item->getHealing());
-        setNarrative("You healed " + item->getHealing());
+        setItemNarrative("You healed " + item->getHealing());
     }
     else
-        setNarrative("You feel great! Why would you want to heal?");
+        setItemNarrative("You feel great! Why would you want to heal?");
 }
 
 void Game::resolveDamage() //player walks on a trap
@@ -714,7 +724,7 @@ void Game::resolveSnorlax()
                         items[i]->setYPos(5);
                         items[i]->setXPos(7);
                         items[i]->setDescription("The Pokédex says: Very lazy. Just eats and sleeps.");
-                        setNarrative("You played the Poké Flute. SNORLAX woke up!");
+                        setItemNarrative("You played the Poké Flute. SNORLAX woke up!");
                     }
 				}
 			}
@@ -727,7 +737,7 @@ void Game::resolveSnorlax()
                         items[i]->setYPos(5);
                         items[i]->setXPos(7);
                         items[i]->setDescription("The Pokédex says: Very lazy. Just eats and sleeps.");
-                        setNarrative("You played the Poké Flute. SNORLAX woke up!");
+                        setItemNarrative("You played the Poké Flute. SNORLAX woke up!");
                     }
 				}
 			}
@@ -740,7 +750,7 @@ void Game::resolveSnorlax()
                         items[i]->setYPos(5);
                         items[i]->setXPos(7);
                         items[i]->setDescription("The Pokédex says: Very lazy. Just eats and sleeps.");
-                        setNarrative("You played the Poké Flute. SNORLAX woke up!");
+                        setItemNarrative("You played the Poké Flute. SNORLAX woke up!");
                     }
 				}
 			}
@@ -753,7 +763,7 @@ void Game::resolveSnorlax()
                         items[i]->setYPos(5);
                         items[i]->setXPos(7);
                         items[i]->setDescription("The Pokédex says: Very lazy. Just eats and sleeps.");
-                        setNarrative("You played the Poké Flute. SNORLAX woke up!");
+                        setItemNarrative("You played the Poké Flute. SNORLAX woke up!");
                     }
 				}
 			}
@@ -783,7 +793,7 @@ void Game::usePokeball()
                             items[i] = NULL;
                         }
                         dropItem();
-                        setNarrative("You threw a Pokéball...    You caught SNORLAX!     SNORLAX was added to you inventory.");
+                        setItemNarrative("You threw a Pokéball...    You caught SNORLAX!     SNORLAX was added to you inventory.");
                     }
                 }
             }
@@ -801,7 +811,7 @@ void Game::usePokeball()
                             items[i] = NULL;
                         }
                         dropItem();
-                        setNarrative("You threw a Pokéball...    You caught SNORLAX!     SNORLAX was added to you inventory.");
+                        setItemNarrative("You threw a Pokéball...    You caught SNORLAX!     SNORLAX was added to you inventory.");
                     }
 				}
 			}
@@ -819,7 +829,7 @@ void Game::usePokeball()
                             items[i] = NULL;
                         }
                         dropItem();
-                        setNarrative("You threw a Pokéball...    You caught SNORLAX!     SNORLAX was added to you inventory.");
+                        setItemNarrative("You threw a Pokéball...    You caught SNORLAX!     SNORLAX was added to you inventory.");
                     }
 				}
 			}
@@ -837,7 +847,7 @@ void Game::usePokeball()
                             items[i] = NULL;
                         }
                         dropItem();
-                        setNarrative("You threw a Pokéball...    You caught SNORLAX!     SNORLAX was added to you inventory.");
+                        setItemNarrative("You threw a Pokéball...    You caught SNORLAX!     SNORLAX was added to you inventory.");
                     }
 				}
 			}
@@ -845,7 +855,7 @@ void Game::usePokeball()
     }
     if (snorlaxMoved == false)
     {
-        setNarrative("That wasn't a good throw.");
+        setItemNarrative("That wasn't a good throw.");
     }
 }
 
@@ -1020,7 +1030,7 @@ void Game::pickUpItem()
     }
     if (pickedUpItem)
     {
-        setNarrative("You picked up the " + theItem->getName());
+        setItemNarrative("You picked up the " + theItem->getName());
         theItem->setXPos(-1);
         theItem->setYPos(-1);
 	if(theItem->getType() == "cubepart")
@@ -1030,11 +1040,11 @@ void Game::pickUpItem()
     }
     else if (!isAnItem)
     {
-        setNarrative("There is nothing there to pick up");
+        setItemNarrative("There is nothing there to pick up");
     }
     else
     {
-        setNarrative("You could not pick up the " + theItem->getName());
+        setItemNarrative("You could not pick up the " + theItem->getName());
     }
 }
 
@@ -1050,7 +1060,7 @@ void Game::dropItem()
         {
             if (items[itemIndex]->getYPos() == player.getYPos() && items[itemIndex]->getXPos() == player.getXPos()) //make sure it is not under the player
             {
-                setNarrative("Item is already here. You cannot drop another here");
+                setItemNarrative("Item is already here. You cannot drop another here");
                 break;
             }
         }
@@ -1059,7 +1069,7 @@ void Game::dropItem()
             droppedItem = player.drop(player.getSelectedItemIndex()); //get the item that has been dropped
             if (droppedItem == NULL)                                  //dropping a null
             {
-                setNarrative("You are unable to drop an empty slot in your bag.");
+                setItemNarrative("You are unable to drop an empty slot in your bag.");
                 break;
             }
             droppedItem->setXPos(player.getXPos());
@@ -1075,13 +1085,13 @@ void Game::dropItem()
     }
     if (itemHasBeenDropped == true)
     {
-        setNarrative("You have dropped " + droppedItem->getName());
+        setItemNarrative("You have dropped " + droppedItem->getName());
     }
 }
 
 void Game::displayItemDescriptionToNarrativeWindow(Item *item){
     string narr = item->getDescription();
-    setNarrative(narr);
+    setItemNarrative(narr);
 }
 
 void Game::readItem()
@@ -1096,14 +1106,14 @@ void Game::readItem()
             {
                 if (((player.getYPos() - 1) == items[i]->getYPos()) && player.getXPos() == items[i]->getXPos() && (items[i]->getType() == "statue" || items[i]->getType() == "profoak"))
                 {
-		            setNarrative(items[i]->getDescription());
+		            setItemNarrative(items[i]->getDescription());
                 }
             }
             else if (player.getSymbol() == "v")
             {
                 if (((player.getYPos() + 1) == items[i]->getYPos()) && player.getXPos() == items[i]->getXPos() && (items[i]->getType() == "statue" || items[i]->getType() == "profoak"))
                 {
-		            setNarrative(items[i]->getDescription());
+		            setItemNarrative(items[i]->getDescription());
                 }
             }
 
@@ -1111,14 +1121,14 @@ void Game::readItem()
             {
                 if (((player.getXPos() - 1) == items[i]->getXPos()) && player.getYPos() == items[i]->getYPos() && (items[i]->getType() == "statue" || items[i]->getType() == "profoak"))
                 {
-		            setNarrative(items[i]->getDescription());
+		            setItemNarrative(items[i]->getDescription());
                 }
             }
             else // player.getSymbol() == ">"
             {
                 if (((player.getXPos() + 1) == items[i]->getXPos()) && player.getYPos() == items[i]->getYPos() && (items[i]->getType() == "statue" || items[i]->getType() == "profoak"))
                 {
-		            setNarrative(items[i]->getDescription());
+		            setItemNarrative(items[i]->getDescription());
                 }
             }
         }
@@ -1185,7 +1195,7 @@ void Game::giveProfOakSnorlax()
                 if (((player.getYPos() - 1) == items[i]->getYPos()) && player.getXPos() == items[i]->getXPos() && items[i]->getType() == "profoak")
                 {
                     items[i]->setDescription("How is my old Pokémon? Well, it seems to like you a lot.");
-                    setNarrative("Professor Oak gave you a Magikarp...laaame.");
+                    setItemNarrative("Professor Oak gave you a Magikarp...laaame.");
                     
 				}
 			}
@@ -1194,7 +1204,7 @@ void Game::giveProfOakSnorlax()
                 if (((player.getYPos() + 1) == items[i]->getYPos()) && player.getXPos() == items[i]->getXPos() && items[i]->getType() == "profoak")
                 {
                     items[i]->setDescription("How is my old Pokémon? Well, it seems to like you a lot.");
-                    setNarrative("Professor Oak gave you a Magikarp...laaame.");
+                    setItemNarrative("Professor Oak gave you a Magikarp...laaame.");
                     
 				}
 			}
@@ -1203,7 +1213,7 @@ void Game::giveProfOakSnorlax()
                 if (((player.getXPos() - 1) == items[i]->getXPos()) && player.getYPos() == items[i]->getYPos() && items[i]->getType() == "profoak")
                 {
                     items[i]->setDescription("How is my old Pokémon? Well, it seems to like you a lot.");
-                    setNarrative("Professor Oak gave you a Magikarp...laaame.");
+                    setItemNarrative("Professor Oak gave you a Magikarp...laaame.");
                     
 				}
 			}
@@ -1212,7 +1222,7 @@ void Game::giveProfOakSnorlax()
                 if (((player.getXPos() + 1) == items[i]->getXPos()) && player.getYPos() == items[i]->getYPos() && items[i]->getType() == "profoak")
                 {
                     items[i]->setDescription("How is my old Pokémon? Well, it seems to like you a lot.");
-                    setNarrative("Professor Oak gave you a Magikarp...laaame.");
+                    setItemNarrative("Professor Oak gave you a Magikarp...laaame.");
 				}
 			}
         }
@@ -1239,7 +1249,7 @@ void Game::plantBomb(int y, int x, Door **doors, Teleporter **teleporters)
 {
     if (getPlanted() == true)
     {
-        setNarrative("There is already a bomb waiting to explode!");
+        setItemNarrative("There is already a bomb waiting to explode!");
     }
     else
     {    
@@ -1252,7 +1262,7 @@ void Game::plantBomb(int y, int x, Door **doors, Teleporter **teleporters)
             {
                 if (items[itemIndex]->getYPos() == y && items[itemIndex]->getXPos() == x) //make sure it is not under the player
                 {
-                    setNarrative("Item is already here. You cannot drop another here");
+                    setItemNarrative("Item is already here. You cannot drop another here");
                     break;
                 }
                 itemIndex++;
@@ -1287,7 +1297,7 @@ void Game::plantBomb(int y, int x, Door **doors, Teleporter **teleporters)
             setPlanted(true);
             setBombY(y);
             setBombX(x);
-            setNarrative("You have planted a bomb. Run!");
+            setItemNarrative("You have planted a bomb. Run!");
             begin_time = clock();
         }
     }
@@ -1336,31 +1346,31 @@ void Game::animateBomb(Door **doors, Teleporter **teleporters)
         {
             player.damageHP(3);
             hasBeenDamaged = true;
-            setNarrative("Ouch, better be more careful.");
+            setItemNarrative("Ouch, better be more careful.");
         }
         else if (player.getYPos() == getBombY() && player.getXPos() == getBombX()-1)  // player is on immediate left of bomb
         {
             player.damageHP(3);
             hasBeenDamaged = true;
-            setNarrative("Ouch, better be more careful.");
+            setItemNarrative("Ouch, better be more careful.");
         }
         else if (player.getYPos() == getBombY() && player.getXPos() == getBombX()+1)  // player is on immediate right of bomb
         {
             player.damageHP(3);
             hasBeenDamaged = true;
-            setNarrative("Ouch, better be more careful.");
+            setItemNarrative("Ouch, better be more careful.");
         }
         else if (player.getYPos() == getBombY()-1 && player.getXPos() == getBombX())  // player is immediately above bomb
         {
             player.damageHP(3);
             hasBeenDamaged = true;
-            setNarrative("Ouch, better be more careful.");
+            setItemNarrative("Ouch, better be more careful.");
         }
         else if (player.getYPos() == getBombY()+1 && player.getXPos() == getBombX())  // player is immediately below bomb
         {
             player.damageHP(3);
             hasBeenDamaged = true;
-            setNarrative("Ouch, better be more careful.");
+            setItemNarrative("Ouch, better be more careful.");
         }
         setPlanted(false);        
         delete items[bombIndex];
@@ -1405,12 +1415,13 @@ void Game::combineCubeParts()
 		{
 		    if(player.getNumCubeParts() == 5)
 		    {
-  		        setNarrative("You combine all of the Pandora's Cube pieces. You step back through a portal back into your own room and go down and get breakfast.");
+                setItemNarrative("");
+  		        setWorldNarrative("You combine all of the Pandora's Cube pieces. You step back through a portal back into your own room and go down and get breakfast.");
 		        isComplete = true; 
 		    }
 		    else if(player.getNumCubeParts() < 5 && player.getNumCubeParts() > -1)
 		    {
- 		       setNarrative("You appear to still be missing pieces. The repair station suggest you need 5.");
+ 		       setItemNarrative("You appear to still be missing pieces. The repair station suggest you need 5.");
 		    }
 		}
 	    }
@@ -1420,12 +1431,13 @@ void Game::combineCubeParts()
 		{
 		    if(player.getNumCubeParts() == 5)
 		    {
-  		        setNarrative("You combine all of the Pandora's Cube pieces. You step back through a portal back into your own room and go down and get breakfast.");
+                setItemNarrative("");
+  		        setWorldNarrative("You combine all of the Pandora's Cube pieces. You step back through a portal back into your own room and go down and get breakfast.");
 		        isComplete = true; 
 		    }
 		    else if(player.getNumCubeParts() < 5 && player.getNumCubeParts() > -1)
 		    {
- 		       setNarrative("You appear to still be missing pieces. The repair station suggest you need 5.");
+ 		       setItemNarrative("You appear to still be missing pieces. The repair station suggest you need 5.");
 		    }
 		}
 	    }
@@ -1435,12 +1447,13 @@ void Game::combineCubeParts()
 		{
 		    if(player.getNumCubeParts() == 5)
 		    {
-  		        setNarrative("You combine all of the Pandora's Cube pieces. You step back through a portal back into your own room and go down and get breakfast.");
+                setItemNarrative("");
+  		        setWorldNarrative("You combine all of the Pandora's Cube pieces. You step back through a portal back into your own room and go down and get breakfast.");
 		        isComplete = true; 
 		    }
 		    else if(player.getNumCubeParts() < 5 && player.getNumCubeParts() > -1)
 		    {
- 		       setNarrative("You appear to still be missing pieces. The repair station suggest you need 5.");
+ 		       setItemNarrative("You appear to still be missing pieces. The repair station suggest you need 5.");
 		    }
 		}
 	    }
@@ -1450,12 +1463,13 @@ void Game::combineCubeParts()
 		{
 		    if(player.getNumCubeParts() == 5)
 		    {
-  		        setNarrative("You combine all of the Pandora's Cube pieces. You step back through a portal back into your own room and go down and get breakfast.");
+                setItemNarrative("");
+  		        setWorldNarrative("You combine all of the Pandora's Cube pieces. You step back through a portal back into your own room and go down and get breakfast.");
 		        isComplete = true; 
 		    }
 		    else if(player.getNumCubeParts() < 5 && player.getNumCubeParts() > -1)
 		    {
- 		       setNarrative("You appear to still be missing pieces. The repair station suggest you need 5.");
+ 		       setItemNarrative("You appear to still be missing pieces. The repair station suggest you need 5.");
 		    }
 		}
 	    }

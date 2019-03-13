@@ -27,7 +27,7 @@ void Game::renderEndScreen()
   refresh();
   renderStatus();
   colorWindow(developerWindow, RED_ON_BLACK);
-  string narrative = getNarrative() + " press any key to continue...";
+  string narrative = getWorldNarrative() + " press any key to continue...";
   mvwprintw(developerWindow, 3, 2, narrative.c_str());
   wrefresh(developerWindow);
 }
@@ -227,29 +227,43 @@ void Game::renderDev()
 void Game::renderNarrative()
 {
   colorWindow(narrativeWindow, BLACK_ON_BLUE);
-  string temp = this->getNarrative();
-  string firstHalf, secondHalf;
-  int lineLength = temp.size();
-  if (lineLength > 146 && lineLength <= 292)  // needs two lines
-  {
-    int cutOff = temp.length() - 146;
-    firstHalf = temp.substr(0, 146);
-    secondHalf = temp.substr(146, cutOff);
-    mvwprintw(narrativeWindow, 2, 2, firstHalf.c_str());
-    mvwprintw(narrativeWindow, 3, 2, secondHalf.c_str());
-  }
-  else if (lineLength > 292) // needs more space than available so the line will be cut off
-  {
-    firstHalf = temp.substr(0, 146);
-    secondHalf = temp.substr(146, 146);
-    mvwprintw(narrativeWindow, 2, 2, firstHalf.c_str());
-    mvwprintw(narrativeWindow, 3, 2, secondHalf.c_str());
-  }
-  else  // needs one line
-  {
-    mvwprintw(narrativeWindow, 2, 2, temp.c_str());
-  }
+  renderItemNarrative();
+  renderWorldNarrative();
   wrefresh(narrativeWindow);
+}
+
+void Game::renderItemNarrative()
+{
+  string temp = this->getItemNarrative();
+  int lineLength = temp.size();
+  int xCoord = 2; // 75 - (146/2)
+  if (lineLength > 146)
+  {
+    string shortenedLine = temp.substr(0, 146);
+    mvwprintw(narrativeWindow, 1, xCoord, shortenedLine.c_str());
+  }
+  else
+  {
+    xCoord = 75 - (lineLength / 2);
+    mvwprintw(narrativeWindow, 1, xCoord, temp.c_str());       
+  }
+}
+
+void Game::renderWorldNarrative()
+{
+  string temp = this->getWorldNarrative();
+  int lineLength = temp.size();
+  int xCoord = 2;  // 75 - (146/2)
+  if (lineLength > 146)
+  {
+    string shortenedLine = temp.substr(0, 146);
+    mvwprintw(narrativeWindow, 2, xCoord, shortenedLine.c_str());
+  }
+  else
+  {
+    xCoord = 75 - (lineLength / 2);
+    mvwprintw(narrativeWindow, 2, xCoord, temp.c_str());       
+  }
 }
 
 void Game::renderRoom()

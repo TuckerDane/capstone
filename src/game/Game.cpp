@@ -71,7 +71,8 @@ Game::Game()
   rooms[16] = initExtraRoom2();
 
   /* init narrative */
-  narrative = "<Adventure Game>";
+  worldNarrative = "Luckily for you, this parallel universe is considerate enough to offer a tutorial room. But don't expect it to always be so generous...";
+  itemNarrative = "";
 }
 
 Game::~Game()
