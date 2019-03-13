@@ -27,7 +27,8 @@ Player::Player() : Object(-1, -1, COLOR_BLACK, "^", "player_object", "adventurer
 	hp = 10;
 	maxHP = 10;
 	currentCarryWeight = 0;
-	maxCarryWeight = 10;
+	maxCarryWeight = 25;
+	numCubeParts = 0;
 } 
 
 Player::~Player()
@@ -108,6 +109,11 @@ void Player::setHP(int newHP)
 void Player::setMaxHP(int newMaxHP)
 {
 	this->maxHP = newMaxHP;
+}
+
+void Player::setNumCubeParts(int newNum)
+{
+	numCubeParts = newNum;
 }
 /* ..............................................
   GETTERS
@@ -198,6 +204,11 @@ Item *Player::getEquippedItem()
 bool Player::getIsMoved()
 {
 	return isMoved;
+}
+
+int Player::getNumCubeParts()
+{
+	return numCubeParts;
 }
 
 /* ..............................................
@@ -321,4 +332,14 @@ void Player::healHP(int hpChange)
 	{
 		hp = maxHP;
 	}
+}
+
+void Player::increaseNumCubeParts()
+{
+	setNumCubeParts(getNumCubeParts() + 1);
+}
+
+void Player::decreaseNumCubeParts()
+{
+	setNumCubeParts(getNumCubeParts() - 1);
 }

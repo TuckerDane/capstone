@@ -100,11 +100,13 @@ bool Game::isMoveAllowed(int y, int x)
     {
         if (items[i] != NULL)
         {
-            if (items[i]->getYPos() == y && items[i]->getXPos() == x && items[i]->getType() != "immovable" && items[i]->getType() != "softblock" && items[i]->getType() != "snorlax" && items[i]->getType() != "profoak")
+            if (items[i]->getYPos() == y && items[i]->getXPos() == x && items[i]->getType() != "immovable" && items[i]->getType() != "softblock" && items[i]->getType() != "snorlax"
+													   && items[i]->getType() != "profoak" && items[i]->getType() != "statue")
             {
                 return true;
             }
-            else if (items[i]->getYPos() == y && items[i]->getXPos() == x && (items[i]->getType() == "immovable" || items[i]->getType() == "softblock" || items[i]->getType() == "snorlax" || items[i]->getType() == "profoak") )
+            else if (items[i]->getYPos() == y && items[i]->getXPos() == x && (items[i]->getType() == "immovable" || items[i]->getType() == "softblock" || items[i]->getType() == "snorlax"
+														 || items[i]->getType() == "profoak" || items[i]->getType() == "statue"))
             {
                 displayItemDescriptionToNarrativeWindow(items[i]);
             }
@@ -408,6 +410,10 @@ void Game::updatePlayer()
 	case 'r':
 	case 'R':
 	    readItem();
+	    if(player.getCurrentRoom() == 13)
+	    {
+		combineCubeParts();
+	    } 
 	    break;
         case ';':
         case ':':
@@ -1017,6 +1023,10 @@ void Game::pickUpItem()
         setNarrative("You picked up the " + theItem->getName());
         theItem->setXPos(-1);
         theItem->setYPos(-1);
+	if(theItem->getType() == "cubepart")
+	{
+	    player.increaseNumCubeParts();
+	}
     }
     else if (!isAnItem)
     {
@@ -1055,6 +1065,10 @@ void Game::dropItem()
             droppedItem->setXPos(player.getXPos());
             droppedItem->setYPos(player.getYPos());
             items[itemIndex] = droppedItem;
+	    if(droppedItem->getType() == "cubepart")
+	    {
+		player.decreaseNumCubeParts();
+	    }
             itemHasBeenDropped = true;
         }
         itemIndex++;
@@ -1366,9 +1380,9 @@ void Game::animateBomb(Door **doors, Teleporter **teleporters)
         {
             if(teleporters[i] != NULL)
             {
-                teleporters[i]->setNextRoom(13);
-                teleporters[i]->setNextYPos(9);
-                teleporters[i]->setNextXPos(59);
+                teleporters[i]->setNextRoom(11);
+                teleporters[i]->setNextYPos(13);
+                teleporters[i]->setNextXPos(78);
             }
         }
     }
@@ -1376,4 +1390,75 @@ void Game::animateBomb(Door **doors, Teleporter **teleporters)
     {
         hasBeenDamaged = false;
     } 
+}
+
+void Game::combineCubeParts()
+{
+    Item **items = rooms[player.getCurrentRoom()]->getItems();
+    for(int i = 0; i < rooms[player.getCurrentRoom()]->getMaxItems(); i++)
+    {
+	if(items[i] != NULL)
+	{
+	    if(player.getSymbol() == "^")
+	    {
+		if(items[i]->getYPos() == player.getYPos() - 1 && items[i]->getXPos() == player.getXPos() && items[i]->getType() == "statue")
+		{
+		    if(player.getNumCubeParts() == 5)
+		    {
+  		        setNarrative("You combine all of the Pandora's Cube pieces. You step back through a portal back into your own room and go down and get breakfast.");
+		        isComplete = true; 
+		    }
+		    else if(player.getNumCubeParts() < 5 && player.getNumCubeParts() > -1)
+		    {
+ 		       setNarrative("You appear to still be missing pieces. The repair station suggest you need 5.");
+		    }
+		}
+	    }
+	    else if(player.getSymbol() == "v")
+	    {
+		if(items[i]->getYPos() == player.getYPos() + 1 && items[i]->getXPos() == player.getXPos() && items[i]->getType() == "statue")
+		{
+		    if(player.getNumCubeParts() == 5)
+		    {
+  		        setNarrative("You combine all of the Pandora's Cube pieces. You step back through a portal back into your own room and go down and get breakfast.");
+		        isComplete = true; 
+		    }
+		    else if(player.getNumCubeParts() < 5 && player.getNumCubeParts() > -1)
+		    {
+ 		       setNarrative("You appear to still be missing pieces. The repair station suggest you need 5.");
+		    }
+		}
+	    }
+	    if(player.getSymbol() == "<")
+	    {
+		if(items[i]->getYPos() == player.getYPos() && items[i]->getXPos() == player.getXPos() - 1 && items[i]->getType() == "statue")
+		{
+		    if(player.getNumCubeParts() == 5)
+		    {
+  		        setNarrative("You combine all of the Pandora's Cube pieces. You step back through a portal back into your own room and go down and get breakfast.");
+		        isComplete = true; 
+		    }
+		    else if(player.getNumCubeParts() < 5 && player.getNumCubeParts() > -1)
+		    {
+ 		       setNarrative("You appear to still be missing pieces. The repair station suggest you need 5.");
+		    }
+		}
+	    }
+	    else //(player.getSymbol() == ">")
+	    {
+		if(items[i]->getYPos() == player.getYPos() && items[i]->getXPos() == player.getXPos() + 1 && items[i]->getType() == "statue")
+		{
+		    if(player.getNumCubeParts() == 5)
+		    {
+  		        setNarrative("You combine all of the Pandora's Cube pieces. You step back through a portal back into your own room and go down and get breakfast.");
+		        isComplete = true; 
+		    }
+		    else if(player.getNumCubeParts() < 5 && player.getNumCubeParts() > -1)
+		    {
+ 		       setNarrative("You appear to still be missing pieces. The repair station suggest you need 5.");
+		    }
+		}
+	    }
+	}
+    }
 }

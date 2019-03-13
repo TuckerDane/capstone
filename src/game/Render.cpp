@@ -152,6 +152,14 @@ void Game::renderStatus()
     mvwprintw(statusWindow, 3, 20 + (2 * i), "♥");
   }
   wattroff(statusWindow, COLOR_PAIR(RED_ON_BLACK));
+//  wrefresh(statusWindow);
+
+//print number of cube parts the player has
+  string parts;
+  parts = std::to_string(player.getNumCubeParts());
+  mvwprintw(statusWindow, 1, 45, "Cube Parts");
+  mvwprintw(statusWindow, 2, 43, "--------------");
+  mvwprintw(statusWindow, 3, 50, parts.c_str());
   wrefresh(statusWindow);
 }
 
