@@ -1380,9 +1380,9 @@ void Game::animateBomb(Door **doors, Teleporter **teleporters)
         {
             if(teleporters[i] != NULL)
             {
-                teleporters[i]->setNextRoom(13);
-                teleporters[i]->setNextYPos(9);
-                teleporters[i]->setNextXPos(59);
+                teleporters[i]->setNextRoom(11);
+                teleporters[i]->setNextYPos(13);
+                teleporters[i]->setNextXPos(78);
             }
         }
     }

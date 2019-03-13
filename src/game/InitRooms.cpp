@@ -90,7 +90,7 @@ Room* Game::initPuzzleRoom1()
   //row four
   room->setTeleporter(new Teleporter(25, 4, 16, 5, 4, COLOR_BLUE), 17);   
   room->setTeleporter(new Teleporter(25, 9, 1, 2, 2, COLOR_BLUE), 18);   
-  room->setTeleporter(new Teleporter(25, 19, 1, 15, 25, COLOR_BLUE), 19);   
+  room->setTeleporter(new Teleporter(25, 18, 1, 15, 25, COLOR_BLUE), 19);   
   room->setTeleporter(new Teleporter(25, 27, 1, 15, 13, COLOR_BLUE), 20);   
   room->setTeleporter(new Teleporter(25, 32, 16, 5, 11, COLOR_BLUE), 21);   
   room->setTeleporter(new Teleporter(25, 41, 1, 2, 36, COLOR_BLUE), 22);   
@@ -199,12 +199,12 @@ Room* Game::initPuzzleRoom5(){
     return room;
 }
 
-Room* Game::initPuzzleRoom6(){
+Room* Game::initPuzzleRoom6()
+{
     Room* room = new Room("rooms/puzzle_6.room");    
     room->setDoor(new Door(2, 13, 3, 6, 2, -1, false, COLOR_WHITE), 0);
     room->setItem(new Bomb(2, 10), 0);
-    room->setTeleporter(new Teleporter(8, 2, 13, 13, 78, COLOR_YELLOW), 0); //room 11
-
+    room->setTeleporter(new Teleporter(8, 2, 11, 13, 78, COLOR_YELLOW), 0); //room 11
     int blockCounter = 1;
     for(int i= 0; i < 11; i++)
     {
