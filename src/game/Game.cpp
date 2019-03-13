@@ -63,10 +63,12 @@ Game::Game()
   rooms[8] = initPuzzleRoom8();
   rooms[9] = initPuzzleRoom9();
   rooms[10] = initPuzzleRoom10();
-  rooms[11] = initPuzzleRoom11(); 
+  rooms[11] = initPuzzleRoom11(); //new trap maze
   rooms[12] = initPuzzleRoom12();
-  rooms[13] = initPuzzleRoom13();
+  rooms[13] = initPuzzleRoom13(); //repair/end room
   rooms[14] = initPuzzleRoom14();
+  rooms[15] = initExtraRoom1();
+  rooms[16] = initExtraRoom2();
 
   /* init narrative */
   narrative = "<Adventure Game>";

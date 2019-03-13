@@ -22,11 +22,11 @@ Room* Game::initStartRoom()
     room->setTeleporter(new Teleporter(8, 42, 4, 14, 107, COLOR_GREEN), 9); //room 4: pac man right side
     room->setTeleporter(new Teleporter(8, 45, 5, 10, 21, COLOR_BLUE), 10); //room 5: life or death blocks
     room->setTeleporter(new Teleporter(8, 48, 6, 2, 12, COLOR_RED), 11); //room 6: bomber man (still in dev)
-    room->setTeleporter(new Teleporter(10, 39, 7, 3, 3, COLOR_BLUE), 12); //room 7: Mario part 1
+    room->setTeleporter(new Teleporter(10, 39, 7, 25, 2, COLOR_BLUE), 12); //room 7: Mario part 1
     room->setTeleporter(new Teleporter(10, 42, 8, 3, 3, COLOR_YELLOW), 13); //room 8: TBD
     room->setTeleporter(new Teleporter(10, 45, 9, 12, 12, COLOR_BLUE), 14); //room 9: Rodent's Revenge
     room->setTeleporter(new Teleporter(10, 48, 10, 3, 3, COLOR_BLUE), 15); //room 10: mario part 2
-    room->setTeleporter(new Teleporter(12, 39, 11, 9, 59, COLOR_BLUE), 16); //room 11: end room
+    room->setTeleporter(new Teleporter(12, 39, 11, 13, 78, COLOR_BLUE), 16); //room 11: end room
     room->setTeleporter(new Teleporter(12, 42, 12, 5, 2, COLOR_BLUE), 17); //room 12: invisible maze
     room->setTeleporter(new Teleporter(12, 45, 13, 9, 59, COLOR_BLUE), 18); //room 13: repair
     room->setTeleporter(new Teleporter(12, 48, 14, 8, 11, COLOR_BLUE), 19); //room 14: trophy
@@ -40,18 +40,17 @@ Room* Game::initStartRoom()
     room->setItem(new Key(4, 14, "Blue Key", 789, COLOR_BLUE), 0);
     room->setItem(new Key(18, 4, "Green Key", 678, COLOR_GREEN), 1);
     room->setItem(new Trap(5, 28), 2);
-    room->setItem(new Potion(17, 19), 3);
-    room->setItem(new Movable(14, 5), 4);
-    room->setItem(new Movable2(13, 11), 5);
-    room->setItem(new Movable2(13, 12), 6);
-    room->setItem(new Statue(3, 13, "Hint: Keys can be used to open specific locked doors."), 7);
-    room->setItem(new Statue(8, 2, "Hint: Teleporters can teleport you places. "), 8);
-    room->setItem(new Statue(7, 19, "Hint: Watch out for traps. They cause damage. Potions heal."), 9);
-    room->setItem(new Statue(13, 21, "Some objects block movement, some can be moved."), 10);
-    room->setItem(new Statue(2, 2, "Player will start here at 2,2"), 11); //TODO: delete before the final version
-    room->setItem(new Statue(2, 6, "You stare at your bed. While sleeping again sounds awesome, you are hungry."), 12);
-    room->setItem(new Statue(5, 2, "It is a bummmer your Pandora's cube broke. At least you still have a Playstation."), 13);
-    room->setItem(new Statue(6, 2, "Piece 1 of the cube"), 14);//TODO: delete before the final verision
+    room->setItem(new Movable(14, 5), 3);
+    room->getItem(3)->setHealing(2);
+    room->setItem(new Movable2(13, 11), 4);
+    room->setItem(new Movable2(13, 12), 5);
+    room->setItem(new Statue(3, 13, "Hint: Keys can be used to open specific locked doors."), 6);
+    room->setItem(new Statue(8, 2, "Hint: Teleporters can teleport you places. "), 7);
+    room->setItem(new Statue(7, 19, "Hint: Watch out for traps. They cause damage. Some items can heal you."), 8);
+    room->setItem(new Statue(13, 21, "Some objects block movement, some can be moved."), 9);
+    room->setItem(new Statue(2, 6, "You stare at your bed. Should you make it or go get food? You smell bacon. Yeah, food seems like the way to go!"), 10);
+    room->setItem(new Statue(5, 2, "It is a bummmer your Pandora's cube broke. At least you still have a Playstation."), 11);
+    room->setItem(new CubeParts(6, 2), 12);
 
     //enemies
     room->setEnemy(new Enemy(5, 10), 0);
@@ -64,28 +63,37 @@ Room* Game::initPuzzleRoom1()
 {
   Room* room = new Room("rooms/puzzle_1.room");
   room->setDoor(new Door(1, 5, 3, 12, 9, 0, false, COLOR_YELLOW), 0);
+  
+  room->setItem(new Potion(5, 15), 0);
 
   //row one of teleporters
-  room->setTeleporter(new Teleporter(4, 4, 1, 4, 18, COLOR_BLUE), 0);   
-  room->setTeleporter(new Teleporter(4, 9, 1, 18, 7, COLOR_BLUE), 1);   
-  room->setTeleporter(new Teleporter(4, 15, 1, 18, 30, COLOR_BLUE), 2);   
-  room->setTeleporter(new Teleporter(4, 21, 1, 18, 18, COLOR_BLUE), 3);   
-  room->setTeleporter(new Teleporter(4, 27, 1, 18, 18, COLOR_BLUE), 4);   
-  room->setTeleporter(new Teleporter(4, 32, 1, 18, 30, COLOR_BLUE), 5);   
+  room->setTeleporter(new Teleporter(4, 6, 1, 15, 2, COLOR_BLUE), 0);   
+  room->setTeleporter(new Teleporter(4, 18, 16, 9, 10, COLOR_BLUE), 1);   
+  room->setTeleporter(new Teleporter(4, 30, 1, 15, 13, COLOR_BLUE), 2);   
+  room->setTeleporter(new Teleporter(4, 41, 16, 2, 7, COLOR_BLUE), 3);   
   //row two
-  room->setTeleporter(new Teleporter(11, 4, 1, 4, 7, COLOR_BLUE), 6);   
-  room->setTeleporter(new Teleporter(11, 9, 1, 5, 30, COLOR_BLUE), 7);   
-  room->setTeleporter(new Teleporter(11, 15, 4, 4, 40, COLOR_GREEN), 8);   
-  room->setTeleporter(new Teleporter(11, 21, 4, 14, 104, COLOR_GREEN), 9);   
-  room->setTeleporter(new Teleporter(11, 27, 1, 11, 7, COLOR_BLUE), 10);   
-  room->setTeleporter(new Teleporter(11, 32, 1, 4, 18, COLOR_BLUE), 11);   
+  room->setTeleporter(new Teleporter(11, 4, 1, 22, 25, COLOR_BLUE), 4);   
+  room->setTeleporter(new Teleporter(11, 9, 16, 8, 4, COLOR_BLUE), 5);   
+  room->setTeleporter(new Teleporter(11, 15, 4, 2, 2, COLOR_BLUE), 6); //pac man 1  
+  room->setTeleporter(new Teleporter(11, 21, 1, 2, 2, COLOR_BLUE), 7);   
+  room->setTeleporter(new Teleporter(11, 30, 1, 2, 2, COLOR_BLUE), 8);   
+  room->setTeleporter(new Teleporter(11, 41, 1, 8, 2, COLOR_BLUE), 9);   
   //row three
-  room->setTeleporter(new Teleporter(18, 4, 1, 4, 30, COLOR_BLUE), 12);   
-  room->setTeleporter(new Teleporter(18, 9, 1, 11, 30, COLOR_BLUE), 13);   
-  room->setTeleporter(new Teleporter(18, 15, 1, 11, 30, COLOR_BLUE), 14);   
-  room->setTeleporter(new Teleporter(18, 21, 1, 18, 7, COLOR_BLUE), 15);   
-  room->setTeleporter(new Teleporter(18, 27, 1, 11, 18, COLOR_BLUE), 16);   
-  room->setTeleporter(new Teleporter(18, 32, 1, 4, 7, COLOR_BLUE), 17);   
+  room->setTeleporter(new Teleporter(18, 6, 1, 22, 13, COLOR_BLUE), 10);   
+  room->setTeleporter(new Teleporter(18, 15, 1, 8, 25, COLOR_BLUE), 11);   
+  room->setTeleporter(new Teleporter(18, 21, 16, 3, 2, COLOR_BLUE), 12);   
+  room->setTeleporter(new Teleporter(18, 27, 1, 8, 36, COLOR_BLUE), 13);   
+  room->setTeleporter(new Teleporter(18, 32, 15, 2, 3, COLOR_BLUE), 14);   
+  room->setTeleporter(new Teleporter(18, 38, 4, 14, 146, COLOR_BLUE), 15); //pac man 2  
+  room->setTeleporter(new Teleporter(18, 44, 1, 2, 2, COLOR_BLUE), 16);   
+
+  //row four
+  room->setTeleporter(new Teleporter(25, 4, 16, 5, 4, COLOR_BLUE), 17);   
+  room->setTeleporter(new Teleporter(25, 9, 1, 2, 2, COLOR_BLUE), 18);   
+  room->setTeleporter(new Teleporter(25, 18, 1, 15, 25, COLOR_BLUE), 19);   
+  room->setTeleporter(new Teleporter(25, 27, 1, 15, 13, COLOR_BLUE), 20);   
+  room->setTeleporter(new Teleporter(25, 32, 16, 5, 11, COLOR_BLUE), 21);   
+  room->setTeleporter(new Teleporter(25, 41, 1, 2, 36, COLOR_BLUE), 22);   
 
   return room; 
 }
@@ -178,6 +186,7 @@ Room* Game::initPuzzleRoom5(){
     room->getItem(1)->setColor(COLOR_RED);
     room->getItem(1)->setDamage(1);
     room->setItem(new Key(10, 33, "Cyan Key", 4, COLOR_CYAN), 2);
+    room->setItem(new CubeParts(10, 45), 3);
 
     room->setEnemy(new Enemy(10, 35), 0);
     room->setEnemy(new Enemy(11, 36), 1);
@@ -190,12 +199,12 @@ Room* Game::initPuzzleRoom5(){
     return room;
 }
 
-Room* Game::initPuzzleRoom6(){
+Room* Game::initPuzzleRoom6()
+{
     Room* room = new Room("rooms/puzzle_6.room");    
     room->setDoor(new Door(2, 13, 3, 6, 2, -1, false, COLOR_WHITE), 0);
     room->setItem(new Bomb(2, 10), 0);
-    room->setTeleporter(new Teleporter(8, 2, 13, 9, 59, COLOR_YELLOW), 0); //room 13: repair room
-
+    room->setTeleporter(new Teleporter(8, 2, 11, 13, 78, COLOR_YELLOW), 0); //room 11
     int blockCounter = 1;
     for(int i= 0; i < 11; i++)
     {
@@ -285,29 +294,29 @@ Room* Game::initPuzzleRoom7()
 
 Room* Game::initPuzzleRoom8() {
     Room* room = new Room("rooms/puzzle_8.room");
-    room->setItem(new Movable2(4, 6, "o"), 0);
-    room->setItem(new Movable2(4, 8, "o"), 1);
-    room->setItem(new Movable2(4, 10, "o"), 2);
-    room->setItem(new Movable2(4, 12, "o"), 3);
-    room->setItem(new Movable2(4, 14, "o"), 4);
-    room->setItem(new Movable(6, 5, "●"), 5);
-    room->setItem(new Movable(6, 7, "●"), 6);
-    room->setItem(new Movable(6, 9, "●"), 7);
-    room->setItem(new Movable(6, 11, "●"), 8);
-    room->setItem(new Movable(6, 13, "●"), 9);
-    room->setDoor(new Door(1, 13, 9, 21, 11, 0, false, COLOR_WHITE), 0);
-    room->setDoor(new Door(6, 30, 7, 25, 2, 0, false, COLOR_WHITE), 1);
+//    room->setItem(new Movable2(4, 6, "o"), 0);
+//    room->setItem(new Movable2(4, 8, "o"), 1);
+//    room->setItem(new Movable2(4, 10, "o"), 2);
+//    room->setItem(new Movable2(4, 12, "o"), 3);
+//    room->setItem(new Movable2(4, 14, "o"), 4);
+//    room->setItem(new Movable(6, 5, "●"), 5);
+//    room->setItem(new Movable(6, 7, "●"), 6);
+//    room->setItem(new Movable(6, 9, "●"), 7);
+//    room->setItem(new Movable(6, 11, "●"), 8);
+//    room->setItem(new Movable(6, 13, "●"), 9);
+//    room->setDoor(new Door(1, 13, 9, 21, 11, 0, false, COLOR_WHITE), 0);
+//    room->setDoor(new Door(6, 30, 7, 25, 2, 0, false, COLOR_WHITE), 1);
     return room;
 }
 
 Room* Game::initPuzzleRoom9(){
     Room* room = new Room("rooms/puzzle_9.room");
-    room->setDoor(new Door(7, 1, 9, 12, 12, 0, false, COLOR_WHITE), 0);     // TODO: update one door to lead to Room 8
-    room->setDoor(new Door(7, 23, 9, 12, 12, 0, false, COLOR_WHITE), 1);     
-    room->setDoor(new Door(16, 1, 9, 12, 12, 0, false, COLOR_WHITE), 2);     
-    room->setDoor(new Door(16, 23, 9, 12, 12, 0, false, COLOR_WHITE), 3);
+    room->setDoor(new Door(7, 1, 9, 12, 12, 0, false, COLOR_WHITE), 0);     
+    room->setDoor(new Door(7, 23, 11, 14, 61, 9121998, true, COLOR_WHITE), 1);    //leads to previous room
+    room->setDoor(new Door(16, 1, 9, 12, 12, 0, false, COLOR_WHITE), 2); 
+    room->setDoor(new Door(16, 23, 7, 25, 12, 0, false, COLOR_WHITE), 3);   //leads to mario part 1
     room->setDoor(new Door(1, 11, 9, 12, 12, 0, false, COLOR_WHITE), 4);
-    room->setDoor(new Door(22, 11, 8, 2, 13, 0, false, COLOR_WHITE), 5);     
+    room->setDoor(new Door(22, 11, 9, 12, 12, 0, false, COLOR_WHITE), 5);     
     room->setEnemy(new Enemy(2, 2), 0); //top left
     room->setEnemy(new Enemy(20, 16), 1); //bottom right
     room->setEnemy(new Enemy(18, 2), 2);  //bottom left
@@ -333,6 +342,8 @@ Room* Game::initPuzzleRoom9(){
             }  
         }
     }
+
+    room->setItem(new Key(20, 21, "white key", 9121998, COLOR_WHITE), 225);
     return room;
 }
 
@@ -380,64 +391,170 @@ Room* Game::initPuzzleRoom10()
     room->setTeleporter(new Teleporter(25, 2, 7, 25, 147, COLOR_BLUE), 23); 
 
     //flag teleporters to finish the room
-    room->setTeleporter(new Teleporter(24, 143, 11, 13, 58, COLOR_BLUE), 24); 
-    room->setTeleporter(new Teleporter(23, 143, 11, 13, 58, COLOR_BLUE), 25); 
-    room->setTeleporter(new Teleporter(22, 143, 11, 13, 58, COLOR_BLUE), 26); 
-    room->setTeleporter(new Teleporter(21, 143, 11, 13, 58, COLOR_BLUE), 27); 
-    room->setTeleporter(new Teleporter(20, 143, 11, 13, 58, COLOR_BLUE), 28); 
-    room->setTeleporter(new Teleporter(19, 143, 11, 13, 58, COLOR_BLUE), 29); 
-    room->setTeleporter(new Teleporter(18, 143, 11, 13, 58, COLOR_BLUE), 31); 
-    room->setTeleporter(new Teleporter(17, 143, 11, 13, 58, COLOR_BLUE), 32); 
-    room->setTeleporter(new Teleporter(16, 143, 11, 13, 58, COLOR_BLUE), 33); 
-    room->setTeleporter(new Teleporter(15, 143, 11, 13, 58, COLOR_BLUE), 34); 
+    room->setTeleporter(new Teleporter(24, 143, 13, 14, 58, COLOR_BLUE), 24); 
+    room->setTeleporter(new Teleporter(23, 143, 13, 14, 58, COLOR_BLUE), 25); 
+    room->setTeleporter(new Teleporter(22, 143, 13, 14, 58, COLOR_BLUE), 26); 
+    room->setTeleporter(new Teleporter(21, 143, 13, 14, 58, COLOR_BLUE), 27); 
+    room->setTeleporter(new Teleporter(20, 143, 13, 14, 58, COLOR_BLUE), 28); 
+    room->setTeleporter(new Teleporter(19, 143, 13, 14, 58, COLOR_BLUE), 29); 
+    room->setTeleporter(new Teleporter(18, 143, 13, 14, 58, COLOR_BLUE), 31); 
+    room->setTeleporter(new Teleporter(17, 143, 13, 14, 58, COLOR_BLUE), 32); 
+    room->setTeleporter(new Teleporter(16, 143, 13, 14, 58, COLOR_BLUE), 33); 
+    room->setTeleporter(new Teleporter(15, 143, 13, 14, 58, COLOR_BLUE), 34); 
 
-    room->setTeleporter(new Teleporter(14, 143, 11, 13, 58, COLOR_BLUE), 35); 
-    room->setTeleporter(new Teleporter(13, 143, 11, 13, 58, COLOR_BLUE), 36); 
-    room->setTeleporter(new Teleporter(12, 143, 11, 13, 58, COLOR_BLUE), 37); 
-    room->setTeleporter(new Teleporter(11, 143, 11, 13, 58, COLOR_BLUE), 38); 
-    room->setTeleporter(new Teleporter(24, 145, 11, 13, 58, COLOR_BLUE), 39); 
-    room->setTeleporter(new Teleporter(23, 145, 11, 13, 58, COLOR_BLUE), 40); 
-    room->setTeleporter(new Teleporter(22, 145, 11, 13, 58, COLOR_BLUE), 41); 
-    room->setTeleporter(new Teleporter(21, 145, 11, 13, 58, COLOR_BLUE), 42); 
-    room->setTeleporter(new Teleporter(20, 145, 11, 13, 58, COLOR_BLUE), 43); 
-    room->setTeleporter(new Teleporter(19, 145, 11, 13, 58, COLOR_BLUE), 44); 
+    room->setTeleporter(new Teleporter(14, 143, 13, 14, 58, COLOR_BLUE), 35); 
+    room->setTeleporter(new Teleporter(13, 143, 13, 14, 58, COLOR_BLUE), 36); 
+    room->setTeleporter(new Teleporter(12, 143, 13, 14, 58, COLOR_BLUE), 37); 
+    room->setTeleporter(new Teleporter(11, 143, 13, 14, 58, COLOR_BLUE), 38); 
+    room->setTeleporter(new Teleporter(24, 145, 13, 14, 58, COLOR_BLUE), 39); 
+    room->setTeleporter(new Teleporter(23, 145, 13, 14, 58, COLOR_BLUE), 40); 
+    room->setTeleporter(new Teleporter(22, 145, 13, 14, 58, COLOR_BLUE), 41); 
+    room->setTeleporter(new Teleporter(21, 145, 13, 14, 58, COLOR_BLUE), 42); 
+    room->setTeleporter(new Teleporter(20, 145, 13, 14, 58, COLOR_BLUE), 43); 
+    room->setTeleporter(new Teleporter(19, 145, 13, 14, 58, COLOR_BLUE), 44); 
 
-    room->setTeleporter(new Teleporter(18, 145, 11, 13, 58, COLOR_BLUE), 45); 
-    room->setTeleporter(new Teleporter(17, 145, 11, 13, 58, COLOR_BLUE), 46); 
-    room->setTeleporter(new Teleporter(16, 145, 11, 13, 58, COLOR_BLUE), 47); 
-    room->setTeleporter(new Teleporter(15, 145, 11, 13, 58, COLOR_BLUE), 48); 
-    room->setTeleporter(new Teleporter(14, 145, 11, 13, 58, COLOR_BLUE), 49); 
-    room->setTeleporter(new Teleporter(13, 145, 11, 13, 58, COLOR_BLUE), 50); 
-    room->setTeleporter(new Teleporter(12, 145, 11, 13, 58, COLOR_BLUE), 51); 
-    room->setTeleporter(new Teleporter(11, 145, 11, 13, 58, COLOR_BLUE), 52); 
-    room->setTeleporter(new Teleporter(10, 145, 11, 13, 58, COLOR_BLUE), 53); 
-    room->setTeleporter(new Teleporter(9, 145, 11, 13, 58, COLOR_BLUE), 54); 
+    room->setTeleporter(new Teleporter(18, 145, 13, 14, 58, COLOR_BLUE), 45); 
+    room->setTeleporter(new Teleporter(17, 145, 13, 14, 58, COLOR_BLUE), 46); 
+    room->setTeleporter(new Teleporter(16, 145, 13, 14, 58, COLOR_BLUE), 47); 
+    room->setTeleporter(new Teleporter(15, 145, 13, 14, 58, COLOR_BLUE), 48); 
+    room->setTeleporter(new Teleporter(14, 145, 13, 14, 58, COLOR_BLUE), 49); 
+    room->setTeleporter(new Teleporter(13, 145, 13, 14, 58, COLOR_BLUE), 50); 
+    room->setTeleporter(new Teleporter(12, 145, 13, 14, 58, COLOR_BLUE), 51); 
+    room->setTeleporter(new Teleporter(11, 145, 13, 14, 58, COLOR_BLUE), 52); 
+    room->setTeleporter(new Teleporter(10, 145, 13, 14, 58, COLOR_BLUE), 53); 
+    room->setTeleporter(new Teleporter(9, 145, 13, 14, 58, COLOR_BLUE), 54); 
 
-    room->setTeleporter(new Teleporter(8, 145, 11, 13, 58, COLOR_BLUE), 55); 
-    room->setTeleporter(new Teleporter(7, 145, 11, 13, 58, COLOR_BLUE), 56); 
-    room->setTeleporter(new Teleporter(6, 145, 11, 13, 58, COLOR_BLUE), 57); 
-    room->setTeleporter(new Teleporter(5, 145, 11, 13, 58, COLOR_BLUE), 58); 
-    room->setTeleporter(new Teleporter(10, 142, 11, 13, 58, COLOR_BLUE), 59); 
-    room->setTeleporter(new Teleporter(9, 141, 11, 13, 58, COLOR_BLUE), 60); 
-    room->setTeleporter(new Teleporter(8, 140, 11, 13, 58, COLOR_BLUE), 61); 
-    room->setTeleporter(new Teleporter(7, 139, 11, 13, 58, COLOR_BLUE), 62); 
-    room->setTeleporter(new Teleporter(6, 138, 11, 13, 58, COLOR_BLUE), 63); 
-    room->setTeleporter(new Teleporter(5, 138, 11, 13, 58, COLOR_BLUE), 64); 
+    room->setTeleporter(new Teleporter(8, 145, 13, 14, 58, COLOR_BLUE), 55); 
+    room->setTeleporter(new Teleporter(7, 145, 13, 14, 58, COLOR_BLUE), 56); 
+    room->setTeleporter(new Teleporter(6, 145, 13, 14, 58, COLOR_BLUE), 57); 
+    room->setTeleporter(new Teleporter(5, 145, 13, 14, 58, COLOR_BLUE), 58); 
+    room->setTeleporter(new Teleporter(10, 142, 13, 14, 58, COLOR_BLUE), 59); 
+    room->setTeleporter(new Teleporter(9, 141, 13, 14, 58, COLOR_BLUE), 60); 
+    room->setTeleporter(new Teleporter(8, 140, 13, 14, 58, COLOR_BLUE), 61); 
+    room->setTeleporter(new Teleporter(7, 139, 13, 14, 58, COLOR_BLUE), 62); 
+    room->setTeleporter(new Teleporter(6, 138, 13, 14, 58, COLOR_BLUE), 63); 
+    room->setTeleporter(new Teleporter(5, 138, 13, 14, 58, COLOR_BLUE), 64); 
 
-    room->setTeleporter(new Teleporter(5, 139, 11, 13, 58, COLOR_BLUE), 65); 
-    room->setTeleporter(new Teleporter(5, 140, 11, 13, 58, COLOR_BLUE), 66); 
-    room->setTeleporter(new Teleporter(5, 141, 11, 13, 58, COLOR_BLUE), 67); 
-    room->setTeleporter(new Teleporter(5, 142, 11, 13, 58, COLOR_BLUE), 68); 
-    room->setTeleporter(new Teleporter(5, 143, 11, 13, 58, COLOR_BLUE), 69); 
-    room->setTeleporter(new Teleporter(5, 144, 11, 13, 58, COLOR_BLUE), 70); 
+    room->setTeleporter(new Teleporter(5, 139, 13, 14, 58, COLOR_BLUE), 65); 
+    room->setTeleporter(new Teleporter(5, 140, 13, 14, 58, COLOR_BLUE), 66); 
+    room->setTeleporter(new Teleporter(5, 141, 13, 14, 58, COLOR_BLUE), 67); 
+    room->setTeleporter(new Teleporter(5, 142, 13, 14, 58, COLOR_BLUE), 68); 
+    room->setTeleporter(new Teleporter(5, 143, 13, 14, 58, COLOR_BLUE), 69); 
+    room->setTeleporter(new Teleporter(5, 144, 13, 14, 58, COLOR_BLUE), 70); 
     return room;
 }
 
 Room* Game::initPuzzleRoom11()
 {
-  Room* room = new Room("rooms/end.room");
-  room->setTeleporter(new Teleporter(4, 58, 14, 8, 11, COLOR_BLUE), 0);
-  room->setItem(new Statue(9, 58, "Smells like pancakes on the other side. Time to go eat! (You have beat the game)"), 0);
+  Room* room = new Room("rooms/puzzle_11.room");
+  room->setTeleporter(new Teleporter(12, 78, 6, 2, 12, COLOR_WHITE), 0);
+  room->setDoor(new Door(14, 60, 9, 2, 23, 9121998, true, COLOR_WHITE), 0); //to rodents/locked and needs key from rodents to open
+  room->setTeleporter(new Teleporter(15, 61, 9, 12, 12, COLOR_BLUE), 1); //if aabovee door is used tele to middle of RRevenge
+
+  //Trap COLUMN 1 (reading from left to right)
+  room->setItem(new Trap(13, 63), 0);
+  room->getItem(0)->setDamage(0);
+  room->getItem(0)->setWeight(1000);
+
+  room->setItem(new Trap(14, 63), 1);
+  room->getItem(1)->setDamage(1);
+  room->getItem(1)->setWeight(1000);
+
+  room->setItem(new Trap(15, 63), 2);
+  room->getItem(2)->setDamage(3);
+  room->getItem(2)->setWeight(1000);
+
+  //Trap COLUMN 2 (reading from left to right)
+  room->setItem(new Trap(13, 65), 3);   //Top
+  room->getItem(3)->setDamage(3);
+  room->getItem(3)->setWeight(1000);
+
+  room->setItem(new Trap(14, 65), 4);   //Left
+  room->getItem(4)->setDamage(1);
+  room->getItem(4)->setWeight(1000);
+
+  room->setItem(new Trap(15, 65), 5);   //Middle
+  room->getItem(5)->setDamage(0);
+  room->getItem(5)->setWeight(1000);
+
+  //Trap COLUMN 3 (reading from left to right)
+  room->setItem(new Trap(13, 67), 6);
+  room->getItem(6)->setDamage(1);
+  room->getItem(6)->setWeight(1000);
+
+  room->setItem(new Trap(14, 67), 7);
+  room->getItem(7)->setDamage(0);
+  room->getItem(7)->setWeight(1000);
+
+  room->setItem(new Trap(15, 67), 8);
+  room->getItem(8)->setDamage(3);
+  room->getItem(8)->setWeight(1000);
+
+  //Trap COLUMN 4 (reading from left to right)
+  room->setItem(new Trap(13, 69), 9);
+  room->getItem(9)->setDamage(3);
+  room->getItem(9)->setWeight(1000);
+
+  room->setItem(new Trap(14, 69), 10);
+  room->getItem(10)->setDamage(0);
+  room->getItem(10)->setWeight(1000);
+
+  room->setItem(new Trap(15, 69), 11);
+  room->getItem(11)->setDamage(1);
+  room->getItem(11)->setWeight(1000);
+
+  //Trap COLUMN 5 (reading from left to right)
+  room->setItem(new Trap(13, 71), 12);
+  room->getItem(12)->setDamage(0);
+  room->getItem(12)->setWeight(1000);
+
+  room->setItem(new Trap(14, 71), 13);
+  room->getItem(13)->setDamage(3);
+  room->getItem(13)->setWeight(1000);
+
+  room->setItem(new Trap(15, 71), 14);
+  room->getItem(14)->setDamage(1);
+  room->getItem(14)->setWeight(1000);
+
+  //Trap COLUMN 6 (reading from left to right)
+  room->setItem(new Trap(13, 73), 15);
+  room->getItem(15)->setDamage(1);
+  room->getItem(15)->setWeight(1000);
+
+  room->setItem(new Trap(14, 73), 16);
+  room->getItem(16)->setDamage(0);
+  room->getItem(16)->setWeight(1000);
+
+  room->setItem(new Trap(15, 73), 17);
+  room->getItem(17)->setDamage(3);
+  room->getItem(17)->setWeight(1000);
+
+  //Trap COLUMN 7 (reading from left to right)
+  room->setItem(new Trap(13, 75), 18);
+  room->getItem(18)->setDamage(3);
+  room->getItem(18)->setWeight(1000);
+
+  room->setItem(new Trap(14, 75), 19);
+  room->getItem(19)->setDamage(0);
+  room->getItem(19)->setWeight(1000);
+
+  room->setItem(new Trap(15, 75), 20);
+  room->getItem(20)->setDamage(1);
+  room->getItem(20)->setWeight(1000);
+
+  //Trap COLUMN 8 (reading from left to right)
+  room->setItem(new Trap(13, 77), 21);
+  room->getItem(21)->setDamage(0);
+  room->getItem(21)->setWeight(1000);
+
+  room->setItem(new Trap(14, 77), 22);
+  room->getItem(22)->setDamage(0);
+  room->getItem(22)->setWeight(1000);
+
+  room->setItem(new Trap(15, 77), 23);
+  room->getItem(23)->setDamage(0);
+  room->getItem(23)->setWeight(1000);
+
 
   return room;
 }
@@ -547,9 +664,10 @@ Room* Game::initPuzzleRoom12()
 Room* Game::initPuzzleRoom13()
 {
     Room* room = new Room("rooms/repair_13.room");
-    room->setTeleporter(new Teleporter(9, 50, 9, 12, 12, COLOR_BLUE), 0); // room9 rodent's revenge
-    room->setTeleporter(new Teleporter(9, 66, 6, 2, 12, COLOR_BLUE), 1); // room6 bomberman
+    room->setTeleporter(new Teleporter(9, 71, 14, 8, 11, COLOR_BLUE), 0); // trophy room
     room->setItem(new Profoak(4, 58), 0);
+    room->setItem(new Statue(9, 58, "Repair Station: Used to repair the Pandora's Cube."), 1);
+
     return room;
 }
 
@@ -573,6 +691,95 @@ Room* Game::initEndRoom()
     room->setItem(new Statue(5, 9, "Pokemon, Saffron Gym"), 2);
     room->setItem(new Statue(5, 11, "Pac-Man"), 3);
     room->setItem(new Statue(5, 13, "Rodent's Revenge"), 4);
+
+    return room;
+}
+
+Room* Game::initExtraRoom1()
+{
+    Room* room = new Room("rooms/extra_1.room");
+    room->setItem(new Movable2(4, 4, "●"), 0);
+    room->setItem(new Movable2(6, 5, "●"), 1);
+    room->setItem(new Movable2(4, 7, "●"), 2);
+    room->setItem(new Movable2(2, 8, "●"), 3);
+    room->setItem(new Movable2(4, 10, "●"), 4);
+
+    room->setItem(new Movable2(6, 11, "●"), 5);
+    room->setItem(new Movable2(4, 13, "●"), 6);
+    room->setItem(new Movable2(2, 14, "●"), 7);
+    room->setItem(new Movable2(4, 16, "●"), 8);
+    room->setItem(new Movable2(6, 17, "●"), 9);
+
+    room->setItem(new Movable2(4, 19, "●"), 10);
+    room->setItem(new Movable2(2, 20, "●"), 11);
+    room->setItem(new Movable2(4, 22, "●"), 12);
+    room->setItem(new Movable2(6, 23, "●"), 13);
+    room->setItem(new Movable2(5, 25, "●"), 14);
+
+    room->setItem(new Movable2(4, 25, "●"), 15);
+    room->setItem(new Movable2(4, 27, "●"), 16);
+    room->setItem(new Movable2(3, 24, "●"), 17);
+    room->setItem(new Movable2(3, 26, "●"), 18);
+    room->setItem(new CubeParts(2, 25), 19);
+  
+    room->setTeleporter(new Teleporter(2, 26, 1, 5, 18, COLOR_BLUE), 0); 
+    return room;
+}
+
+Room* Game::initExtraRoom2()
+{
+    Room* room = new Room("rooms/extra_2.room");
+    room->setTeleporter(new Teleporter(2, 2, 1, 2, 2, COLOR_BLUE), 0);
+    room->setTeleporter(new Teleporter(2, 12, 1, 2, 13, COLOR_BLUE), 1);
+    room->setTeleporter(new Teleporter(5, 2, 1, 15, 36, COLOR_BLUE), 2);
+    room->setTeleporter(new Teleporter(6, 12, 1, 8, 13, COLOR_BLUE), 3);
+    room->setTeleporter(new Teleporter(9, 2, 1, 2, 36, COLOR_BLUE), 4);
+    room->setTeleporter(new Teleporter(9, 7, 1, 22, 2, COLOR_BLUE), 5);
+    room->setTeleporter(new Teleporter(9, 12, 1, 2, 2, COLOR_BLUE), 6);
+ 
+    //middle hallway
+    room->setItem(new Trap(3, 7), 0);
+    room->getItem(0)->setWeight(1000);
+
+    room->setItem(new Trap(4, 7), 1);
+    room->getItem(1)->setWeight(1000);
+
+    room->setItem(new Trap(5, 7), 2);
+    room->getItem(2)->setWeight(1000);
+
+    room->setItem(new Trap(6, 7), 3);
+    room->getItem(3)->setWeight(1000);
+
+    room->setItem(new Trap(7, 7), 4);
+    room->getItem(4)->setWeight(1000);
+
+    room->setItem(new Trap(8, 7), 5);
+    room->getItem(5)->setWeight(1000);
+
+    //side rooms
+    room->setItem(new Potion(2, 11), 6);
+    room->getItem(6)->setWeight(1000);
+
+    room->setItem(new Potion(5, 3), 7);
+    room->getItem(7)->setWeight(1000);
+
+    room->setItem(new Potion(9, 11), 8);
+    room->getItem(8)->setWeight(1000);
+
+    room->setItem(new Trap(2, 3), 9);
+    room->getItem(9)->setDamage(2);
+    room->getItem(9)->setWeight(1000);
+
+    room->setItem(new Trap(5, 12), 10);
+    room->getItem(10)->setDamage(2);
+    room->getItem(10)->setWeight(1000);
+
+    room->setItem(new Trap(8, 2), 11);
+    room->getItem(11)->setDamage(2);
+    room->getItem(11)->setWeight(1000);
+
+    room->setItem(new CubeParts(3, 4), 12);
+    room->setItem(new CubeParts(8, 10), 13);
 
     return room;
 }

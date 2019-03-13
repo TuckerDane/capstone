@@ -32,6 +32,7 @@
 #include "Statue.hpp"
 #include "Profoak.hpp"
 #include "Colors.hpp"
+#include "CubeParts.hpp"
 
 #define MAX_ROOMS 20
 
@@ -97,6 +98,8 @@ public:
   Room* initPuzzleRoom14(); //trophy/statue room
   Room* initPuzzleRoomX();
   Room* initEndRoom();
+  Room* initExtraRoom1();
+  Room* initExtraRoom2();
 
   // ACTIONS
   void run();
@@ -159,6 +162,7 @@ public:
   void resolveBomb();
   void plantBomb(int y, int x, Door **doors, Teleporter **teleporters);
   void animateBomb(Door **doors, Teleporter **teleporters);
+  void combineCubeParts();
 
   /* ..............................................
     RENDER.CPP
