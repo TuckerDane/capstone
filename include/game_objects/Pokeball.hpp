@@ -1,6 +1,9 @@
 /*......................................
- @file Pokeball.hpp
- @date 02/19/2019
+  @ file Pokeball.hpp
+  @ Authors: Tucker Walker, David Pipitone, Marisa Rea
+  @ OSU Computer Science - Capstone Project
+  @ Winter Term 2019
+
 
 ......................................*/
 #ifndef POKEBALL_HPP

@@ -1,8 +1,8 @@
 /* ..............................................
-  @file Render.cpp
-  @author Tucker Walker (tuckerdwalker@gmail.com)
-  @brief 
-  @date 2019-01-16
+  @ file Render.cpp
+  @ Authors: Tucker Walker, David Pipitone, Marisa Rea
+  @ OSU Computer Science - Capstone Project
+  @ Winter Term 20196
   
   
 .............................................. */

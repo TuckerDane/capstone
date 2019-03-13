@@ -1,7 +1,8 @@
 /* ..............................................
-  @file Teleporter.hpp
-  @brief 
-  @date 2019-02-20
+  @ file Teleporter.hpp
+  @ Authors: Tucker Walker, David Pipitone, Marisa Rea
+  @ OSU Computer Science - Capstone Project
+  @ Winter Term 2019
   
   
 .............................................. */
