@@ -1,6 +1,8 @@
 /*......................................
- @file Bomb.h
- @date 02/25/2019
+  @ file Bomb.h
+  @ Authors: Tucker Walker, David Pipitone, Marisa Rea
+  @ OSU Computer Science - Capstone Project
+  @ Winter Term 2019
 
 ......................................*/
 #ifndef BOMB_HPP

@@ -1,8 +1,8 @@
 /* ..............................................
-  @file Main.cpp
-  @author Tucker Walker (tuckerdwalker@gmail.com)
-  @brief An adventure game for CS467 Capstone
-  @date 2018-12-26
+  @ file Main.cpp
+  @ Authors: Tucker Walker, David Pipitone, Marisa Rea
+  @ OSU Computer Science - Capstone Project
+  @ Winter Term 2019
   
   
 .............................................. */

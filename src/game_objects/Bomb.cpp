@@ -1,6 +1,9 @@
 /*............................................
- @file Bomb.cpp
- @date 2/25/19
+  @ file Bomb.cpp
+  @ Authors: Tucker Walker, David Pipitone, Marisa Rea
+  @ OSU Computer Science - Capstone Project
+  @ Winter Term 2019
+
 
 ............................................*/
 #include "Bomb.hpp"
