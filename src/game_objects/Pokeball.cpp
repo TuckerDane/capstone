@@ -1,6 +1,9 @@
 /*............................................
- @file Pokeball.cpp
- @date 1/31/19
+  @ file Pokeball.cpp
+  @ Authors: Tucker Walker, David Pipitone, Marisa Rea
+  @ OSU Computer Science - Capstone Project
+  @ Winter Term 2019
+
 
 ............................................*/
 #include "Pokeball.hpp"

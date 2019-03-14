@@ -1,6 +1,9 @@
 /*............................................
- @file Immovable.cpp
- @date 1/31/19
+  @ file Immovable.cpp
+  @ Authors: Tucker Walker, David Pipitone, Marisa Rea
+  @ OSU Computer Science - Capstone Project
+  @ Winter Term 2019
+
 
 ............................................*/
 #include "Immovable.hpp"

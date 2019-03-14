@@ -1,6 +1,9 @@
 /*............................................
- @file Statue.cpp
- @date 3/3/19
+  @ file Statue.cpp
+  @ Authors: Tucker Walker, David Pipitone, Marisa Rea
+  @ OSU Computer Science - Capstone Project
+  @ Winter Term 2019
+
 
 ............................................*/
 #include "Statue.hpp"

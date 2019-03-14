@@ -1,6 +1,9 @@
 /*............................................
- @file Snorlax.cpp
- @date 1/31/19
+  @ file Snorlax.cpp
+  @ Authors: Tucker Walker, David Pipitone, Marisa Rea
+  @ OSU Computer Science - Capstone Project
+  @ Winter Term 2019
+
 
 ............................................*/
 #include "Snorlax.hpp"

@@ -1,8 +1,8 @@
 /* ..............................................
-  @file Key.hpp
-  @author Tucker Walker (tuckerdwalker@gmail.com)
-  @brief 
-  @date 2019-01-26
+  @ file Key.hpp
+  @ Authors: Tucker Walker, David Pipitone, Marisa Rea
+  @ OSU Computer Science - Capstone Project
+  @ Winter Term 2019
   
   
 .............................................. */
