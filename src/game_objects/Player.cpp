@@ -1,8 +1,8 @@
 /* ..............................................
-  @file Player.cpp
-  @author Tucker Walker (tuckerdwalker@gmail.com)
-  @brief 
-  @date 2018-12-26
+  @ file Player.cpp
+  @ Authors: Tucker Walker, David Pipitone, Marisa Rea
+  @ OSU Computer Science - Capstone Project
+  @ Winter Term 2019
   
   
 .............................................. */

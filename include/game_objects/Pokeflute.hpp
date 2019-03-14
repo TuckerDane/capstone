@@ -1,6 +1,9 @@
 /*......................................
- @file Pokeflute.hpp
- @date 02/19/2019
+  @ file Pokeflute.hpp
+  @ Authors: Tucker Walker, David Pipitone, Marisa Rea
+  @ OSU Computer Science - Capstone Project
+  @ Winter Term 2019
+
 
 ......................................*/
 #ifndef POKEFLUTE_HPP

@@ -1,6 +1,9 @@
 /*............................................
- @file Trap.cpp
- @date 1/30/19
+  @ file Trap.cpp
+  @ Authors: Tucker Walker, David Pipitone, Marisa Rea
+  @ OSU Computer Science - Capstone Project
+  @ Winter Term 2019
+
 
 ............................................*/
 #include "Trap.hpp"

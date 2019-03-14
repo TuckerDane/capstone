@@ -1,6 +1,9 @@
 /*............................................
- @file Potion.cpp
- @date 1/30/19
+  @ file Potion.cpp
+  @ Authors: Tucker Walker, David Pipitone, Marisa Rea
+  @ OSU Computer Science - Capstone Project
+  @ Winter Term 2019
+
 
 ............................................*/
 #include "Potion.hpp"

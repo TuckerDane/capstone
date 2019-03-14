@@ -1,6 +1,8 @@
 /*......................................
- @file Trap.h
- @date 1/30/19
+  @ file Trap.h
+  @ Authors: Tucker Walker, David Pipitone, Marisa Rea
+  @ OSU Computer Science - Capstone Project
+  @ Winter Term 2019
 
 ......................................*/
 #ifndef TRAP_HPP

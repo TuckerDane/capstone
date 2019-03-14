@@ -1,6 +1,9 @@
 /*......................................
- @file Snorlax.hpp
- @date 02/19/2019
+  @ file Snorlax.hpp
+  @ Authors: Tucker Walker, David Pipitone, Marisa Rea
+  @ OSU Computer Science - Capstone Project
+  @ Winter Term 2019
+
 
 ......................................*/
 #ifndef SNORLAX_HPP
