@@ -46,6 +46,9 @@ Game::Game()
   isComplete = false;
   planted = false;
   hasBeenDamaged = false;
+  narrativeOneDone = false;
+  priorRoomIndex = 0;
+  currentRoomIndex = 0;
   player.setCurrentRoom(0);
   player.setXPos(40);
   player.setYPos(15);
@@ -72,7 +75,8 @@ Game::Game()
   rooms[16] = initExtraRoom2();
 
   /* init narrative */
-  narrative = "<Adventure Game>";
+  worldNarrative = "<Adventure Game>";
+  itemNarrative = "";
 
   /* Starting Screen Text */
   s1 = "You awaken on the floor as you have rolled out of your bed again. Everything is hazy but you remember having a great"; 

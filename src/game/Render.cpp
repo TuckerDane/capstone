@@ -19,6 +19,7 @@ void Game::render()
   refresh();
   renderStatus();
   renderCurrentWindow();
+  checkForNarrativeUpdate();
   renderNarrative();
 }
 
@@ -29,38 +30,38 @@ void Game::renderStartScreen()
   colorWindow(developerWindow, RED_ON_BLACK);
   string narrative;
 
-  narrative = getNarrative();
+  narrative = getWorldNarrative();
   mvwprintw(developerWindow, 4, 10, narrative.c_str());
 
-  setNarrative(s1);
-  narrative = getNarrative();
+  setWorldNarrative(s1);
+  narrative = getWorldNarrative();
   mvwprintw(developerWindow, 7, 10, narrative.c_str());
-  setNarrative(s2);
-  narrative = getNarrative();
+  setWorldNarrative(s2);
+  narrative = getWorldNarrative();
   mvwprintw(developerWindow, 8, 10, narrative.c_str());
-  setNarrative(s3);
-  narrative = getNarrative();
+  setWorldNarrative(s3);
+  narrative = getWorldNarrative();
   mvwprintw(developerWindow, 9, 10, narrative.c_str());
-  setNarrative(s4);
+  setWorldNarrative(s4);
 
-  narrative = getNarrative();
+  narrative = getWorldNarrative();
   mvwprintw(developerWindow, 12, 10, narrative.c_str());
-  setNarrative(s5);
-  narrative = getNarrative();
+  setWorldNarrative(s5);
+  narrative = getWorldNarrative();
   mvwprintw(developerWindow, 13, 10, narrative.c_str());
-  setNarrative(s6);
-  narrative = getNarrative();
+  setWorldNarrative(s6);
+  narrative = getWorldNarrative();
   mvwprintw(developerWindow, 14, 10, narrative.c_str());
   
-  setNarrative(s7);
-  narrative = getNarrative();
+  setWorldNarrative(s7);
+  narrative = getWorldNarrative();
   mvwprintw(developerWindow, 17, 10, narrative.c_str());
 
-  setNarrative(":: Press any key to continue ::");
-  narrative = getNarrative();
+  setWorldNarrative(":: Press any key to continue ::");
+  narrative = getWorldNarrative();
   mvwprintw(developerWindow, 25, 57, narrative.c_str());
 
-  setNarrative("Luckily for you, this parallel universe is considerate enough to offer a tutorial room. But don't expect it to always be so generous...");
+  setWorldNarrative("Luckily for you, this parallel universe is considerate enough to offer a tutorial room. But don't expect it to always be so generous...");
   wrefresh(developerWindow);
 }
 
@@ -69,7 +70,7 @@ void Game::renderEndScreen()
   refresh();
   renderStatus();
   colorWindow(developerWindow, RED_ON_BLACK);
-  string narrative = getNarrative() + " press any key to continue...";
+  string narrative = getWorldNarrative() + " press any key to continue...";
   mvwprintw(developerWindow, 3, 2, narrative.c_str());
   wrefresh(developerWindow);
 }
@@ -269,29 +270,43 @@ void Game::renderDev()
 void Game::renderNarrative()
 {
   colorWindow(narrativeWindow, BLACK_ON_BLUE);
-  string temp = this->getNarrative();
-  string firstHalf, secondHalf;
-  int lineLength = temp.size();
-  if (lineLength > 146 && lineLength <= 292)  // needs two lines
-  {
-    int cutOff = temp.length() - 146;
-    firstHalf = temp.substr(0, 146);
-    secondHalf = temp.substr(146, cutOff);
-    mvwprintw(narrativeWindow, 2, 2, firstHalf.c_str());
-    mvwprintw(narrativeWindow, 3, 2, secondHalf.c_str());
-  }
-  else if (lineLength > 292) // needs more space than available so the line will be cut off
-  {
-    firstHalf = temp.substr(0, 146);
-    secondHalf = temp.substr(146, 146);
-    mvwprintw(narrativeWindow, 2, 2, firstHalf.c_str());
-    mvwprintw(narrativeWindow, 3, 2, secondHalf.c_str());
-  }
-  else  // needs one line
-  {
-    mvwprintw(narrativeWindow, 2, 2, temp.c_str());
-  }
+  renderItemNarrative();
+  renderWorldNarrative();
   wrefresh(narrativeWindow);
+}
+
+void Game::renderItemNarrative()
+{
+  string temp = this->getItemNarrative();
+  int lineLength = temp.size();
+  int xCoord = 2; // 75 - (146/2)
+  if (lineLength > 146)
+  {
+    string shortenedLine = temp.substr(0, 146);
+    mvwprintw(narrativeWindow, 1, xCoord, shortenedLine.c_str());
+  }
+  else
+  {
+    xCoord = 75 - (lineLength / 2);
+    mvwprintw(narrativeWindow, 1, xCoord, temp.c_str());       
+  }
+}
+
+void Game::renderWorldNarrative()
+{
+  string temp = this->getWorldNarrative();
+  int lineLength = temp.size();
+  int xCoord = 2;  // 75 - (146/2)
+  if (lineLength > 146)
+  {
+    string shortenedLine = temp.substr(0, 146);
+    mvwprintw(narrativeWindow, 2, xCoord, shortenedLine.c_str());
+  }
+  else
+  {
+    xCoord = 75 - (lineLength / 2);
+    mvwprintw(narrativeWindow, 2, xCoord, temp.c_str());       
+  }
 }
 
 void Game::renderRoom()
