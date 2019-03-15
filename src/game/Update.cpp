@@ -455,7 +455,7 @@ void Game::updatePlayer()
                 confirm = getch();
                 if (confirm == 'y' || confirm == 'Y')
                 {
-                    setNarrative("You Quit the Game");
+                    setNarrative("You Quit the Game.");
                     setIsComplete(true);
                 }
             }
@@ -464,7 +464,7 @@ void Game::updatePlayer()
     }
     if (player.getHP() < 1)
     {
-        setNarrative("GAME OVER: You Died");
+        setNarrative("GAME OVER: You Died.");
         isComplete = true;
     }
 }
