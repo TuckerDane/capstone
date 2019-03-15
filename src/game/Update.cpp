@@ -729,6 +729,7 @@ void Game::resolveSnorlax()
                         items[i]->setXPos(7);
                         items[i]->setDescription("The Pokédex says: Very lazy. Just eats and sleeps.");
                         setItemNarrative("You played the Poké Flute. SNORLAX woke up!");
+                        narrativeOneDone = true;
                     }
 				}
 			}
@@ -742,6 +743,7 @@ void Game::resolveSnorlax()
                         items[i]->setXPos(7);
                         items[i]->setDescription("The Pokédex says: Very lazy. Just eats and sleeps.");
                         setItemNarrative("You played the Poké Flute. SNORLAX woke up!");
+                        narrativeOneDone = true;
                     }
 				}
 			}
@@ -755,6 +757,7 @@ void Game::resolveSnorlax()
                         items[i]->setXPos(7);
                         items[i]->setDescription("The Pokédex says: Very lazy. Just eats and sleeps.");
                         setItemNarrative("You played the Poké Flute. SNORLAX woke up!");
+                        narrativeOneDone = true;
                     }
 				}
 			}
@@ -768,6 +771,7 @@ void Game::resolveSnorlax()
                         items[i]->setXPos(7);
                         items[i]->setDescription("The Pokédex says: Very lazy. Just eats and sleeps.");
                         setItemNarrative("You played the Poké Flute. SNORLAX woke up!");
+                        narrativeOneDone = true;
                     }
 				}
 			}
@@ -1501,7 +1505,10 @@ void Game::updateRoomNarrative(int roomIndex)
     }
     else if (roomIndex == 3)    // snorlax
     {
-        setWorldNarrative("Welcome to Route 12. It appears that there is a very large and very lazy looking Pokemon over there…");
+        if (narrativeOneDone == false)
+            setWorldNarrative("Welcome to Route 12. It appears that there is a very large and very lazy looking Pokemon over there...");
+        else if (narrativeOneDone == true)
+            setWorldNarrative("Welcome to Route 12. Snorlax yawns and looks longingly at his favorite spot blocking the bridge...");
     }
     else if (roomIndex == 4)    // pacman
     {
