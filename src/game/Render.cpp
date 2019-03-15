@@ -30,38 +30,38 @@ void Game::renderStartScreen()
   colorWindow(developerWindow, RED_ON_BLACK);
   string narrative;
 
-  narrative = getNarrative();
+  narrative = getWorldNarrative();
   mvwprintw(developerWindow, 4, 10, narrative.c_str());
 
-  setNarrative(s1);
-  narrative = getNarrative();
+  setWorldNarrative(s1);
+  narrative = getWorldNarrative();
   mvwprintw(developerWindow, 7, 10, narrative.c_str());
-  setNarrative(s2);
-  narrative = getNarrative();
+  setWorldNarrative(s2);
+  narrative = getWorldNarrative();
   mvwprintw(developerWindow, 8, 10, narrative.c_str());
-  setNarrative(s3);
-  narrative = getNarrative();
+  setWorldNarrative(s3);
+  narrative = getWorldNarrative();
   mvwprintw(developerWindow, 9, 10, narrative.c_str());
-  setNarrative(s4);
+  setWorldNarrative(s4);
 
-  narrative = getNarrative();
+  narrative = getWorldNarrative();
   mvwprintw(developerWindow, 12, 10, narrative.c_str());
-  setNarrative(s5);
-  narrative = getNarrative();
+  setWorldNarrative(s5);
+  narrative = getWorldNarrative();
   mvwprintw(developerWindow, 13, 10, narrative.c_str());
-  setNarrative(s6);
-  narrative = getNarrative();
+  setWorldNarrative(s6);
+  narrative = getWorldNarrative();
   mvwprintw(developerWindow, 14, 10, narrative.c_str());
   
-  setNarrative(s7);
-  narrative = getNarrative();
+  setWorldNarrative(s7);
+  narrative = getWorldNarrative();
   mvwprintw(developerWindow, 17, 10, narrative.c_str());
 
-  setNarrative(":: Press any key to continue ::");
-  narrative = getNarrative();
+  setWorldNarrative(":: Press any key to continue ::");
+  narrative = getWorldNarrative();
   mvwprintw(developerWindow, 25, 57, narrative.c_str());
 
-  setNarrative("Luckily for you, this parallel universe is considerate enough to offer a tutorial room. But don't expect it to always be so generous...");
+  setWorldNarrative("Luckily for you, this parallel universe is considerate enough to offer a tutorial room. But don't expect it to always be so generous...");
   wrefresh(developerWindow);
 }
 
