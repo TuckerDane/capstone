@@ -1493,7 +1493,7 @@ void Game::updateRoomNarrative(int roomIndex)
 {
     if (roomIndex == 1) // pokemon gym
     {
-        setWorldNarrative("Welcome to Room 1.");
+        setWorldNarrative("Welcome to the Saffron City Gym. Previous winners: Gary and Ash.");
     }
     else if (roomIndex == 2)    // zelda blocks
     {
@@ -1505,51 +1505,48 @@ void Game::updateRoomNarrative(int roomIndex)
     }
     else if (roomIndex == 4)    // pacman
     {
-        setWorldNarrative("");
+        setWorldNarrative("waga waga waga waga waga waga waga waga waga waga waga waga waga waga waga waga waga waga waga waga waga waga waga waga waga waga waga waga");
     }
     else if (roomIndex == 5) // life or death blocks
     {
-        setWorldNarrative("");
+        setWorldNarrative("Welcome to Room 5.");
     }
     else if (roomIndex == 6)    // bomberman
     {
-        setWorldNarrative("");
+        setWorldNarrative("Wow, it looks like someone put a lot of thought and effort into this room… Oh, well, time to start blowing stuff up!");
     }
     else if (roomIndex == 7 || roomIndex == 10)    //mario
     {
-        setWorldNarrative("");
+        setWorldNarrative("As you listen, you start to realize the song. Its the Super Mario Bros theme song!");
     }
-    else if (roomIndex == 8) // ?
-    {
-        setWorldNarrative("Which room am I?");
-    }
+    //  no room index 8
     else if (roomIndex == 9) // Rodent's Revenge
     {
-        setWorldNarrative("");
+        setWorldNarrative("Uh oh, I’m feeling a little claustrophobic. I’m sure I'll be much safer outside of this small space.");
     }
-    else if (roomIndex == 11)   // end room
+    else if (roomIndex == 11)   // trap maze
     {
-        setWorldNarrative("");
+        setWorldNarrative("Trap: You see a bunch of traps, however, some seem to be shimmering. Maybe they are fake.");
     }
     else if (roomIndex == 12)   // invisible maze
     {
-        setWorldNarrative("");
+        setWorldNarrative("Whoa, that was weird. Looks like a straight shot to the door at least!");
     }
     else if (roomIndex == 13)   //repair
     {
-        setWorldNarrative("");
+        setWorldNarrative("You see a strange device in the middle of the room and an old man that looks a bit like Professor Oak in the back.");
     }
     else if (roomIndex == 14)   // trophy
     {
-        setWorldNarrative("");
+        setWorldNarrative("Welcome to the trophy room. These statues are our way of showing where we got our inspiration from. We hope you enjoyed the game.");
     }
-    else if (roomIndex == 15) // ?
+    else if (roomIndex == 15) // David's Maze
     {
-        setWorldNarrative("Who am I?");
+        setWorldNarrative("You can see a teleporter through the walls of glass. Now you just have to get there.");
     }
-    else if (roomIndex == 16) // ?
+    else if (roomIndex == 16) // Small extra room
     {
-        setWorldNarrative("Who am I?");
+        setWorldNarrative("This seems like an easy room.");
     }
 
 
