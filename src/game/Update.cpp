@@ -91,6 +91,18 @@ bool Game::isEnemyMoveAllowed(int y, int x)
     {
         return true;
     }
+    // if the space contains a door, the enemy cannot move there
+    Door **doors = rooms[player.getCurrentRoom()]->getDoors();
+    for (int i = 0; i < rooms[player.getCurrentRoom()]->getMaxDoors(); i++)
+    {
+        if (doors[i] != NULL)
+        {
+            if(doors[i]->getYPos() == y && doors[i]->getXPos() == x)
+            {
+                return false;
+            }
+        }
+    }
     return false;  
 }
 
@@ -187,6 +199,18 @@ bool Game::isItemMoveAllowed(int y, int x, char direction, Object* object)
             }
         }       
     }
+    // if the space contains a door, the item cannot move there
+    Door **doors = rooms[player.getCurrentRoom()]->getDoors();
+    for (int i = 0; i < rooms[player.getCurrentRoom()]->getMaxDoors(); i++)
+    {
+        if (doors[i] != NULL)
+        {
+            if(doors[i]->getYPos() == y && doors[i]->getXPos() == x)
+            {
+                return false;
+            }
+        }
+    }
     // if the space is empty
     if (((testch & A_CHARTEXT) == GRASS) || ((testch & A_CHARTEXT) == EMPTY))
     {
@@ -221,8 +245,8 @@ WINDOW *Game::getCurrentWindow()
 .............................................. */
 void Game::update()
 {
-    updatePlayer();
     updateEnemies();
+    updatePlayer();
 }
 
 void Game::updatePlayer()

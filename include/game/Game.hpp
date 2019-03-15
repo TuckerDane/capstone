@@ -64,6 +64,7 @@ private:
   clock_t begin_time;
   double elapsedSeconds;
   int bombX, bombY;
+  string s1, s2, s3, s4, s5, s6, s7;
   Player player;
   Console devConsole;
   Room *rooms[MAX_ROOMS];
@@ -195,6 +196,7 @@ public:
   void renderPlayer();
   void renderEnemies();
   void renderTeleporters();
+  void renderStartScreen();
   void renderEndScreen();
   void mvwaddchWithColor(int yPos, int xPos, string TILE_SYMBOL, char TILE_PAIR);
 };

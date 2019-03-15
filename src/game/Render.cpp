@@ -23,6 +23,48 @@ void Game::render()
   renderNarrative();
 }
 
+void Game::renderStartScreen()
+{
+  refresh();
+  renderStatus();
+  colorWindow(developerWindow, RED_ON_BLACK);
+  string narrative;
+
+  narrative = getNarrative();
+  mvwprintw(developerWindow, 4, 10, narrative.c_str());
+
+  setNarrative(s1);
+  narrative = getNarrative();
+  mvwprintw(developerWindow, 7, 10, narrative.c_str());
+  setNarrative(s2);
+  narrative = getNarrative();
+  mvwprintw(developerWindow, 8, 10, narrative.c_str());
+  setNarrative(s3);
+  narrative = getNarrative();
+  mvwprintw(developerWindow, 9, 10, narrative.c_str());
+  setNarrative(s4);
+
+  narrative = getNarrative();
+  mvwprintw(developerWindow, 12, 10, narrative.c_str());
+  setNarrative(s5);
+  narrative = getNarrative();
+  mvwprintw(developerWindow, 13, 10, narrative.c_str());
+  setNarrative(s6);
+  narrative = getNarrative();
+  mvwprintw(developerWindow, 14, 10, narrative.c_str());
+  
+  setNarrative(s7);
+  narrative = getNarrative();
+  mvwprintw(developerWindow, 17, 10, narrative.c_str());
+
+  setNarrative(":: Press any key to continue ::");
+  narrative = getNarrative();
+  mvwprintw(developerWindow, 25, 57, narrative.c_str());
+
+  setNarrative("Luckily for you, this parallel universe is considerate enough to offer a tutorial room. But don't expect it to always be so generous...");
+  wrefresh(developerWindow);
+}
+
 void Game::renderEndScreen()
 {
   refresh();
