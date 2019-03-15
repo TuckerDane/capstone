@@ -540,9 +540,11 @@ void Game::resolveDoorMovement()
         {
             if (player.getXPos() == doors[i]->getXPos() && player.getYPos() == doors[i]->getYPos() && doors[i]->getNextRoom() != -1)
             {
+                priorRoomIndex = i;
                 player.setCurrentRoom(doors[i]->getNextRoom());
                 player.setYPos(doors[i]->getNextYPos());
                 player.setXPos(doors[i]->getNextXPos());
+                currentRoomIndex = player.getCurrentRoom();
             }
         }
     }
@@ -553,15 +555,17 @@ void Game::resolveTeleporterMovement()
     Teleporter **teleporters = rooms[player.getCurrentRoom()]->getTeleporters();
     for (int i = 0; i < 64; i++)
     {
-	if (teleporters[i] != NULL)
-	{
-	    if(player.getXPos() == teleporters[i]->getXPos() && player.getYPos() == teleporters[i]->getYPos() && teleporters[i]->getNextRoom() != -1)
-	    {
-		player.setCurrentRoom(teleporters[i]->getNextRoom());
-		player.setYPos(teleporters[i]->getNextYPos());
-		player.setXPos(teleporters[i]->getNextXPos());
-	    }
-	}
+        if (teleporters[i] != NULL)
+        {
+            if(player.getXPos() == teleporters[i]->getXPos() && player.getYPos() == teleporters[i]->getYPos() && teleporters[i]->getNextRoom() != -1)
+            {
+                priorRoomIndex = i;
+                player.setCurrentRoom(teleporters[i]->getNextRoom());
+                player.setYPos(teleporters[i]->getNextYPos());
+                player.setXPos(teleporters[i]->getNextXPos());
+                currentRoomIndex = player.getCurrentRoom();
+            }
+        }
     }
 }
 
@@ -1475,4 +1479,79 @@ void Game::combineCubeParts()
 	    }
 	}
     }
+}
+
+void Game::checkForNarrativeUpdate()
+{
+	if (priorRoomIndex != currentRoomIndex)
+	{
+		updateRoomNarrative(currentRoomIndex);
+	}
+}
+
+void Game::updateRoomNarrative(int roomIndex)
+{
+    if (roomIndex == 1) // pokemon gym
+    {
+        setWorldNarrative("Welcome to Room 1.");
+    }
+    else if (roomIndex == 2)    // zelda blocks
+    {
+        setWorldNarrative("Welcome to Room 2.");
+    }
+    else if (roomIndex == 3)    // snorlax
+    {
+        setWorldNarrative("Welcome to Route 12. It appears that there is a very large and very lazy looking Pokemon over there…");
+    }
+    else if (roomIndex == 4)    // pacman
+    {
+        setWorldNarrative("");
+    }
+    else if (roomIndex == 5) // life or death blocks
+    {
+        setWorldNarrative("");
+    }
+    else if (roomIndex == 6)    // bomberman
+    {
+        setWorldNarrative("");
+    }
+    else if (roomIndex == 7 || roomIndex == 10)    //mario
+    {
+        setWorldNarrative("");
+    }
+    else if (roomIndex == 8) // ?
+    {
+        setWorldNarrative("Which room am I?");
+    }
+    else if (roomIndex == 9) // Rodent's Revenge
+    {
+        setWorldNarrative("");
+    }
+    else if (roomIndex == 11)   // end room
+    {
+        setWorldNarrative("");
+    }
+    else if (roomIndex == 12)   // invisible maze
+    {
+        setWorldNarrative("");
+    }
+    else if (roomIndex == 13)   //repair
+    {
+        setWorldNarrative("");
+    }
+    else if (roomIndex == 14)   // trophy
+    {
+        setWorldNarrative("");
+    }
+    else if (roomIndex == 15) // ?
+    {
+        setWorldNarrative("Who am I?");
+    }
+    else if (roomIndex == 16) // ?
+    {
+        setWorldNarrative("Who am I?");
+    }
+
+
+
 }

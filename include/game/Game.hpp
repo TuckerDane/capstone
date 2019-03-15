@@ -57,6 +57,9 @@ private:
   bool isComplete;
   bool planted;
   bool hasBeenDamaged;
+  bool narrativeOneDone;
+  int priorRoomIndex;
+  int currentRoomIndex;
   unsigned int userInput;
   clock_t begin_time;
   double elapsedSeconds;
@@ -166,6 +169,8 @@ public:
   void plantBomb(int y, int x, Door **doors, Teleporter **teleporters);
   void animateBomb(Door **doors, Teleporter **teleporters);
   void combineCubeParts();
+  void checkForNarrativeUpdate();
+  void updateRoomNarrative(int roomIndex);
 
   /* ..............................................
     RENDER.CPP

@@ -19,6 +19,7 @@ void Game::render()
   refresh();
   renderStatus();
   renderCurrentWindow();
+  checkForNarrativeUpdate();
   renderNarrative();
 }
 

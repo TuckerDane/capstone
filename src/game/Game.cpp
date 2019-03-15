@@ -46,6 +46,9 @@ Game::Game()
   isComplete = false;
   planted = false;
   hasBeenDamaged = false;
+  narrativeOneDone = false;
+  priorRoomIndex = 0;
+  currentRoomIndex = 0;
   player.setCurrentRoom(0);
   player.setXPos(40);
   player.setYPos(15);
