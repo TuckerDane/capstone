@@ -474,7 +474,7 @@ void Game::updatePlayer()
     }
     if (player.getHP() < 1)
     {
-        setWorldNarrative("GAME OVER: You Died");
+        playerDied = true;
         isComplete = true;
     }
 }
@@ -1579,7 +1579,4 @@ void Game::updateRoomNarrative(int roomIndex)
     {
         setWorldNarrative("This seems like an easy room.");
     }
-
-
-
 }

@@ -67,10 +67,52 @@ void Game::renderStartScreen()
 
 void Game::renderEndScreen()
 {
+refresh();
+  renderStatus();
+  colorWindow(developerWindow, RED_ON_BLACK);
+  string narrative;
+
+  setWorldNarrative(e1);
+  narrative = getWorldNarrative();
+  mvwprintw(developerWindow, 4, 68, narrative.c_str());
+  setWorldNarrative("<Adventure Game>");
+  narrative = getWorldNarrative();
+  mvwprintw(developerWindow, 8, 64, narrative.c_str());
+
+  setWorldNarrative(e2);
+  narrative = getWorldNarrative();
+  mvwprintw(developerWindow, 11, 66, narrative.c_str());
+  setWorldNarrative(e3);
+  narrative = getWorldNarrative();
+  mvwprintw(developerWindow, 12, 60, narrative.c_str());
+  
+  setWorldNarrative(e4);
+  narrative = getWorldNarrative();
+  mvwprintw(developerWindow, 15, 64, narrative.c_str());
+  setWorldNarrative(e5);
+  narrative = getWorldNarrative();
+  mvwprintw(developerWindow, 16, 59, narrative.c_str());
+  
+  setWorldNarrative(e6);
+  narrative = getWorldNarrative();
+  mvwprintw(developerWindow, 19, 66, narrative.c_str());
+  setWorldNarrative(e7);
+  narrative = getWorldNarrative();
+  mvwprintw(developerWindow, 20, 60, narrative.c_str());
+
+  setWorldNarrative(":: Press any key to quit ::");
+  narrative = getWorldNarrative();
+  mvwprintw(developerWindow, 25, 57, narrative.c_str());
+
+  wrefresh(developerWindow);
+}
+
+void Game::renderPlayerDiedScreen()
+{
   refresh();
   renderStatus();
   colorWindow(developerWindow, RED_ON_BLACK);
-  string narrative = getWorldNarrative() + " press any key to continue...";
+  string narrative = "You Died. Press any key to continue...";
   mvwprintw(developerWindow, 3, 2, narrative.c_str());
   wrefresh(developerWindow);
 }

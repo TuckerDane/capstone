@@ -58,6 +58,7 @@ private:
   bool planted;
   bool hasBeenDamaged;
   bool narrativeOneDone;
+  bool playerDied;
   int priorRoomIndex;
   int currentRoomIndex;
   unsigned int userInput;
@@ -65,6 +66,7 @@ private:
   double elapsedSeconds;
   int bombX, bombY;
   string s1, s2, s3, s4, s5, s6, s7;
+  string e1, e2, e3, e4, e5, e6, e7;
   Player player;
   Console devConsole;
   Room *rooms[MAX_ROOMS];
@@ -198,6 +200,7 @@ public:
   void renderTeleporters();
   void renderStartScreen();
   void renderEndScreen();
+  void renderPlayerDiedScreen();
   void mvwaddchWithColor(int yPos, int xPos, string TILE_SYMBOL, char TILE_PAIR);
 };
 
