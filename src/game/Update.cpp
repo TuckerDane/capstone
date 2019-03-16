@@ -1525,7 +1525,7 @@ void Game::updateRoomNarrative(int roomIndex)
     }
     else if (roomIndex == 2)    // zelda blocks
     {
-        setWorldNarrative("Welcome to Room 2.");
+        setWorldNarrative("This kind of reminds me of A Link To The Past... now how to get those keys?");
     }
     else if (roomIndex == 3)    // snorlax
     {
@@ -1540,7 +1540,7 @@ void Game::updateRoomNarrative(int roomIndex)
     }
     else if (roomIndex == 5) // life or death blocks
     {
-        setWorldNarrative("Welcome to Room 5.");
+        setWorldNarrative("How do I get through that blue door? Could those blocks be movable? That red one looks hot!");
     }
     else if (roomIndex == 6)    // bomberman
     {
