@@ -47,11 +47,13 @@ Game::Game()
   planted = false;
   hasBeenDamaged = false;
   playerDied = false;
+  narrativeOneDone = false;
+  priorRoomIndex = 0;
+  currentRoomIndex = 0;
   player.setCurrentRoom(0);
-  player.setXPos(40);
-  player.setYPos(15);
- 
-  player.setInventoryItem(new Potion(), 0);
+  player.setXPos(2);
+  player.setYPos(5);
+
   /* initialize Rooms */
 
   rooms[0] = initStartRoom();
