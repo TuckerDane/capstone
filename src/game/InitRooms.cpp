@@ -685,23 +685,13 @@ Room* Game::initPuzzleRoom13()
 Room* Game::initPuzzleRoom14()
 {
     Room* room = new Room("rooms/trophy.room");
-    room->setItem(new Statue(5, 5, "Pokemon, Snorlax Encounter"), 0);
-    room->setItem(new Statue(5, 7, "Legend of Zelda: Link to the Past, Block Puzzle"), 1);
-    room->setItem(new Statue(5, 9, "Pokemon, Saffron Gym"), 2);
-    room->setItem(new Statue(5, 11, "Pac-Man"), 3);
-    room->setItem(new Statue(5, 13, "Rodent's Revenge"), 4);
-
-    return room;
-}
-
-Room* Game::initEndRoom()
-{
-    Room* room = new Room("rooms/trophy.room");
-    room->setItem(new Statue(5, 5, "Pokemon, Snorlax Encounter"), 0);
-    room->setItem(new Statue(5, 7, "Legend of Zelda: Link to the Past, Block Puzzle"), 1);
-    room->setItem(new Statue(5, 9, "Pokemon, Saffron Gym"), 2);
-    room->setItem(new Statue(5, 11, "Pac-Man"), 3);
-    room->setItem(new Statue(5, 13, "Rodent's Revenge"), 4);
+    room->setItem(new Statue(5, 4, "Pokemon, Snorlax Encounter"), 0);
+    room->setItem(new Statue(5, 6, "Legend of Zelda: Link to the Past, Block Puzzle"), 1);
+    room->setItem(new Statue(5, 8, "Pokemon, Saffron Gym"), 2);
+    room->setItem(new Statue(5, 10, "Pac-Man"), 3);
+    room->setItem(new Statue(5, 12, "Rodent's Revenge"), 4);
+    room->setItem(new Statue(5, 14, "Bomberman"), 5);
+    room->setItem(new Statue(5, 16, "Super Mario Bros."), 6);
 
     return room;
 }
