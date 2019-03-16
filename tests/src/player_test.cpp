@@ -12,13 +12,13 @@ TEST_CASE("default constructor", "[player][constructor]")
 	REQUIRE(p.getHP() == 10);
 	REQUIRE(p.getMaxHP() == 10);
 	REQUIRE(p.getCurrentCarryWeight() == 0);
-	REQUIRE(p.getMaxCarryWeight() == 10);
+	REQUIRE(p.getMaxCarryWeight() == 25);
 }
 
 TEST_CASE("set/get maxCarryWeight", "[player][get][set]")
 {
 	Player p;
-	REQUIRE(p.getMaxCarryWeight() == 10);
+	REQUIRE(p.getMaxCarryWeight() == 25);
 	p.setMaxCarryWeight(15);
 	REQUIRE(p.getMaxCarryWeight() == 15);
 	p.setMaxCarryWeight(100);
