@@ -824,7 +824,6 @@ void Game::usePokeball()
                         {
                             items[i] = NULL;
                         }
-                        dropItem();
                         setItemNarrative("You threw a Pokéball...    You caught SNORLAX!     SNORLAX was added to you inventory.");
                     }
                 }
@@ -842,7 +841,6 @@ void Game::usePokeball()
                         {
                             items[i] = NULL;
                         }
-                        dropItem();
                         setItemNarrative("You threw a Pokéball...    You caught SNORLAX!     SNORLAX was added to you inventory.");
                     }
 				}
@@ -860,7 +858,6 @@ void Game::usePokeball()
                         {
                             items[i] = NULL;
                         }
-                        dropItem();
                         setItemNarrative("You threw a Pokéball...    You caught SNORLAX!     SNORLAX was added to you inventory.");
                     }
 				}
@@ -878,7 +875,6 @@ void Game::usePokeball()
                         {
                             items[i] = NULL;
                         }
-                        dropItem();
                         setItemNarrative("You threw a Pokéball...    You caught SNORLAX!     SNORLAX was added to you inventory.");
                     }
 				}
