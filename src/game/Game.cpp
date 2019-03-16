@@ -46,9 +46,7 @@ Game::Game()
   isComplete = false;
   planted = false;
   hasBeenDamaged = false;
-  narrativeOneDone = false;
-  priorRoomIndex = 0;
-  currentRoomIndex = 0;
+  playerDied = false;
   player.setCurrentRoom(0);
   player.setXPos(40);
   player.setYPos(15);
@@ -75,10 +73,9 @@ Game::Game()
   rooms[16] = initExtraRoom2();
 
   /* init narrative */
-  worldNarrative = "<Adventure Game>";
-  itemNarrative = "";
+  setWorldNarrative("<Adventure Game>");
 
-  /* Starting Screen Text */
+  /* Start Screen Text */
   s1 = "You awaken on the floor as you have rolled out of your bed again. Everything is hazy but you remember having a great"; 
   s2 = "time with your friends playing with some console called Pandora’s cube. You had never heard of it before, but that";
   s3 = "just makes it rare and amazing, right?";
@@ -88,6 +85,16 @@ Game::Game()
   s6 = "you are in a some strange, parallel dimension and that the only thing that matters is getting through that door.";
 
   s7 = "You hear a little voice exclaim 'Hey! Listen!' from a nearby room. Maybe something in there will be useful.";
+
+  /* End Screen Text */
+  e1 = "THE END";
+  e2 = "Tucker Dane";
+  e3 = "tuckerdwalker@gmail.com";
+  e4 = "David Pipitone"; 
+  e5 = "pipitond@oregonstate.edu";
+  e6 = "Marisa Rea";
+  e7 = "codingmarisa@gmail.com";
+
 }
 
 Game::~Game()
@@ -114,7 +121,21 @@ void Game::run()
     process(); // process player input
     update();  // update the game state
   } while (getIsComplete() != true);
-  renderEndScreen();
-  sleep(1); // display end screen for 3 seconds
-  getchar();
+  
+  setWorldNarrative("");
+  setItemNarrative("");
+  renderNarrative();
+
+  if (playerDied == true)
+  {
+    renderPlayerDiedScreen();
+    sleep(1); // display end screen for 3 seconds
+    getchar();
+  }
+  else
+  {
+    renderEndScreen();
+    sleep(1); // display end screen for 3 seconds
+    getchar();
+  } 
 }
