@@ -712,7 +712,7 @@ Room* Game::initPuzzleRoom13()
     Room* room = new Room("rooms/repair_13.room");
     room->setTeleporter(new Teleporter(9, 71, 14, 8, 11, COLOR_BLACK), 0); // trophy room
     room->setItem(new Profoak(4, 58), 0);
-    room->setItem(new Statue(9, 58, "Repair Station: Used to repair the Pandora's Cube."), 1);
+    room->setItem(new Statue(9, 58, "Repair Station: Used to repair the Pandora's Cube. If you want to combine, press R while facing the Repair Station"), 1);
 
     return room;
 }
