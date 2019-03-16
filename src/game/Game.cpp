@@ -51,7 +51,7 @@ Game::Game()
   player.setXPos(40);
   player.setYPos(15);
  
-  player.setInventoryItem(new Potion(), 0); 
+  player.setInventoryItem(new Potion(), 0);
   /* initialize Rooms */
 
   rooms[0] = initStartRoom();
