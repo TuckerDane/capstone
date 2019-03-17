@@ -57,9 +57,14 @@ void Game::renderStartScreen()
   narrative = getWorldNarrative();
   mvwprintw(developerWindow, 17, 10, narrative.c_str());
 
+  setWorldNarrative("OBJECTIVE: COLLECT AND REASSEMBLE ALL 5 PIECES OF THE SHATTERED PANDORA'S CUBE");
+  narrative = getWorldNarrative();
+  mvwprintw(developerWindow, 20, 10, narrative.c_str());
+
   setWorldNarrative(":: Press any key to continue ::");
   narrative = getWorldNarrative();
   mvwprintw(developerWindow, 25, 57, narrative.c_str());
+
 
   setWorldNarrative("Luckily for you, this parallel universe is considerate enough to offer a tutorial room. But don't expect it to always be so generous...");
   wrefresh(developerWindow);
@@ -72,26 +77,36 @@ refresh();
   colorWindow(developerWindow, RED_ON_BLACK);
   string narrative;
 
+  setWorldNarrative("Congratulations! You have found and assembled all 5 pieces of Pandora's Cube and beat the game!");
+  narrative = getWorldNarrative();
+  mvwprintw(developerWindow, 2, 25, narrative.c_str());
+  setWorldNarrative("We hope you enjoyed joining us on a walk down - or rather a battle through - memory lane.");
+  narrative = getWorldNarrative();
+  mvwprintw(developerWindow, 3, 28, narrative.c_str());
+  setWorldNarrative("Please review the Game Guide to see if you missed any special features along the way.");
+  narrative = getWorldNarrative();
+  mvwprintw(developerWindow, 4, 30, narrative.c_str());
+
   setWorldNarrative(e1);
   narrative = getWorldNarrative();
-  mvwprintw(developerWindow, 4, 68, narrative.c_str());
+  mvwprintw(developerWindow, 6, 68, narrative.c_str());
   setWorldNarrative("<Adventure Game>");
   narrative = getWorldNarrative();
-  mvwprintw(developerWindow, 8, 64, narrative.c_str());
+  mvwprintw(developerWindow, 10, 64, narrative.c_str());
 
   setWorldNarrative(e2);
   narrative = getWorldNarrative();
-  mvwprintw(developerWindow, 11, 66, narrative.c_str());
+  mvwprintw(developerWindow, 13, 66, narrative.c_str());
   setWorldNarrative(e3);
   narrative = getWorldNarrative();
-  mvwprintw(developerWindow, 12, 60, narrative.c_str());
+  mvwprintw(developerWindow, 14, 60, narrative.c_str());
   
   setWorldNarrative(e4);
   narrative = getWorldNarrative();
-  mvwprintw(developerWindow, 15, 64, narrative.c_str());
+  mvwprintw(developerWindow, 16, 64, narrative.c_str());
   setWorldNarrative(e5);
   narrative = getWorldNarrative();
-  mvwprintw(developerWindow, 16, 59, narrative.c_str());
+  mvwprintw(developerWindow, 17, 59, narrative.c_str());
   
   setWorldNarrative(e6);
   narrative = getWorldNarrative();
@@ -102,7 +117,7 @@ refresh();
 
   setWorldNarrative(":: Press any key to quit ::");
   narrative = getWorldNarrative();
-  mvwprintw(developerWindow, 25, 57, narrative.c_str());
+  mvwprintw(developerWindow, 26, 57, narrative.c_str());
 
   wrefresh(developerWindow);
 }

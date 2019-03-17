@@ -85,6 +85,7 @@ Game::Game()
   s4 = "The night was cut short because the console fell and shattered. You walk to your bedroom door but it won’t open. As you";
   s5 = "start to think about it you realize something is off. The room is clearly not your room any more. You suddenly feel like"; 
   s6 = "you are in a some strange, parallel dimension and that the only thing that matters is getting through that door.";
+  
 
   s7 = "You hear a little voice exclaim 'Hey! Listen!' from a nearby room. Maybe something in there will be useful.";
 
@@ -114,7 +115,7 @@ void Game::run()
 {
   // start screen
     renderStartScreen();
-    sleep(1); // display end screen for 3 seconds
+    sleep(1);
     getchar();
 
   do
@@ -131,13 +132,13 @@ void Game::run()
   if (playerDied == true)
   {
     renderPlayerDiedScreen();
-    sleep(1); // display end screen for 3 seconds
+    sleep(1);
     getchar();
   }
   else
   {
     renderEndScreen();
-    sleep(1); // display end screen for 3 seconds
+    sleep(1);
     getchar();
   } 
 }
