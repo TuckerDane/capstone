@@ -51,8 +51,8 @@ Game::Game()
   priorRoomIndex = 0;
   currentRoomIndex = 0;
   player.setCurrentRoom(0);
-  player.setXPos(2);
-  player.setYPos(5);
+  player.setXPos(5);
+  player.setYPos(2);
 
   /* initialize Rooms */
 
