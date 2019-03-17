@@ -57,9 +57,14 @@ void Game::renderStartScreen()
   narrative = getWorldNarrative();
   mvwprintw(developerWindow, 17, 10, narrative.c_str());
 
+  setWorldNarrative("OBJECTIVE: COLLECT AND REASSEMBLE ALL 5 PIECES OF THE SHATTERED PANDORA'S CUBE");
+  narrative = getWorldNarrative();
+  mvwprintw(developerWindow, 22, 35, narrative.c_str());
+
   setWorldNarrative(":: Press any key to continue ::");
   narrative = getWorldNarrative();
   mvwprintw(developerWindow, 25, 57, narrative.c_str());
+
 
   setWorldNarrative("Luckily for you, this parallel universe is considerate enough to offer a tutorial room. But don't expect it to always be so generous...");
   wrefresh(developerWindow);
