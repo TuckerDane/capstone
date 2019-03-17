@@ -647,7 +647,7 @@ void Game::useKey()
 
     if (keyIsUsed)
     {
-        setItemNarrative("you used the " + player.getEquippedItem()->getName());
+        setItemNarrative("You used the " + player.getEquippedItem()->getName());
         if (firstDoor->getNextRoom() != -1)
             useKeyOnOppositeDoor(firstDoor);
     }
